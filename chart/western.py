@@ -304,3 +304,47 @@ def _of_sect(p, is_day):
     if p == "Saturn": return "malefic of sect" if is_day else "malefic contrary to sect"
     if p == "Mars": return "malefic contrary to sect" if is_day else "malefic of sect"
     return "neutral (Mercury takes the sect of its solar phase)"
+
+
+def hermetic_lots(asc, pos, is_day):
+    """The seven Hermetic lots, each with the correct sect reversal.
+
+    Fortune and Spirit are computed first because five of the others are built from them.
+    """
+    sun, moon = pos["Sun"]["longitude"], pos["Moon"]["longitude"]
+    if is_day:
+        fortune = (asc + moon - sun) % 360.0
+        spirit = (asc + sun - moon) % 360.0
+    else:
+        fortune = (asc + sun - moon) % 360.0
+        spirit = (asc + moon - sun) % 360.0
+
+    def lot(day_formula, night_formula):
+        return (day_formula if is_day else night_formula) % 360.0
+
+    V, Me, Ma, J, Sa = (pos["Venus"]["longitude"], pos["Mercury"]["longitude"],
+                        pos["Mars"]["longitude"], pos["Jupiter"]["longitude"],
+                        pos["Saturn"]["longitude"])
+    raw = {
+        "Fortune": (fortune, "body, circumstance, livelihood",
+                    "day Asc+Moon-Sun / night Asc+Sun-Moon"),
+        "Spirit": (spirit, "mind, action, career, what one initiates",
+                   "day Asc+Sun-Moon / night Asc+Moon-Sun"),
+        "Eros": (lot(asc + V - spirit, asc + spirit - V), "desire, friendship, what is wished for",
+                 "day Asc+Venus-Spirit / night Asc+Spirit-Venus"),
+        "Necessity": (lot(asc + fortune - Me, asc + Me - fortune),
+                      "constraint, compulsion, what cannot be avoided",
+                      "day Asc+Fortune-Mercury / night Asc+Mercury-Fortune"),
+        "Courage": (lot(asc + fortune - Ma, asc + Ma - fortune), "boldness, force, daring",
+                    "day Asc+Fortune-Mars / night Asc+Mars-Fortune"),
+        "Victory": (lot(asc + J - spirit, asc + spirit - J), "success, contest, patronage",
+                    "day Asc+Jupiter-Spirit / night Asc+Spirit-Jupiter"),
+        "Nemesis": (lot(asc + fortune - Sa, asc + Sa - fortune), "hidden constraint, retribution",
+                    "day Asc+Fortune-Saturn / night Asc+Saturn-Fortune"),
+    }
+    asc_sign = core.sign_of(asc)
+    return {k: {"longitude": v, "formatted": core.fmt(v), "sign": core.SIGNS_TROP[core.sign_of(v)],
+                "sign_index": core.sign_of(v),
+                "whole_sign_house": (core.sign_of(v) - asc_sign) % 12 + 1,
+                "ruler": DOMICILE[core.sign_of(v)], "signifies": sig, "formula": f}
+            for k, (v, sig, f) in raw.items()}

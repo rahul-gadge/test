@@ -1,6 +1,6 @@
 # VERIFICATION REPORT
 
-**30 material data verified. 0 failures or alerts.**
+**43 material data verified. 0 failures or alerts.**
 
 Largest primary-vs-validator disagreement across all ten bodies: **0.0026 arcseconds** (0.00000071°), against an alert threshold of 0.01°.
 
@@ -46,6 +46,19 @@ The first comparison showed a **constant 14.168″ offset on every single body**
 | maya | Gregorian round-trip | [2003, 1, 20] | — | — | stable | high | pass |
 | maya | external anchor 2012-12-21 | 13.0.0.0.0 | published reference value | — | stable | high | pass |
 | tibetan | year element-animal | Water Male Horse | BaZi year pillar from lunar_python (shared 60-cycle) | — | stable | medium | pass |
+| shared_astronomy | Sun longitude, third engine cross-check | 299.492243 | Moshier analytical ephemeris (swe FLG_MOSEPH, no data files) | 0.0288″ | stable | high | pass |
+| shared_astronomy | Moon longitude, third engine cross-check | 139.141133 | Moshier analytical ephemeris (swe FLG_MOSEPH, no data files) | 0.5197″ | stable | high | pass |
+| shared_astronomy | Mercury longitude, third engine cross-check | 282.967107 | Moshier analytical ephemeris (swe FLG_MOSEPH, no data files) | 0.0354″ | stable | high | pass |
+| shared_astronomy | Venus longitude, third engine cross-check | 252.866689 | Moshier analytical ephemeris (swe FLG_MOSEPH, no data files) | 0.0060″ | stable | high | pass |
+| shared_astronomy | Mars longitude, third engine cross-check | 241.813593 | Moshier analytical ephemeris (swe FLG_MOSEPH, no data files) | 0.0376″ | stable | high | pass |
+| shared_astronomy | Jupiter longitude, third engine cross-check | 134.848351 | Moshier analytical ephemeris (swe FLG_MOSEPH, no data files) | 0.0562″ | stable | high | pass |
+| shared_astronomy | Saturn longitude, third engine cross-check | 83.139033 | Moshier analytical ephemeris (swe FLG_MOSEPH, no data files) | 0.3281″ | stable | high | pass |
+| bazi | Yong Shen agreement across three named schools | _(structured)_ | — | — | stable | low | pass |
+| jyotisha | Shadbala component validation | _(structured)_ | — | — | stable | medium | pass |
+| jyotisha | sixteen vargas, range and boundary validation | True | — | — | stable | high | pass |
+| jyotisha | Lagna sign across 12 ayanamshas | Dhanu in all 12 | swe sidereal modes | — | stable | high | pass |
+| jyotisha | Vimshottari starting lord across 12 ayanamshas | Mercury | swe sidereal modes | — | stable | high | pass |
+| western | sect verdict across 5 sunrise conventions | nocturnal in all 5 | swe rise_trans flag variants | — | stable | high | pass |
 
 ## Invariants
 

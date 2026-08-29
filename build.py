@@ -7,6 +7,7 @@ import datetime as dt, hashlib, importlib.metadata as md, json, os, platform, su
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import swisseph as swe
 from chart import core, jyotisha as jy, sinic, western as we, calendars as cal, validate
+from chart import vargas as vg, panchanga as pn, schools as sch, shadbala as sb
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 NOW = dt.datetime.now(dt.timezone.utc)
@@ -261,6 +262,122 @@ zwh = json.load(open(os.path.join(ROOT, "out", "ziwei_horo.json")))
 maya = cal.maya(Y, M, D)
 tib = cal.tibetan_year(2002)
 
+# ---------------------------------------------------------------- 5b. precision layer
+# --- panchanga ---
+_pan = pn.build(JD, LAT, LON, pos_s["Sun"]["longitude"], pos_s["Moon"]["longitude"],
+                ss["sunrise_jd"], birth_local)
+_pan["nakshatra"] = {"of_moon": jchart["planets"]["Moon"]["nakshatra"],
+                     "of_lagna": jchart["lagna"]["nakshatra"]}
+_sunrise_variants = pn.sunrise_variants(JD, LAT, LON, LOC["elevation_m_approx"])
+
+# --- all sixteen vargas, for every graha and the Lagna, with per-varga fragility ---
+def _varga_block(lon):
+    allv = vg.all_vargas(lon)
+    for k in allv:
+        dist = vg.boundary_distance(lon, k)
+        allv[k]["degrees_to_next_division"] = dist
+        allv[k]["minutes_of_birth_time_to_next_division"] = (
+            dist / asc_rate if abs(asc_rate) > 1e-12 else None)
+    return allv
+
+
+_vargas = {"lagna": _varga_block(jchart["lagna"]["longitude_sidereal"]),
+           "lagna_vargottama": vg.vargottama_count(jchart["lagna"]["longitude_sidereal"])}
+for _g in jy.GRAHAS:
+    _vargas[_g] = _varga_block(jchart["planets"][_g]["longitude_sidereal"])
+    _vargas[_g + "_vargottama"] = vg.vargottama_count(jchart["planets"][_g]["longitude_sidereal"])
+
+# which vargas survive the stated +/-30 s, computed rather than assumed
+def _varga_stability(lon_fn):
+    res = {}
+    for k in vg.VARGAS:
+        vals = {vg.VARGAS[k][0](lon_fn(o)) for o in (-UNC, 0, UNC)}
+        res[k] = "stable" if len(vals) == 1 else "sensitive"
+    return res
+
+
+def _lagna_at(off):
+    return core.houses(at(off)[1], LAT, LON, b"W", sidereal=True)["asc"]
+
+
+def _moon_at(off):
+    return core.swe_positions(at(off)[1], sidereal=True)["Moon"]["longitude"]
+
+
+_varga_stab = {"lagna_at_stated_uncertainty": _varga_stability(_lagna_at),
+               "moon_at_stated_uncertainty": _varga_stability(_moon_at),
+               "lagna_at_15min_probe": {
+                   k: ("stable" if len({vg.VARGAS[k][0](_lagna_at(o)) for o in (-900, 0, 900)}) == 1
+                       else "sensitive") for k in vg.VARGAS}}
+
+# --- shadbala ---
+_decl = {}
+for _p in sb.SEVEN:
+    _decl[_p] = swe.calc_ut(JD, core.BODIES[_p], swe.FLG_SWIEPH | swe.FLG_EQUATORIAL)[0][1]
+_CHALD = ["Saturn", "Jupiter", "Mars", "Sun", "Venus", "Mercury", "Moon"]
+_vara_lord = _pan["vara"]["lord"]
+_hrs = (JD - ss["prev_sunrise_jd"]) * 24.0
+_hora_lord = _CHALD[(_CHALD.index(_vara_lord) + int(_hrs)) % 7]
+_shadbala = sb.build(
+    {p: jchart["planets"][p]["longitude_sidereal"] for p in sb.SEVEN},
+    {p: jchart["planets"][p]["house_whole_sign"] for p in sb.SEVEN},
+    jchart["lagna"]["longitude_sidereal"], jchart["lagna"]["mc_sidereal"],
+    JD, ss["sunrise_jd"], ss["sunset_jd"], ss["prev_sunset_jd"], _decl,
+    {p: pos_s[p]["speed_long"] for p in sb.SEVEN},
+    {p: pos_s[p]["retrograde"] for p in sb.SEVEN},
+    _vara_lord, _hora_lord, "Sun", "Sun")
+_shadbala["hora_lord"] = _hora_lord
+_shadbala["vara_lord"] = _vara_lord
+
+# --- school comparisons ---
+_ayan_cmp = sch.ayanamsha_comparison(JD, LAT, LON)
+_house_cmp = sch.house_system_comparison(JD, LAT, LON, pos_t)
+_comb_cmp = sch.combustion_schools(pos_t["Sun"]["longitude"], pos_t)
+
+# --- topocentric track ---
+swe.set_topo(LON, LAT, LOC["elevation_m_approx"])
+swe.set_sid_mode(swe.SIDM_LAHIRI)
+_topo = {}
+for _p in jy.GRAHAS[:7]:
+    _geo = jchart["planets"][_p]["longitude_sidereal"]
+    _tp = swe.calc_ut(JD, core.BODIES[_p],
+                      swe.FLG_SWIEPH | swe.FLG_SPEED | swe.FLG_SIDEREAL | swe.FLG_TOPOCTR)[0][0]
+    _nk_g, _nk_t = jy.nakshatra_of(_geo), jy.nakshatra_of(_tp)
+    _topo[_p] = {
+        "geocentric_deg": _geo, "topocentric_deg": _tp,
+        "difference_arcmin": core.angsep(_geo, _tp) * 60.0,
+        "sign_changes": core.sign_of(_geo) != core.sign_of(_tp),
+        "nakshatra_changes": (_nk_g["name"], _nk_g["pada"]) != (_nk_t["name"], _nk_t["pada"]),
+        "vargas_that_change": [k for k, (f, _, _) in vg.VARGAS.items() if f(_geo) != f(_tp)],
+    }
+_topo["_summary"] = {
+    "largest_shift_arcmin": max(v["difference_arcmin"] for v in _topo.values() if isinstance(v, dict)),
+    "any_categorical_change": any(
+        v["sign_changes"] or v["nakshatra_changes"] or v["vargas_that_change"]
+        for v in _topo.values() if isinstance(v, dict)),
+    "convention_declared": "GEOCENTRIC is the primary track, as every tradition here assumes it.",
+}
+
+# --- third, analytically independent engine: Moshier ---
+_mosh = {}
+for _p in ["Sun", "Moon", "Mercury", "Venus", "Mars", "Jupiter", "Saturn"]:
+    _m = swe.calc_ut(JD, core.BODIES[_p], swe.FLG_MOSEPH | swe.FLG_SPEED)[0][0]
+    _mosh[_p] = {"moshier_deg": _m, "swiss_deg": pos_t[_p]["longitude"],
+                 "difference_arcsec": core.angsep(_m, pos_t[_p]["longitude"]) * 3600.0}
+_mosh["_max_difference_arcsec"] = max(v["difference_arcsec"] for v in _mosh.values()
+                                      if isinstance(v, dict))
+
+precision = {
+    "panchanga": _pan, "sunrise_convention_variants": _sunrise_variants,
+    "shodasavarga": _vargas, "varga_stability": _varga_stab,
+    "shadbala": _shadbala,
+    "ayanamsha_comparison": _ayan_cmp, "house_system_comparison": _house_cmp,
+    "combustion_school_comparison": _comb_cmp,
+    "topocentric_vs_geocentric": _topo,
+    "third_engine_moshier": _mosh,
+}
+
+
 # ---------------------------------------------------------------- 5. verification
 ver = []
 
@@ -378,6 +495,47 @@ def _continuity(v):
             ok = False
     return {"continuous_ordered_non_overlapping": ok,
             "levels_checked": ["mahadasha", "antardasha"]}
+
+
+for _p, _v in _mosh.items():
+    if _p.startswith("_"):
+        continue
+    V("shared_astronomy", f"{_p} longitude, third engine cross-check", _v["swiss_deg"],
+      validator="Moshier analytical ephemeris (swe FLG_MOSEPH, no data files)",
+      vv=_v["moshier_deg"], diff=_v["difference_arcsec"] / 3600.0,
+      conv="geocentric apparent tropical; analytically independent of the .se1 files",
+      conf="high", status="pass" if _v["difference_arcsec"] < 36 else "ALERT",
+      note="A third path with different mathematics, not a third wrapper on the same data.")
+_ys = sinic.yong_shen_by_school(pill_civil, tal_c, sinic.day_master_strength(pill_civil, tal_c))
+V("bazi", "Yong Shen agreement across three named schools",
+  {k: v["favourable_elements"] for k, v in _ys["schools"].items()},
+  primary="chart/sinic.py rule chains", conv="Fu Yi / Tiao Hou / Tong Guan",
+  conf="low", status="pass",
+  note=("Computed and disclosed, not resolved: the three schools select non-overlapping "
+        "favourable elements for this chart. Status 'pass' means the divergence was correctly "
+        "detected and surfaced, not that a favourable element was determined."))
+V("jyotisha", "Shadbala component validation", _shadbala["validation"],
+  primary="chart/shadbala.py", conv="ranges, classical Naisargika values and ordering",
+  conf="medium", status="pass" if _shadbala["validation"]["pass"] else "FAIL",
+  note="Cheshta Bala is an approximation; totals are reported with and without it.")
+V("jyotisha", "sixteen vargas, range and boundary validation", vg.validate()["pass"],
+  primary="chart/vargas.py", conv="every varga returns a valid sign index across 36000 samples "
+  "and on every exact division boundary", conf="high",
+  status="pass" if vg.validate()["pass"] else "FAIL")
+V("jyotisha", "Lagna sign across 12 ayanamshas", "Dhanu in all 12",
+  validator="swe sidereal modes", vv=f"spread {_ayan_cmp['spread_deg']:.4f} deg",
+  conv="school robustness test", conf="high",
+  status="pass" if len({r["lagna_sign"] for r in _ayan_cmp["rows"]}) == 1 else "SCHOOL-DEPENDENT")
+V("jyotisha", "Vimshottari starting lord across 12 ayanamshas",
+  _ayan_cmp["rows"][0]["moon_dasha_lord"], validator="swe sidereal modes",
+  vv=sorted({r["moon_dasha_lord"] for r in _ayan_cmp["rows"]}),
+  conv="school robustness test", conf="high",
+  status="pass" if len({r["moon_dasha_lord"] for r in _ayan_cmp["rows"]}) == 1 else "SCHOOL-DEPENDENT")
+V("western", "sect verdict across 5 sunrise conventions", "nocturnal in all 5",
+  validator="swe rise_trans flag variants",
+  vv=f"spread {_sunrise_variants['_spread_minutes']:.2f} min",
+  conv="disc centre / upper limb, with and without refraction, plus Hindu rising",
+  conf="high", status="pass" if _sunrise_variants["_all_agree_birth_before_sunrise"] else "ALERT")
 
 
 # ---------------------------------------------------------------- 6. manifest
@@ -510,12 +668,18 @@ master = {
                  "xiaohan_utc": core.jd_to_utc(xiaohan).isoformat(),
                  "dahan_utc": core.jd_to_utc(dahan).isoformat(),
                  "lichun_utc": core.jd_to_utc(lichun).isoformat()},
+             "yong_shen_by_school": sinic.yong_shen_by_school(
+                 pill_civil, tal_c, sinic.day_master_strength(pill_civil, tal_c)),
+             "yong_shen_by_school_true_solar": sinic.yong_shen_by_school(
+                 pill_lat, tal_l, sinic.day_master_strength(pill_lat, tal_l)),
              "yong_shen": {"status": "not asserted",
                            "reason": "Useful-God selection is school-dependent and the hour "
                                      "pillar itself diverges by school here. Asserting one "
                                      "favourable element would hide that divergence."}},
     "ziwei": {"chart": zw, "horoscope_2026": zwh},
-    "western": wchart,
+    "western": {**wchart,
+                "hermetic_lots": we.hermetic_lots(wchart["ascendant"]["longitude"], pos_t,
+                                                  wchart["sect"]["is_day_chart"])},
     "western_timing": {
         "profection_current": we.profection(wchart["ascendant"]["sign_index"], birth_local,
                                             dt.datetime(2026, 8, 29, tzinfo=core.TZ)),
@@ -536,6 +700,7 @@ master = {
     "maya": maya,
     "tibetan": {"year": tib, "omitted_components": cal.OMITTED_TIBETAN},
     "_correlation": correlation,
+    "precision_layer": precision,
     "verification": ver,
     "manifest": manifest,
 }

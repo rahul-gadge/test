@@ -1,6 +1,6 @@
 {
  "schema": "six-culture-verified-chart/MASTER_DATASET/v2",
- "generated_utc": "2026-08-29T16:19:37.208493+00:00",
+ "generated_utc": "2026-08-29T20:42:18.802368+00:00",
  "birth_input": {
   "schema": "six-culture-verified-chart/BIRTH_INPUT/v2",
   "original_user_entered": {
@@ -18816,6 +18816,64 @@
    "dahan_utc": "2003-01-20T11:52:34.195820+00:00",
    "lichun_utc": "2003-02-04T06:05:19.632746+00:00"
   },
+  "yong_shen_by_school": {
+   "schools": {
+    "扶抑 Fu Yi (support / suppress)": {
+     "favourable_elements": [
+      "Water",
+      "Metal"
+     ],
+     "reasoning": "Day Master 癸 (Water) computes as moderately weak (ratio 0.4267), so the school supports it with its own element and its resource.",
+     "depends_on_hour_pillar": true
+    },
+    "調候 Tiao Hou (climate regulation)": {
+     "favourable_elements": [
+      "Fire"
+     ],
+     "reasoning": "癸 born in the 丑 month: the classical prescription is 丙 -- warm the frozen water.",
+     "depends_on_hour_pillar": false
+    },
+    "通關 Tong Guan (bridging)": {
+     "favourable_elements": [
+      "Wood"
+     ],
+     "reasoning": "Water controls Fire, both heavy; the bridging element is Wood",
+     "depends_on_hour_pillar": true
+    }
+   },
+   "elements_all_schools_agree_on": [],
+   "schools_conflict": true,
+   "verdict": "NOT RESOLVED -- the named schools select different favourable elements for this chart, and the Fu Yi answer additionally depends on the hour pillar, which is itself school-divergent here. Reported side by side rather than collapsed into one answer."
+  },
+  "yong_shen_by_school_true_solar": {
+   "schools": {
+    "扶抑 Fu Yi (support / suppress)": {
+     "favourable_elements": [
+      "Water",
+      "Metal"
+     ],
+     "reasoning": "Day Master 癸 (Water) computes as moderately weak (ratio 0.4051), so the school supports it with its own element and its resource.",
+     "depends_on_hour_pillar": true
+    },
+    "調候 Tiao Hou (climate regulation)": {
+     "favourable_elements": [
+      "Fire"
+     ],
+     "reasoning": "癸 born in the 丑 month: the classical prescription is 丙 -- warm the frozen water.",
+     "depends_on_hour_pillar": false
+    },
+    "通關 Tong Guan (bridging)": {
+     "favourable_elements": [
+      "Wood"
+     ],
+     "reasoning": "Water controls Fire, both heavy; the bridging element is Wood",
+     "depends_on_hour_pillar": true
+    }
+   },
+   "elements_all_schools_agree_on": [],
+   "schools_conflict": true,
+   "verdict": "NOT RESOLVED -- the named schools select different favourable elements for this chart, and the Fu Yi answer additionally depends on the hour pillar, which is itself school-divergent here. Reported side by side rather than collapsed into one answer."
+  },
   "yong_shen": {
    "status": "not asserted",
    "reason": "Useful-God selection is school-dependent and the hour pillar itself diverges by school here. Asserting one favourable element would hide that divergence."
@@ -20449,6 +20507,78 @@
    "each_sign_sums_to_30": true,
    "grand_total": 360,
    "grand_total_expected": 360
+  },
+  "hermetic_lots": {
+   "Fortune": {
+    "longitude": 75.81052369413817,
+    "formatted": "Gemini 15°48'37.9\"",
+    "sign": "Gemini",
+    "sign_index": 2,
+    "whole_sign_house": 6,
+    "ruler": "Mercury",
+    "signifies": "body, circumstance, livelihood",
+    "formula": "day Asc+Moon-Sun / night Asc+Sun-Moon"
+   },
+   "Spirit": {
+    "longitude": 115.10830384630714,
+    "formatted": "Cancer 25°06'29.9\"",
+    "sign": "Cancer",
+    "sign_index": 3,
+    "whole_sign_house": 7,
+    "ruler": "Moon",
+    "signifies": "mind, action, career, what one initiates",
+    "formula": "day Asc+Sun-Moon / night Asc+Moon-Sun"
+   },
+   "Eros": {
+    "longitude": 137.70102843068415,
+    "formatted": "Leo 17°42'03.7\"",
+    "sign": "Leo",
+    "sign_index": 4,
+    "whole_sign_house": 8,
+    "ruler": "Sun",
+    "signifies": "desire, friendship, what is wished for",
+    "formula": "day Asc+Venus-Spirit / night Asc+Spirit-Venus"
+   },
+   "Necessity": {
+    "longitude": 122.61599734532501,
+    "formatted": "Leo 2°36'57.6\"",
+    "sign": "Leo",
+    "sign_index": 4,
+    "whole_sign_house": 8,
+    "ruler": "Sun",
+    "signifies": "constraint, compulsion, what cannot be avoided",
+    "formula": "day Asc+Fortune-Mercury / night Asc+Mercury-Fortune"
+   },
+   "Courage": {
+    "longitude": 81.4624826273357,
+    "formatted": "Gemini 21°27'44.9\"",
+    "sign": "Gemini",
+    "sign_index": 2,
+    "whole_sign_house": 6,
+    "ruler": "Mercury",
+    "signifies": "boldness, force, daring",
+    "formula": "day Asc+Fortune-Mars / night Asc+Mars-Fortune"
+   },
+   "Victory": {
+    "longitude": 255.71936656080524,
+    "formatted": "Sagittarius 15°43'09.7\"",
+    "sign": "Sagittarius",
+    "sign_index": 8,
+    "whole_sign_house": 12,
+    "ruler": "Jupiter",
+    "signifies": "success, contest, patronage",
+    "formula": "day Asc+Jupiter-Spirit / night Asc+Spirit-Jupiter"
+   },
+   "Nemesis": {
+    "longitude": 282.78792356741747,
+    "formatted": "Capricorn 12°47'16.5\"",
+    "sign": "Capricorn",
+    "sign_index": 9,
+    "whole_sign_house": 1,
+    "ruler": "Saturn",
+    "signifies": "hidden constraint, retribution",
+    "formula": "day Asc+Fortune-Saturn / night Asc+Saturn-Fortune"
+   }
   }
  },
  "western_timing": {
@@ -20928,6 +21058,3774 @@
   ],
   "explanation": "Whole-sign house = (planet sign - Ascendant sign) mod 12. The Lahiri ayanamsha shifts the Ascendant and every planet by the same 23 deg 53' 59\", so the house number survives unless one crosses a sign boundary and the other does not. Only the Sun differs here, because the ayanamsha carried the Ascendant back from Capricorn into Sagittarius while the Sun stayed in Capricorn.",
   "consequence": "House-placement agreement between the Jyotisha and Hellenistic clusters is an artifact of shared method, NOT independent cross-cultural corroboration. DIGNITY, by contrast, genuinely diverges: the Moon and Mars are in their own signs in Jyotisha but hold no essential dignity in the Western chart, and Jupiter is exalted in Jyotisha but holds only triplicity and face in the Western chart."
+ },
+ "precision_layer": {
+  "panchanga": {
+   "tithi": {
+    "index": 17,
+    "name": "Dvitiya",
+    "paksha": "Krishna (waning)",
+    "elapsed_fraction": 0.6374075063403701,
+    "sun_moon_elongation_deg": 199.64889007608446,
+    "degrees_to_next_tithi": 4.351109923915544,
+    "rule": "tithi = floor((Moon - Sun) / 12 deg) + 1, sidereal longitudes"
+   },
+   "vara": {
+    "index": 0,
+    "name": "Ravivara (Sunday)",
+    "lord": "Sun",
+    "civil_weekday": "Monday",
+    "differs_from_civil": true,
+    "rule": "the Vedic day runs sunrise to sunrise; a pre-sunrise birth belongs to the previous vara"
+   },
+   "nakshatra": {
+    "of_moon": {
+     "index": 9,
+     "name": "Ashlesha",
+     "pada": 3,
+     "lord": "Mercury",
+     "degrees_into": 8.578685806613194,
+     "fraction_elapsed": 0.6434014354959895
+    },
+    "of_lagna": {
+     "index": 19,
+     "name": "Mula",
+     "pada": 4,
+     "lord": "Ketu",
+     "degrees_into": 11.563633123484312,
+     "fraction_elapsed": 0.8672724842613233
+    }
+   },
+   "yoga": {
+    "index": 3,
+    "name": "Ayushman",
+    "degrees_to_next": 9.158185129524727,
+    "rule": "yoga = floor((Sun + Moon) / 13 deg 20') + 1"
+   },
+   "karana": {
+    "index": 34,
+    "name": "Gara",
+    "type": "movable",
+    "degrees_to_next": 4.351109923915544,
+    "rule": "karana = floor((Moon - Sun) / 6 deg) + 1, half-tithis"
+   }
+  },
+  "sunrise_convention_variants": {
+   "disc_centre_with_refraction": {
+    "jd": 2452659.5614172355,
+    "local": "2003-01-20T06:58:26.449150+05:30",
+    "minutes_from_birth": -94.44081947207451,
+    "birth_is_before_sunrise": true
+   },
+   "upper_limb_with_refraction": {
+    "jd": 2452659.5605479525,
+    "local": "2003-01-20T06:57:11.343099+05:30",
+    "minutes_from_birth": -93.1890519708395,
+    "birth_is_before_sunrise": true
+   },
+   "disc_centre_no_refraction": {
+    "jd": 2452659.5632996485,
+    "local": "2003-01-20T07:01:09.089627+05:30",
+    "minutes_from_birth": -97.15149410068989,
+    "birth_is_before_sunrise": true
+   },
+   "upper_limb_no_refraction": {
+    "jd": 2452659.56242889,
+    "local": "2003-01-20T06:59:53.856078+05:30",
+    "minutes_from_birth": -95.89760161936283,
+    "birth_is_before_sunrise": true
+   },
+   "hindu_sunrise_upper_limb": {
+    "jd": 2452659.5632920875,
+    "local": "2003-01-20T07:01:08.436362+05:30",
+    "minutes_from_birth": -97.14060634374619,
+    "birth_is_before_sunrise": true
+   },
+   "_spread_minutes": 3.9624421298503876,
+   "_all_agree_birth_before_sunrise": true
+  },
+  "shodasavarga": {
+   "lagna": {
+    "D1": {
+     "sign_index": 8,
+     "sign": "Dhanu",
+     "sign_western": "Sagittarius",
+     "name": "Rasi",
+     "signifies": "body / overall",
+     "degrees_to_next_division": 18.436366876515677,
+     "minutes_of_birth_time_to_next_division": 78.58788945241997
+    },
+    "D2": {
+     "sign_index": 4,
+     "sign": "Simha",
+     "sign_western": "Leo",
+     "name": "Hora",
+     "signifies": "wealth",
+     "degrees_to_next_division": 3.4363668765156774,
+     "minutes_of_birth_time_to_next_division": 14.64804980386734
+    },
+    "D3": {
+     "sign_index": 0,
+     "sign": "Mesha",
+     "sign_western": "Aries",
+     "name": "Drekkana",
+     "signifies": "siblings, courage",
+     "degrees_to_next_division": 8.436366876515677,
+     "minutes_of_birth_time_to_next_division": 35.961329686718216
+    },
+    "D4": {
+     "sign_index": 11,
+     "sign": "Meena",
+     "sign_western": "Pisces",
+     "name": "Chaturthamsa",
+     "signifies": "home, fortune",
+     "degrees_to_next_division": 3.4363668765156774,
+     "minutes_of_birth_time_to_next_division": 14.64804980386734
+    },
+    "D7": {
+     "sign_index": 10,
+     "sign": "Kumbha",
+     "sign_western": "Aquarius",
+     "name": "Saptamsa",
+     "signifies": "children, progeny",
+     "degrees_to_next_division": 1.293509733658527,
+     "minutes_of_birth_time_to_next_division": 5.513786996931216
+    },
+    "D9": {
+     "sign_index": 3,
+     "sign": "Karka",
+     "sign_western": "Cancer",
+     "name": "Navamsa",
+     "signifies": "spouse, dharma, general strength",
+     "degrees_to_next_division": 1.769700209849022,
+     "minutes_of_birth_time_to_next_division": 7.543623176250428
+    },
+    "D10": {
+     "sign_index": 11,
+     "sign": "Meena",
+     "sign_western": "Pisces",
+     "name": "Dasamsa",
+     "signifies": "career, action",
+     "degrees_to_next_division": 0.4363668765156774,
+     "minutes_of_birth_time_to_next_division": 1.8600818741568121
+    },
+    "D12": {
+     "sign_index": 0,
+     "sign": "Mesha",
+     "sign_western": "Aries",
+     "name": "Dwadasamsa",
+     "signifies": "parents",
+     "degrees_to_next_division": 0.9363668765156774,
+     "minutes_of_birth_time_to_next_division": 3.9914098624419
+    },
+    "D16": {
+     "sign_index": 2,
+     "sign": "Mithuna",
+     "sign_western": "Gemini",
+     "name": "Shodasamsa",
+     "signifies": "vehicles, comforts",
+     "degrees_to_next_division": 1.5613668765156774,
+     "minutes_of_birth_time_to_next_division": 6.65556984779826
+    },
+    "D20": {
+     "sign_index": 11,
+     "sign": "Meena",
+     "sign_western": "Pisces",
+     "name": "Vimsamsa",
+     "signifies": "spiritual practice",
+     "degrees_to_next_division": 0.4363668765156774,
+     "minutes_of_birth_time_to_next_division": 1.8600818741568121
+    },
+    "D24": {
+     "sign_index": 1,
+     "sign": "Vrishabha",
+     "sign_western": "Taurus",
+     "name": "Chaturvimsamsa",
+     "signifies": "education, learning",
+     "degrees_to_next_division": 0.9363668765156774,
+     "minutes_of_birth_time_to_next_division": 3.9914098624419
+    },
+    "D27": {
+     "sign_index": 10,
+     "sign": "Kumbha",
+     "sign_western": "Aquarius",
+     "name": "Bhamsa",
+     "signifies": "strengths and weaknesses",
+     "degrees_to_next_division": 0.6585890987379108,
+     "minutes_of_birth_time_to_next_division": 2.8073387578391213
+    },
+    "D30": {
+     "sign_index": 8,
+     "sign": "Dhanu",
+     "sign_western": "Sagittarius",
+     "name": "Trimsamsa",
+     "signifies": "misfortune, character",
+     "degrees_to_next_division": 6.436366876515677,
+     "minutes_of_birth_time_to_next_division": 27.436017733577867
+    },
+    "D40": {
+     "sign_index": 3,
+     "sign": "Karka",
+     "sign_western": "Cancer",
+     "name": "Khavedamsa",
+     "signifies": "maternal legacy",
+     "degrees_to_next_division": 0.4363668765156774,
+     "minutes_of_birth_time_to_next_division": 1.8600818741568121
+    },
+    "D45": {
+     "sign_index": 1,
+     "sign": "Vrishabha",
+     "sign_western": "Taurus",
+     "name": "Akshavedamsa",
+     "signifies": "paternal legacy",
+     "degrees_to_next_division": 0.4363668765156634,
+     "minutes_of_birth_time_to_next_division": 1.8600818741567524
+    },
+    "D60": {
+     "sign_index": 7,
+     "sign": "Vrischika",
+     "sign_western": "Scorpio",
+     "name": "Shastiamsa",
+     "signifies": "totality, past karma",
+     "degrees_to_next_division": 0.4363668765156774,
+     "minutes_of_birth_time_to_next_division": 1.8600818741568121
+    }
+   },
+   "lagna_vargottama": {
+    "count": 2,
+    "vargas": [
+     "D1",
+     "D30"
+    ]
+   },
+   "Sun": {
+    "D1": {
+     "sign_index": 9,
+     "sign": "Makara",
+     "sign_western": "Capricorn",
+     "name": "Rasi",
+     "signifies": "body / overall",
+     "degrees_to_next_division": 24.40353760280459,
+     "minutes_of_birth_time_to_next_division": 104.02388541205
+    },
+    "D2": {
+     "sign_index": 3,
+     "sign": "Karka",
+     "sign_western": "Cancer",
+     "name": "Hora",
+     "signifies": "wealth",
+     "degrees_to_next_division": 9.40353760280459,
+     "minutes_of_birth_time_to_next_division": 40.08404576349737
+    },
+    "D3": {
+     "sign_index": 9,
+     "sign": "Makara",
+     "sign_western": "Capricorn",
+     "name": "Drekkana",
+     "signifies": "siblings, courage",
+     "degrees_to_next_division": 4.40353760280459,
+     "minutes_of_birth_time_to_next_division": 18.77076588064649
+    },
+    "D4": {
+     "sign_index": 9,
+     "sign": "Makara",
+     "sign_western": "Capricorn",
+     "name": "Chaturthamsa",
+     "signifies": "home, fortune",
+     "degrees_to_next_division": 1.9035376028045903,
+     "minutes_of_birth_time_to_next_division": 8.114125939221053
+    },
+    "D7": {
+     "sign_index": 4,
+     "sign": "Simha",
+     "sign_western": "Leo",
+     "name": "Saptamsa",
+     "signifies": "children, progeny",
+     "degrees_to_next_division": 2.9749661742331535,
+     "minutes_of_birth_time_to_next_division": 12.681257342689062
+    },
+    "D9": {
+     "sign_index": 10,
+     "sign": "Kumbha",
+     "sign_western": "Aquarius",
+     "name": "Navamsa",
+     "signifies": "spouse, dharma, general strength",
+     "degrees_to_next_division": 1.0702042694712692,
+     "minutes_of_birth_time_to_next_division": 4.561912625412624
+    },
+    "D10": {
+     "sign_index": 6,
+     "sign": "Tula",
+     "sign_western": "Libra",
+     "name": "Dasamsa",
+     "signifies": "career, action",
+     "degrees_to_next_division": 0.4035376028045903,
+     "minutes_of_birth_time_to_next_division": 1.7201419743657884
+    },
+    "D12": {
+     "sign_index": 11,
+     "sign": "Meena",
+     "sign_western": "Pisces",
+     "name": "Dwadasamsa",
+     "signifies": "parents",
+     "degrees_to_next_division": 1.9035376028045903,
+     "minutes_of_birth_time_to_next_division": 8.114125939221053
+    },
+    "D16": {
+     "sign_index": 2,
+     "sign": "Mithuna",
+     "sign_western": "Gemini",
+     "name": "Shodasamsa",
+     "signifies": "vehicles, comforts",
+     "degrees_to_next_division": 0.02853760280459028,
+     "minutes_of_birth_time_to_next_division": 0.12164598315197256
+    },
+    "D20": {
+     "sign_index": 3,
+     "sign": "Karka",
+     "sign_western": "Cancer",
+     "name": "Vimsamsa",
+     "signifies": "spiritual practice",
+     "degrees_to_next_division": 0.4035376028045903,
+     "minutes_of_birth_time_to_next_division": 1.7201419743657884
+    },
+    "D24": {
+     "sign_index": 7,
+     "sign": "Vrischika",
+     "sign_western": "Scorpio",
+     "name": "Chaturvimsamsa",
+     "signifies": "education, learning",
+     "degrees_to_next_division": 0.6535376028045903,
+     "minutes_of_birth_time_to_next_division": 2.7858059685083325
+    },
+    "D27": {
+     "sign_index": 8,
+     "sign": "Dhanu",
+     "sign_western": "Sagittarius",
+     "name": "Bhamsa",
+     "signifies": "strengths and weaknesses",
+     "degrees_to_next_division": 1.0702042694712692,
+     "minutes_of_birth_time_to_next_division": 4.561912625412624
+    },
+    "D30": {
+     "sign_index": 5,
+     "sign": "Kanya",
+     "sign_western": "Virgo",
+     "name": "Trimsamsa",
+     "signifies": "misfortune, character",
+     "degrees_to_next_division": 6.40353760280459,
+     "minutes_of_birth_time_to_next_division": 27.296077833786843
+    },
+    "D40": {
+     "sign_index": 1,
+     "sign": "Vrishabha",
+     "sign_western": "Taurus",
+     "name": "Khavedamsa",
+     "signifies": "maternal legacy",
+     "degrees_to_next_division": 0.4035376028045903,
+     "minutes_of_birth_time_to_next_division": 1.7201419743657884
+    },
+    "D45": {
+     "sign_index": 8,
+     "sign": "Dhanu",
+     "sign_western": "Sagittarius",
+     "name": "Akshavedamsa",
+     "signifies": "paternal legacy",
+     "degrees_to_next_division": 0.40353760280457496,
+     "minutes_of_birth_time_to_next_division": 1.7201419743657231
+    },
+    "D60": {
+     "sign_index": 8,
+     "sign": "Dhanu",
+     "sign_western": "Sagittarius",
+     "name": "Shastiamsa",
+     "signifies": "totality, past karma",
+     "degrees_to_next_division": 0.4035376028045903,
+     "minutes_of_birth_time_to_next_division": 1.7201419743657884
+    }
+   },
+   "Sun_vargottama": {
+    "count": 3,
+    "vargas": [
+     "D1",
+     "D3",
+     "D4"
+    ]
+   },
+   "Moon": {
+    "D1": {
+     "sign_index": 3,
+     "sign": "Karka",
+     "sign_western": "Cancer",
+     "name": "Rasi",
+     "signifies": "body / overall",
+     "degrees_to_next_division": 4.7546475267201345,
+     "minutes_of_birth_time_to_next_division": 20.267426696258184
+    },
+    "D2": {
+     "sign_index": 4,
+     "sign": "Simha",
+     "sign_western": "Leo",
+     "name": "Hora",
+     "signifies": "wealth",
+     "degrees_to_next_division": 4.7546475267201345,
+     "minutes_of_birth_time_to_next_division": 20.267426696258184
+    },
+    "D3": {
+     "sign_index": 11,
+     "sign": "Meena",
+     "sign_western": "Pisces",
+     "name": "Drekkana",
+     "signifies": "siblings, courage",
+     "degrees_to_next_division": 4.7546475267201345,
+     "minutes_of_birth_time_to_next_division": 20.267426696258184
+    },
+    "D4": {
+     "sign_index": 0,
+     "sign": "Mesha",
+     "sign_western": "Aries",
+     "name": "Chaturthamsa",
+     "signifies": "home, fortune",
+     "degrees_to_next_division": 4.7546475267201345,
+     "minutes_of_birth_time_to_next_division": 20.267426696258184
+    },
+    "D7": {
+     "sign_index": 2,
+     "sign": "Mithuna",
+     "sign_western": "Gemini",
+     "name": "Saptamsa",
+     "signifies": "children, progeny",
+     "degrees_to_next_division": 0.4689332410058453,
+     "minutes_of_birth_time_to_next_division": 1.9989010823859892
+    },
+    "D9": {
+     "sign_index": 10,
+     "sign": "Kumbha",
+     "sign_western": "Aquarius",
+     "name": "Navamsa",
+     "signifies": "spouse, dharma, general strength",
+     "degrees_to_next_division": 1.4213141933868063,
+     "minutes_of_birth_time_to_next_division": 6.058573441024288
+    },
+    "D10": {
+     "sign_index": 7,
+     "sign": "Vrischika",
+     "sign_western": "Scorpio",
+     "name": "Dasamsa",
+     "signifies": "career, action",
+     "degrees_to_next_division": 1.7546475267201345,
+     "minutes_of_birth_time_to_next_division": 7.479458766547658
+    },
+    "D12": {
+     "sign_index": 1,
+     "sign": "Vrishabha",
+     "sign_western": "Taurus",
+     "name": "Dwadasamsa",
+     "signifies": "parents",
+     "degrees_to_next_division": 2.2546475267201345,
+     "minutes_of_birth_time_to_next_division": 9.610786754832747
+    },
+    "D16": {
+     "sign_index": 1,
+     "sign": "Vrishabha",
+     "sign_western": "Taurus",
+     "name": "Shodasamsa",
+     "signifies": "vehicles, comforts",
+     "degrees_to_next_division": 1.0046475267201345,
+     "minutes_of_birth_time_to_next_division": 4.282466784120026
+    },
+    "D20": {
+     "sign_index": 4,
+     "sign": "Simha",
+     "sign_western": "Leo",
+     "name": "Vimsamsa",
+     "signifies": "spiritual practice",
+     "degrees_to_next_division": 0.25464752672013446,
+     "minutes_of_birth_time_to_next_division": 1.0854748016923947
+    },
+    "D24": {
+     "sign_index": 11,
+     "sign": "Meena",
+     "sign_western": "Pisces",
+     "name": "Chaturvimsamsa",
+     "signifies": "education, learning",
+     "degrees_to_next_division": 1.0046475267201345,
+     "minutes_of_birth_time_to_next_division": 4.282466784120026
+    },
+    "D27": {
+     "sign_index": 7,
+     "sign": "Vrischika",
+     "sign_western": "Scorpio",
+     "name": "Bhamsa",
+     "signifies": "strengths and weaknesses",
+     "degrees_to_next_division": 0.31020308227569515,
+     "minutes_of_birth_time_to_next_division": 1.322289022612982
+    },
+    "D30": {
+     "sign_index": 7,
+     "sign": "Vrischika",
+     "sign_western": "Scorpio",
+     "name": "Trimsamsa",
+     "signifies": "misfortune, character",
+     "degrees_to_next_division": 4.7546475267201345,
+     "minutes_of_birth_time_to_next_division": 20.267426696258184
+    },
+    "D40": {
+     "sign_index": 3,
+     "sign": "Karka",
+     "sign_western": "Cancer",
+     "name": "Khavedamsa",
+     "signifies": "maternal legacy",
+     "degrees_to_next_division": 0.25464752672013446,
+     "minutes_of_birth_time_to_next_division": 1.0854748016923947
+    },
+    "D45": {
+     "sign_index": 1,
+     "sign": "Vrishabha",
+     "sign_western": "Taurus",
+     "name": "Akshavedamsa",
+     "signifies": "paternal legacy",
+     "degrees_to_next_division": 0.0879808600534614,
+     "minutes_of_birth_time_to_next_division": 0.37503213893067144
+    },
+    "D60": {
+     "sign_index": 5,
+     "sign": "Kanya",
+     "sign_western": "Virgo",
+     "name": "Shastiamsa",
+     "signifies": "totality, past karma",
+     "degrees_to_next_division": 0.25464752672013446,
+     "minutes_of_birth_time_to_next_division": 1.0854748016923947
+    }
+   },
+   "Moon_vargottama": {
+    "count": 2,
+    "vargas": [
+     "D1",
+     "D40"
+    ]
+   },
+   "Mars": {
+    "D1": {
+     "sign_index": 7,
+     "sign": "Vrischika",
+     "sign_western": "Scorpio",
+     "name": "Rasi",
+     "signifies": "body / overall",
+     "degrees_to_next_division": 22.08218809548717,
+     "minutes_of_birth_time_to_next_division": 94.12877106097517
+    },
+    "D2": {
+     "sign_index": 3,
+     "sign": "Karka",
+     "sign_western": "Cancer",
+     "name": "Hora",
+     "signifies": "wealth",
+     "degrees_to_next_division": 7.082188095487169,
+     "minutes_of_birth_time_to_next_division": 30.18893141242253
+    },
+    "D3": {
+     "sign_index": 7,
+     "sign": "Vrischika",
+     "sign_western": "Scorpio",
+     "name": "Drekkana",
+     "signifies": "siblings, courage",
+     "degrees_to_next_division": 2.0821880954871688,
+     "minutes_of_birth_time_to_next_division": 8.875651529571652
+    },
+    "D4": {
+     "sign_index": 10,
+     "sign": "Kumbha",
+     "sign_western": "Aquarius",
+     "name": "Chaturthamsa",
+     "signifies": "home, fortune",
+     "degrees_to_next_division": 7.082188095487169,
+     "minutes_of_birth_time_to_next_division": 30.18893141242253
+    },
+    "D7": {
+     "sign_index": 2,
+     "sign": "Mithuna",
+     "sign_western": "Gemini",
+     "name": "Saptamsa",
+     "signifies": "children, progeny",
+     "degrees_to_next_division": 0.6536166669157337,
+     "minutes_of_birth_time_to_next_division": 2.78614299161423
+    },
+    "D9": {
+     "sign_index": 5,
+     "sign": "Kanya",
+     "sign_western": "Virgo",
+     "name": "Navamsa",
+     "signifies": "spouse, dharma, general strength",
+     "degrees_to_next_division": 2.0821880954871785,
+     "minutes_of_birth_time_to_next_division": 8.875651529571693
+    },
+    "D10": {
+     "sign_index": 5,
+     "sign": "Kanya",
+     "sign_western": "Virgo",
+     "name": "Dasamsa",
+     "signifies": "career, action",
+     "degrees_to_next_division": 1.0821880954871688,
+     "minutes_of_birth_time_to_next_division": 4.612995553001476
+    },
+    "D12": {
+     "sign_index": 10,
+     "sign": "Kumbha",
+     "sign_western": "Aquarius",
+     "name": "Dwadasamsa",
+     "signifies": "parents",
+     "degrees_to_next_division": 2.0821880954871688,
+     "minutes_of_birth_time_to_next_division": 8.875651529571652
+    },
+    "D16": {
+     "sign_index": 8,
+     "sign": "Dhanu",
+     "sign_western": "Sagittarius",
+     "name": "Shodasamsa",
+     "signifies": "vehicles, comforts",
+     "degrees_to_next_division": 1.4571880954871688,
+     "minutes_of_birth_time_to_next_division": 6.211491544215292
+    },
+    "D20": {
+     "sign_index": 1,
+     "sign": "Vrishabha",
+     "sign_western": "Taurus",
+     "name": "Vimsamsa",
+     "signifies": "spiritual practice",
+     "degrees_to_next_division": 1.0821880954871688,
+     "minutes_of_birth_time_to_next_division": 4.612995553001476
+    },
+    "D24": {
+     "sign_index": 9,
+     "sign": "Makara",
+     "sign_western": "Capricorn",
+     "name": "Chaturvimsamsa",
+     "signifies": "education, learning",
+     "degrees_to_next_division": 0.8321880954871688,
+     "minutes_of_birth_time_to_next_division": 3.547331558858932
+    },
+    "D27": {
+     "sign_index": 4,
+     "sign": "Simha",
+     "sign_western": "Leo",
+     "name": "Bhamsa",
+     "signifies": "strengths and weaknesses",
+     "degrees_to_next_division": 0.9710769843760674,
+     "minutes_of_birth_time_to_next_division": 4.139367111160387
+    },
+    "D30": {
+     "sign_index": 5,
+     "sign": "Kanya",
+     "sign_western": "Virgo",
+     "name": "Trimsamsa",
+     "signifies": "misfortune, character",
+     "degrees_to_next_division": 4.082188095487169,
+     "minutes_of_birth_time_to_next_division": 17.400963482712005
+    },
+    "D40": {
+     "sign_index": 4,
+     "sign": "Simha",
+     "sign_western": "Leo",
+     "name": "Khavedamsa",
+     "signifies": "maternal legacy",
+     "degrees_to_next_division": 0.33218809548716877,
+     "minutes_of_birth_time_to_next_division": 1.416003570573844
+    },
+    "D45": {
+     "sign_index": 3,
+     "sign": "Karka",
+     "sign_western": "Cancer",
+     "name": "Akshavedamsa",
+     "signifies": "paternal legacy",
+     "degrees_to_next_division": 0.08218809548715666,
+     "minutes_of_birth_time_to_next_division": 0.35033957643124863
+    },
+    "D60": {
+     "sign_index": 10,
+     "sign": "Kumbha",
+     "sign_western": "Aquarius",
+     "name": "Shastiamsa",
+     "signifies": "totality, past karma",
+     "degrees_to_next_division": 0.08218809548716877,
+     "minutes_of_birth_time_to_next_division": 0.3503395764313002
+    }
+   },
+   "Mars_vargottama": {
+    "count": 2,
+    "vargas": [
+     "D1",
+     "D3"
+    ]
+   },
+   "Mercury": {
+    "D1": {
+     "sign_index": 8,
+     "sign": "Dhanu",
+     "sign_western": "Sagittarius",
+     "name": "Rasi",
+     "signifies": "body / overall",
+     "degrees_to_next_division": 10.92867337749783,
+     "minutes_of_birth_time_to_next_division": 46.58517488857449
+    },
+    "D2": {
+     "sign_index": 3,
+     "sign": "Karka",
+     "sign_western": "Cancer",
+     "name": "Hora",
+     "signifies": "wealth",
+     "degrees_to_next_division": 10.92867337749783,
+     "minutes_of_birth_time_to_next_division": 46.58517488857449
+    },
+    "D3": {
+     "sign_index": 0,
+     "sign": "Mesha",
+     "sign_western": "Aries",
+     "name": "Drekkana",
+     "signifies": "siblings, courage",
+     "degrees_to_next_division": 0.9286733774978302,
+     "minutes_of_birth_time_to_next_division": 3.958615122872737
+    },
+    "D4": {
+     "sign_index": 2,
+     "sign": "Mithuna",
+     "sign_western": "Gemini",
+     "name": "Chaturthamsa",
+     "signifies": "home, fortune",
+     "degrees_to_next_division": 3.42867337749783,
+     "minutes_of_birth_time_to_next_division": 14.615255064298177
+    },
+    "D7": {
+     "sign_index": 0,
+     "sign": "Mesha",
+     "sign_western": "Aries",
+     "name": "Saptamsa",
+     "signifies": "children, progeny",
+     "degrees_to_next_division": 2.357244806069251,
+     "minutes_of_birth_time_to_next_division": 10.048123660830097
+    },
+    "D9": {
+     "sign_index": 5,
+     "sign": "Kanya",
+     "sign_western": "Virgo",
+     "name": "Navamsa",
+     "signifies": "spouse, dharma, general strength",
+     "degrees_to_next_division": 0.9286733774978417,
+     "minutes_of_birth_time_to_next_division": 3.958615122872786
+    },
+    "D10": {
+     "sign_index": 2,
+     "sign": "Mithuna",
+     "sign_western": "Gemini",
+     "name": "Dasamsa",
+     "signifies": "career, action",
+     "degrees_to_next_division": 1.9286733774978302,
+     "minutes_of_birth_time_to_next_division": 8.221271099442912
+    },
+    "D12": {
+     "sign_index": 3,
+     "sign": "Karka",
+     "sign_western": "Cancer",
+     "name": "Dwadasamsa",
+     "signifies": "parents",
+     "degrees_to_next_division": 0.9286733774978302,
+     "minutes_of_birth_time_to_next_division": 3.958615122872737
+    },
+    "D16": {
+     "sign_index": 6,
+     "sign": "Tula",
+     "sign_western": "Libra",
+     "name": "Shodasamsa",
+     "signifies": "vehicles, comforts",
+     "degrees_to_next_division": 1.5536733774978302,
+     "minutes_of_birth_time_to_next_division": 6.622775108229097
+    },
+    "D20": {
+     "sign_index": 4,
+     "sign": "Simha",
+     "sign_western": "Leo",
+     "name": "Vimsamsa",
+     "signifies": "spiritual practice",
+     "degrees_to_next_division": 0.4286733774978302,
+     "minutes_of_birth_time_to_next_division": 1.827287134587649
+    },
+    "D24": {
+     "sign_index": 7,
+     "sign": "Vrischika",
+     "sign_western": "Scorpio",
+     "name": "Chaturvimsamsa",
+     "signifies": "education, learning",
+     "degrees_to_next_division": 0.9286733774978302,
+     "minutes_of_birth_time_to_next_division": 3.958615122872737
+    },
+    "D27": {
+     "sign_index": 5,
+     "sign": "Kanya",
+     "sign_western": "Virgo",
+     "name": "Bhamsa",
+     "signifies": "strengths and weaknesses",
+     "degrees_to_next_division": 0.9286733774978417,
+     "minutes_of_birth_time_to_next_division": 3.958615122872786
+    },
+    "D30": {
+     "sign_index": 2,
+     "sign": "Mithuna",
+     "sign_western": "Gemini",
+     "name": "Trimsamsa",
+     "signifies": "misfortune, character",
+     "degrees_to_next_division": 5.92867337749783,
+     "minutes_of_birth_time_to_next_division": 25.271895005723614
+    },
+    "D40": {
+     "sign_index": 1,
+     "sign": "Vrishabha",
+     "sign_western": "Taurus",
+     "name": "Khavedamsa",
+     "signifies": "maternal legacy",
+     "degrees_to_next_division": 0.4286733774978302,
+     "minutes_of_birth_time_to_next_division": 1.827287134587649
+    },
+    "D45": {
+     "sign_index": 0,
+     "sign": "Mesha",
+     "sign_western": "Aries",
+     "name": "Akshavedamsa",
+     "signifies": "paternal legacy",
+     "degrees_to_next_division": 0.2620067108311491,
+     "minutes_of_birth_time_to_next_division": 1.1168444718258916
+    },
+    "D60": {
+     "sign_index": 10,
+     "sign": "Kumbha",
+     "sign_western": "Aquarius",
+     "name": "Shastiamsa",
+     "signifies": "totality, past karma",
+     "degrees_to_next_division": 0.4286733774978302,
+     "minutes_of_birth_time_to_next_division": 1.827287134587649
+    }
+   },
+   "Mercury_vargottama": {
+    "count": 1,
+    "vargas": [
+     "D1"
+    ]
+   },
+   "Jupiter": {
+    "D1": {
+     "sign_index": 3,
+     "sign": "Karka",
+     "sign_western": "Cancer",
+     "name": "Rasi",
+     "signifies": "body / overall",
+     "degrees_to_next_division": 9.04742959101381,
+     "minutes_of_birth_time_to_next_division": 38.566079818732874
+    },
+    "D2": {
+     "sign_index": 4,
+     "sign": "Simha",
+     "sign_western": "Leo",
+     "name": "Hora",
+     "signifies": "wealth",
+     "degrees_to_next_division": 9.04742959101381,
+     "minutes_of_birth_time_to_next_division": 38.566079818732874
+    },
+    "D3": {
+     "sign_index": 11,
+     "sign": "Meena",
+     "sign_western": "Pisces",
+     "name": "Drekkana",
+     "signifies": "siblings, courage",
+     "degrees_to_next_division": 9.04742959101381,
+     "minutes_of_birth_time_to_next_division": 38.566079818732874
+    },
+    "D4": {
+     "sign_index": 9,
+     "sign": "Makara",
+     "sign_western": "Capricorn",
+     "name": "Chaturthamsa",
+     "signifies": "home, fortune",
+     "degrees_to_next_division": 1.5474295910138096,
+     "minutes_of_birth_time_to_next_division": 6.596159994456558
+    },
+    "D7": {
+     "sign_index": 1,
+     "sign": "Vrishabha",
+     "sign_western": "Taurus",
+     "name": "Saptamsa",
+     "signifies": "children, progeny",
+     "degrees_to_next_division": 0.4760010195852349,
+     "minutes_of_birth_time_to_next_division": 2.029028590988499
+    },
+    "D9": {
+     "sign_index": 9,
+     "sign": "Makara",
+     "sign_western": "Capricorn",
+     "name": "Navamsa",
+     "signifies": "spouse, dharma, general strength",
+     "degrees_to_next_division": 2.380762924347148,
+     "minutes_of_birth_time_to_next_division": 10.14837330826506
+    },
+    "D10": {
+     "sign_index": 5,
+     "sign": "Kanya",
+     "sign_western": "Virgo",
+     "name": "Dasamsa",
+     "signifies": "career, action",
+     "degrees_to_next_division": 0.04742959101380961,
+     "minutes_of_birth_time_to_next_division": 0.20217602960129466
+    },
+    "D12": {
+     "sign_index": 11,
+     "sign": "Meena",
+     "sign_western": "Pisces",
+     "name": "Dwadasamsa",
+     "signifies": "parents",
+     "degrees_to_next_division": 1.5474295910138096,
+     "minutes_of_birth_time_to_next_division": 6.596159994456558
+    },
+    "D16": {
+     "sign_index": 11,
+     "sign": "Meena",
+     "sign_western": "Pisces",
+     "name": "Shodasamsa",
+     "signifies": "vehicles, comforts",
+     "degrees_to_next_division": 1.5474295910138096,
+     "minutes_of_birth_time_to_next_division": 6.596159994456558
+    },
+    "D20": {
+     "sign_index": 1,
+     "sign": "Vrishabha",
+     "sign_western": "Taurus",
+     "name": "Vimsamsa",
+     "signifies": "spiritual practice",
+     "degrees_to_next_division": 0.04742959101380961,
+     "minutes_of_birth_time_to_next_division": 0.20217602960129466
+    },
+    "D24": {
+     "sign_index": 7,
+     "sign": "Vrischika",
+     "sign_western": "Scorpio",
+     "name": "Chaturvimsamsa",
+     "signifies": "education, learning",
+     "degrees_to_next_division": 0.2974295910138096,
+     "minutes_of_birth_time_to_next_division": 1.2678400237438385
+    },
+    "D27": {
+     "sign_index": 3,
+     "sign": "Karka",
+     "sign_western": "Cancer",
+     "name": "Bhamsa",
+     "signifies": "strengths and weaknesses",
+     "degrees_to_next_division": 0.15854070212492566,
+     "minutes_of_birth_time_to_next_division": 0.6758044714424463
+    },
+    "D30": {
+     "sign_index": 9,
+     "sign": "Makara",
+     "sign_western": "Capricorn",
+     "name": "Trimsamsa",
+     "signifies": "misfortune, character",
+     "degrees_to_next_division": 4.04742959101381,
+     "minutes_of_birth_time_to_next_division": 17.252799935882
+    },
+    "D40": {
+     "sign_index": 9,
+     "sign": "Makara",
+     "sign_western": "Capricorn",
+     "name": "Khavedamsa",
+     "signifies": "maternal legacy",
+     "degrees_to_next_division": 0.04742959101380961,
+     "minutes_of_birth_time_to_next_division": 0.20217602960129466
+    },
+    "D45": {
+     "sign_index": 7,
+     "sign": "Vrischika",
+     "sign_western": "Scorpio",
+     "name": "Akshavedamsa",
+     "signifies": "paternal legacy",
+     "degrees_to_next_division": 0.38076292434713677,
+     "minutes_of_birth_time_to_next_division": 1.6230613551246602
+    },
+    "D60": {
+     "sign_index": 8,
+     "sign": "Dhanu",
+     "sign_western": "Sagittarius",
+     "name": "Shastiamsa",
+     "signifies": "totality, past karma",
+     "degrees_to_next_division": 0.04742959101380961,
+     "minutes_of_birth_time_to_next_division": 0.20217602960129466
+    }
+   },
+   "Jupiter_vargottama": {
+    "count": 2,
+    "vargas": [
+     "D1",
+     "D27"
+    ]
+   },
+   "Venus": {
+    "D1": {
+     "sign_index": 7,
+     "sign": "Vrischika",
+     "sign_western": "Scorpio",
+     "name": "Rasi",
+     "signifies": "body / overall",
+     "degrees_to_next_division": 11.029091460892687,
+     "minutes_of_birth_time_to_next_division": 47.0132226319133
+    },
+    "D2": {
+     "sign_index": 4,
+     "sign": "Simha",
+     "sign_western": "Leo",
+     "name": "Hora",
+     "signifies": "wealth",
+     "degrees_to_next_division": 11.029091460892687,
+     "minutes_of_birth_time_to_next_division": 47.0132226319133
+    },
+    "D3": {
+     "sign_index": 11,
+     "sign": "Meena",
+     "sign_western": "Pisces",
+     "name": "Drekkana",
+     "signifies": "siblings, courage",
+     "degrees_to_next_division": 1.0290914608926869,
+     "minutes_of_birth_time_to_next_division": 4.3866628662115446
+    },
+    "D4": {
+     "sign_index": 1,
+     "sign": "Vrishabha",
+     "sign_western": "Taurus",
+     "name": "Chaturthamsa",
+     "signifies": "home, fortune",
+     "degrees_to_next_division": 3.529091460892687,
+     "minutes_of_birth_time_to_next_division": 15.043302807636984
+    },
+    "D7": {
+     "sign_index": 5,
+     "sign": "Kanya",
+     "sign_western": "Virgo",
+     "name": "Saptamsa",
+     "signifies": "children, progeny",
+     "degrees_to_next_division": 2.4576628894641086,
+     "minutes_of_birth_time_to_next_division": 10.476171404168909
+    },
+    "D9": {
+     "sign_index": 8,
+     "sign": "Dhanu",
+     "sign_western": "Sagittarius",
+     "name": "Navamsa",
+     "signifies": "spouse, dharma, general strength",
+     "degrees_to_next_division": 1.029091460892697,
+     "minutes_of_birth_time_to_next_division": 4.386662866211588
+    },
+    "D10": {
+     "sign_index": 9,
+     "sign": "Makara",
+     "sign_western": "Capricorn",
+     "name": "Dasamsa",
+     "signifies": "career, action",
+     "degrees_to_next_division": 2.029091460892687,
+     "minutes_of_birth_time_to_next_division": 8.649318842781721
+    },
+    "D12": {
+     "sign_index": 2,
+     "sign": "Mithuna",
+     "sign_western": "Gemini",
+     "name": "Dwadasamsa",
+     "signifies": "parents",
+     "degrees_to_next_division": 1.0290914608926869,
+     "minutes_of_birth_time_to_next_division": 4.3866628662115446
+    },
+    "D16": {
+     "sign_index": 2,
+     "sign": "Mithuna",
+     "sign_western": "Gemini",
+     "name": "Shodasamsa",
+     "signifies": "vehicles, comforts",
+     "degrees_to_next_division": 1.6540914608926869,
+     "minutes_of_birth_time_to_next_division": 7.050822851567905
+    },
+    "D20": {
+     "sign_index": 8,
+     "sign": "Dhanu",
+     "sign_western": "Sagittarius",
+     "name": "Vimsamsa",
+     "signifies": "spiritual practice",
+     "degrees_to_next_division": 0.5290914608926869,
+     "minutes_of_birth_time_to_next_division": 2.2553348779264573
+    },
+    "D24": {
+     "sign_index": 6,
+     "sign": "Tula",
+     "sign_western": "Libra",
+     "name": "Chaturvimsamsa",
+     "signifies": "education, learning",
+     "degrees_to_next_division": 1.0290914608926869,
+     "minutes_of_birth_time_to_next_division": 4.3866628662115446
+    },
+    "D27": {
+     "sign_index": 2,
+     "sign": "Mithuna",
+     "sign_western": "Gemini",
+     "name": "Bhamsa",
+     "signifies": "strengths and weaknesses",
+     "degrees_to_next_division": 1.029091460892697,
+     "minutes_of_birth_time_to_next_division": 4.386662866211588
+    },
+    "D30": {
+     "sign_index": 11,
+     "sign": "Meena",
+     "sign_western": "Pisces",
+     "name": "Trimsamsa",
+     "signifies": "misfortune, character",
+     "degrees_to_next_division": 1.0290914608926869,
+     "minutes_of_birth_time_to_next_division": 4.3866628662115446
+    },
+    "D40": {
+     "sign_index": 7,
+     "sign": "Vrischika",
+     "sign_western": "Scorpio",
+     "name": "Khavedamsa",
+     "signifies": "maternal legacy",
+     "degrees_to_next_division": 0.5290914608926869,
+     "minutes_of_birth_time_to_next_division": 2.2553348779264573
+    },
+    "D45": {
+     "sign_index": 8,
+     "sign": "Dhanu",
+     "sign_western": "Sagittarius",
+     "name": "Akshavedamsa",
+     "signifies": "paternal legacy",
+     "degrees_to_next_division": 0.3624247942260075,
+     "minutes_of_birth_time_to_next_division": 1.5448922151647069
+    },
+    "D60": {
+     "sign_index": 8,
+     "sign": "Dhanu",
+     "sign_western": "Sagittarius",
+     "name": "Shastiamsa",
+     "signifies": "totality, past karma",
+     "degrees_to_next_division": 0.029091460892686882,
+     "minutes_of_birth_time_to_next_division": 0.12400688964136927
+    }
+   },
+   "Venus_vargottama": {
+    "count": 2,
+    "vargas": [
+     "D1",
+     "D40"
+    ]
+   },
+   "Saturn": {
+    "D1": {
+     "sign_index": 1,
+     "sign": "Vrishabha",
+     "sign_western": "Taurus",
+     "name": "Rasi",
+     "signifies": "body / overall",
+     "degrees_to_next_division": 0.7567471554054492,
+     "minutes_of_birth_time_to_next_division": 3.2257527847415175
+    },
+    "D2": {
+     "sign_index": 4,
+     "sign": "Simha",
+     "sign_western": "Leo",
+     "name": "Hora",
+     "signifies": "wealth",
+     "degrees_to_next_division": 0.7567471554054492,
+     "minutes_of_birth_time_to_next_division": 3.2257527847415175
+    },
+    "D3": {
+     "sign_index": 9,
+     "sign": "Makara",
+     "sign_western": "Capricorn",
+     "name": "Drekkana",
+     "signifies": "siblings, courage",
+     "degrees_to_next_division": 0.7567471554054492,
+     "minutes_of_birth_time_to_next_division": 3.2257527847415175
+    },
+    "D4": {
+     "sign_index": 10,
+     "sign": "Kumbha",
+     "sign_western": "Aquarius",
+     "name": "Chaturthamsa",
+     "signifies": "home, fortune",
+     "degrees_to_next_division": 0.7567471554054492,
+     "minutes_of_birth_time_to_next_division": 3.2257527847415175
+    },
+    "D7": {
+     "sign_index": 1,
+     "sign": "Vrishabha",
+     "sign_western": "Taurus",
+     "name": "Saptamsa",
+     "signifies": "children, progeny",
+     "degrees_to_next_division": 0.7567471554054475,
+     "minutes_of_birth_time_to_next_division": 3.22575278474151
+    },
+    "D9": {
+     "sign_index": 5,
+     "sign": "Kanya",
+     "sign_western": "Virgo",
+     "name": "Navamsa",
+     "signifies": "spouse, dharma, general strength",
+     "degrees_to_next_division": 0.7567471554054519,
+     "minutes_of_birth_time_to_next_division": 3.225752784741529
+    },
+    "D10": {
+     "sign_index": 6,
+     "sign": "Tula",
+     "sign_western": "Libra",
+     "name": "Dasamsa",
+     "signifies": "career, action",
+     "degrees_to_next_division": 0.7567471554054492,
+     "minutes_of_birth_time_to_next_division": 3.2257527847415175
+    },
+    "D12": {
+     "sign_index": 0,
+     "sign": "Mesha",
+     "sign_western": "Aries",
+     "name": "Dwadasamsa",
+     "signifies": "parents",
+     "degrees_to_next_division": 0.7567471554054492,
+     "minutes_of_birth_time_to_next_division": 3.2257527847415175
+    },
+    "D16": {
+     "sign_index": 7,
+     "sign": "Vrischika",
+     "sign_western": "Scorpio",
+     "name": "Shodasamsa",
+     "signifies": "vehicles, comforts",
+     "degrees_to_next_division": 0.7567471554054492,
+     "minutes_of_birth_time_to_next_division": 3.2257527847415175
+    },
+    "D20": {
+     "sign_index": 3,
+     "sign": "Karka",
+     "sign_western": "Cancer",
+     "name": "Vimsamsa",
+     "signifies": "spiritual practice",
+     "degrees_to_next_division": 0.7567471554054492,
+     "minutes_of_birth_time_to_next_division": 3.2257527847415175
+    },
+    "D24": {
+     "sign_index": 2,
+     "sign": "Mithuna",
+     "sign_western": "Gemini",
+     "name": "Chaturvimsamsa",
+     "signifies": "education, learning",
+     "degrees_to_next_division": 0.7567471554054492,
+     "minutes_of_birth_time_to_next_division": 3.2257527847415175
+    },
+    "D27": {
+     "sign_index": 5,
+     "sign": "Kanya",
+     "sign_western": "Virgo",
+     "name": "Bhamsa",
+     "signifies": "strengths and weaknesses",
+     "degrees_to_next_division": 0.7567471554054519,
+     "minutes_of_birth_time_to_next_division": 3.225752784741529
+    },
+    "D30": {
+     "sign_index": 7,
+     "sign": "Vrischika",
+     "sign_western": "Scorpio",
+     "name": "Trimsamsa",
+     "signifies": "misfortune, character",
+     "degrees_to_next_division": 0.7567471554054492,
+     "minutes_of_birth_time_to_next_division": 3.2257527847415175
+    },
+    "D40": {
+     "sign_index": 8,
+     "sign": "Dhanu",
+     "sign_western": "Sagittarius",
+     "name": "Khavedamsa",
+     "signifies": "maternal legacy",
+     "degrees_to_next_division": 0.006747155405449234,
+     "minutes_of_birth_time_to_next_division": 0.028760802313885947
+    },
+    "D45": {
+     "sign_index": 11,
+     "sign": "Meena",
+     "sign_western": "Pisces",
+     "name": "Akshavedamsa",
+     "signifies": "paternal legacy",
+     "degrees_to_next_division": 0.09008048873877927,
+     "minutes_of_birth_time_to_next_division": 0.3839821336947199
+    },
+    "D60": {
+     "sign_index": 11,
+     "sign": "Meena",
+     "sign_western": "Pisces",
+     "name": "Shastiamsa",
+     "signifies": "totality, past karma",
+     "degrees_to_next_division": 0.25674715540544923,
+     "minutes_of_birth_time_to_next_division": 1.0944247964564298
+    }
+   },
+   "Saturn_vargottama": {
+    "count": 2,
+    "vargas": [
+     "D1",
+     "D7"
+    ]
+   },
+   "Rahu": {
+    "D1": {
+     "sign_index": 1,
+     "sign": "Vrishabha",
+     "sign_western": "Taurus",
+     "name": "Rasi",
+     "signifies": "body / overall",
+     "degrees_to_next_division": 17.871950699542595,
+     "minutes_of_birth_time_to_next_division": 76.18197746237277
+    },
+    "D2": {
+     "sign_index": 3,
+     "sign": "Karka",
+     "sign_western": "Cancer",
+     "name": "Hora",
+     "signifies": "wealth",
+     "degrees_to_next_division": 2.8719506995425945,
+     "minutes_of_birth_time_to_next_division": 12.242137813820138
+    },
+    "D3": {
+     "sign_index": 5,
+     "sign": "Kanya",
+     "sign_western": "Virgo",
+     "name": "Drekkana",
+     "signifies": "siblings, courage",
+     "degrees_to_next_division": 7.8719506995425945,
+     "minutes_of_birth_time_to_next_division": 33.555417696671014
+    },
+    "D4": {
+     "sign_index": 4,
+     "sign": "Simha",
+     "sign_western": "Leo",
+     "name": "Chaturthamsa",
+     "signifies": "home, fortune",
+     "degrees_to_next_division": 2.8719506995425945,
+     "minutes_of_birth_time_to_next_division": 12.242137813820138
+    },
+    "D7": {
+     "sign_index": 9,
+     "sign": "Makara",
+     "sign_western": "Capricorn",
+     "name": "Saptamsa",
+     "signifies": "children, progeny",
+     "degrees_to_next_division": 0.7290935566854504,
+     "minutes_of_birth_time_to_next_division": 3.1078750068840413
+    },
+    "D9": {
+     "sign_index": 0,
+     "sign": "Mesha",
+     "sign_western": "Aries",
+     "name": "Navamsa",
+     "signifies": "spouse, dharma, general strength",
+     "degrees_to_next_division": 1.2052840328759298,
+     "minutes_of_birth_time_to_next_division": 5.137711186203187
+    },
+    "D10": {
+     "sign_index": 1,
+     "sign": "Vrishabha",
+     "sign_western": "Taurus",
+     "name": "Dasamsa",
+     "signifies": "career, action",
+     "degrees_to_next_division": 2.8719506995425945,
+     "minutes_of_birth_time_to_next_division": 12.242137813820138
+    },
+    "D12": {
+     "sign_index": 5,
+     "sign": "Kanya",
+     "sign_western": "Virgo",
+     "name": "Dwadasamsa",
+     "signifies": "parents",
+     "degrees_to_next_division": 0.3719506995425945,
+     "minutes_of_birth_time_to_next_division": 1.5854978723946982
+    },
+    "D16": {
+     "sign_index": 10,
+     "sign": "Kumbha",
+     "sign_western": "Aquarius",
+     "name": "Shodasamsa",
+     "signifies": "vehicles, comforts",
+     "degrees_to_next_division": 0.9969506995425945,
+     "minutes_of_birth_time_to_next_division": 4.249657857751058
+    },
+    "D20": {
+     "sign_index": 4,
+     "sign": "Simha",
+     "sign_western": "Leo",
+     "name": "Vimsamsa",
+     "signifies": "spiritual practice",
+     "degrees_to_next_division": 1.3719506995425945,
+     "minutes_of_birth_time_to_next_division": 5.848153848964874
+    },
+    "D24": {
+     "sign_index": 0,
+     "sign": "Mesha",
+     "sign_western": "Aries",
+     "name": "Chaturvimsamsa",
+     "signifies": "education, learning",
+     "degrees_to_next_division": 0.3719506995425945,
+     "minutes_of_birth_time_to_next_division": 1.5854978723946982
+    },
+    "D27": {
+     "sign_index": 1,
+     "sign": "Vrishabha",
+     "sign_western": "Taurus",
+     "name": "Bhamsa",
+     "signifies": "strengths and weaknesses",
+     "degrees_to_next_division": 0.09417292176481862,
+     "minutes_of_birth_time_to_next_division": 0.40142676779187964
+    },
+    "D30": {
+     "sign_index": 11,
+     "sign": "Meena",
+     "sign_western": "Pisces",
+     "name": "Trimsamsa",
+     "signifies": "misfortune, character",
+     "degrees_to_next_division": 7.8719506995425945,
+     "minutes_of_birth_time_to_next_division": 33.555417696671014
+    },
+    "D40": {
+     "sign_index": 10,
+     "sign": "Kumbha",
+     "sign_western": "Aquarius",
+     "name": "Khavedamsa",
+     "signifies": "maternal legacy",
+     "degrees_to_next_division": 0.6219506995425945,
+     "minutes_of_birth_time_to_next_division": 2.651161866537242
+    },
+    "D45": {
+     "sign_index": 10,
+     "sign": "Kumbha",
+     "sign_western": "Aquarius",
+     "name": "Akshavedamsa",
+     "signifies": "paternal legacy",
+     "degrees_to_next_division": 0.5386173662092588,
+     "minutes_of_birth_time_to_next_division": 2.295940535156384
+    },
+    "D60": {
+     "sign_index": 1,
+     "sign": "Vrishabha",
+     "sign_western": "Taurus",
+     "name": "Shastiamsa",
+     "signifies": "totality, past karma",
+     "degrees_to_next_division": 0.3719506995425945,
+     "minutes_of_birth_time_to_next_division": 1.5854978723946982
+    }
+   },
+   "Rahu_vargottama": {
+    "count": 4,
+    "vargas": [
+     "D1",
+     "D10",
+     "D27",
+     "D60"
+    ]
+   },
+   "Ketu": {
+    "D1": {
+     "sign_index": 7,
+     "sign": "Vrischika",
+     "sign_western": "Scorpio",
+     "name": "Rasi",
+     "signifies": "body / overall",
+     "degrees_to_next_division": 17.871950699542595,
+     "minutes_of_birth_time_to_next_division": 76.18197746237277
+    },
+    "D2": {
+     "sign_index": 3,
+     "sign": "Karka",
+     "sign_western": "Cancer",
+     "name": "Hora",
+     "signifies": "wealth",
+     "degrees_to_next_division": 2.8719506995425945,
+     "minutes_of_birth_time_to_next_division": 12.242137813820138
+    },
+    "D3": {
+     "sign_index": 11,
+     "sign": "Meena",
+     "sign_western": "Pisces",
+     "name": "Drekkana",
+     "signifies": "siblings, courage",
+     "degrees_to_next_division": 7.8719506995425945,
+     "minutes_of_birth_time_to_next_division": 33.555417696671014
+    },
+    "D4": {
+     "sign_index": 10,
+     "sign": "Kumbha",
+     "sign_western": "Aquarius",
+     "name": "Chaturthamsa",
+     "signifies": "home, fortune",
+     "degrees_to_next_division": 2.8719506995425945,
+     "minutes_of_birth_time_to_next_division": 12.242137813820138
+    },
+    "D7": {
+     "sign_index": 3,
+     "sign": "Karka",
+     "sign_western": "Cancer",
+     "name": "Saptamsa",
+     "signifies": "children, progeny",
+     "degrees_to_next_division": 0.7290935566854451,
+     "minutes_of_birth_time_to_next_division": 3.1078750068840186
+    },
+    "D9": {
+     "sign_index": 6,
+     "sign": "Tula",
+     "sign_western": "Libra",
+     "name": "Navamsa",
+     "signifies": "spouse, dharma, general strength",
+     "degrees_to_next_division": 1.2052840328759378,
+     "minutes_of_birth_time_to_next_division": 5.13771118620322
+    },
+    "D10": {
+     "sign_index": 7,
+     "sign": "Vrischika",
+     "sign_western": "Scorpio",
+     "name": "Dasamsa",
+     "signifies": "career, action",
+     "degrees_to_next_division": 2.8719506995425945,
+     "minutes_of_birth_time_to_next_division": 12.242137813820138
+    },
+    "D12": {
+     "sign_index": 11,
+     "sign": "Meena",
+     "sign_western": "Pisces",
+     "name": "Dwadasamsa",
+     "signifies": "parents",
+     "degrees_to_next_division": 0.3719506995425945,
+     "minutes_of_birth_time_to_next_division": 1.5854978723946982
+    },
+    "D16": {
+     "sign_index": 10,
+     "sign": "Kumbha",
+     "sign_western": "Aquarius",
+     "name": "Shodasamsa",
+     "signifies": "vehicles, comforts",
+     "degrees_to_next_division": 0.9969506995425945,
+     "minutes_of_birth_time_to_next_division": 4.249657857751058
+    },
+    "D20": {
+     "sign_index": 4,
+     "sign": "Simha",
+     "sign_western": "Leo",
+     "name": "Vimsamsa",
+     "signifies": "spiritual practice",
+     "degrees_to_next_division": 1.3719506995425945,
+     "minutes_of_birth_time_to_next_division": 5.848153848964874
+    },
+    "D24": {
+     "sign_index": 0,
+     "sign": "Mesha",
+     "sign_western": "Aries",
+     "name": "Chaturvimsamsa",
+     "signifies": "education, learning",
+     "degrees_to_next_division": 0.3719506995425945,
+     "minutes_of_birth_time_to_next_division": 1.5854978723946982
+    },
+    "D27": {
+     "sign_index": 7,
+     "sign": "Vrischika",
+     "sign_western": "Scorpio",
+     "name": "Bhamsa",
+     "signifies": "strengths and weaknesses",
+     "degrees_to_next_division": 0.09417292176482661,
+     "minutes_of_birth_time_to_next_division": 0.4014267677919137
+    },
+    "D30": {
+     "sign_index": 11,
+     "sign": "Meena",
+     "sign_western": "Pisces",
+     "name": "Trimsamsa",
+     "signifies": "misfortune, character",
+     "degrees_to_next_division": 7.8719506995425945,
+     "minutes_of_birth_time_to_next_division": 33.555417696671014
+    },
+    "D40": {
+     "sign_index": 10,
+     "sign": "Kumbha",
+     "sign_western": "Aquarius",
+     "name": "Khavedamsa",
+     "signifies": "maternal legacy",
+     "degrees_to_next_division": 0.6219506995425945,
+     "minutes_of_birth_time_to_next_division": 2.651161866537242
+    },
+    "D45": {
+     "sign_index": 10,
+     "sign": "Kumbha",
+     "sign_western": "Aquarius",
+     "name": "Akshavedamsa",
+     "signifies": "paternal legacy",
+     "degrees_to_next_division": 0.5386173662092488,
+     "minutes_of_birth_time_to_next_division": 2.2959405351563413
+    },
+    "D60": {
+     "sign_index": 7,
+     "sign": "Vrischika",
+     "sign_western": "Scorpio",
+     "name": "Shastiamsa",
+     "signifies": "totality, past karma",
+     "degrees_to_next_division": 0.3719506995425945,
+     "minutes_of_birth_time_to_next_division": 1.5854978723946982
+    }
+   },
+   "Ketu_vargottama": {
+    "count": 4,
+    "vargas": [
+     "D1",
+     "D10",
+     "D27",
+     "D60"
+    ]
+   }
+  },
+  "varga_stability": {
+   "lagna_at_stated_uncertainty": {
+    "D1": "stable",
+    "D2": "stable",
+    "D3": "stable",
+    "D4": "stable",
+    "D7": "stable",
+    "D9": "stable",
+    "D10": "stable",
+    "D12": "stable",
+    "D16": "stable",
+    "D20": "stable",
+    "D24": "stable",
+    "D27": "stable",
+    "D30": "stable",
+    "D40": "stable",
+    "D45": "stable",
+    "D60": "sensitive"
+   },
+   "moon_at_stated_uncertainty": {
+    "D1": "stable",
+    "D2": "stable",
+    "D3": "stable",
+    "D4": "stable",
+    "D7": "stable",
+    "D9": "stable",
+    "D10": "stable",
+    "D12": "stable",
+    "D16": "stable",
+    "D20": "stable",
+    "D24": "stable",
+    "D27": "stable",
+    "D30": "stable",
+    "D40": "stable",
+    "D45": "stable",
+    "D60": "stable"
+   },
+   "lagna_at_15min_probe": {
+    "D1": "stable",
+    "D2": "sensitive",
+    "D3": "sensitive",
+    "D4": "sensitive",
+    "D7": "sensitive",
+    "D9": "sensitive",
+    "D10": "sensitive",
+    "D12": "sensitive",
+    "D16": "sensitive",
+    "D20": "sensitive",
+    "D24": "sensitive",
+    "D27": "sensitive",
+    "D30": "sensitive",
+    "D40": "sensitive",
+    "D45": "sensitive",
+    "D60": "sensitive"
+   }
+  },
+  "shadbala": {
+   "planets": {
+    "Sun": {
+     "sthana_bala": {
+      "uchcha_bala": 28.53215413239847,
+      "saptavargaja_bala": 65.625,
+      "saptavargaja_detail": {
+       "D1": {
+        "varga_sign": "Makara",
+        "lord": "Saturn",
+        "relation": "adhishatru",
+        "points": 1.875
+       },
+       "D2": {
+        "varga_sign": "Karka",
+        "lord": "Moon",
+        "relation": "sama",
+        "points": 7.5
+       },
+       "D3": {
+        "varga_sign": "Makara",
+        "lord": "Saturn",
+        "relation": "adhishatru",
+        "points": 1.875
+       },
+       "D7": {
+        "varga_sign": "Simha",
+        "lord": "Sun",
+        "relation": "own",
+        "points": 30.0
+       },
+       "D9": {
+        "varga_sign": "Kumbha",
+        "lord": "Saturn",
+        "relation": "adhishatru",
+        "points": 1.875
+       },
+       "D12": {
+        "varga_sign": "Meena",
+        "lord": "Jupiter",
+        "relation": "sama",
+        "points": 7.5
+       },
+       "D30": {
+        "varga_sign": "Kanya",
+        "lord": "Mercury",
+        "relation": "mitra",
+        "points": 15.0
+       }
+      },
+      "ojhayugmarasyamsa_bala": 15.0,
+      "kendradi_bala": 30.0,
+      "drekkana_bala": 15.0,
+      "total": 154.1571541323985
+     },
+     "dig_bala": 25.85205003934929,
+     "kala_bala": {
+      "nathonnatha_bala": 45.502310070219366,
+      "nathonnatha_basis": "noon-strong",
+      "paksha_bala": 6.549630025361486,
+      "paksha_nature": "malefic",
+      "sun_moon_elongation": 199.64889007608446,
+      "tribhaga_bala": 0.0,
+      "tribhaga_basis": "night third 3, lord Mars",
+      "abda_masa_vara_hora_bala": 90.0,
+      "abda_masa_vara_hora_detail": {
+       "abda": {
+        "lord": "Sun",
+        "points": 15.0
+       },
+       "masa": {
+        "lord": "Sun",
+        "points": 30.0
+       },
+       "vara": {
+        "lord": "Sun",
+        "points": 45.0
+       },
+       "hora": {
+        "lord": "Venus",
+        "points": 0.0
+       }
+      },
+      "ayana_bala": 8.168673982177888,
+      "ayana_basis": "north-strong",
+      "yuddha_bala": 0.0,
+      "yuddha_basis": "no planetary war in this chart",
+      "total": 150.22061407775874
+     },
+     "cheshta_bala": null,
+     "cheshta_basis": "Sun and Moon take Ayana / Paksha Bala in place of Cheshta",
+     "cheshta_is_approximation": false,
+     "naisargika_bala": 60.0,
+     "drik_bala": -7.5,
+     "drik_detail": [
+      {
+       "from": "Moon",
+       "house_distance": 7,
+       "fraction": 1.0,
+       "nature": "malefic",
+       "signed": -1.0
+      },
+      {
+       "from": "Mars",
+       "house_distance": 3,
+       "fraction": 0.25,
+       "nature": "malefic",
+       "signed": -0.25
+      },
+      {
+       "from": "Jupiter",
+       "house_distance": 7,
+       "fraction": 1.0,
+       "nature": "benefic",
+       "signed": 1.0
+      },
+      {
+       "from": "Venus",
+       "house_distance": 3,
+       "fraction": 0.25,
+       "nature": "benefic",
+       "signed": 0.25
+      },
+      {
+       "from": "Saturn",
+       "house_distance": 9,
+       "fraction": 0.5,
+       "nature": "malefic",
+       "signed": -0.5
+      }
+     ],
+     "total_virupas_with_cheshta": 382.7298182495065,
+     "total_rupas_with_cheshta": 6.378830304158441,
+     "total_virupas_without_cheshta": 382.7298182495065,
+     "total_rupas_without_cheshta": 6.378830304158441,
+     "required_rupas": 5.0,
+     "meets_requirement_with_cheshta": true,
+     "meets_requirement_without_cheshta": true,
+     "ishta_kashta_note": "Ishta/Kashta Phala not computed (depends on Cheshta, which is approximated)."
+    },
+    "Moon": {
+     "sthana_bala": {
+      "uchcha_bala": 32.58488250890671,
+      "saptavargaja_bala": 71.25,
+      "saptavargaja_detail": {
+       "D1": {
+        "varga_sign": "Karka",
+        "lord": "Moon",
+        "relation": "own",
+        "points": 30.0
+       },
+       "D2": {
+        "varga_sign": "Simha",
+        "lord": "Sun",
+        "relation": "sama",
+        "points": 7.5
+       },
+       "D3": {
+        "varga_sign": "Meena",
+        "lord": "Jupiter",
+        "relation": "shatru",
+        "points": 3.75
+       },
+       "D7": {
+        "varga_sign": "Mithuna",
+        "lord": "Mercury",
+        "relation": "sama",
+        "points": 7.5
+       },
+       "D9": {
+        "varga_sign": "Kumbha",
+        "lord": "Saturn",
+        "relation": "mitra",
+        "points": 15.0
+       },
+       "D12": {
+        "varga_sign": "Vrishabha",
+        "lord": "Venus",
+        "relation": "shatru",
+        "points": 3.75
+       },
+       "D30": {
+        "varga_sign": "Vrischika",
+        "lord": "Mars",
+        "relation": "shatru",
+        "points": 3.75
+       }
+      },
+      "ojhayugmarasyamsa_bala": 15.0,
+      "kendradi_bala": 30.0,
+      "drekkana_bala": 15.0,
+      "total": 163.8348825089067
+     },
+     "dig_bala": 19.302420013987803,
+     "kala_bala": {
+      "nathonnatha_bala": 14.497689929780634,
+      "nathonnatha_basis": "midnight-strong",
+      "paksha_bala": 106.90073994927702,
+      "paksha_nature": "benefic",
+      "sun_moon_elongation": 199.64889007608446,
+      "tribhaga_bala": 0.0,
+      "tribhaga_basis": "night third 3, lord Mars",
+      "abda_masa_vara_hora_bala": 0.0,
+      "abda_masa_vara_hora_detail": {
+       "abda": {
+        "lord": "Sun",
+        "points": 0.0
+       },
+       "masa": {
+        "lord": "Sun",
+        "points": 0.0
+       },
+       "vara": {
+        "lord": "Sun",
+        "points": 0.0
+       },
+       "hora": {
+        "lord": "Venus",
+        "points": 0.0
+       }
+      },
+      "ayana_bala": 4.8243063825150205,
+      "ayana_basis": "south-strong",
+      "yuddha_bala": 0.0,
+      "yuddha_basis": "no planetary war in this chart",
+      "total": 126.22273626157268
+     },
+     "cheshta_bala": null,
+     "cheshta_basis": "Sun and Moon take Ayana / Paksha Bala in place of Cheshta",
+     "cheshta_is_approximation": false,
+     "naisargika_bala": 51.43,
+     "drik_bala": -18.75,
+     "drik_detail": [
+      {
+       "from": "Sun",
+       "house_distance": 7,
+       "fraction": 1.0,
+       "nature": "malefic",
+       "signed": -1.0
+      },
+      {
+       "from": "Mars",
+       "house_distance": 9,
+       "fraction": 0.5,
+       "nature": "malefic",
+       "signed": -0.5
+      },
+      {
+       "from": "Mercury",
+       "house_distance": 8,
+       "fraction": 0.75,
+       "nature": "benefic",
+       "signed": 0.75
+      },
+      {
+       "from": "Venus",
+       "house_distance": 9,
+       "fraction": 0.5,
+       "nature": "benefic",
+       "signed": 0.5
+      },
+      {
+       "from": "Saturn",
+       "house_distance": 3,
+       "fraction": 1.0,
+       "nature": "malefic",
+       "signed": -1.0
+      }
+     ],
+     "total_virupas_with_cheshta": 342.0400387844672,
+     "total_rupas_with_cheshta": 5.700667313074453,
+     "total_virupas_without_cheshta": 342.0400387844672,
+     "total_rupas_without_cheshta": 5.700667313074453,
+     "required_rupas": 6.0,
+     "meets_requirement_with_cheshta": false,
+     "meets_requirement_without_cheshta": false,
+     "ishta_kashta_note": "Ishta/Kashta Phala not computed (depends on Cheshta, which is approximated)."
+    },
+    "Mars": {
+     "sthana_bala": {
+      "uchcha_bala": 33.30593730150428,
+      "saptavargaja_bala": 93.75,
+      "saptavargaja_detail": {
+       "D1": {
+        "varga_sign": "Vrischika",
+        "lord": "Mars",
+        "relation": "own",
+        "points": 30.0
+       },
+       "D2": {
+        "varga_sign": "Karka",
+        "lord": "Moon",
+        "relation": "sama",
+        "points": 7.5
+       },
+       "D3": {
+        "varga_sign": "Vrischika",
+        "lord": "Mars",
+        "relation": "own",
+        "points": 30.0
+       },
+       "D7": {
+        "varga_sign": "Mithuna",
+        "lord": "Mercury",
+        "relation": "sama",
+        "points": 7.5
+       },
+       "D9": {
+        "varga_sign": "Kanya",
+        "lord": "Mercury",
+        "relation": "sama",
+        "points": 7.5
+       },
+       "D12": {
+        "varga_sign": "Kumbha",
+        "lord": "Saturn",
+        "relation": "shatru",
+        "points": 3.75
+       },
+       "D30": {
+        "varga_sign": "Kanya",
+        "lord": "Mercury",
+        "relation": "sama",
+        "points": 7.5
+       }
+      },
+      "ojhayugmarasyamsa_bala": 0.0,
+      "kendradi_bala": 15.0,
+      "drekkana_bala": 15.0,
+      "total": 157.0559373015043
+     },
+     "dig_bala": 45.07826687024348,
+     "kala_bala": {
+      "nathonnatha_bala": 14.497689929780634,
+      "nathonnatha_basis": "midnight-strong",
+      "paksha_bala": 6.549630025361486,
+      "paksha_nature": "malefic",
+      "sun_moon_elongation": 199.64889007608446,
+      "tribhaga_bala": 60.0,
+      "tribhaga_basis": "night third 3, lord Mars",
+      "abda_masa_vara_hora_bala": 0.0,
+      "abda_masa_vara_hora_detail": {
+       "abda": {
+        "lord": "Sun",
+        "points": 0.0
+       },
+       "masa": {
+        "lord": "Sun",
+        "points": 0.0
+       },
+       "vara": {
+        "lord": "Sun",
+        "points": 0.0
+       },
+       "hora": {
+        "lord": "Venus",
+        "points": 0.0
+       }
+      },
+      "ayana_bala": 4.384422603572319,
+      "ayana_basis": "north-strong",
+      "yuddha_bala": 0.0,
+      "yuddha_basis": "no planetary war in this chart",
+      "total": 85.43174255871443
+     },
+     "cheshta_bala": 23.099611945285258,
+     "cheshta_basis": "direct, speed/mean = 1.2300",
+     "cheshta_is_approximation": true,
+     "naisargika_bala": 17.14,
+     "drik_bala": -7.5,
+     "drik_detail": [
+      {
+       "from": "Moon",
+       "house_distance": 5,
+       "fraction": 0.5,
+       "nature": "malefic",
+       "signed": -0.5
+      },
+      {
+       "from": "Jupiter",
+       "house_distance": 5,
+       "fraction": 1.0,
+       "nature": "benefic",
+       "signed": 1.0
+      },
+      {
+       "from": "Saturn",
+       "house_distance": 7,
+       "fraction": 1.0,
+       "nature": "malefic",
+       "signed": -1.0
+      }
+     ],
+     "total_virupas_with_cheshta": 320.3055586757474,
+     "total_rupas_with_cheshta": 5.338425977929123,
+     "total_virupas_without_cheshta": 297.2059467304622,
+     "total_rupas_without_cheshta": 4.953432445507703,
+     "required_rupas": 5.0,
+     "meets_requirement_with_cheshta": true,
+     "meets_requirement_without_cheshta": false,
+     "ishta_kashta_note": "Ishta/Kashta Phala not computed (depends on Cheshta, which is approximated)."
+    },
+    "Mercury": {
+     "sthana_bala": {
+      "uchcha_bala": 28.64289112583261,
+      "saptavargaja_bala": 97.5,
+      "saptavargaja_detail": {
+       "D1": {
+        "varga_sign": "Dhanu",
+        "lord": "Jupiter",
+        "relation": "shatru",
+        "points": 3.75
+       },
+       "D2": {
+        "varga_sign": "Karka",
+        "lord": "Moon",
+        "relation": "adhishatru",
+        "points": 1.875
+       },
+       "D3": {
+        "varga_sign": "Mesha",
+        "lord": "Mars",
+        "relation": "mitra",
+        "points": 15.0
+       },
+       "D7": {
+        "varga_sign": "Mesha",
+        "lord": "Mars",
+        "relation": "mitra",
+        "points": 15.0
+       },
+       "D9": {
+        "varga_sign": "Kanya",
+        "lord": "Mercury",
+        "relation": "own",
+        "points": 30.0
+       },
+       "D12": {
+        "varga_sign": "Karka",
+        "lord": "Moon",
+        "relation": "adhishatru",
+        "points": 1.875
+       },
+       "D30": {
+        "varga_sign": "Mithuna",
+        "lord": "Mercury",
+        "relation": "own",
+        "points": 30.0
+       }
+      },
+      "ojhayugmarasyamsa_bala": 15.0,
+      "kendradi_bala": 60.0,
+      "drekkana_bala": 15.0,
+      "total": 216.1428911258326
+     },
+     "dig_bala": 57.49743550032739,
+     "kala_bala": {
+      "nathonnatha_bala": 60.0,
+      "nathonnatha_basis": "Mercury is always full",
+      "paksha_bala": 53.45036997463851,
+      "paksha_nature": "benefic",
+      "sun_moon_elongation": 199.64889007608446,
+      "tribhaga_bala": 0.0,
+      "tribhaga_basis": "night third 3, lord Mars",
+      "abda_masa_vara_hora_bala": 0.0,
+      "abda_masa_vara_hora_detail": {
+       "abda": {
+        "lord": "Sun",
+        "points": 0.0
+       },
+       "masa": {
+        "lord": "Sun",
+        "points": 0.0
+       },
+       "vara": {
+        "lord": "Sun",
+        "points": 0.0
+       },
+       "hora": {
+        "lord": "Venus",
+        "points": 0.0
+       }
+      },
+      "ayana_bala": 55.0304408257342,
+      "ayana_basis": "always treated as strong in either declination",
+      "yuddha_bala": 0.0,
+      "yuddha_basis": "no planetary war in this chart",
+      "total": 168.4808108003727
+     },
+     "cheshta_bala": 60.0,
+     "cheshta_basis": "retrograde -> full",
+     "cheshta_is_approximation": true,
+     "naisargika_bala": 25.71,
+     "drik_bala": -11.25,
+     "drik_detail": [
+      {
+       "from": "Saturn",
+       "house_distance": 8,
+       "fraction": 0.75,
+       "nature": "malefic",
+       "signed": -0.75
+      }
+     ],
+     "total_virupas_with_cheshta": 516.5811374265327,
+     "total_rupas_with_cheshta": 8.609685623775544,
+     "total_virupas_without_cheshta": 456.5811374265327,
+     "total_rupas_without_cheshta": 7.609685623775545,
+     "required_rupas": 7.0,
+     "meets_requirement_with_cheshta": true,
+     "meets_requirement_without_cheshta": true,
+     "ishta_kashta_note": "Ishta/Kashta Phala not computed (depends on Cheshta, which is approximated)."
+    },
+    "Jupiter": {
+     "sthana_bala": {
+      "uchcha_bala": 54.68247653033794,
+      "saptavargaja_bala": 106.875,
+      "saptavargaja_detail": {
+       "D1": {
+        "varga_sign": "Karka",
+        "lord": "Moon",
+        "relation": "sama",
+        "points": 7.5
+       },
+       "D2": {
+        "varga_sign": "Simha",
+        "lord": "Sun",
+        "relation": "sama",
+        "points": 7.5
+       },
+       "D3": {
+        "varga_sign": "Meena",
+        "lord": "Jupiter",
+        "relation": "own",
+        "points": 30.0
+       },
+       "D7": {
+        "varga_sign": "Vrishabha",
+        "lord": "Venus",
+        "relation": "adhishatru",
+        "points": 1.875
+       },
+       "D9": {
+        "varga_sign": "Makara",
+        "lord": "Saturn",
+        "relation": "mitra",
+        "points": 15.0
+       },
+       "D12": {
+        "varga_sign": "Meena",
+        "lord": "Jupiter",
+        "relation": "own",
+        "points": 30.0
+       },
+       "D30": {
+        "varga_sign": "Makara",
+        "lord": "Saturn",
+        "relation": "mitra",
+        "points": 15.0
+       }
+      },
+      "ojhayugmarasyamsa_bala": 0.0,
+      "kendradi_bala": 30.0,
+      "drekkana_bala": 0.0,
+      "total": 191.55747653033794
+     },
+     "dig_bala": 13.129645761833947,
+     "kala_bala": {
+      "nathonnatha_bala": 45.502310070219366,
+      "nathonnatha_basis": "noon-strong",
+      "paksha_bala": 53.45036997463851,
+      "paksha_nature": "benefic",
+      "sun_moon_elongation": 199.64889007608446,
+      "tribhaga_bala": 60.0,
+      "tribhaga_basis": "Jupiter always full",
+      "abda_masa_vara_hora_bala": 0.0,
+      "abda_masa_vara_hora_detail": {
+       "abda": {
+        "lord": "Sun",
+        "points": 0.0
+       },
+       "masa": {
+        "lord": "Sun",
+        "points": 0.0
+       },
+       "vara": {
+        "lord": "Sun",
+        "points": 0.0
+       },
+       "hora": {
+        "lord": "Venus",
+        "points": 0.0
+       }
+      },
+      "ayana_bala": 51.97246045924894,
+      "ayana_basis": "north-strong",
+      "yuddha_bala": 0.0,
+      "yuddha_basis": "no planetary war in this chart",
+      "total": 210.92514050410682
+     },
+     "cheshta_bala": 60.0,
+     "cheshta_basis": "retrograde -> full",
+     "cheshta_is_approximation": true,
+     "naisargika_bala": 34.29,
+     "drik_bala": -18.75,
+     "drik_detail": [
+      {
+       "from": "Sun",
+       "house_distance": 7,
+       "fraction": 1.0,
+       "nature": "malefic",
+       "signed": -1.0
+      },
+      {
+       "from": "Mars",
+       "house_distance": 9,
+       "fraction": 0.5,
+       "nature": "malefic",
+       "signed": -0.5
+      },
+      {
+       "from": "Mercury",
+       "house_distance": 8,
+       "fraction": 0.75,
+       "nature": "benefic",
+       "signed": 0.75
+      },
+      {
+       "from": "Venus",
+       "house_distance": 9,
+       "fraction": 0.5,
+       "nature": "benefic",
+       "signed": 0.5
+      },
+      {
+       "from": "Saturn",
+       "house_distance": 3,
+       "fraction": 1.0,
+       "nature": "malefic",
+       "signed": -1.0
+      }
+     ],
+     "total_virupas_with_cheshta": 491.15226279627876,
+     "total_rupas_with_cheshta": 8.185871046604646,
+     "total_virupas_without_cheshta": 431.15226279627876,
+     "total_rupas_without_cheshta": 7.185871046604646,
+     "required_rupas": 6.5,
+     "meets_requirement_with_cheshta": true,
+     "meets_requirement_without_cheshta": true,
+     "ishta_kashta_note": "Ishta/Kashta Phala not computed (depends on Cheshta, which is approximated)."
+    },
+    "Venus": {
+     "sthana_bala": {
+      "uchcha_bala": 17.323636179702437,
+      "saptavargaja_bala": 67.5,
+      "saptavargaja_detail": {
+       "D1": {
+        "varga_sign": "Vrischika",
+        "lord": "Mars",
+        "relation": "shatru",
+        "points": 3.75
+       },
+       "D2": {
+        "varga_sign": "Simha",
+        "lord": "Sun",
+        "relation": "sama",
+        "points": 7.5
+       },
+       "D3": {
+        "varga_sign": "Meena",
+        "lord": "Jupiter",
+        "relation": "shatru",
+        "points": 3.75
+       },
+       "D7": {
+        "varga_sign": "Kanya",
+        "lord": "Mercury",
+        "relation": "adhimitra",
+        "points": 22.5
+       },
+       "D9": {
+        "varga_sign": "Dhanu",
+        "lord": "Jupiter",
+        "relation": "shatru",
+        "points": 3.75
+       },
+       "D12": {
+        "varga_sign": "Mithuna",
+        "lord": "Mercury",
+        "relation": "adhimitra",
+        "points": 22.5
+       },
+       "D30": {
+        "varga_sign": "Meena",
+        "lord": "Jupiter",
+        "relation": "shatru",
+        "points": 3.75
+       }
+      },
+      "ojhayugmarasyamsa_bala": 15.0,
+      "kendradi_bala": 15.0,
+      "drekkana_bala": 0.0,
+      "total": 114.82363617970243
+     },
+     "dig_bala": 18.606098674621347,
+     "kala_bala": {
+      "nathonnatha_bala": 45.502310070219366,
+      "nathonnatha_basis": "noon-strong",
+      "paksha_bala": 53.45036997463851,
+      "paksha_nature": "benefic",
+      "sun_moon_elongation": 199.64889007608446,
+      "tribhaga_bala": 0.0,
+      "tribhaga_basis": "night third 3, lord Mars",
+      "abda_masa_vara_hora_bala": 60.0,
+      "abda_masa_vara_hora_detail": {
+       "abda": {
+        "lord": "Sun",
+        "points": 0.0
+       },
+       "masa": {
+        "lord": "Sun",
+        "points": 0.0
+       },
+       "vara": {
+        "lord": "Sun",
+        "points": 0.0
+       },
+       "hora": {
+        "lord": "Venus",
+        "points": 60.0
+       }
+      },
+      "ayana_bala": 5.59616949340162,
+      "ayana_basis": "north-strong",
+      "yuddha_bala": 0.0,
+      "yuddha_basis": "no planetary war in this chart",
+      "total": 164.5488495382595
+     },
+     "cheshta_bala": 33.28245087056823,
+     "cheshta_basis": "direct, speed/mean = 0.8906",
+     "cheshta_is_approximation": true,
+     "naisargika_bala": 42.86,
+     "drik_bala": -7.5,
+     "drik_detail": [
+      {
+       "from": "Moon",
+       "house_distance": 5,
+       "fraction": 0.5,
+       "nature": "malefic",
+       "signed": -0.5
+      },
+      {
+       "from": "Jupiter",
+       "house_distance": 5,
+       "fraction": 1.0,
+       "nature": "benefic",
+       "signed": 1.0
+      },
+      {
+       "from": "Saturn",
+       "house_distance": 7,
+       "fraction": 1.0,
+       "nature": "malefic",
+       "signed": -1.0
+      }
+     ],
+     "total_virupas_with_cheshta": 366.62103526315155,
+     "total_rupas_with_cheshta": 6.110350587719193,
+     "total_virupas_without_cheshta": 333.3385843925833,
+     "total_rupas_without_cheshta": 5.555643073209722,
+     "required_rupas": 5.5,
+     "meets_requirement_with_cheshta": true,
+     "meets_requirement_without_cheshta": true,
+     "ishta_kashta_note": "Ishta/Kashta Phala not computed (depends on Cheshta, which is approximated)."
+    },
+    "Saturn": {
+     "sthana_bala": {
+      "uchcha_bala": 13.081084281531517,
+      "saptavargaja_bala": 58.125,
+      "saptavargaja_detail": {
+       "D1": {
+        "varga_sign": "Vrishabha",
+        "lord": "Venus",
+        "relation": "sama",
+        "points": 7.5
+       },
+       "D2": {
+        "varga_sign": "Simha",
+        "lord": "Sun",
+        "relation": "adhishatru",
+        "points": 1.875
+       },
+       "D3": {
+        "varga_sign": "Makara",
+        "lord": "Saturn",
+        "relation": "own",
+        "points": 30.0
+       },
+       "D7": {
+        "varga_sign": "Vrishabha",
+        "lord": "Venus",
+        "relation": "sama",
+        "points": 7.5
+       },
+       "D9": {
+        "varga_sign": "Kanya",
+        "lord": "Mercury",
+        "relation": "sama",
+        "points": 7.5
+       },
+       "D12": {
+        "varga_sign": "Mesha",
+        "lord": "Mars",
+        "relation": "adhishatru",
+        "points": 1.875
+       },
+       "D30": {
+        "varga_sign": "Vrischika",
+        "lord": "Mars",
+        "relation": "adhishatru",
+        "points": 1.875
+       }
+      },
+      "ojhayugmarasyamsa_bala": 0.0,
+      "kendradi_bala": 15.0,
+      "drekkana_bala": 0.0,
+      "total": 86.20608428153152
+     },
+     "dig_bala": 55.8932065737034,
+     "kala_bala": {
+      "nathonnatha_bala": 14.497689929780634,
+      "nathonnatha_basis": "midnight-strong",
+      "paksha_bala": 6.549630025361486,
+      "paksha_nature": "malefic",
+      "sun_moon_elongation": 199.64889007608446,
+      "tribhaga_bala": 0.0,
+      "tribhaga_basis": "night third 3, lord Mars",
+      "abda_masa_vara_hora_bala": 0.0,
+      "abda_masa_vara_hora_detail": {
+       "abda": {
+        "lord": "Sun",
+        "points": 0.0
+       },
+       "masa": {
+        "lord": "Sun",
+        "points": 0.0
+       },
+       "vara": {
+        "lord": "Sun",
+        "points": 0.0
+       },
+       "hora": {
+        "lord": "Venus",
+        "points": 0.0
+       }
+      },
+      "ayana_bala": 1.8153067653437873,
+      "ayana_basis": "south-strong",
+      "yuddha_bala": 0.0,
+      "yuddha_basis": "no planetary war in this chart",
+      "total": 22.86262672048591
+     },
+     "cheshta_bala": 60.0,
+     "cheshta_basis": "retrograde -> full",
+     "cheshta_is_approximation": true,
+     "naisargika_bala": 8.57,
+     "drik_bala": -7.5,
+     "drik_detail": [
+      {
+       "from": "Sun",
+       "house_distance": 5,
+       "fraction": 0.5,
+       "nature": "malefic",
+       "signed": -0.5
+      },
+      {
+       "from": "Mars",
+       "house_distance": 7,
+       "fraction": 1.0,
+       "nature": "malefic",
+       "signed": -1.0
+      },
+      {
+       "from": "Venus",
+       "house_distance": 7,
+       "fraction": 1.0,
+       "nature": "benefic",
+       "signed": 1.0
+      }
+     ],
+     "total_virupas_with_cheshta": 226.03191757572083,
+     "total_rupas_with_cheshta": 3.767198626262014,
+     "total_virupas_without_cheshta": 166.03191757572083,
+     "total_rupas_without_cheshta": 2.767198626262014,
+     "required_rupas": 5.0,
+     "meets_requirement_with_cheshta": false,
+     "meets_requirement_without_cheshta": false,
+     "ishta_kashta_note": "Ishta/Kashta Phala not computed (depends on Cheshta, which is approximated)."
+    }
+   },
+   "rank_strongest_first": [
+    "Mercury",
+    "Jupiter",
+    "Sun",
+    "Venus",
+    "Moon",
+    "Mars",
+    "Saturn"
+   ],
+   "units": "virupas; 60 virupas = 1 rupa",
+   "components_computed": [
+    "Sthana (5 sub-components)",
+    "Dig",
+    "Kala (6 sub-components)",
+    "Naisargika",
+    "Drik"
+   ],
+   "components_approximated": [
+    "Cheshta -- see module docstring"
+   ],
+   "validation": {
+    "uchcha_in_range_0_60": true,
+    "dig_in_range_0_60": true,
+    "kendradi_valid": true,
+    "naisargika_matches_classical": true,
+    "naisargika_order_correct": true,
+    "saptavargaja_max_315": true,
+    "all_totals_positive": true,
+    "pass": true
+   },
+   "hora_lord": "Venus",
+   "vara_lord": "Sun"
+  },
+  "ayanamsha_comparison": {
+   "reference": "Lahiri / Chitrapaksha",
+   "rows": [
+    {
+     "ayanamsha": "Lahiri / Chitrapaksha",
+     "value_deg": 23.89971620697429,
+     "value_dms": "23°53'59.0\"",
+     "lagna_deg": 251.56363312348432,
+     "lagna_sign": "Dhanu",
+     "lagna_formatted": "Dhanu 11°33'49.1\"",
+     "lagna_nakshatra": "Mula",
+     "lagna_pada": 4,
+     "lagna_d9": "Karka",
+     "lagna_d10": "Meena",
+     "moon_nakshatra": "Ashlesha",
+     "moon_pada": 3,
+     "moon_dasha_lord": "Mercury",
+     "planet_signs": {
+      "Sun": "Makara",
+      "Moon": "Karka",
+      "Mars": "Vrischika",
+      "Mercury": "Dhanu",
+      "Jupiter": "Karka",
+      "Venus": "Vrischika",
+      "Saturn": "Vrishabha"
+     },
+     "planet_houses": {
+      "Sun": 2,
+      "Moon": 8,
+      "Mars": 12,
+      "Mercury": 1,
+      "Jupiter": 8,
+      "Venus": 12,
+      "Saturn": 6
+     },
+     "differs_from_lahiri": {
+      "lagna_sign": false,
+      "lagna_nakshatra_or_pada": false,
+      "lagna_d9": false,
+      "lagna_d10": false,
+      "moon_dasha_lord": false,
+      "planets_changing_sign": [],
+      "planets_changing_house": []
+     }
+    },
+    {
+     "ayanamsha": "Raman",
+     "value_deg": 22.453414897225628,
+     "value_dms": "22°27'12.3\"",
+     "lagna_deg": 253.00993443323298,
+     "lagna_sign": "Dhanu",
+     "lagna_formatted": "Dhanu 13°00'35.8\"",
+     "lagna_nakshatra": "Mula",
+     "lagna_pada": 4,
+     "lagna_d9": "Karka",
+     "lagna_d10": "Mesha",
+     "moon_nakshatra": "Ashlesha",
+     "moon_pada": 4,
+     "moon_dasha_lord": "Mercury",
+     "planet_signs": {
+      "Sun": "Makara",
+      "Moon": "Karka",
+      "Mars": "Vrischika",
+      "Mercury": "Dhanu",
+      "Jupiter": "Karka",
+      "Venus": "Vrischika",
+      "Saturn": "Mithuna"
+     },
+     "planet_houses": {
+      "Sun": 2,
+      "Moon": 8,
+      "Mars": 12,
+      "Mercury": 1,
+      "Jupiter": 8,
+      "Venus": 12,
+      "Saturn": 7
+     },
+     "differs_from_lahiri": {
+      "lagna_sign": false,
+      "lagna_nakshatra_or_pada": false,
+      "lagna_d9": false,
+      "lagna_d10": true,
+      "moon_dasha_lord": false,
+      "planets_changing_sign": [
+       "Saturn"
+      ],
+      "planets_changing_house": [
+       "Saturn"
+      ]
+     }
+    },
+    {
+     "ayanamsha": "Krishnamurti (KP)",
+     "value_deg": 23.80286389722562,
+     "value_dms": "23°48'10.3\"",
+     "lagna_deg": 251.660485433233,
+     "lagna_sign": "Dhanu",
+     "lagna_formatted": "Dhanu 11°39'37.7\"",
+     "lagna_nakshatra": "Mula",
+     "lagna_pada": 4,
+     "lagna_d9": "Karka",
+     "lagna_d10": "Meena",
+     "moon_nakshatra": "Ashlesha",
+     "moon_pada": 3,
+     "moon_dasha_lord": "Mercury",
+     "planet_signs": {
+      "Sun": "Makara",
+      "Moon": "Karka",
+      "Mars": "Vrischika",
+      "Mercury": "Dhanu",
+      "Jupiter": "Karka",
+      "Venus": "Vrischika",
+      "Saturn": "Vrishabha"
+     },
+     "planet_houses": {
+      "Sun": 2,
+      "Moon": 8,
+      "Mars": 12,
+      "Mercury": 1,
+      "Jupiter": 8,
+      "Venus": 12,
+      "Saturn": 6
+     },
+     "differs_from_lahiri": {
+      "lagna_sign": false,
+      "lagna_nakshatra_or_pada": false,
+      "lagna_d9": false,
+      "lagna_d10": false,
+      "moon_dasha_lord": false,
+      "planets_changing_sign": [],
+      "planets_changing_house": []
+     }
+    },
+    {
+     "ayanamsha": "Yukteshwar",
+     "value_deg": 22.521426884707296,
+     "value_dms": "22°31'17.1\"",
+     "lagna_deg": 252.94192244575132,
+     "lagna_sign": "Dhanu",
+     "lagna_formatted": "Dhanu 12°56'30.9\"",
+     "lagna_nakshatra": "Mula",
+     "lagna_pada": 4,
+     "lagna_d9": "Karka",
+     "lagna_d10": "Mesha",
+     "moon_nakshatra": "Ashlesha",
+     "moon_pada": 3,
+     "moon_dasha_lord": "Mercury",
+     "planet_signs": {
+      "Sun": "Makara",
+      "Moon": "Karka",
+      "Mars": "Vrischika",
+      "Mercury": "Dhanu",
+      "Jupiter": "Karka",
+      "Venus": "Vrischika",
+      "Saturn": "Mithuna"
+     },
+     "planet_houses": {
+      "Sun": 2,
+      "Moon": 8,
+      "Mars": 12,
+      "Mercury": 1,
+      "Jupiter": 8,
+      "Venus": 12,
+      "Saturn": 7
+     },
+     "differs_from_lahiri": {
+      "lagna_sign": false,
+      "lagna_nakshatra_or_pada": false,
+      "lagna_d9": false,
+      "lagna_d10": true,
+      "moon_dasha_lord": false,
+      "planets_changing_sign": [
+       "Saturn"
+      ],
+      "planets_changing_house": [
+       "Saturn"
+      ]
+     }
+    },
+    {
+     "ayanamsha": "True Chitra",
+     "value_deg": 23.884487854823647,
+     "value_dms": "23°53'04.2\"",
+     "lagna_deg": 251.57886147563497,
+     "lagna_sign": "Dhanu",
+     "lagna_formatted": "Dhanu 11°34'43.9\"",
+     "lagna_nakshatra": "Mula",
+     "lagna_pada": 4,
+     "lagna_d9": "Karka",
+     "lagna_d10": "Meena",
+     "moon_nakshatra": "Ashlesha",
+     "moon_pada": 3,
+     "moon_dasha_lord": "Mercury",
+     "planet_signs": {
+      "Sun": "Makara",
+      "Moon": "Karka",
+      "Mars": "Vrischika",
+      "Mercury": "Dhanu",
+      "Jupiter": "Karka",
+      "Venus": "Vrischika",
+      "Saturn": "Vrishabha"
+     },
+     "planet_houses": {
+      "Sun": 2,
+      "Moon": 8,
+      "Mars": 12,
+      "Mercury": 1,
+      "Jupiter": 8,
+      "Venus": 12,
+      "Saturn": 6
+     },
+     "differs_from_lahiri": {
+      "lagna_sign": false,
+      "lagna_nakshatra_or_pada": false,
+      "lagna_d9": false,
+      "lagna_d10": false,
+      "moon_dasha_lord": false,
+      "planets_changing_sign": [],
+      "planets_changing_house": []
+     }
+    },
+    {
+     "ayanamsha": "True Revati",
+     "value_deg": 20.08599850451799,
+     "value_dms": "20°05'09.6\"",
+     "lagna_deg": 255.37735082594062,
+     "lagna_sign": "Dhanu",
+     "lagna_formatted": "Dhanu 15°22'38.5\"",
+     "lagna_nakshatra": "Purva Ashadha",
+     "lagna_pada": 1,
+     "lagna_d9": "Simha",
+     "lagna_d10": "Vrishabha",
+     "moon_nakshatra": "Ashlesha",
+     "moon_pada": 4,
+     "moon_dasha_lord": "Mercury",
+     "planet_signs": {
+      "Sun": "Makara",
+      "Moon": "Karka",
+      "Mars": "Vrischika",
+      "Mercury": "Dhanu",
+      "Jupiter": "Karka",
+      "Venus": "Vrischika",
+      "Saturn": "Mithuna"
+     },
+     "planet_houses": {
+      "Sun": 2,
+      "Moon": 8,
+      "Mars": 12,
+      "Mercury": 1,
+      "Jupiter": 8,
+      "Venus": 12,
+      "Saturn": 7
+     },
+     "differs_from_lahiri": {
+      "lagna_sign": false,
+      "lagna_nakshatra_or_pada": true,
+      "lagna_d9": true,
+      "lagna_d10": true,
+      "moon_dasha_lord": false,
+      "planets_changing_sign": [
+       "Saturn"
+      ],
+      "planets_changing_house": [
+       "Saturn"
+      ]
+     }
+    },
+    {
+     "ayanamsha": "True Pushya",
+     "value_deg": 22.770353616621605,
+     "value_dms": "22°46'13.3\"",
+     "lagna_deg": 252.692995713837,
+     "lagna_sign": "Dhanu",
+     "lagna_formatted": "Dhanu 12°41'34.8\"",
+     "lagna_nakshatra": "Mula",
+     "lagna_pada": 4,
+     "lagna_d9": "Karka",
+     "lagna_d10": "Mesha",
+     "moon_nakshatra": "Ashlesha",
+     "moon_pada": 3,
+     "moon_dasha_lord": "Mercury",
+     "planet_signs": {
+      "Sun": "Makara",
+      "Moon": "Karka",
+      "Mars": "Vrischika",
+      "Mercury": "Dhanu",
+      "Jupiter": "Karka",
+      "Venus": "Vrischika",
+      "Saturn": "Mithuna"
+     },
+     "planet_houses": {
+      "Sun": 2,
+      "Moon": 8,
+      "Mars": 12,
+      "Mercury": 1,
+      "Jupiter": 8,
+      "Venus": 12,
+      "Saturn": 7
+     },
+     "differs_from_lahiri": {
+      "lagna_sign": false,
+      "lagna_nakshatra_or_pada": false,
+      "lagna_d9": false,
+      "lagna_d10": true,
+      "moon_dasha_lord": false,
+      "planets_changing_sign": [
+       "Saturn"
+      ],
+      "planets_changing_house": [
+       "Saturn"
+      ]
+     }
+    },
+    {
+     "ayanamsha": "Fagan / Bradley",
+     "value_deg": 24.78292384813608,
+     "value_dms": "24°46'58.5\"",
+     "lagna_deg": 250.68042548232253,
+     "lagna_sign": "Dhanu",
+     "lagna_formatted": "Dhanu 10°40'49.5\"",
+     "lagna_nakshatra": "Mula",
+     "lagna_pada": 4,
+     "lagna_d9": "Karka",
+     "lagna_d10": "Meena",
+     "moon_nakshatra": "Ashlesha",
+     "moon_pada": 3,
+     "moon_dasha_lord": "Mercury",
+     "planet_signs": {
+      "Sun": "Makara",
+      "Moon": "Karka",
+      "Mars": "Vrischika",
+      "Mercury": "Dhanu",
+      "Jupiter": "Karka",
+      "Venus": "Vrischika",
+      "Saturn": "Vrishabha"
+     },
+     "planet_houses": {
+      "Sun": 2,
+      "Moon": 8,
+      "Mars": 12,
+      "Mercury": 1,
+      "Jupiter": 8,
+      "Venus": 12,
+      "Saturn": 6
+     },
+     "differs_from_lahiri": {
+      "lagna_sign": false,
+      "lagna_nakshatra_or_pada": false,
+      "lagna_d9": false,
+      "lagna_d10": false,
+      "moon_dasha_lord": false,
+      "planets_changing_sign": [],
+      "planets_changing_house": []
+     }
+    },
+    {
+     "ayanamsha": "Sassanian",
+     "value_deg": 20.03558313536911,
+     "value_dms": "20°02'08.1\"",
+     "lagna_deg": 255.4277661950895,
+     "lagna_sign": "Dhanu",
+     "lagna_formatted": "Dhanu 15°25'40.0\"",
+     "lagna_nakshatra": "Purva Ashadha",
+     "lagna_pada": 1,
+     "lagna_d9": "Simha",
+     "lagna_d10": "Vrishabha",
+     "moon_nakshatra": "Ashlesha",
+     "moon_pada": 4,
+     "moon_dasha_lord": "Mercury",
+     "planet_signs": {
+      "Sun": "Makara",
+      "Moon": "Karka",
+      "Mars": "Vrischika",
+      "Mercury": "Dhanu",
+      "Jupiter": "Karka",
+      "Venus": "Vrischika",
+      "Saturn": "Mithuna"
+     },
+     "planet_houses": {
+      "Sun": 2,
+      "Moon": 8,
+      "Mars": 12,
+      "Mercury": 1,
+      "Jupiter": 8,
+      "Venus": 12,
+      "Saturn": 7
+     },
+     "differs_from_lahiri": {
+      "lagna_sign": false,
+      "lagna_nakshatra_or_pada": true,
+      "lagna_d9": true,
+      "lagna_d10": true,
+      "moon_dasha_lord": false,
+      "planets_changing_sign": [
+       "Saturn"
+      ],
+      "planets_changing_house": [
+       "Saturn"
+      ]
+     }
+    },
+    {
+     "ayanamsha": "Aldebaran at 15 Taurus",
+     "value_deg": 24.801547408458475,
+     "value_dms": "24°48'05.6\"",
+     "lagna_deg": 250.66180192200014,
+     "lagna_sign": "Dhanu",
+     "lagna_formatted": "Dhanu 10°39'42.5\"",
+     "lagna_nakshatra": "Mula",
+     "lagna_pada": 4,
+     "lagna_d9": "Karka",
+     "lagna_d10": "Meena",
+     "moon_nakshatra": "Ashlesha",
+     "moon_pada": 3,
+     "moon_dasha_lord": "Mercury",
+     "planet_signs": {
+      "Sun": "Makara",
+      "Moon": "Karka",
+      "Mars": "Vrischika",
+      "Mercury": "Dhanu",
+      "Jupiter": "Karka",
+      "Venus": "Vrischika",
+      "Saturn": "Vrishabha"
+     },
+     "planet_houses": {
+      "Sun": 2,
+      "Moon": 8,
+      "Mars": 12,
+      "Mercury": 1,
+      "Jupiter": 8,
+      "Venus": 12,
+      "Saturn": 6
+     },
+     "differs_from_lahiri": {
+      "lagna_sign": false,
+      "lagna_nakshatra_or_pada": false,
+      "lagna_d9": false,
+      "lagna_d10": false,
+      "moon_dasha_lord": false,
+      "planets_changing_sign": [],
+      "planets_changing_house": []
+     }
+    },
+    {
+     "ayanamsha": "Usha / Shashi",
+     "value_deg": 20.100164884707283,
+     "value_dms": "20°06'00.6\"",
+     "lagna_deg": 255.36318444575133,
+     "lagna_sign": "Dhanu",
+     "lagna_formatted": "Dhanu 15°21'47.5\"",
+     "lagna_nakshatra": "Purva Ashadha",
+     "lagna_pada": 1,
+     "lagna_d9": "Simha",
+     "lagna_d10": "Vrishabha",
+     "moon_nakshatra": "Ashlesha",
+     "moon_pada": 4,
+     "moon_dasha_lord": "Mercury",
+     "planet_signs": {
+      "Sun": "Makara",
+      "Moon": "Karka",
+      "Mars": "Vrischika",
+      "Mercury": "Dhanu",
+      "Jupiter": "Karka",
+      "Venus": "Vrischika",
+      "Saturn": "Mithuna"
+     },
+     "planet_houses": {
+      "Sun": 2,
+      "Moon": 8,
+      "Mars": 12,
+      "Mercury": 1,
+      "Jupiter": 8,
+      "Venus": 12,
+      "Saturn": 7
+     },
+     "differs_from_lahiri": {
+      "lagna_sign": false,
+      "lagna_nakshatra_or_pada": true,
+      "lagna_d9": true,
+      "lagna_d10": true,
+      "moon_dasha_lord": false,
+      "planets_changing_sign": [
+       "Saturn"
+      ],
+      "planets_changing_house": [
+       "Saturn"
+      ]
+     }
+    },
+    {
+     "ayanamsha": "Djwhal Khul",
+     "value_deg": 28.40230248470732,
+     "value_dms": "28°24'08.3\"",
+     "lagna_deg": 247.0610468457513,
+     "lagna_sign": "Dhanu",
+     "lagna_formatted": "Dhanu 7°03'39.8\"",
+     "lagna_nakshatra": "Mula",
+     "lagna_pada": 3,
+     "lagna_d9": "Mithuna",
+     "lagna_d10": "Kumbha",
+     "moon_nakshatra": "Ashlesha",
+     "moon_pada": 2,
+     "moon_dasha_lord": "Mercury",
+     "planet_signs": {
+      "Sun": "Makara",
+      "Moon": "Karka",
+      "Mars": "Vrischika",
+      "Mercury": "Dhanu",
+      "Jupiter": "Karka",
+      "Venus": "Vrischika",
+      "Saturn": "Vrishabha"
+     },
+     "planet_houses": {
+      "Sun": 2,
+      "Moon": 8,
+      "Mars": 12,
+      "Mercury": 1,
+      "Jupiter": 8,
+      "Venus": 12,
+      "Saturn": 6
+     },
+     "differs_from_lahiri": {
+      "lagna_sign": false,
+      "lagna_nakshatra_or_pada": true,
+      "lagna_d9": true,
+      "lagna_d10": true,
+      "moon_dasha_lord": false,
+      "planets_changing_sign": [],
+      "planets_changing_house": []
+     }
+    }
+   ],
+   "spread_deg": 8.366719349338211,
+   "note": "Ayanamsha is a school choice, not an observable. The Vimshottari dasha sequence depends on the Moon's nakshatra, so any ayanamsha that moves the Moon across a nakshatra boundary changes the entire dasha timeline."
+  },
+  "house_system_comparison": {
+   "reference": "Whole sign",
+   "rows": [
+    {
+     "system": "Whole sign",
+     "asc": 275.4594137702227,
+     "asc_formatted": "Capricorn 5°27'33.9\"",
+     "mc": 197.04839316198164,
+     "mc_formatted": "Libra 17°02'54.2\"",
+     "cusps": [
+      270.0,
+      300.0,
+      330.0,
+      0.0,
+      30.0,
+      60.0,
+      90.0,
+      120.0,
+      150.0,
+      180.0,
+      210.0,
+      240.0
+     ],
+     "planet_houses": {
+      "Sun": 1,
+      "Moon": 8,
+      "Mars": 12,
+      "Mercury": 1,
+      "Jupiter": 8,
+      "Venus": 12,
+      "Saturn": 6
+     },
+     "mc_in_house": 10,
+     "planets_changing_house_vs_whole_sign": []
+    },
+    {
+     "system": "Placidus",
+     "asc": 275.4594137702227,
+     "asc_formatted": "Capricorn 5°27'33.9\"",
+     "mc": 197.04839316198164,
+     "mc_formatted": "Libra 17°02'54.2\"",
+     "cusps": [
+      275.4594137702227,
+      308.3437357251251,
+      343.5721313455642,
+      17.048393161981608,
+      45.934245888845226,
+      71.14325908193211,
+      95.45941377022268,
+      128.3437357251251,
+      163.57213134556423,
+      197.04839316198164,
+      225.93424588884523,
+      251.14325908193211
+     ],
+     "planet_houses": {
+      "Sun": 1,
+      "Moon": 8,
+      "Mars": 11,
+      "Mercury": 1,
+      "Jupiter": 8,
+      "Venus": 12,
+      "Saturn": 6
+     },
+     "mc_in_house": 10,
+     "planets_changing_house_vs_whole_sign": [
+      "Mars"
+     ]
+    },
+    {
+     "system": "Koch",
+     "asc": 275.4594137702227,
+     "asc_formatted": "Capricorn 5°27'33.9\"",
+     "mc": 197.04839316198164,
+     "mc_formatted": "Libra 17°02'54.2\"",
+     "cusps": [
+      275.4594137702227,
+      304.6616429463381,
+      339.1304957968762,
+      17.048393161981608,
+      43.50355970389222,
+      69.21832487312707,
+      95.45941377022268,
+      124.66164294633808,
+      159.13049579687618,
+      197.04839316198164,
+      223.50355970389222,
+      249.21832487312707
+     ],
+     "planet_houses": {
+      "Sun": 1,
+      "Moon": 8,
+      "Mars": 11,
+      "Mercury": 1,
+      "Jupiter": 8,
+      "Venus": 12,
+      "Saturn": 6
+     },
+     "mc_in_house": 10,
+     "planets_changing_house_vs_whole_sign": [
+      "Mars"
+     ]
+    },
+    {
+     "system": "Equal (from Asc)",
+     "asc": 275.4594137702227,
+     "asc_formatted": "Capricorn 5°27'33.9\"",
+     "mc": 197.04839316198164,
+     "mc_formatted": "Libra 17°02'54.2\"",
+     "cusps": [
+      275.4594137702227,
+      305.4594137702227,
+      335.4594137702227,
+      5.459413770222682,
+      35.45941377022268,
+      65.45941377022268,
+      95.45941377022268,
+      125.45941377022268,
+      155.45941377022268,
+      185.45941377022268,
+      215.45941377022268,
+      245.45941377022268
+     ],
+     "planet_houses": {
+      "Sun": 1,
+      "Moon": 8,
+      "Mars": 11,
+      "Mercury": 1,
+      "Jupiter": 8,
+      "Venus": 12,
+      "Saturn": 6
+     },
+     "mc_in_house": 10,
+     "planets_changing_house_vs_whole_sign": [
+      "Mars"
+     ]
+    },
+    {
+     "system": "Porphyry",
+     "asc": 275.4594137702227,
+     "asc_formatted": "Capricorn 5°27'33.9\"",
+     "mc": 197.04839316198164,
+     "mc_formatted": "Libra 17°02'54.2\"",
+     "cusps": [
+      275.4594137702227,
+      309.322406900809,
+      343.1854000313953,
+      17.048393161981608,
+      43.18540003139532,
+      69.32240690080903,
+      95.45941377022268,
+      129.32240690080903,
+      163.18540003139537,
+      197.04839316198164,
+      223.18540003139532,
+      249.322406900809
+     ],
+     "planet_houses": {
+      "Sun": 1,
+      "Moon": 8,
+      "Mars": 11,
+      "Mercury": 1,
+      "Jupiter": 8,
+      "Venus": 12,
+      "Saturn": 6
+     },
+     "mc_in_house": 10,
+     "planets_changing_house_vs_whole_sign": [
+      "Mars"
+     ]
+    },
+    {
+     "system": "Regiomontanus",
+     "asc": 275.4594137702227,
+     "asc_formatted": "Capricorn 5°27'33.9\"",
+     "mc": 197.04839316198164,
+     "mc_formatted": "Libra 17°02'54.2\"",
+     "cusps": [
+      275.4594137702227,
+      306.74307379955144,
+      343.0738260439652,
+      17.048393161981608,
+      44.88017129346122,
+      69.5209861458435,
+      95.45941377022268,
+      126.74307379955144,
+      163.07382604396525,
+      197.04839316198164,
+      224.8801712934612,
+      249.5209861458435
+     ],
+     "planet_houses": {
+      "Sun": 1,
+      "Moon": 8,
+      "Mars": 11,
+      "Mercury": 1,
+      "Jupiter": 8,
+      "Venus": 12,
+      "Saturn": 6
+     },
+     "mc_in_house": 10,
+     "planets_changing_house_vs_whole_sign": [
+      "Mars"
+     ]
+    },
+    {
+     "system": "Campanus",
+     "asc": 275.4594137702227,
+     "asc_formatted": "Capricorn 5°27'33.9\"",
+     "mc": 197.04839316198164,
+     "mc_formatted": "Libra 17°02'54.2\"",
+     "cusps": [
+      275.4594137702227,
+      308.84703582371355,
+      345.2027877458024,
+      17.048393161981608,
+      43.38481529476309,
+      68.03800976495279,
+      95.45941377022268,
+      128.84703582371355,
+      165.20278774580242,
+      197.04839316198164,
+      223.3848152947631,
+      248.0380097649528
+     ],
+     "planet_houses": {
+      "Sun": 1,
+      "Moon": 8,
+      "Mars": 11,
+      "Mercury": 1,
+      "Jupiter": 8,
+      "Venus": 12,
+      "Saturn": 6
+     },
+     "mc_in_house": 10,
+     "planets_changing_house_vs_whole_sign": [
+      "Mars"
+     ]
+    },
+    {
+     "system": "Alcabitius",
+     "asc": 275.4594137702227,
+     "asc_formatted": "Capricorn 5°27'33.9\"",
+     "mc": 197.04839316198164,
+     "mc_formatted": "Libra 17°02'54.2\"",
+     "cusps": [
+      275.4594137702227,
+      306.8092871508805,
+      340.9895932916961,
+      17.048393161981608,
+      44.92228447249198,
+      70.7881831506242,
+      95.45941377022268,
+      126.8092871508805,
+      160.9895932916961,
+      197.04839316198164,
+      224.92228447249198,
+      250.7881831506242
+     ],
+     "planet_houses": {
+      "Sun": 1,
+      "Moon": 8,
+      "Mars": 11,
+      "Mercury": 1,
+      "Jupiter": 8,
+      "Venus": 12,
+      "Saturn": 6
+     },
+     "mc_in_house": 10,
+     "planets_changing_house_vs_whole_sign": [
+      "Mars"
+     ]
+    },
+    {
+     "system": "Topocentric",
+     "asc": 275.4594137702227,
+     "asc_formatted": "Capricorn 5°27'33.9\"",
+     "mc": 197.04839316198164,
+     "mc_formatted": "Libra 17°02'54.2\"",
+     "cusps": [
+      275.4594137702227,
+      308.3519292808177,
+      343.57241623813354,
+      17.048393161981608,
+      45.93866959294081,
+      71.15647206800395,
+      95.45941377022268,
+      128.35192928081773,
+      163.57241623813354,
+      197.04839316198164,
+      225.9386695929408,
+      251.15647206800395
+     ],
+     "planet_houses": {
+      "Sun": 1,
+      "Moon": 8,
+      "Mars": 11,
+      "Mercury": 1,
+      "Jupiter": 8,
+      "Venus": 12,
+      "Saturn": 6
+     },
+     "mc_in_house": 10,
+     "planets_changing_house_vs_whole_sign": [
+      "Mars"
+     ]
+    },
+    {
+     "system": "Morinus",
+     "asc": 275.4594137702227,
+     "asc_formatted": "Capricorn 5°27'33.9\"",
+     "mc": 197.04839316198164,
+     "mc_formatted": "Libra 17°02'54.2\"",
+     "cusps": [
+      287.04839316198166,
+      318.17478172575625,
+      346.85010272172445,
+      14.473884873801467,
+      43.24770719460105,
+      74.48842783443092,
+      107.04839316198166,
+      138.17478172575625,
+      166.8501027217244,
+      194.47388487380147,
+      223.24770719460108,
+      254.4884278344309
+     ],
+     "planet_houses": {
+      "Sun": 1,
+      "Moon": 8,
+      "Mars": 11,
+      "Mercury": 12,
+      "Jupiter": 7,
+      "Venus": 11,
+      "Saturn": 6
+     },
+     "mc_in_house": 10,
+     "planets_changing_house_vs_whole_sign": [
+      "Mars",
+      "Mercury",
+      "Jupiter",
+      "Venus"
+     ]
+    },
+    {
+     "system": "Krusinski",
+     "asc": 275.4594137702227,
+     "asc_formatted": "Capricorn 5°27'33.9\"",
+     "mc": 197.04839316198164,
+     "mc_formatted": "Libra 17°02'54.2\"",
+     "cusps": [
+      275.4594137702227,
+      306.19297220854526,
+      342.4855945341921,
+      17.048393161981608,
+      45.290081541864765,
+      69.91200896814081,
+      95.45941377022268,
+      126.19297220854526,
+      162.48559453419216,
+      197.04839316198164,
+      225.29008154186477,
+      249.9120089681408
+     ],
+     "planet_houses": {
+      "Sun": 1,
+      "Moon": 8,
+      "Mars": 11,
+      "Mercury": 1,
+      "Jupiter": 8,
+      "Venus": 12,
+      "Saturn": 6
+     },
+     "mc_in_house": 10,
+     "planets_changing_house_vs_whole_sign": [
+      "Mars"
+     ]
+    },
+    {
+     "system": "Vehlow equal",
+     "asc": 275.4594137702227,
+     "asc_formatted": "Capricorn 5°27'33.9\"",
+     "mc": 197.04839316198164,
+     "mc_formatted": "Libra 17°02'54.2\"",
+     "cusps": [
+      260.4594137702227,
+      290.4594137702227,
+      320.4594137702227,
+      350.4594137702227,
+      20.45941377022268,
+      50.45941377022268,
+      80.45941377022268,
+      110.45941377022268,
+      140.45941377022268,
+      170.45941377022268,
+      200.45941377022268,
+      230.45941377022268
+     ],
+     "planet_houses": {
+      "Sun": 2,
+      "Moon": 8,
+      "Mars": 12,
+      "Mercury": 1,
+      "Jupiter": 8,
+      "Venus": 12,
+      "Saturn": 7
+     },
+     "mc_in_house": 10,
+     "planets_changing_house_vs_whole_sign": [
+      "Sun",
+      "Saturn"
+     ]
+    }
+   ],
+   "note": "The Ascendant degree is identical in every system -- only the house DIVISIONS differ. Whole sign is the declared primary for both the Hellenistic and Parasari tracks."
+  },
+  "combustion_school_comparison": {
+   "BPHS / common Parasari": {
+    "Moon": {
+     "elongation_deg": 160.35110992391557,
+     "orb_deg": 12,
+     "combust": false
+    },
+    "Mars": {
+     "elongation_deg": 57.67865049268258,
+     "orb_deg": 17,
+     "combust": false
+    },
+    "Mercury": {
+     "elongation_deg": 16.525135774693297,
+     "orb_deg": 14,
+     "combust": false
+    },
+    "Jupiter": {
+     "elongation_deg": 164.64389198820922,
+     "orb_deg": 11,
+     "combust": false
+    },
+    "Venus": {
+     "elongation_deg": 46.625553858088125,
+     "orb_deg": 10,
+     "combust": false
+    },
+    "Saturn": {
+     "elongation_deg": 143.6467904473991,
+     "orb_deg": 15,
+     "combust": false
+    }
+   },
+   "Surya Siddhanta": {
+    "Moon": {
+     "elongation_deg": 160.35110992391557,
+     "orb_deg": 12,
+     "combust": false
+    },
+    "Mars": {
+     "elongation_deg": 57.67865049268258,
+     "orb_deg": 17,
+     "combust": false
+    },
+    "Mercury": {
+     "elongation_deg": 16.525135774693297,
+     "orb_deg": 13,
+     "combust": false
+    },
+    "Jupiter": {
+     "elongation_deg": 164.64389198820922,
+     "orb_deg": 11,
+     "combust": false
+    },
+    "Venus": {
+     "elongation_deg": 46.625553858088125,
+     "orb_deg": 9,
+     "combust": false
+    },
+    "Saturn": {
+     "elongation_deg": 143.6467904473991,
+     "orb_deg": 15,
+     "combust": false
+    }
+   },
+   "Western traditional": {
+    "Moon": {
+     "elongation_deg": 160.35110992391557,
+     "orb_deg": 8,
+     "combust": false
+    },
+    "Mars": {
+     "elongation_deg": 57.67865049268258,
+     "orb_deg": 8,
+     "combust": false
+    },
+    "Mercury": {
+     "elongation_deg": 16.525135774693297,
+     "orb_deg": 8,
+     "combust": false
+    },
+    "Jupiter": {
+     "elongation_deg": 164.64389198820922,
+     "orb_deg": 8,
+     "combust": false
+    },
+    "Venus": {
+     "elongation_deg": 46.625553858088125,
+     "orb_deg": 8,
+     "combust": false
+    },
+    "Saturn": {
+     "elongation_deg": 143.6467904473991,
+     "orb_deg": 8,
+     "combust": false
+    }
+   },
+   "_planets_where_schools_disagree": []
+  },
+  "topocentric_vs_geocentric": {
+   "Sun": {
+    "geocentric_deg": 275.5964623971954,
+    "topocentric_deg": 275.598488492593,
+    "difference_arcmin": 0.12156572385492836,
+    "sign_changes": false,
+    "nakshatra_changes": false,
+    "vargas_that_change": []
+   },
+   "Moon": {
+    "geocentric_deg": 115.24535247327987,
+    "topocentric_deg": 114.60135291180437,
+    "difference_arcmin": 38.639973688528926,
+    "sign_changes": false,
+    "nakshatra_changes": false,
+    "vargas_that_change": [
+     "D12",
+     "D24",
+     "D30",
+     "D40",
+     "D45",
+     "D60"
+    ]
+   },
+   "Mars": {
+    "geocentric_deg": 217.91781190451283,
+    "topocentric_deg": 217.91883437149485,
+    "difference_arcmin": 0.06134801892130781,
+    "sign_changes": false,
+    "nakshatra_changes": false,
+    "vargas_that_change": []
+   },
+   "Mercury": {
+    "geocentric_deg": 259.07132662250217,
+    "topocentric_deg": 259.0743265725239,
+    "difference_arcmin": 0.17999700130303609,
+    "sign_changes": false,
+    "nakshatra_changes": false,
+    "vargas_that_change": []
+   },
+   "Jupiter": {
+    "geocentric_deg": 110.95257040898619,
+    "topocentric_deg": 110.95221515215576,
+    "difference_arcmin": 0.02131540982588831,
+    "sign_changes": false,
+    "nakshatra_changes": false,
+    "vargas_that_change": []
+   },
+   "Venus": {
+    "geocentric_deg": 228.9709085391073,
+    "topocentric_deg": 228.97369323216319,
+    "difference_arcmin": 0.16708158335234202,
+    "sign_changes": false,
+    "nakshatra_changes": false,
+    "vargas_that_change": []
+   },
+   "Saturn": {
+    "geocentric_deg": 59.24325284459455,
+    "topocentric_deg": 59.24296051892719,
+    "difference_arcmin": 0.017539540042434965,
+    "sign_changes": false,
+    "nakshatra_changes": false,
+    "vargas_that_change": []
+   },
+   "_summary": {
+    "largest_shift_arcmin": 38.639973688528926,
+    "any_categorical_change": true,
+    "convention_declared": "GEOCENTRIC is the primary track, as every tradition here assumes it."
+   }
+  },
+  "third_engine_moshier": {
+   "Sun": {
+    "moshier_deg": 299.49223503380745,
+    "swiss_deg": 299.4922430439338,
+    "difference_arcsec": 0.02883645486235764
+   },
+   "Moon": {
+    "moshier_deg": 139.14098875329438,
+    "swiss_deg": 139.14113312001822,
+    "difference_arcsec": 0.5197202058411676
+   },
+   "Mercury": {
+    "moshier_deg": 282.96709744909487,
+    "swiss_deg": 282.9671072692405,
+    "difference_arcsec": 0.035352524287191045
+   },
+   "Venus": {
+    "moshier_deg": 252.86669084997385,
+    "swiss_deg": 252.86668918584567,
+    "difference_arcsec": 0.005990861438931461
+   },
+   "Mars": {
+    "moshier_deg": 241.81358211515627,
+    "swiss_deg": 241.81359255125122,
+    "difference_arcsec": 0.03756994183277129
+   },
+   "Jupiter": {
+    "moshier_deg": 134.84833544254548,
+    "swiss_deg": 134.84835105572458,
+    "difference_arcsec": 0.05620744476573236
+   },
+   "Saturn": {
+    "moshier_deg": 83.13894236213481,
+    "swiss_deg": 83.13903349133292,
+    "difference_arcsec": 0.3280651131490231
+   },
+   "_max_difference_arcsec": 0.5197202058411676
+  }
  },
  "verification": [
   {
@@ -21453,11 +25351,228 @@
    "confidence": "medium",
    "status": "pass",
    "note": "Cross-cycle consistency only. Mewa, Parkha and the personal forces are NOT computed."
+  },
+  {
+   "system": "shared_astronomy",
+   "datum": "Sun longitude, third engine cross-check",
+   "primary_engine": "Swiss Ephemeris 2.10.03 (sepl/semo/seas_18.se1)",
+   "primary_value": 299.4922430439338,
+   "validator": "Moshier analytical ephemeris (swe FLG_MOSEPH, no data files)",
+   "validator_value": 299.49223503380745,
+   "difference": 8.0101263506549e-06,
+   "convention": "geocentric apparent tropical; analytically independent of the .se1 files",
+   "boundary_distance": null,
+   "uncertainty_stability": "stable",
+   "confidence": "high",
+   "status": "pass",
+   "note": "A third path with different mathematics, not a third wrapper on the same data."
+  },
+  {
+   "system": "shared_astronomy",
+   "datum": "Moon longitude, third engine cross-check",
+   "primary_engine": "Swiss Ephemeris 2.10.03 (sepl/semo/seas_18.se1)",
+   "primary_value": 139.14113312001822,
+   "validator": "Moshier analytical ephemeris (swe FLG_MOSEPH, no data files)",
+   "validator_value": 139.14098875329438,
+   "difference": 0.00014436672384476879,
+   "convention": "geocentric apparent tropical; analytically independent of the .se1 files",
+   "boundary_distance": null,
+   "uncertainty_stability": "stable",
+   "confidence": "high",
+   "status": "pass",
+   "note": "A third path with different mathematics, not a third wrapper on the same data."
+  },
+  {
+   "system": "shared_astronomy",
+   "datum": "Mercury longitude, third engine cross-check",
+   "primary_engine": "Swiss Ephemeris 2.10.03 (sepl/semo/seas_18.se1)",
+   "primary_value": 282.9671072692405,
+   "validator": "Moshier analytical ephemeris (swe FLG_MOSEPH, no data files)",
+   "validator_value": 282.96709744909487,
+   "difference": 9.820145635330846e-06,
+   "convention": "geocentric apparent tropical; analytically independent of the .se1 files",
+   "boundary_distance": null,
+   "uncertainty_stability": "stable",
+   "confidence": "high",
+   "status": "pass",
+   "note": "A third path with different mathematics, not a third wrapper on the same data."
+  },
+  {
+   "system": "shared_astronomy",
+   "datum": "Venus longitude, third engine cross-check",
+   "primary_engine": "Swiss Ephemeris 2.10.03 (sepl/semo/seas_18.se1)",
+   "primary_value": 252.86668918584567,
+   "validator": "Moshier analytical ephemeris (swe FLG_MOSEPH, no data files)",
+   "validator_value": 252.86669084997385,
+   "difference": 1.6641281774809613e-06,
+   "convention": "geocentric apparent tropical; analytically independent of the .se1 files",
+   "boundary_distance": null,
+   "uncertainty_stability": "stable",
+   "confidence": "high",
+   "status": "pass",
+   "note": "A third path with different mathematics, not a third wrapper on the same data."
+  },
+  {
+   "system": "shared_astronomy",
+   "datum": "Mars longitude, third engine cross-check",
+   "primary_engine": "Swiss Ephemeris 2.10.03 (sepl/semo/seas_18.se1)",
+   "primary_value": 241.81359255125122,
+   "validator": "Moshier analytical ephemeris (swe FLG_MOSEPH, no data files)",
+   "validator_value": 241.81358211515627,
+   "difference": 1.0436094953547581e-05,
+   "convention": "geocentric apparent tropical; analytically independent of the .se1 files",
+   "boundary_distance": null,
+   "uncertainty_stability": "stable",
+   "confidence": "high",
+   "status": "pass",
+   "note": "A third path with different mathematics, not a third wrapper on the same data."
+  },
+  {
+   "system": "shared_astronomy",
+   "datum": "Jupiter longitude, third engine cross-check",
+   "primary_engine": "Swiss Ephemeris 2.10.03 (sepl/semo/seas_18.se1)",
+   "primary_value": 134.84835105572458,
+   "validator": "Moshier analytical ephemeris (swe FLG_MOSEPH, no data files)",
+   "validator_value": 134.84833544254548,
+   "difference": 1.5613179101592323e-05,
+   "convention": "geocentric apparent tropical; analytically independent of the .se1 files",
+   "boundary_distance": null,
+   "uncertainty_stability": "stable",
+   "confidence": "high",
+   "status": "pass",
+   "note": "A third path with different mathematics, not a third wrapper on the same data."
+  },
+  {
+   "system": "shared_astronomy",
+   "datum": "Saturn longitude, third engine cross-check",
+   "primary_engine": "Swiss Ephemeris 2.10.03 (sepl/semo/seas_18.se1)",
+   "primary_value": 83.13903349133292,
+   "validator": "Moshier analytical ephemeris (swe FLG_MOSEPH, no data files)",
+   "validator_value": 83.13894236213481,
+   "difference": 9.112919809695086e-05,
+   "convention": "geocentric apparent tropical; analytically independent of the .se1 files",
+   "boundary_distance": null,
+   "uncertainty_stability": "stable",
+   "confidence": "high",
+   "status": "pass",
+   "note": "A third path with different mathematics, not a third wrapper on the same data."
+  },
+  {
+   "system": "bazi",
+   "datum": "Yong Shen agreement across three named schools",
+   "primary_engine": "chart/sinic.py rule chains",
+   "primary_value": {
+    "扶抑 Fu Yi (support / suppress)": [
+     "Water",
+     "Metal"
+    ],
+    "調候 Tiao Hou (climate regulation)": [
+     "Fire"
+    ],
+    "通關 Tong Guan (bridging)": [
+     "Wood"
+    ]
+   },
+   "validator": null,
+   "validator_value": null,
+   "difference": null,
+   "convention": "Fu Yi / Tiao Hou / Tong Guan",
+   "boundary_distance": null,
+   "uncertainty_stability": "stable",
+   "confidence": "low",
+   "status": "pass",
+   "note": "Computed and disclosed, not resolved: the three schools select non-overlapping favourable elements for this chart. Status 'pass' means the divergence was correctly detected and surfaced, not that a favourable element was determined."
+  },
+  {
+   "system": "jyotisha",
+   "datum": "Shadbala component validation",
+   "primary_engine": "chart/shadbala.py",
+   "primary_value": {
+    "uchcha_in_range_0_60": true,
+    "dig_in_range_0_60": true,
+    "kendradi_valid": true,
+    "naisargika_matches_classical": true,
+    "naisargika_order_correct": true,
+    "saptavargaja_max_315": true,
+    "all_totals_positive": true,
+    "pass": true
+   },
+   "validator": null,
+   "validator_value": null,
+   "difference": null,
+   "convention": "ranges, classical Naisargika values and ordering",
+   "boundary_distance": null,
+   "uncertainty_stability": "stable",
+   "confidence": "medium",
+   "status": "pass",
+   "note": "Cheshta Bala is an approximation; totals are reported with and without it."
+  },
+  {
+   "system": "jyotisha",
+   "datum": "sixteen vargas, range and boundary validation",
+   "primary_engine": "chart/vargas.py",
+   "primary_value": true,
+   "validator": null,
+   "validator_value": null,
+   "difference": null,
+   "convention": "every varga returns a valid sign index across 36000 samples and on every exact division boundary",
+   "boundary_distance": null,
+   "uncertainty_stability": "stable",
+   "confidence": "high",
+   "status": "pass",
+   "note": null
+  },
+  {
+   "system": "jyotisha",
+   "datum": "Lagna sign across 12 ayanamshas",
+   "primary_engine": "Swiss Ephemeris 2.10.03 (sepl/semo/seas_18.se1)",
+   "primary_value": "Dhanu in all 12",
+   "validator": "swe sidereal modes",
+   "validator_value": "spread 8.3667 deg",
+   "difference": null,
+   "convention": "school robustness test",
+   "boundary_distance": null,
+   "uncertainty_stability": "stable",
+   "confidence": "high",
+   "status": "pass",
+   "note": null
+  },
+  {
+   "system": "jyotisha",
+   "datum": "Vimshottari starting lord across 12 ayanamshas",
+   "primary_engine": "Swiss Ephemeris 2.10.03 (sepl/semo/seas_18.se1)",
+   "primary_value": "Mercury",
+   "validator": "swe sidereal modes",
+   "validator_value": [
+    "Mercury"
+   ],
+   "difference": null,
+   "convention": "school robustness test",
+   "boundary_distance": null,
+   "uncertainty_stability": "stable",
+   "confidence": "high",
+   "status": "pass",
+   "note": null
+  },
+  {
+   "system": "western",
+   "datum": "sect verdict across 5 sunrise conventions",
+   "primary_engine": "Swiss Ephemeris 2.10.03 (sepl/semo/seas_18.se1)",
+   "primary_value": "nocturnal in all 5",
+   "validator": "swe rise_trans flag variants",
+   "validator_value": "spread 3.96 min",
+   "difference": null,
+   "convention": "disc centre / upper limb, with and without refraction, plus Hindu rising",
+   "boundary_distance": null,
+   "uncertainty_stability": "stable",
+   "confidence": "high",
+   "status": "pass",
+   "note": null
   }
  ],
  "manifest": {
   "schema": "six-culture-verified-chart/CALCULATION_MANIFEST/v2",
-  "generated_utc": "2026-08-29T16:19:37.208493+00:00",
+  "generated_utc": "2026-08-29T20:42:18.802368+00:00",
   "runtime": {
    "python": "3.11.15",
    "os": "Linux-6.18.44-fc-v22-x86_64-with-glibc2.39",
@@ -21495,11 +25610,11 @@
    }
   },
   "source_checksums": {
-   "build.py": "31cff855d395abdaccd1686834ca4451d67b9a3817b9e715e4df326981aa9d49",
+   "build.py": "67499760c03111fd6d26ec6b03205390e336d3bad30e40b457935e6b29000faf",
    "chart/core.py": "371c9c04863a0a86716c6c563b377e1c27e85e173a4ebb14624427c7bb98a007",
    "chart/jyotisha.py": "d6cec0f741fb67463f6daba5347c4a7a4252389f570f9abbe93f444032219b9f",
-   "chart/sinic.py": "88455a3355d14e6effc1f0e8f2a6f4065c0f4734fec884e1f8be6e8da7712bdc",
-   "chart/western.py": "a9a9f8db91de19d1a2e955ddf9d43fa208a7a0403b7c2a7cb1a42966416deded",
+   "chart/sinic.py": "6ebf833fd18dc41d85d1f7c51dc547fac2aa0194c8258617a3cfa9d994d6e70a",
+   "chart/western.py": "86ee4eb2e39972ffacfcd921190e99f1faf0f442f30e11a09d7be01c1d2db2a2",
    "chart/calendars.py": "3680bd7e72149d358528a07f32cc39f4bccd67584007c212fa3f0d55bf07e048",
    "chart/validate.py": "9cee97e0e2fd4e4da91fe397fb95c8e916a5a973a556a3837b74ea46074d008c"
   },

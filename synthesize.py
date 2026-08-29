@@ -41,6 +41,8 @@ AV = MD["jyotisha"]["ashtakavarga"]["sarvashtakavarga_by_house"]
 W = MD["western"]; WP = W["planets"]; WH = W["houses"]
 ZW = MD["ziwei"]["chart"]; ZWH = MD["ziwei"]["horoscope_2026"]
 BZ = MD["bazi"]
+SB = MD["precision_layer"]["shadbala"]
+PL = MD["precision_layer"]
 PAL = {p["name_zh"]: p for p in ZW["palaces"]}
 
 # ============================ D1 Self / identity ============================
@@ -64,6 +66,12 @@ proj("D1", "bazi", "medium", "mixed", "medium",
 proj("D1", "ziwei", "high", "mixed", "medium",
      "Ming (life) palace at gengxu holds Tan Lang / Greedy Wolf at brightness +3 (temple); "
      "life ruler Lu Cun, body ruler Huo Xing", "ZW-MING-PALACE", "unique")
+
+proj("D1", "jyotisha", "high", "mixed", "medium",
+     f"Shadbala ranks the seven grahas {' > '.join(SB['rank_strongest_first'])}. The Lagna lord "
+     f"Jupiter is second strongest at {SB['planets']['Jupiter']['total_rupas_with_cheshta']:.2f} "
+     f"rupas against a 6.5 requirement -- so the Lagna lord is genuinely strong in absolute terms "
+     f"even though it sits in a dusthana", "JY-SHADBALA-LAGNA-LORD", "unique")
 
 # ============================ D2 Career / status ============================
 proj("D2", "jyotisha", "high", "mixed", "medium",
@@ -149,6 +157,11 @@ proj("D7", "western", "high", "mixed", "high",
      "House 6 (Gemini) holds Saturn, which is retrograde, has triplicity dignity (score 3), and "
      "is the malefic CONTRARY to sect. The Lot of Fortune, which governs body and circumstance, "
      "also falls in house 6", "WE-LOT-FORTUNE-H6 + WE-SECT-SATURN", "unique")
+proj("D7", "jyotisha", "high", "negative-leaning", "medium",
+     f"Shadbala places Saturn LAST of the seven at "
+     f"{SB['planets']['Saturn']['total_rupas_with_cheshta']:.2f} rupas against a 5.0 requirement -- "
+     f"the only planet other than the Moon to fall below its classical minimum -- and Saturn is "
+     f"the graha occupying house 6", "JY-SHADBALA-SATURN", "unique")
 proj("D7", "ziwei", "medium", "positive-leaning", "medium",
      "Health palace (疾厄) at yisi holds Tai Yang / Sun at brightness +2", "ZW-HEALTH-PALACE", "unique")
 
@@ -162,6 +175,11 @@ proj("D8", "jyotisha", "high", "mixed", "high",
      "Mercury retrograde in house 1 in Purva Ashadha pada 2; house 3 lord Saturn in house 6; "
      "Jupiter exalted in house 8, the house of research and hidden matters",
      "JY-MERCURY-H1 + JY-H8-JUPITER", "unique")
+proj("D8", "jyotisha", "high", "positive-leaning", "medium",
+     f"Shadbala makes Mercury the STRONGEST graha in the chart at "
+     f"{SB['planets']['Mercury']['total_rupas_with_cheshta']:.2f} rupas against a 7.0 requirement. "
+     f"Mercury is also the graha in house 1 and the lord of houses 7 and 10",
+     "JY-SHADBALA-MERCURY", "unique")
 proj("D8", "bazi", "medium", "negative-leaning", "medium",
      "Resource (Yin), the learning-support element, is Metal at 0.9 weighted units -- the LOWEST "
      "of the five elements, present only as hidden Xin in Chou and hidden Geng in Si",
@@ -396,23 +414,30 @@ chronology = {
 
 # ==================================================================== dropped claims
 DROPPED = {
- "total_dropped": 14,
+ "total_dropped": 13,
+ "changed_since_first_pass": (
+   "Shadbala moved OUT of this list -- it is now computed (five components exactly, Cheshta "
+   "approximated and flagged). Yong Shen also moved out: it is now computed under three named "
+   "schools and reported as an unresolved three-way split rather than withheld."),
  "by_reason": {
    "no_validated_method": [
-     "Jyotisha Shadbala (all six strength components)",
      "Tibetan Mewa (sme ba)", "Tibetan Parkha", "Tibetan life force (srog)",
      "Tibetan body force (lus)", "Tibetan power (dbang thang)",
-     "Tibetan wind-horse (rlung rta)", "Tibetan annual obstacles"],
+     "Tibetan wind-horse (rlung rta)", "Tibetan annual relations and obstacles"],
    "no_classical_source": [
      "Maya day-sign personality meaning for 8 Caban",
      "Maya Haab month symbolism for 10 Muwan"],
-   "school_dependent_and_unresolvable_here": [
-     "BaZi Useful God (Yong Shen) / favourable element",
-     "a single BaZi hour pillar (civil and true-solar schools disagree)"],
+   "computed_but_deliberately_not_collapsed_to_one_answer": [
+     "a single BaZi hour pillar (civil and true-solar schools disagree; both reported)",
+     "a single BaZi Useful God (three named schools give non-overlapping answers; all reported)"],
    "duplicate_of_another_cluster": [
      "Western whole-sign house occupancy as a second vote alongside Jyotisha",
      "Zodiacal Releasing as a second Western timing vote alongside profection"],
  },
+ "also_excluded_from_voting_though_computed": [
+   "Shadbala -- refines the Jyotisha cluster from inside it, never counted as a separate vote",
+   "D60 Shastiamsa -- sensitive within the stated +/-30 s uncertainty, so unusable for this birth time",
+ ],
  "barnum_filter_note": ("Claims that would fit most people -- 'you are sometimes introverted', "
                         "'you value honesty', 'you have untapped potential' -- were not generated, "
                         "because every sentence in the reading is required to cite a computed datum "
@@ -426,6 +451,9 @@ SYN = {
    "primary_clusters": ["jyotisha", "western", "sinic"],
    "sinic_composition": "BaZi and Zi Wei corroborate each other internally but contribute at most ONE cross-cultural vote",
    "non_voting": ["maya", "tibetan"],
+   "shadbala_is_not_a_separate_vote": (
+     "Shadbala refines the Jyotisha cluster's stance from inside it. It is never counted as an "
+     "additional cluster, and it cannot upgrade a MODERATE to a STRONG on its own."),
    "independence_gate": ("Jyotisha (sidereal whole-sign) and Western (tropical whole-sign) place "
                          "6 of 7 traditional planets in the SAME house, because the ayanamsha "
                          "shifts the Ascendant and the planets together. House-occupancy agreement "

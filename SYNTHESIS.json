@@ -1,6 +1,6 @@
 {
  "schema": "six-culture-verified-chart/SYNTHESIS/v2",
- "generated_utc": "2026-08-29T16:19:38.089702+00:00",
+ "generated_utc": "2026-08-29T20:42:22.967307+00:00",
  "counting_rules": {
   "primary_clusters": [
    "jyotisha",
@@ -12,6 +12,7 @@
    "maya",
    "tibetan"
   ],
+  "shadbala_is_not_a_separate_vote": "Shadbala refines the Jyotisha cluster's stance from inside it. It is never counted as an additional cluster, and it cannot upgrade a MODERATE to a STRONG on its own.",
   "independence_gate": "Jyotisha (sidereal whole-sign) and Western (tropical whole-sign) place 6 of 7 traditional planets in the SAME house, because the ayanamsha shifts the Ascendant and the planets together. House-occupancy agreement between these two clusters is therefore an artifact, not corroboration. A domain earns two votes from them only if at least one side rests on a cluster-unique mechanism."
  },
  "mechanical_correlation_measurement": {
@@ -197,6 +198,17 @@
      "confidence": "medium",
      "basis": "Ming (life) palace at gengxu holds Tan Lang / Greedy Wolf at brightness +3 (temple); life ruler Lu Cun, body ruler Huo Xing",
      "mapping_rule": "ZW-MING-PALACE",
+     "basis_type": "unique"
+    },
+    {
+     "domain": "D1",
+     "system": "jyotisha",
+     "cluster": "jyotisha",
+     "prominence": "high",
+     "polarity": "mixed",
+     "confidence": "medium",
+     "basis": "Shadbala ranks the seven grahas Mercury > Jupiter > Sun > Venus > Moon > Mars > Saturn. The Lagna lord Jupiter is second strongest at 8.19 rupas against a 6.5 requirement -- so the Lagna lord is genuinely strong in absolute terms even though it sits in a dusthana",
+     "mapping_rule": "JY-SHADBALA-LAGNA-LORD",
      "basis_type": "unique"
     }
    ]
@@ -648,7 +660,7 @@
   "D7": {
    "domain": "D7",
    "domain_name": "Health / routine",
-   "grade": "STRONG",
+   "grade": "DIVERGENT",
    "clusters_speaking": [
     "jyotisha",
     "sinic",
@@ -665,7 +677,8 @@
     "jyotisha": {
      "prominence": 2,
      "polarities": [
-      "mixed"
+      "mixed",
+      "negative-leaning"
      ]
     },
     "western": {
@@ -681,8 +694,23 @@
      ]
     }
    },
-   "conflicts": [],
-   "what_is_agreed": "prominence",
+   "conflicts": [
+    {
+     "kind": "polarity",
+     "clusters": [
+      "jyotisha",
+      "sinic"
+     ],
+     "jyotisha": [
+      "mixed",
+      "negative-leaning"
+     ],
+     "sinic": [
+      "positive-leaning"
+     ]
+    }
+   ],
+   "what_is_agreed": null,
    "aggregate_prominence": "high",
    "projections": [
     {
@@ -705,6 +733,17 @@
      "confidence": "high",
      "basis": "House 6 (Gemini) holds Saturn, which is retrograde, has triplicity dignity (score 3), and is the malefic CONTRARY to sect. The Lot of Fortune, which governs body and circumstance, also falls in house 6",
      "mapping_rule": "WE-LOT-FORTUNE-H6 + WE-SECT-SATURN",
+     "basis_type": "unique"
+    },
+    {
+     "domain": "D7",
+     "system": "jyotisha",
+     "cluster": "jyotisha",
+     "prominence": "high",
+     "polarity": "negative-leaning",
+     "confidence": "medium",
+     "basis": "Shadbala places Saturn LAST of the seven at 3.77 rupas against a 5.0 requirement -- the only planet other than the Moon to fall below its classical minimum -- and Saturn is the graha occupying house 6",
+     "mapping_rule": "JY-SHADBALA-SATURN",
      "basis_type": "unique"
     },
     {
@@ -746,7 +785,8 @@
     "jyotisha": {
      "prominence": 2,
      "polarities": [
-      "mixed"
+      "mixed",
+      "positive-leaning"
      ]
     },
     "sinic": {
@@ -758,6 +798,21 @@
     }
    },
    "conflicts": [
+    {
+     "kind": "polarity",
+     "clusters": [
+      "jyotisha",
+      "sinic"
+     ],
+     "jyotisha": [
+      "mixed",
+      "positive-leaning"
+     ],
+     "sinic": [
+      "negative-leaning",
+      "positive-leaning"
+     ]
+    },
     {
      "kind": "polarity",
      "clusters": [
@@ -796,6 +851,17 @@
      "confidence": "high",
      "basis": "Mercury retrograde in house 1 in Purva Ashadha pada 2; house 3 lord Saturn in house 6; Jupiter exalted in house 8, the house of research and hidden matters",
      "mapping_rule": "JY-MERCURY-H1 + JY-H8-JUPITER",
+     "basis_type": "unique"
+    },
+    {
+     "domain": "D8",
+     "system": "jyotisha",
+     "cluster": "jyotisha",
+     "prominence": "high",
+     "polarity": "positive-leaning",
+     "confidence": "medium",
+     "basis": "Shadbala makes Mercury the STRONGEST graha in the chart at 8.61 rupas against a 7.0 requirement. Mercury is also the graha in house 1 and the lord of houses 7 and 10",
+     "mapping_rule": "JY-SHADBALA-MERCURY",
      "basis_type": "unique"
     },
     {
@@ -902,10 +968,11 @@
   "divergent_domains": [
    "D3",
    "D4",
+   "D7",
    "D8"
   ],
-  "divergent_over_all_nine": "3/9 = 33.3%",
-  "divergent_over_sufficient": "3/9 = 33.3%",
+  "divergent_over_all_nine": "4/9 = 44.4%",
+  "divergent_over_sufficient": "4/9 = 44.4%",
   "insufficient_domains": [],
   "weak_or_quiet_domains": [
    "D6"
@@ -1135,31 +1202,35 @@
   ]
  },
  "dropped_claims": {
-  "total_dropped": 14,
+  "total_dropped": 13,
+  "changed_since_first_pass": "Shadbala moved OUT of this list -- it is now computed (five components exactly, Cheshta approximated and flagged). Yong Shen also moved out: it is now computed under three named schools and reported as an unresolved three-way split rather than withheld.",
   "by_reason": {
    "no_validated_method": [
-    "Jyotisha Shadbala (all six strength components)",
     "Tibetan Mewa (sme ba)",
     "Tibetan Parkha",
     "Tibetan life force (srog)",
     "Tibetan body force (lus)",
     "Tibetan power (dbang thang)",
     "Tibetan wind-horse (rlung rta)",
-    "Tibetan annual obstacles"
+    "Tibetan annual relations and obstacles"
    ],
    "no_classical_source": [
     "Maya day-sign personality meaning for 8 Caban",
     "Maya Haab month symbolism for 10 Muwan"
    ],
-   "school_dependent_and_unresolvable_here": [
-    "BaZi Useful God (Yong Shen) / favourable element",
-    "a single BaZi hour pillar (civil and true-solar schools disagree)"
+   "computed_but_deliberately_not_collapsed_to_one_answer": [
+    "a single BaZi hour pillar (civil and true-solar schools disagree; both reported)",
+    "a single BaZi Useful God (three named schools give non-overlapping answers; all reported)"
    ],
    "duplicate_of_another_cluster": [
     "Western whole-sign house occupancy as a second vote alongside Jyotisha",
     "Zodiacal Releasing as a second Western timing vote alongside profection"
    ]
   },
+  "also_excluded_from_voting_though_computed": [
+   "Shadbala -- refines the Jyotisha cluster from inside it, never counted as a separate vote",
+   "D60 Shastiamsa -- sensitive within the stated +/-30 s uncertainty, so unusable for this birth time"
+  ],
   "barnum_filter_note": "Claims that would fit most people -- 'you are sometimes introverted', 'you value honesty', 'you have untapped potential' -- were not generated, because every sentence in the reading is required to cite a computed datum and a mapping rule."
  },
  "standing_caveat": "This is computed symbolic corroboration among traditional systems. It is not a validated forecast, not evidence of causation, and carries no medical, lifespan, fertility, financial or legal conclusion."

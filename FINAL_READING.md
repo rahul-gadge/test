@@ -36,9 +36,9 @@ Every statement below traces to a computed value in `MASTER_DATASET.json` and a 
 
 ## 2. Verification
 
-**30 material data were independently verified. Zero failures. Zero alerts.**
+**43 material data were independently verified across three engines. Zero failures. Zero alerts.**
 
-- **Swiss Ephemeris vs JPL DE440s (Skyfield):** largest disagreement across ten bodies was **0.0026 arcseconds** — about 4,000 times inside the 0.01° alert threshold.
+- **Three independent engines, not two.** Swiss Ephemeris vs JPL DE440s (Skyfield) agree to **0.0026″**. A third path — the **Moshier analytic ephemeris**, which carries no data files and is mathematically independent of both the compressed-JPL `.se1` files *and* of DE440s — agrees to **0.52″** at worst (the Moon). Three separate derivations, sub-arcsecond.
 - **A frame error was caught before any claim rested on it.** The first comparison showed a *constant* 14.168″ offset on every body — the signature of a reference-frame mismatch, not an ephemeris difference. It was identified as the nutation in longitude (Δψ = −14.168017″ at this instant) and the frames were matched. Agreement then fell to 0.0026″. The two engines were never averaged.
 - **Solar terms cross-checked by two genuinely independent algorithms:** Swiss Ephemeris solar-longitude crossings vs lunar_python's own routine agreed to **under one second** on Xiaohan, Dahan and Lichun.
 - **The Maya conversion was validated against an external anchor:** the same code reproduces 2012-12-21 = 13.0.0.0.0, 4 Ahau 3 Kankin.
@@ -47,13 +47,44 @@ Every statement below traces to a computed value in `MASTER_DATASET.json` and a 
 
 **Engine independence, stated honestly.** Swiss Ephemeris files descend from a JPL integration (DE431 lineage) and Skyfield here reads DE440s. These are *not* fully independent in data lineage — they are separate code paths and separate DE releases, and that is what their agreement demonstrates. The solar-term and Maya cross-checks *are* genuinely independent. **py-iztro was deliberately not run alongside iztro**, because it wraps the same logic and would have produced a fake second opinion.
 
-**Not computed, and therefore not used:** Jyotisha Shadbala (no validated implementation); Tibetan Mewa, Parkha, and all personal-force calculations (no validated lineage anchors); the BaZi Useful God (school-dependent, and the hour pillar itself is unresolved); any Maya day-sign personality meaning (no classical or living-lineage source). **14 candidate claims were dropped** — 8 for having no validated method, 2 for having no classical source, 2 as unresolvable school disputes, and 2 as duplicates of another cluster's vote.
+**Since the first pass, two of the four gaps have been closed.** Shadbala is now computed — five of its six components from exact classical formulas, with Cheshta Bala flagged as an approximation and totals given both with and without it. The BaZi Useful God is now computed **under three named schools**, which turns out to be more informative than the single answer I withheld (see section 5). A validation gate on the sixteen divisional charts caught a genuine bug in my own code: `int(lon // (30/9))` mis-floors on exact boundaries because 30/9 is not representable in binary, so 30.000° returned the 9th navamsa instead of the 10th. Fixed by multiplying first.
+
+**Still not computed, and still not used:** Tibetan Mewa, Parkha and all personal-force calculations (no validated lineage anchors); any Maya day-sign personality meaning (no classical or living-lineage source). **13 claims remain withheld** — 7 Tibetan components with no validated lineage anchor, 2 Maya meanings with no classical source, 2 deliberately left as school splits rather than collapsed to one answer (the hour pillar and the Useful God), and 2 duplicates of another cluster's vote. Two further items are computed but excluded from voting: Shadbala, which refines the Jyotisha cluster from inside it, and D60, which is unusable at this time precision.
 
 ---
 
+
+### What survives a change of school
+
+The point of hardening the data was not more decimal places — the astronomy was already 0.0026″, far past astrological relevance. It was to find out **which of a practitioner's convention choices actually move a conclusion in this chart.** Twelve ayanamshas, twelve house systems, five sunrise conventions, three combustion tables and geocentric-vs-topocentric were each computed in full.
+
+**Survives everything — state these firmly:**
+
+- **The Lagna is Dhanu under all twelve ayanamshas**, across an 8.37° spread from Djwhal Khul to Sassanian.
+- **The Vimshottari starting lord is Mercury under all twelve** — so the entire dasha timeline, including the current Venus–Jupiter period, is ayanamsha-independent. That is a much stronger result than I could claim in the first pass.
+- **Nocturnal sect holds under all five sunrise conventions** (they span only 3.96 minutes).
+- **No planet is combust** under BPHS, Surya Siddhanta or Western orbs — unanimous.
+- **Fifteen of the sixteen vargas are stable** at your stated ±30 s.
+
+**Does not survive — hedge these, or name your school:**
+
+- **The D10 Lagna changes under seven of the twelve ayanamshas.** Combined with its 1.86-minute boundary distance, the D10 is the single most fragile thing in your chart. Any career claim drawn from it is doubly contingent.
+- **D60 is unusable.** It flips *within* the ±30 s rounding window itself. Fifteen vargas survive your time precision; the Shastiamsa does not, and no honest reading should use it here.
+- **Mars moves from the 12th house to the 11th in every quadrant system** (Placidus, Koch, Campanus, Regiomontanus, Alcabitius, Porphyry, Topocentric, Krusinski). It sits at 1°48′ Sagittarius — inside the sign but outside the cusp. A whole-sign reader and a Placidus reader will disagree about Mars, and that is a convention, not a fact.
+- **The Moon's topocentric position differs from its geocentric position by 38.6′**, enough to move six of the finer vargas (D12, D24, D30, D40, D45, D60). Geocentric is declared as primary here, since that is what these traditions assume — but a claim about the Moon in those six vargas is convention-dependent.
+- **Saturn changes sign under at least one ayanamsha.** It sits at 29°14′, the last degree of Vrishabha.
+
+The full tables are in `PRECISION_REPORT.md`.
+
+### Panchanga
+
+Tithi **Krishna Dvitiya** (waning, #17) · Vara **Ravivara / Sunday** (lord Sun — the Vedic day begins at sunrise, so the civil Monday does not apply) · Nakshatra **Ashlesha pada 3** · Yoga **Ayushman** · Karana **Gara**.
+
 ## 3. Divergence rate — before any positive theme
 
-**3 of 9 domains diverge (33.3 %).** One further domain is quiet. Only 5 of 9 carry a convergent theme, and in every one of those five the convergence is about *prominence*, not about outcome.
+**4 of 9 domains diverge (44.4 %).** One further domain is quiet. Only 4 of 9 carry a convergent theme, and in every one the convergence is about *prominence*, not about outcome.
+
+> **The divergence rate went UP when the data got better.** In the first pass it was 3 of 9. Computing Shadbala moved **D7 (Health/routine) from STRONG to DIVERGENT**: Jyotisha's own strength arithmetic puts Saturn — the graha sitting in house 6 — **last of the seven and below its classical minimum**, which contradicts Zi Wei's bright Sun in the health palace. More rigour found more disagreement, not less. That is the expected direction when you stop letting vague agreement stand in for real agreement.
 
 Before the agreements are worth anything, one structural finding has to be stated, because it would otherwise inflate everything that follows:
 
@@ -75,7 +106,7 @@ That is a real, material disagreement between two of your three primary clusters
 
 ## 4. Strongest cross-cultural themes
 
-**All five of these are STRONG on prominence with mixed polarity.** That distinction is the whole point: three traditions independently marking an area as *significant* is not the same as three traditions predicting it will go *well*. None of the five carries a directional claim.
+**All four of these are STRONG on prominence with mixed polarity.** That distinction is the whole point: three traditions independently marking an area as *significant* is not the same as three traditions predicting it will go *well*. None of the five carries a directional claim.
 
 ### D1 · Self / identity — STRONG (prominence), polarity mixed in all three clusters
 
@@ -84,6 +115,8 @@ Three unrelated mechanisms each place the anchor of your identity somewhere effo
 - **Jyotisha:** Lagna is Dhanu 11°33′ in Mula pada 4. Its lord Jupiter is *exalted* — but sits in the 8th house and is retrograde.
 - **Western:** Ascendant Capricorn 5°27′; its ruler Saturn is in the 6th house, retrograde, holds triplicity dignity (score 3) — and is the malefic **contrary to sect** in a night chart, its least comfortable condition.
 - **Sinic:** Day Master 癸 Gui (yin Water) computes as *moderately weak* (support ratio 0.427), rooted only in the month branch 丑, which stores 癸 as a hidden stem rather than exposing it. Zi Wei places 貪狼 (Greedy Wolf) at brightness +3 in the Ming palace.
+
+Shadbala sharpens this rather than softening it: the Lagna lord Jupiter ranks **second strongest of the seven at 8.19 rupas against a 6.5 requirement**, so it is genuinely strong in absolute terms — and still sits in a dusthana.
 
 The convergent theme is that the significator of "you" is dignified or capable in principle but positioned where it has to work indirectly. Note the two clusters disagree on *which* planet that even is — Jupiter in Jyotisha, Saturn in the Western chart — which is why the theme is about placement, not about a planet.
 
@@ -98,14 +131,6 @@ Three systems, three mechanisms, one shape: career registers as a high-prominenc
 ### D5 · Family / roots / home — STRONG (prominence)
 
 Jyotisha's 4th lord Jupiter is exalted but in the 8th; the Western 4th ruler Mars — malefic *of* sect, so not the harder one — is in the 12th; Zi Wei's property palace 田宅 carries 天梁 at +2 with **化祿, the prosperity transformation of your 壬 birth year**. The Zi Wei signal leans positive where the other two read as displaced; no cluster contradicts another outright, so this is agreement on prominence only.
-
-### D7 · Health and daily routine — STRONG (prominence)
-
-- **Jyotisha:** Sarvashtakavarga house 6 = **37 bindus, joint highest**; the house holds Saturn (29°14′ Vrishabha, retrograde) and Rahu; its lord Venus is in the 12th, satisfying a declared **Vipareeta Raja Yoga**.
-- **Western:** house 6 holds Saturn — retrograde, with triplicity dignity, and **contrary to sect**. The **Lot of Fortune**, which governs body and circumstance, also falls in house 6.
-- **Sinic:** the health palace 疾厄 holds 太陽 at +2.
-
-Read this as *routine, regimen and work-discipline being a structurally loaded area of the chart*. **No medical inference is drawn, and none should be.** This protocol makes no diagnostic, prognostic or health-outcome claim, and a symbolic system is not evidence about your body.
 
 ### D9 · Fortune / spirituality / worldview — STRONG (prominence)
 
@@ -133,6 +158,21 @@ Your longitude is 4.24° west of the IST meridian (−16.97 min) and the equatio
 
 Two of the three conventions give 乙卯, and that is worth knowing, but it is not a majority verdict — schools are not votes. The branch relations change too: under 寅 you additionally get a 寅-巳 harm *and* a partial 寅-巳-申 punishment that simply do not exist under 卯. What *both* schools agree on: the year (壬午), month (癸丑) and day (癸巳) pillars, the 癸 yin-Water Day Master, and its "moderately weak" strength label (0.427 civil vs 0.405 true-solar). **Anything resting on the hour pillar alone is low confidence. Anything resting on the other three is not.**
 
+
+### The BaZi favourable element splits three ways
+
+In the first pass I declined to name a Useful God (用神). Computing it under three named schools shows why that was the right call — and is more useful than the refusal:
+
+| School | Favourable elements | Hour-dependent? |
+|---|---|---|
+| 扶抑 Fu Yi (support / suppress) | **Water, Metal** | yes |
+| 調候 Tiao Hou (climate regulation) | **Fire** | no |
+| 通關 Tong Guan (bridging) | **Wood** | yes |
+
+**Three schools, three answers, zero overlap.** Fu Yi supports a moderately weak Day Master with its own element and its resource. Tiao Hou reads 癸 born in the 丑 month as frozen water needing 丙 to warm it. Tong Guan bridges the heavy Water–Fire control clash with Wood. Two of the three additionally depend on the hour pillar, which is itself unresolved.
+
+Any practitioner who hands you a single favourable element for this chart has silently picked a school. Ask which one.
+
 ### D3 · Wealth — DIVERGENT (prominence conflict: Jyotisha vs Sinic)
 
 - **Jyotisha says quiet:** Sarvashtakavarga house 2 = **21 bindus, the second lowest**; the 2nd lord Saturn is in the 6th; the 11th lord Venus is in the 12th; and the declared 2nd/11th-lord **Dhana Yoga is absent** — the two lords are not conjunct.
@@ -148,13 +188,25 @@ One cluster reads this as a low-emphasis area; another reads it as a high-amplit
 
 This is the starkest contradiction in the whole chart: your weakest house by Jyotisha's own arithmetic is your strongest palace by Zi Wei's. Anyone who tells you these "really agree" is choosing one and hiding the other.
 
-### D8 · Mind / education / craft — DIVERGENT (polarity: Western vs Sinic)
+### D7 · Health and daily routine — DIVERGENT (polarity: Jyotisha vs Sinic)
+
+This one changed when Shadbala was computed, and the change is instructive.
+
+- **Jyotisha marks it prominent but weak.** Sarvashtakavarga gives house 6 **37 bindus, joint highest** of the twelve. But the graha sitting there is Saturn, and Shadbala puts **Saturn last of the seven at 3.77 rupas against a 5.0 requirement** — one of only two planets that fail their classical minimum. Its lord Venus is in the 12th, satisfying a **Vipareeta Raja Yoga**.
+- **Western agrees on the loading:** house 6 holds Saturn, retrograde, with triplicity dignity but **contrary to sect**; the **Lot of Fortune**, which governs body and circumstance, also falls in house 6. Two of the seven Hermetic lots land there — Fortune and Courage.
+- **Zi Wei says the opposite:** the health palace 疾厄 holds **太陽 at +2**, a bright benefic placement.
+
+A high-bindu house occupied by the chart's weakest planet, against a bright star in the corresponding palace. These do not reconcile, and averaging them would be dishonest.
+
+Read the whole domain as *routine, regimen and work-discipline being a structurally loaded area*. **No medical inference is drawn, and none should be.** This protocol makes no diagnostic, prognostic or health-outcome claim, and a symbolic system is not evidence about your body.
+
+### D8 · Mind / education / craft — DIVERGENT (Jyotisha and Western vs Sinic)
 
 - **Western says strong:** Mercury and Saturn are in **mutual reception by domicile** (Mercury in Capricorn, Saturn in Gemini), and **all seven dispositor chains terminate in that pair** — it is the structural terminus of your entire chart. Disciplined, technical, structure-building intelligence.
 - **BaZi says under-resourced:** the Resource element (印), which governs learning support, is **Metal at 0.9 units — the weakest of your five elements**, present only as hidden 辛 in 丑 and hidden 庚 in 巳.
-- Jyotisha is mixed: Mercury retrograde in house 1 in Purva Ashadha; Jupiter exalted in the 8th (research, hidden matters). Zi Wei places 左輔 with **化科** — the academic transformation — but in the Friends palace 仆役 rather than in a self, career or study palace.
+- **Jyotisha now sides with the Western chart, by its own arithmetic:** Shadbala makes **Mercury the strongest graha in the chart at 8.61 rupas against a 7.0 requirement**. So the Mercury–Saturn pair that the Hellenistic chart calls its structural terminus is, in Jyotisha's own strength reckoning, a pairing of the chart's **strongest and weakest planets**. That sharpens the divergence rather than settling it. Mercury is retrograde in house 1 in Purva Ashadha; Jupiter is exalted in the 8th. Zi Wei places 左輔 with **化科** — the academic transformation — but in the Friends palace 仆役 rather than in a self, career or study palace.
 
-The Western chart says the craft structure is the best-built thing you have; the BaZi says the fuel supply for it is the thinnest. Both are computed, and they point opposite ways.
+Two clusters now say the craft structure is the best-built thing you have; the BaZi says the fuel supply for it is the thinnest. Both are computed, and they point opposite ways. Note that Jyotisha and Western reaching the same conclusion here is **not** double-counting — one is a Shadbala total, the other a reception-and-dispositor argument, and neither derives from the shared whole-sign house frame.
 
 ---
 
@@ -179,9 +231,9 @@ Computed axes (Jyotisha, Western and Sinic only):
 | **T1 Leadership / visibility** | **contested** | Zi Wei elevated (紫微 +2 with 化權; 七殺 +3 in career); Western and Jyotisha both damped (Ascendant ruler contrary to sect and retrograde, empty 10th, three planets in the 12th) |
 | **T2 Drive / initiative** | present, privatised | Mars in its own sign but in the 12th (Jyotisha); Mars is the malefic *of sect* and applies to a sextile with the Sun at 2.32° — though by whole sign the two are in **aversion**, so the degree-based aspect is the weaker testimony (Western) |
 | **T3 Nurturing / service** | **high, all three clusters** | Moon in own sign Karka; Moon is the sect light; Lot of Fortune in the 6th; SAV house 6 joint-highest at 37 |
-| **T4 Intellect / craft** | high but under-fuelled | Mercury–Saturn mutual reception as chart terminus; Mercury in house 1; Resource element weakest at 0.9 |
+| **T4 Intellect / craft** | high but under-fuelled | Mercury–Saturn mutual reception as chart terminus; **Mercury is the strongest graha by Shadbala (8.61 rupas)**; but the BaZi Resource element is weakest at 0.9 |
 | **T5 Adaptability** | **high, all three clusters** | 貪狼 +3 and 破軍 +3; yin-Water Day Master; dual-sign Lagna with three of the seven true grahas retrograde (Mercury, Jupiter, Saturn — the nodes are retrograde by definition) |
-| **T6 Discipline / structure** | high with friction | Capricorn Ascendant and Saturn in triplicity and mutual reception; but Saturn retrograde at 29°14′, the final degree, sharing house 6 with Rahu 17° away |
+| **T6 Discipline / structure** | high with friction | Capricorn Ascendant, Saturn in triplicity and in mutual reception; but Saturn is **last of the seven by Shadbala (3.77 rupas, below its 5.0 minimum)**, retrograde at 29°14′, sharing house 6 with Rahu |
 
 **Attributed symbolism — no domain weight, no grade changes:**
 
@@ -211,9 +263,11 @@ The exact overlap of the two windows is **2026-04-13 → 2027-01-20**. Both poin
 
 ## 9. Closing frame
 
-What you have here is a reproducible calculation and an honest tally of where six traditional symbolic systems corroborate one another and where they contradict one another. The arithmetic is verified: two ephemeris engines agree to 0.0026 arcseconds, two independent algorithms agree on the solar terms to under a second, and every structural invariant passes.
+What you have here is a reproducible calculation and an honest tally of where six traditional symbolic systems corroborate one another and where they contradict one another. The arithmetic is verified: three ephemeris engines agree sub-arcsecond, two independent algorithms agree on the solar terms to under a second, every structural invariant passes, and the conclusions have been tested against twelve ayanamshas, twelve house systems and five sunrise conventions.
 
 **None of that makes any of it a validated method of prediction.** Verified inputs and correct arithmetic produce a verified chart, not a verified forecast. The agreements above are agreements between interpretive traditions — several of which, as section 3 shows, are not even as independent of each other as they appear.
+
+And note which direction the extra rigour pushed things: measured divergence rose from 33 % to 44 % once Shadbala was computed. Better data found *more* disagreement between these traditions, not less.
 
 Three things this document deliberately does not do: it names no favourable outcome, it makes no claim about health, lifespan, fertility, finances or legal matters, and it does not choose between schools where the schools genuinely disagree. Where your chart is ambiguous — the hour pillar, partnership, wealth, the fuel behind your craft — it is left ambiguous, because that is what the calculation actually says.
 

@@ -1,6 +1,6 @@
 {
  "schema": "six-culture-verified-chart/CALCULATION_MANIFEST/v2",
- "generated_utc": "2026-08-29T16:19:37.208493+00:00",
+ "generated_utc": "2026-08-29T20:42:18.802368+00:00",
  "runtime": {
   "python": "3.11.15",
   "os": "Linux-6.18.44-fc-v22-x86_64-with-glibc2.39",
@@ -38,11 +38,11 @@
   }
  },
  "source_checksums": {
-  "build.py": "31cff855d395abdaccd1686834ca4451d67b9a3817b9e715e4df326981aa9d49",
+  "build.py": "67499760c03111fd6d26ec6b03205390e336d3bad30e40b457935e6b29000faf",
   "chart/core.py": "371c9c04863a0a86716c6c563b377e1c27e85e173a4ebb14624427c7bb98a007",
   "chart/jyotisha.py": "d6cec0f741fb67463f6daba5347c4a7a4252389f570f9abbe93f444032219b9f",
-  "chart/sinic.py": "88455a3355d14e6effc1f0e8f2a6f4065c0f4734fec884e1f8be6e8da7712bdc",
-  "chart/western.py": "a9a9f8db91de19d1a2e955ddf9d43fa208a7a0403b7c2a7cb1a42966416deded",
+  "chart/sinic.py": "6ebf833fd18dc41d85d1f7c51dc547fac2aa0194c8258617a3cfa9d994d6e70a",
+  "chart/western.py": "86ee4eb2e39972ffacfcd921190e99f1faf0f442f30e11a09d7be01c1d2db2a2",
   "chart/calendars.py": "3680bd7e72149d358528a07f32cc39f4bccd67584007c212fa3f0d55bf07e048",
   "chart/validate.py": "9cee97e0e2fd4e4da91fe397fb95c8e916a5a973a556a3837b74ea46074d008c"
  },

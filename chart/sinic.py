@@ -256,3 +256,75 @@ def annual_pillars(day_stem, years):
                     "ten_god_stem_en": TEN_GOD_EN.get(ten_god_of(day_stem, st)),
                     "boundary_note": "BaZi year runs Lichun-to-Lichun, not Jan 1 to Jan 1."})
     return out
+
+
+TIAO_HOU = {
+    # Qiong Tong Bao Jian climate prescriptions for a Gui (yin Water) day master.
+    ("癸", "子"): ("丙", "warm the frozen water"), ("癸", "丑"): ("丙", "warm the frozen water"),
+    ("癸", "寅"): ("辛", "generate the source"), ("癸", "卯"): ("庚", "generate the source"),
+    ("癸", "辰"): ("丙", "warmth with drainage"), ("癸", "巳"): ("辛", "resist the heat"),
+    ("癸", "午"): ("庚", "resist the heat"), ("癸", "未"): ("庚", "resist the heat"),
+    ("癸", "申"): ("丁", "temper the metal"), ("癸", "酉"): ("辛", "refine"),
+    ("癸", "戌"): ("辛", "generate the source"), ("癸", "亥"): ("庚", "generate the source"),
+}
+
+
+def yong_shen_by_school(pillars, tally, strength):
+    """Favourable-element judgement under each NAMED school, side by side.
+
+    These schools genuinely disagree for this chart, so no single answer is selected.
+    """
+    dm = pillars["day"]["stem"]; dme = STEM_EL[dm]
+    mb = pillars["month"]["branch"]
+    weak = strength["support_ratio"] < 0.5
+
+    fu_yi = ([dme, PRODUCED_BY[dme]] if weak
+             else [PRODUCES[dme], CONTROLS[dme], CONTROLLED_BY[dme]])
+    th = TIAO_HOU.get((dm, mb))
+    tiao_hou = [STEM_EL[th[0]]] if th else []
+
+    # Tong Guan: bridge the two heaviest opposed elements, if they are in a control relation.
+    ordered = sorted(tally.items(), key=lambda kv: -kv[1])
+    tong_guan, tg_why = [], "no dominant control clash to bridge"
+    for i in range(len(ordered)):
+        for j in range(len(ordered)):
+            a, b = ordered[i][0], ordered[j][0]
+            if CONTROLS.get(a) == b and ordered[i][1] >= 2.0 and ordered[j][1] >= 2.0:
+                bridge = PRODUCES[a]
+                if bridge == b:
+                    continue
+                tong_guan = [PRODUCED_BY[b]] if PRODUCED_BY[b] != a else []
+                tg_why = f"{a} controls {b}, both heavy; the bridging element is {PRODUCED_BY[b]}"
+                break
+        if tong_guan:
+            break
+
+    schools = {
+        "扶抑 Fu Yi (support / suppress)": {
+            "favourable_elements": fu_yi,
+            "reasoning": (f"Day Master {dm} ({dme}) computes as {strength['strength_label']} "
+                          f"(ratio {strength['support_ratio']}), so the school supports it with "
+                          f"its own element and its resource."),
+            "depends_on_hour_pillar": True},
+        "調候 Tiao Hou (climate regulation)": {
+            "favourable_elements": tiao_hou,
+            "reasoning": (f"{dm} born in the {mb} month: the classical prescription is "
+                          f"{th[0]} -- {th[1]}." if th else "no prescription found"),
+            "depends_on_hour_pillar": False},
+        "通關 Tong Guan (bridging)": {
+            "favourable_elements": tong_guan, "reasoning": tg_why,
+            "depends_on_hour_pillar": True},
+    }
+    picks = {k: set(v["favourable_elements"]) for k, v in schools.items() if v["favourable_elements"]}
+    agreed = set.intersection(*picks.values()) if len(picks) > 1 else set()
+    conflict = len(picks) > 1 and not agreed
+    return {
+        "schools": schools,
+        "elements_all_schools_agree_on": sorted(agreed),
+        "schools_conflict": conflict,
+        "verdict": ("NOT RESOLVED -- the named schools select different favourable elements for "
+                    "this chart, and the Fu Yi answer additionally depends on the hour pillar, "
+                    "which is itself school-divergent here. Reported side by side rather than "
+                    "collapsed into one answer."
+                    if conflict else "schools converge"),
+    }
