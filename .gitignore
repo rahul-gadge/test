@@ -1,0 +1,7 @@
+.venv/
+node_modules/
+__pycache__/
+*.pyc
+# Ephemeris data files are large binaries fetched by scripts/fetch_ephemeris.sh.
+# Their SHA-256 checksums are recorded in CALCULATION_MANIFEST.json.
+ephe/

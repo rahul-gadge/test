@@ -1,0 +1,178 @@
+{
+  "target": "2026-08-29",
+  "birth_year_stem": "ren",
+  "natal_mutagens": [
+    {
+      "star": "officer",
+      "star_zh": "左辅",
+      "mutagen": "C",
+      "mutagen_zh": null,
+      "palace": "friends",
+      "palace_zh": "仆役",
+      "branch": "mao"
+    },
+    {
+      "star": "general",
+      "star_zh": "武曲",
+      "mutagen": "D",
+      "mutagen_zh": null,
+      "palace": "surface",
+      "palace_zh": "迁移",
+      "branch": "chen"
+    },
+    {
+      "star": "emperor",
+      "star_zh": "紫微",
+      "mutagen": "B",
+      "mutagen_zh": null,
+      "palace": "spouse",
+      "palace_zh": "夫妻",
+      "branch": "shen"
+    },
+    {
+      "star": "sage",
+      "star_zh": "天梁",
+      "mutagen": "A",
+      "mutagen_zh": null,
+      "palace": "property",
+      "palace_zh": "田宅",
+      "branch": "chou"
+    }
+  ],
+  "decadal": {
+    "index": 10,
+    "heavenlyStem": "ren",
+    "earthlyBranch": "子",
+    "palaceNames": [
+      "福德",
+      "田宅",
+      "官禄",
+      "仆役",
+      "迁移",
+      "疾厄",
+      "财帛",
+      "子女",
+      "夫妻",
+      "兄弟",
+      "命宫",
+      "父母"
+    ],
+    "mutagen": [
+      "天梁",
+      "紫微",
+      "左辅",
+      "武曲"
+    ],
+    "age": {
+      "index": 2,
+      "nominalAge": 25,
+      "name": "小限",
+      "heavenlyStem": "jia",
+      "earthlyBranch": "chen",
+      "palaceNames": [
+        "夫妻",
+        "兄弟",
+        "命宫",
+        "父母",
+        "福德",
+        "田宅",
+        "官禄",
+        "仆役",
+        "迁移",
+        "疾厄",
+        "财帛",
+        "子女"
+      ],
+      "mutagen": [
+        "廉贞",
+        "破军",
+        "武曲",
+        "太阳"
+      ]
+    }
+  },
+  "decadal_zh": {
+    "palaceNames": [
+      "福德",
+      "田宅",
+      "官禄",
+      "仆役",
+      "迁移",
+      "疾厄",
+      "财帛",
+      "子女",
+      "夫妻",
+      "兄弟",
+      "命宫",
+      "父母"
+    ],
+    "mutagen": [
+      "天梁",
+      "紫微",
+      "左辅",
+      "武曲"
+    ]
+  },
+  "yearly": {
+    "index": 4,
+    "heavenlyStem": "丙",
+    "earthlyBranch": "午",
+    "palaceNames": [
+      "财帛",
+      "子女",
+      "夫妻",
+      "兄弟",
+      "命宫",
+      "父母",
+      "福德",
+      "田宅",
+      "官禄",
+      "仆役",
+      "迁移",
+      "疾厄"
+    ],
+    "mutagen": [
+      "天同",
+      "天机",
+      "文昌",
+      "廉贞"
+    ]
+  },
+  "yearly_zh": {
+    "palaceNames": [
+      "财帛",
+      "子女",
+      "夫妻",
+      "兄弟",
+      "命宫",
+      "父母",
+      "福德",
+      "田宅",
+      "官禄",
+      "仆役",
+      "迁移",
+      "疾厄"
+    ],
+    "mutagen": [
+      "天同",
+      "天机",
+      "文昌",
+      "廉贞"
+    ]
+  },
+  "natal_palace_at_decadal_index": {
+    "name": "spirit",
+    "name_zh": "福德",
+    "majorStars": [
+      "廉贞",
+      "天相"
+    ]
+  },
+  "natal_palace_at_yearly_index": {
+    "name": "wealth",
+    "name_zh": "财帛",
+    "majorStars": [
+      "破军"
+    ]
+  }
+}

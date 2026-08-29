@@ -1,0 +1,46 @@
+{
+  "schema": "six-culture-verified-chart/BIRTH_INPUT/v2",
+  "original_user_entered": {
+    "date_of_birth": "20 January 2003",
+    "time_of_birth": "5:24 AM (05:24), IST",
+    "time_certainty": "Exact minutes",
+    "birthplace": "Warud, Maharashtra, India (Amravati district)",
+    "gender": "Male",
+    "current_residence": "Ghaziabad, Uttar Pradesh, India",
+    "calendar_note_supplied_by_user": null,
+    "dst_or_tz_uncertainty_note_supplied_by_user": null
+  },
+  "normalized": {
+    "calendar": "Gregorian (proleptic not required; date is post-1752 adoption everywhere relevant)",
+    "civil_date_local": "2003-01-20",
+    "civil_time_local_24h": "05:24:00",
+    "timezone_iana": "Asia/Kolkata",
+    "gender": "male",
+    "time_certainty_class": "exact_to_the_minute",
+    "time_uncertainty_seconds": 30,
+    "time_uncertainty_basis": "A time recorded to whole minutes is truthful to a +/-30 s rounding interval. No rectification is applied."
+  },
+  "location_primary": {
+    "name": "Warud (town), Warud tehsil, Amravati district, Maharashtra, India",
+    "latitude_deg": 21.4737672,
+    "longitude_deg": 78.2569898,
+    "elevation_m_approx": 340,
+    "elevation_note": "Approximate regional value. Not used: all traditions here use geocentric positions, and elevation does not enter the Ascendant, house cusps, or any pillar.",
+    "coordinate_source": "OpenStreetMap Nominatim, relation 14221227, 'Warud (rural), Warud, Amravati, Maharashtra, 444906, India', queried 2026-08-29",
+    "postcode": "444906"
+  },
+  "location_alternate_candidate": {
+    "name": "Warud, Chandur Railway tehsil, Amravati district, Maharashtra, India",
+    "latitude_deg": 20.8995723,
+    "longitude_deg": 77.9013313,
+    "coordinate_source": "OpenStreetMap Nominatim, relation 14216257",
+    "why_recorded": "A second settlement named Warud exists in the same district, ~68 km SSW. The user named the district but not the tehsil. Treated as a coordinate-sensitivity case, not as the primary."
+  },
+  "current_residence": {
+    "name": "Ghaziabad, Uttar Pradesh, India",
+    "latitude_deg": 28.6692,
+    "longitude_deg": 77.4538,
+    "timezone_iana": "Asia/Kolkata",
+    "coordinate_source": "Standard gazetteer value; used only for relocated solar-return comparison."
+  }
+}

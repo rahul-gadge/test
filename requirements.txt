@@ -1,0 +1,16 @@
+certifi==2026.7.22
+cffi==2.1.1
+convertdate==2.4.1
+flatbuffers==25.12.19
+h3==4.5.0
+jplephem==2.24
+lunar_python==1.4.8
+numpy==2.4.6
+pycparser==3.0
+PyMeeus==0.5.12
+pyswisseph==2.10.3.2
+sgp4==2.27
+skyfield==1.55
+timezonefinder==8.3.0
+timezonefinder-data==1.2026.3
+tzdata==2026.3

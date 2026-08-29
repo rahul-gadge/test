@@ -1,0 +1,734 @@
+{
+  "implementation": "iztro (canonical JavaScript)",
+  "version": "2.6.0",
+  "input": {
+    "solarDate": "2003-01-20",
+    "timeIndex": 3,
+    "gender": "male",
+    "fixLeap": true
+  },
+  "meta": {
+    "solarDate": "2003-01-20",
+    "lunarDate": "二〇〇二年腊月十八",
+    "chineseDate": "ren woo - gui chou - gui si - yi mao",
+    "time": "Rabbit hour",
+    "timeRange": "05:00~07:00",
+    "sign": "aquarius",
+    "zodiac": "horse",
+    "earthlyBranchOfSoulPalace": "xu",
+    "earthlyBranchOfBodyPalace": "chen",
+    "soul": "money",
+    "body": "impulsive",
+    "fiveElementsClass": "metal 4th"
+  },
+  "meta_zh": {
+    "lunarDate": "二〇〇二年腊月十八",
+    "chineseDate": "壬午 癸丑 癸巳 乙卯",
+    "soul": "禄存",
+    "body": "火星",
+    "fiveElementsClass": "金四局",
+    "sign": "水瓶座",
+    "zodiac": "马"
+  },
+  "palaces": [
+    {
+      "index": 0,
+      "name": "career",
+      "name_zh": "官禄",
+      "isBodyPalace": false,
+      "isOriginalPalace": true,
+      "heavenlyStem": "ren",
+      "earthlyBranch": "yin",
+      "majorStars": [
+        {
+          "name": "marshal",
+          "name_zh": "七杀",
+          "type": "major",
+          "brightness": "[+3]",
+          "mutagen": null
+        }
+      ],
+      "minorStars": [
+        {
+          "name": "fickle",
+          "name_zh": "地劫",
+          "type": "tough",
+          "brightness": "",
+          "mutagen": null
+        }
+      ],
+      "adjectiveStars": [
+        "sickly",
+        "intercepted",
+        "instigated"
+      ],
+      "changsheng12": "dissipated",
+      "boshi12": "consumer",
+      "jiangqian12": "insidious",
+      "suiqian12": "sinister",
+      "decadal": {
+        "range": [
+          44,
+          53
+        ],
+        "heavenlyStem": "ren",
+        "earthlyBranch": "yin"
+      },
+      "ages": [
+        11,
+        23,
+        35,
+        47,
+        59,
+        71,
+        83,
+        95,
+        107,
+        119
+      ]
+    },
+    {
+      "index": 1,
+      "name": "friends",
+      "name_zh": "仆役",
+      "isBodyPalace": false,
+      "isOriginalPalace": false,
+      "heavenlyStem": "gui",
+      "earthlyBranch": "mao",
+      "majorStars": [
+        {
+          "name": "fortunate",
+          "name_zh": "天同",
+          "type": "major",
+          "brightness": "[-1]",
+          "mutagen": null
+        }
+      ],
+      "minorStars": [
+        {
+          "name": "officer",
+          "name_zh": "左辅",
+          "type": "soft",
+          "brightness": "",
+          "mutagen": "C"
+        },
+        {
+          "name": "assistant",
+          "name_zh": "天魁",
+          "type": "soft",
+          "brightness": "",
+          "mutagen": null
+        }
+      ],
+      "adjectiveStars": [
+        "cheerful",
+        "passionate",
+        "blessed",
+        "bottomless",
+        "wounded"
+      ],
+      "changsheng12": "embryo",
+      "boshi12": "general",
+      "jiangqian12": "passionate",
+      "suiqian12": "blessed",
+      "decadal": {
+        "range": [
+          54,
+          63
+        ],
+        "heavenlyStem": "gui",
+        "earthlyBranch": "mao"
+      },
+      "ages": [
+        12,
+        24,
+        36,
+        48,
+        60,
+        72,
+        84,
+        96,
+        108,
+        120
+      ]
+    },
+    {
+      "index": 2,
+      "name": "surface",
+      "name_zh": "迁移",
+      "isBodyPalace": true,
+      "isOriginalPalace": false,
+      "heavenlyStem": "jia",
+      "earthlyBranch": "chen",
+      "majorStars": [
+        {
+          "name": "general",
+          "name_zh": "武曲",
+          "type": "major",
+          "brightness": "[+3]",
+          "mutagen": "D"
+        }
+      ],
+      "minorStars": [
+        {
+          "name": "impulsive",
+          "name_zh": "火星",
+          "type": "tough",
+          "brightness": "[-3]",
+          "mutagen": null
+        }
+      ],
+      "adjectiveStars": [
+        "refined",
+        "gifted",
+        "lonely",
+        "gloomy",
+        "considery(Y)"
+      ],
+      "changsheng12": "molding",
+      "boshi12": "book",
+      "jiangqian12": "hapless",
+      "suiqian12": "sorrowing",
+      "decadal": {
+        "range": [
+          64,
+          73
+        ],
+        "heavenlyStem": "jia",
+        "earthlyBranch": "chen"
+      },
+      "ages": [
+        1,
+        13,
+        25,
+        37,
+        49,
+        61,
+        73,
+        85,
+        97,
+        109
+      ]
+    },
+    {
+      "index": 3,
+      "name": "health",
+      "name_zh": "疾厄",
+      "isBodyPalace": false,
+      "isOriginalPalace": false,
+      "heavenlyStem": "yi",
+      "earthlyBranch": "si",
+      "majorStars": [
+        {
+          "name": "sun",
+          "name_zh": "太阳",
+          "type": "major",
+          "brightness": "[+2]",
+          "mutagen": null
+        }
+      ],
+      "minorStars": [
+        {
+          "name": "aide",
+          "name_zh": "天钺",
+          "type": "soft",
+          "brightness": "",
+          "mutagen": null
+        }
+      ],
+      "adjectiveStars": [
+        "awarded",
+        "broken",
+        "heaven"
+      ],
+      "changsheng12": "born",
+      "boshi12": "gossip",
+      "jiangqian12": "perished",
+      "suiqian12": "illness",
+      "decadal": {
+        "range": [
+          74,
+          83
+        ],
+        "heavenlyStem": "yi",
+        "earthlyBranch": "si"
+      },
+      "ages": [
+        2,
+        14,
+        26,
+        38,
+        50,
+        62,
+        74,
+        86,
+        98,
+        110
+      ]
+    },
+    {
+      "index": 4,
+      "name": "wealth",
+      "name_zh": "财帛",
+      "isBodyPalace": false,
+      "isOriginalPalace": false,
+      "heavenlyStem": "bing",
+      "earthlyBranch": "woo",
+      "majorStars": [
+        {
+          "name": "rebel",
+          "name_zh": "破军",
+          "type": "major",
+          "brightness": "[+3]",
+          "mutagen": null
+        }
+      ],
+      "minorStars": [
+        {
+          "name": "spark",
+          "name_zh": "铃星",
+          "type": "tough",
+          "brightness": "[+3]",
+          "mutagen": null
+        }
+      ],
+      "adjectiveStars": [
+        "considery",
+        "dignified",
+        "lucky"
+      ],
+      "changsheng12": "infancy",
+      "boshi12": "happiness",
+      "jiangqian12": "capable",
+      "suiqian12": "initial",
+      "decadal": {
+        "range": [
+          84,
+          93
+        ],
+        "heavenlyStem": "bing",
+        "earthlyBranch": "woo"
+      },
+      "ages": [
+        3,
+        15,
+        27,
+        39,
+        51,
+        63,
+        75,
+        87,
+        99,
+        111
+      ]
+    },
+    {
+      "index": 5,
+      "name": "children",
+      "name_zh": "子女",
+      "isBodyPalace": false,
+      "isOriginalPalace": false,
+      "heavenlyStem": "ding",
+      "earthlyBranch": "wei",
+      "majorStars": [
+        {
+          "name": "advisor",
+          "name_zh": "天机",
+          "type": "major",
+          "brightness": "[-3]",
+          "mutagen": null
+        }
+      ],
+      "minorStars": [
+        {
+          "name": "scholar",
+          "name_zh": "文昌",
+          "type": "soft",
+          "brightness": "[0]",
+          "mutagen": null
+        },
+        {
+          "name": "artist",
+          "name_zh": "文曲",
+          "type": "soft",
+          "brightness": "[+2]",
+          "mutagen": null
+        }
+      ],
+      "adjectiveStars": [
+        "utopian"
+      ],
+      "changsheng12": "adolescence",
+      "boshi12": "illness",
+      "jiangqian12": "admired",
+      "suiqian12": "unlucky",
+      "decadal": {
+        "range": [
+          94,
+          103
+        ],
+        "heavenlyStem": "ding",
+        "earthlyBranch": "wei"
+      },
+      "ages": [
+        4,
+        16,
+        28,
+        40,
+        52,
+        64,
+        76,
+        88,
+        100,
+        112
+      ]
+    },
+    {
+      "index": 6,
+      "name": "spouse",
+      "name_zh": "夫妻",
+      "isBodyPalace": false,
+      "isOriginalPalace": false,
+      "heavenlyStem": "wu",
+      "earthlyBranch": "shen",
+      "majorStars": [
+        {
+          "name": "emperor",
+          "name_zh": "紫微",
+          "type": "major",
+          "brightness": "[+2]",
+          "mutagen": "B"
+        },
+        {
+          "name": "empress",
+          "name_zh": "天府",
+          "type": "major",
+          "brightness": "[+1]",
+          "mutagen": null
+        }
+      ],
+      "minorStars": [
+        {
+          "name": "horse",
+          "name_zh": "天马",
+          "type": "tianma",
+          "brightness": "",
+          "mutagen": null
+        },
+        {
+          "name": "ideologue",
+          "name_zh": "地空",
+          "type": "tough",
+          "brightness": "",
+          "mutagen": null
+        }
+      ],
+      "adjectiveStars": [
+        "senior",
+        "fancied",
+        "alone",
+        "serious"
+      ],
+      "changsheng12": "adulthood",
+      "boshi12": "wastrel",
+      "jiangqian12": "varied",
+      "suiqian12": "downcast",
+      "decadal": {
+        "range": [
+          104,
+          113
+        ],
+        "heavenlyStem": "wu",
+        "earthlyBranch": "shen"
+      },
+      "ages": [
+        5,
+        17,
+        29,
+        41,
+        53,
+        65,
+        77,
+        89,
+        101,
+        113
+      ]
+    },
+    {
+      "index": 7,
+      "name": "siblings",
+      "name_zh": "兄弟",
+      "isBodyPalace": false,
+      "isOriginalPalace": false,
+      "heavenlyStem": "ji",
+      "earthlyBranch": "you",
+      "majorStars": [
+        {
+          "name": "moon",
+          "name_zh": "太阴",
+          "type": "major",
+          "brightness": "[-2]",
+          "mutagen": null
+        }
+      ],
+      "minorStars": [],
+      "adjectiveStars": [
+        "attractive",
+        "honorable",
+        "gourmet"
+      ],
+      "changsheng12": "prime",
+      "boshi12": "ambush",
+      "jiangqian12": "listless",
+      "suiqian12": "tied",
+      "decadal": {
+        "range": [
+          114,
+          123
+        ],
+        "heavenlyStem": "ji",
+        "earthlyBranch": "you"
+      },
+      "ages": [
+        6,
+        18,
+        30,
+        42,
+        54,
+        66,
+        78,
+        90,
+        102,
+        114
+      ]
+    },
+    {
+      "index": 8,
+      "name": "soul",
+      "name_zh": "命宫",
+      "isBodyPalace": false,
+      "isOriginalPalace": false,
+      "heavenlyStem": "geng",
+      "earthlyBranch": "xu",
+      "majorStars": [
+        {
+          "name": "wolf",
+          "name_zh": "贪狼",
+          "type": "major",
+          "brightness": "[+3]",
+          "mutagen": null
+        }
+      ],
+      "minorStars": [
+        {
+          "name": "tangled",
+          "name_zh": "陀罗",
+          "type": "tough",
+          "brightness": "[+3]",
+          "mutagen": null
+        }
+      ],
+      "adjectiveStars": [
+        "talented",
+        "ageless",
+        "religious",
+        "solemn"
+      ],
+      "changsheng12": "weak",
+      "boshi12": "government",
+      "jiangqian12": "religious",
+      "suiqian12": "official",
+      "decadal": {
+        "range": [
+          4,
+          13
+        ],
+        "heavenlyStem": "geng",
+        "earthlyBranch": "xu"
+      },
+      "ages": [
+        7,
+        19,
+        31,
+        43,
+        55,
+        67,
+        79,
+        91,
+        103,
+        115
+      ]
+    },
+    {
+      "index": 9,
+      "name": "parents",
+      "name_zh": "父母",
+      "isBodyPalace": false,
+      "isOriginalPalace": false,
+      "heavenlyStem": "xin",
+      "earthlyBranch": "hai",
+      "majorStars": [
+        {
+          "name": "advocator",
+          "name_zh": "巨门",
+          "type": "major",
+          "brightness": "[+2]",
+          "mutagen": null
+        }
+      ],
+      "minorStars": [
+        {
+          "name": "helper",
+          "name_zh": "右弼",
+          "type": "soft",
+          "brightness": "",
+          "mutagen": null
+        },
+        {
+          "name": "money",
+          "name_zh": "禄存",
+          "type": "lucun",
+          "brightness": "",
+          "mutagen": null
+        }
+      ],
+      "adjectiveStars": [
+        "grateful",
+        "noble",
+        "psychic",
+        "peaceful"
+      ],
+      "changsheng12": "sick",
+      "boshi12": "doctor",
+      "jiangqian12": "robbed",
+      "suiqian12": "consumer",
+      "decadal": {
+        "range": [
+          14,
+          23
+        ],
+        "heavenlyStem": "xin",
+        "earthlyBranch": "hai"
+      },
+      "ages": [
+        8,
+        20,
+        32,
+        44,
+        56,
+        68,
+        80,
+        92,
+        104,
+        116
+      ]
+    },
+    {
+      "index": 10,
+      "name": "spirit",
+      "name_zh": "福德",
+      "isBodyPalace": false,
+      "isOriginalPalace": false,
+      "heavenlyStem": "ren",
+      "earthlyBranch": "zi",
+      "majorStars": [
+        {
+          "name": "judge",
+          "name_zh": "廉贞",
+          "type": "major",
+          "brightness": "[-1]",
+          "mutagen": null
+        },
+        {
+          "name": "minister",
+          "name_zh": "天相",
+          "type": "major",
+          "brightness": "[+3]",
+          "mutagen": null
+        }
+      ],
+      "minorStars": [
+        {
+          "name": "driven",
+          "name_zh": "擎羊",
+          "type": "tough",
+          "brightness": "[-3]",
+          "mutagen": null
+        }
+      ],
+      "adjectiveStars": [
+        "social",
+        "upset",
+        "frail"
+      ],
+      "changsheng12": "dead",
+      "boshi12": "sumo",
+      "jiangqian12": "disastery",
+      "suiqian12": "wastrel",
+      "decadal": {
+        "range": [
+          24,
+          33
+        ],
+        "heavenlyStem": "ren",
+        "earthlyBranch": "zi"
+      },
+      "ages": [
+        9,
+        21,
+        33,
+        45,
+        57,
+        69,
+        81,
+        93,
+        105,
+        117
+      ]
+    },
+    {
+      "index": 11,
+      "name": "property",
+      "name_zh": "田宅",
+      "isBodyPalace": false,
+      "isOriginalPalace": false,
+      "heavenlyStem": "gui",
+      "earthlyBranch": "chou",
+      "majorStars": [
+        {
+          "name": "sage",
+          "name_zh": "天梁",
+          "type": "major",
+          "brightness": "[+2]",
+          "mutagen": "A"
+        }
+      ],
+      "minorStars": [],
+      "adjectiveStars": [],
+      "changsheng12": "buried",
+      "boshi12": "dragon",
+      "jiangqian12": "condemned",
+      "suiqian12": "virtuous",
+      "decadal": {
+        "range": [
+          34,
+          43
+        ],
+        "heavenlyStem": "gui",
+        "earthlyBranch": "chou"
+      },
+      "ages": [
+        10,
+        22,
+        34,
+        46,
+        58,
+        70,
+        82,
+        94,
+        106,
+        118
+      ]
+    }
+  ]
+}

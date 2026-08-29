@@ -1,0 +1,1166 @@
+{
+ "schema": "six-culture-verified-chart/SYNTHESIS/v2",
+ "generated_utc": "2026-08-29T16:19:38.089702+00:00",
+ "counting_rules": {
+  "primary_clusters": [
+   "jyotisha",
+   "western",
+   "sinic"
+  ],
+  "sinic_composition": "BaZi and Zi Wei corroborate each other internally but contribute at most ONE cross-cultural vote",
+  "non_voting": [
+   "maya",
+   "tibetan"
+  ],
+  "independence_gate": "Jyotisha (sidereal whole-sign) and Western (tropical whole-sign) place 6 of 7 traditional planets in the SAME house, because the ayanamsha shifts the Ascendant and the planets together. House-occupancy agreement between these two clusters is therefore an artifact, not corroboration. A domain earns two votes from them only if at least one side rests on a cluster-unique mechanism."
+ },
+ "mechanical_correlation_measurement": {
+  "traditional_planets_in_same_whole_sign_house": 6,
+  "of": 7,
+  "detail": [
+   {
+    "planet": "Sun",
+    "jyotisha_sign": "Makara",
+    "jyotisha_house": 2,
+    "western_sign": "Capricorn",
+    "western_house": 1,
+    "same_house": false,
+    "jyotisha_dignity": "neutral_or_friendly",
+    "western_dignity_score": 1
+   },
+   {
+    "planet": "Moon",
+    "jyotisha_sign": "Karka",
+    "jyotisha_house": 8,
+    "western_sign": "Leo",
+    "western_house": 8,
+    "same_house": true,
+    "jyotisha_dignity": "own_sign",
+    "western_dignity_score": 0
+   },
+   {
+    "planet": "Mercury",
+    "jyotisha_sign": "Dhanu",
+    "jyotisha_house": 1,
+    "western_sign": "Capricorn",
+    "western_house": 1,
+    "same_house": true,
+    "jyotisha_dignity": "neutral_or_friendly",
+    "western_dignity_score": 0
+   },
+   {
+    "planet": "Venus",
+    "jyotisha_sign": "Vrischika",
+    "jyotisha_house": 12,
+    "western_sign": "Sagittarius",
+    "western_house": 12,
+    "same_house": true,
+    "jyotisha_dignity": "neutral_or_friendly",
+    "western_dignity_score": 2
+   },
+   {
+    "planet": "Mars",
+    "jyotisha_sign": "Vrischika",
+    "jyotisha_house": 12,
+    "western_sign": "Sagittarius",
+    "western_house": 12,
+    "same_house": true,
+    "jyotisha_dignity": "own_sign",
+    "western_dignity_score": 0
+   },
+   {
+    "planet": "Jupiter",
+    "jyotisha_sign": "Karka",
+    "jyotisha_house": 8,
+    "western_sign": "Leo",
+    "western_house": 8,
+    "same_house": true,
+    "jyotisha_dignity": "exalted",
+    "western_dignity_score": 4
+   },
+   {
+    "planet": "Saturn",
+    "jyotisha_sign": "Vrishabha",
+    "jyotisha_house": 6,
+    "western_sign": "Gemini",
+    "western_house": 6,
+    "same_house": true,
+    "jyotisha_dignity": "neutral_or_friendly",
+    "western_dignity_score": 3
+   }
+  ],
+  "explanation": "Whole-sign house = (planet sign - Ascendant sign) mod 12. The Lahiri ayanamsha shifts the Ascendant and every planet by the same 23 deg 53' 59\", so the house number survives unless one crosses a sign boundary and the other does not. Only the Sun differs here, because the ayanamsha carried the Ascendant back from Capricorn into Sagittarius while the Sun stayed in Capricorn.",
+  "consequence": "House-placement agreement between the Jyotisha and Hellenistic clusters is an artifact of shared method, NOT independent cross-cultural corroboration. DIGNITY, by contrast, genuinely diverges: the Moon and Mars are in their own signs in Jyotisha but hold no essential dignity in the Western chart, and Jupiter is exalted in Jyotisha but holds only triplicity and face in the Western chart."
+ },
+ "domains": {
+  "D1": {
+   "domain": "D1",
+   "domain_name": "Self / identity",
+   "grade": "STRONG",
+   "clusters_speaking": [
+    "jyotisha",
+    "sinic",
+    "western"
+   ],
+   "clusters_speaking_materially": [
+    "jyotisha",
+    "sinic",
+    "western"
+   ],
+   "cluster_count_material": 3,
+   "independence_gate_applied": null,
+   "cluster_stance": {
+    "jyotisha": {
+     "prominence": 2,
+     "polarities": [
+      "mixed"
+     ]
+    },
+    "western": {
+     "prominence": 2,
+     "polarities": [
+      "mixed"
+     ]
+    },
+    "sinic": {
+     "prominence": 2,
+     "polarities": [
+      "mixed"
+     ]
+    }
+   },
+   "conflicts": [],
+   "what_is_agreed": "prominence; every cluster reports MIXED polarity, so no outcome is implied",
+   "aggregate_prominence": "high",
+   "projections": [
+    {
+     "domain": "D1",
+     "system": "jyotisha",
+     "cluster": "jyotisha",
+     "prominence": "high",
+     "polarity": "mixed",
+     "confidence": "high",
+     "basis": "Lagna Dhanu 11 deg 33' (Mula pada 4); Lagna lord Jupiter exalted in Karka but placed in house 8 and retrograde",
+     "mapping_rule": "JY-LAGNA-LORD",
+     "basis_type": "unique"
+    },
+    {
+     "domain": "D1",
+     "system": "jyotisha",
+     "cluster": "jyotisha",
+     "prominence": "high",
+     "polarity": "mixed",
+     "confidence": "high",
+     "basis": "Mercury (lord of houses 7 and 10) in house 1, retrograde, in Purva Ashadha pada 2",
+     "mapping_rule": "JY-H1-OCCUPANT",
+     "basis_type": "ws_house"
+    },
+    {
+     "domain": "D1",
+     "system": "western",
+     "cluster": "western",
+     "prominence": "high",
+     "polarity": "mixed",
+     "confidence": "high",
+     "basis": "Ascendant Capricorn 5 deg 27'; ruler Saturn in Gemini house 6, retrograde, holds triplicity (score 3) but is the malefic CONTRARY to sect in a night chart",
+     "mapping_rule": "WE-ASC-RULER-SECT",
+     "basis_type": "unique"
+    },
+    {
+     "domain": "D1",
+     "system": "western",
+     "cluster": "western",
+     "prominence": "medium",
+     "polarity": "mixed",
+     "confidence": "high",
+     "basis": "Sun in house 1 by whole sign but below the horizon, at 29 deg 29' Capricorn (final degree), holding face only (dignity score 1), and contrary to sect",
+     "mapping_rule": "WE-SECT-LUMINARY",
+     "basis_type": "unique"
+    },
+    {
+     "domain": "D1",
+     "system": "bazi",
+     "cluster": "sinic",
+     "prominence": "medium",
+     "polarity": "mixed",
+     "confidence": "medium",
+     "basis": "Day Master Gui (yin Water), support ratio 0.427 -> moderately weak; rooted only in the month branch Chou, which stores Gui as a hidden stem",
+     "mapping_rule": "BZ-DAY-MASTER",
+     "basis_type": "unique"
+    },
+    {
+     "domain": "D1",
+     "system": "ziwei",
+     "cluster": "sinic",
+     "prominence": "high",
+     "polarity": "mixed",
+     "confidence": "medium",
+     "basis": "Ming (life) palace at gengxu holds Tan Lang / Greedy Wolf at brightness +3 (temple); life ruler Lu Cun, body ruler Huo Xing",
+     "mapping_rule": "ZW-MING-PALACE",
+     "basis_type": "unique"
+    }
+   ]
+  },
+  "D2": {
+   "domain": "D2",
+   "domain_name": "Career / status",
+   "grade": "STRONG",
+   "clusters_speaking": [
+    "jyotisha",
+    "sinic",
+    "western"
+   ],
+   "clusters_speaking_materially": [
+    "jyotisha",
+    "sinic",
+    "western"
+   ],
+   "cluster_count_material": 3,
+   "independence_gate_applied": null,
+   "cluster_stance": {
+    "jyotisha": {
+     "prominence": 2,
+     "polarities": [
+      "mixed"
+     ]
+    },
+    "western": {
+     "prominence": 2,
+     "polarities": [
+      "mixed"
+     ]
+    },
+    "sinic": {
+     "prominence": 2,
+     "polarities": [
+      "mixed"
+     ]
+    }
+   },
+   "conflicts": [],
+   "what_is_agreed": "prominence; every cluster reports MIXED polarity, so no outcome is implied",
+   "aggregate_prominence": "high",
+   "projections": [
+    {
+     "domain": "D2",
+     "system": "jyotisha",
+     "cluster": "jyotisha",
+     "prominence": "high",
+     "polarity": "mixed",
+     "confidence": "medium",
+     "basis": "Sarvashtakavarga house 10 = 37 bindus, the joint highest of the twelve houses; house 10 (Kanya) is itself empty and its lord Mercury sits in house 1",
+     "mapping_rule": "JY-SAV-H10 + JY-H10-LORD",
+     "basis_type": "unique"
+    },
+    {
+     "domain": "D2",
+     "system": "western",
+     "cluster": "western",
+     "prominence": "high",
+     "polarity": "mixed",
+     "confidence": "high",
+     "basis": "Whole-sign house 10 is Libra and contains the Midheaven at 17 deg 02'; its ruler Venus is the benefic OF SECT in this night chart and holds its own bound, but sits in house 12",
+     "mapping_rule": "WE-H10-RULER-SECT",
+     "basis_type": "unique"
+    },
+    {
+     "domain": "D2",
+     "system": "ziwei",
+     "cluster": "sinic",
+     "prominence": "high",
+     "polarity": "mixed",
+     "confidence": "medium",
+     "basis": "Career palace (官禄) at renyin holds Qi Sha / Seven Killings at brightness +3 (temple)",
+     "mapping_rule": "ZW-CAREER-PALACE",
+     "basis_type": "unique"
+    },
+    {
+     "domain": "D2",
+     "system": "bazi",
+     "cluster": "sinic",
+     "prominence": "medium",
+     "polarity": "mixed",
+     "confidence": "medium",
+     "basis": "Officer/Seven-Killings (Earth, the element that governs a Water Day Master) totals 2.45 weighted units and appears only as hidden stems in Chou, Si and Wu -- structurally present but never exposed in a visible stem",
+     "mapping_rule": "BZ-TEN-GOD-OFFICER",
+     "basis_type": "unique"
+    }
+   ]
+  },
+  "D3": {
+   "domain": "D3",
+   "domain_name": "Wealth / gains",
+   "grade": "DIVERGENT",
+   "clusters_speaking": [
+    "jyotisha",
+    "sinic",
+    "western"
+   ],
+   "clusters_speaking_materially": [
+    "sinic",
+    "western"
+   ],
+   "cluster_count_material": 2,
+   "independence_gate_applied": null,
+   "cluster_stance": {
+    "jyotisha": {
+     "prominence": 0,
+     "polarities": [
+      "mixed"
+     ]
+    },
+    "western": {
+     "prominence": 1,
+     "polarities": [
+      "mixed"
+     ]
+    },
+    "sinic": {
+     "prominence": 2,
+     "polarities": [
+      "mixed"
+     ]
+    }
+   },
+   "conflicts": [
+    {
+     "kind": "prominence",
+     "clusters": [
+      "jyotisha",
+      "sinic"
+     ],
+     "high": [
+      "sinic"
+     ],
+     "low": [
+      "jyotisha"
+     ]
+    }
+   ],
+   "what_is_agreed": null,
+   "aggregate_prominence": "medium",
+   "projections": [
+    {
+     "domain": "D3",
+     "system": "jyotisha",
+     "cluster": "jyotisha",
+     "prominence": "low",
+     "polarity": "mixed",
+     "confidence": "medium",
+     "basis": "Sarvashtakavarga house 2 = 21 bindus (second lowest); house 2 lord Saturn is in house 6; house 11 lord Venus is in house 12; the declared 2nd/11th-lord Dhana Yoga is ABSENT",
+     "mapping_rule": "JY-SAV-H2 + JY-DHANA-ABSENT",
+     "basis_type": "unique"
+    },
+    {
+     "domain": "D3",
+     "system": "western",
+     "cluster": "western",
+     "prominence": "medium",
+     "polarity": "mixed",
+     "confidence": "medium",
+     "basis": "House 2 (Aquarius) ruler Saturn in house 6; house 11 (Scorpio) ruler Mars in house 12; Lot of Fortune in Gemini, house 6",
+     "mapping_rule": "WE-LOT-FORTUNE + WE-H2-H11-RULERS",
+     "basis_type": "unique"
+    },
+    {
+     "domain": "D3",
+     "system": "ziwei",
+     "cluster": "sinic",
+     "prominence": "high",
+     "polarity": "mixed",
+     "confidence": "medium",
+     "basis": "Wealth palace (财帛) at bingwoo holds Po Jun / Army Destroyer at brightness +3 -- a high-amplitude, disruption-and-rebuild star rather than a steady-accumulation one",
+     "mapping_rule": "ZW-WEALTH-PALACE",
+     "basis_type": "unique"
+    },
+    {
+     "domain": "D3",
+     "system": "bazi",
+     "cluster": "sinic",
+     "prominence": "medium",
+     "polarity": "mixed",
+     "confidence": "medium",
+     "basis": "Wealth element for a Water Day Master is Fire, totalling 2.1 weighted units (Wu and Si branches, Ding and Bing hidden); a moderately weak Day Master carrying visible wealth is the classical 'wealth heavier than the self' configuration",
+     "mapping_rule": "BZ-TEN-GOD-WEALTH",
+     "basis_type": "unique"
+    }
+   ]
+  },
+  "D4": {
+   "domain": "D4",
+   "domain_name": "Partnership",
+   "grade": "DIVERGENT",
+   "clusters_speaking": [
+    "jyotisha",
+    "sinic",
+    "western"
+   ],
+   "clusters_speaking_materially": [
+    "sinic",
+    "western"
+   ],
+   "cluster_count_material": 2,
+   "independence_gate_applied": null,
+   "cluster_stance": {
+    "jyotisha": {
+     "prominence": 0,
+     "polarities": [
+      "negative-leaning"
+     ]
+    },
+    "western": {
+     "prominence": 1,
+     "polarities": [
+      "mixed"
+     ]
+    },
+    "sinic": {
+     "prominence": 2,
+     "polarities": [
+      "positive-leaning"
+     ]
+    }
+   },
+   "conflicts": [
+    {
+     "kind": "polarity",
+     "clusters": [
+      "jyotisha",
+      "sinic"
+     ],
+     "jyotisha": [
+      "negative-leaning"
+     ],
+     "sinic": [
+      "positive-leaning"
+     ]
+    },
+    {
+     "kind": "prominence",
+     "clusters": [
+      "jyotisha",
+      "sinic"
+     ],
+     "high": [
+      "sinic"
+     ],
+     "low": [
+      "jyotisha"
+     ]
+    }
+   ],
+   "what_is_agreed": null,
+   "aggregate_prominence": "medium",
+   "projections": [
+    {
+     "domain": "D4",
+     "system": "jyotisha",
+     "cluster": "jyotisha",
+     "prominence": "low",
+     "polarity": "negative-leaning",
+     "confidence": "medium",
+     "basis": "Sarvashtakavarga house 7 = 19 bindus -- the LOWEST of all twelve houses; house 7 (Mithuna) is empty and its lord Mercury is retrograde",
+     "mapping_rule": "JY-SAV-H7",
+     "basis_type": "unique"
+    },
+    {
+     "domain": "D4",
+     "system": "western",
+     "cluster": "western",
+     "prominence": "medium",
+     "polarity": "mixed",
+     "confidence": "medium",
+     "basis": "House 7 is Cancer; its ruler is the Moon, the sect light, but the Moon sits in house 8 with no essential dignity (score 0). Lot of Spirit falls in house 7. Venus, benefic of sect and natural significator of partnership, is in house 12",
+     "mapping_rule": "WE-H7-RULER + WE-LOT-SPIRIT",
+     "basis_type": "unique"
+    },
+    {
+     "domain": "D4",
+     "system": "ziwei",
+     "cluster": "sinic",
+     "prominence": "high",
+     "polarity": "positive-leaning",
+     "confidence": "medium",
+     "basis": "Spouse palace (夫妻) at wushen holds Zi Wei / Emperor at +2 carrying Hua Quan (power transformation) TOGETHER WITH Tian Fu / Treasury at +1 -- the most dignified star pairing anywhere in this chart",
+     "mapping_rule": "ZW-SPOUSE-PALACE + ZW-SIHUA-QUAN",
+     "basis_type": "unique"
+    }
+   ]
+  },
+  "D5": {
+   "domain": "D5",
+   "domain_name": "Family / roots / home",
+   "grade": "STRONG",
+   "clusters_speaking": [
+    "jyotisha",
+    "sinic",
+    "western"
+   ],
+   "clusters_speaking_materially": [
+    "jyotisha",
+    "sinic",
+    "western"
+   ],
+   "cluster_count_material": 3,
+   "independence_gate_applied": null,
+   "cluster_stance": {
+    "jyotisha": {
+     "prominence": 1,
+     "polarities": [
+      "mixed"
+     ]
+    },
+    "western": {
+     "prominence": 1,
+     "polarities": [
+      "mixed"
+     ]
+    },
+    "sinic": {
+     "prominence": 2,
+     "polarities": [
+      "positive-leaning"
+     ]
+    }
+   },
+   "conflicts": [],
+   "what_is_agreed": "prominence",
+   "aggregate_prominence": "medium",
+   "projections": [
+    {
+     "domain": "D5",
+     "system": "jyotisha",
+     "cluster": "jyotisha",
+     "prominence": "medium",
+     "polarity": "mixed",
+     "confidence": "medium",
+     "basis": "House 4 (Meena) is empty, SAV 26 bindus; its lord Jupiter is exalted but in house 8 and retrograde. House 2 (family/speech) holds the Sun",
+     "mapping_rule": "JY-H4-LORD",
+     "basis_type": "unique"
+    },
+    {
+     "domain": "D5",
+     "system": "western",
+     "cluster": "western",
+     "prominence": "medium",
+     "polarity": "mixed",
+     "confidence": "medium",
+     "basis": "House 4 (Aries) is empty; its ruler Mars, the malefic OF SECT in this night chart, is in house 12 with no essential dignity",
+     "mapping_rule": "WE-H4-RULER-SECT",
+     "basis_type": "unique"
+    },
+    {
+     "domain": "D5",
+     "system": "ziwei",
+     "cluster": "sinic",
+     "prominence": "high",
+     "polarity": "positive-leaning",
+     "confidence": "medium",
+     "basis": "Property/home palace (田宅) at guichou holds Tian Liang / Sage at +2 carrying Hua Lu, the prosperity transformation of the Ren birth year",
+     "mapping_rule": "ZW-PROPERTY-SIHUA-LU",
+     "basis_type": "unique"
+    }
+   ]
+  },
+  "D6": {
+   "domain": "D6",
+   "domain_name": "Children / creation",
+   "grade": "WEAK",
+   "clusters_speaking": [
+    "jyotisha",
+    "sinic",
+    "western"
+   ],
+   "clusters_speaking_materially": [],
+   "cluster_count_material": 0,
+   "independence_gate_applied": null,
+   "cluster_stance": {
+    "jyotisha": {
+     "prominence": 0,
+     "polarities": [
+      "mixed"
+     ]
+    },
+    "western": {
+     "prominence": 0,
+     "polarities": [
+      "mixed"
+     ]
+    },
+    "sinic": {
+     "prominence": 0,
+     "polarities": [
+      "mixed",
+      "negative-leaning"
+     ]
+    }
+   },
+   "conflicts": [],
+   "what_is_agreed": "all speaking clusters independently report LOW prominence -- this is a quiet domain, NOT a convergent theme",
+   "aggregate_prominence": "low",
+   "projections": [
+    {
+     "domain": "D6",
+     "system": "jyotisha",
+     "cluster": "jyotisha",
+     "prominence": "low",
+     "polarity": "mixed",
+     "confidence": "medium",
+     "basis": "House 5 (Mesha) is empty, SAV 26 bindus; its lord Mars is in house 12, though in its own sign Vrischika",
+     "mapping_rule": "JY-H5-LORD",
+     "basis_type": "unique"
+    },
+    {
+     "domain": "D6",
+     "system": "western",
+     "cluster": "western",
+     "prominence": "low",
+     "polarity": "mixed",
+     "confidence": "medium",
+     "basis": "House 5 (Taurus) is empty; its ruler Venus, benefic of sect and in its own bound, is in house 12",
+     "mapping_rule": "WE-H5-RULER",
+     "basis_type": "unique"
+    },
+    {
+     "domain": "D6",
+     "system": "ziwei",
+     "cluster": "sinic",
+     "prominence": "low",
+     "polarity": "negative-leaning",
+     "confidence": "medium",
+     "basis": "Children/creation palace (子女) at dingwei holds Tian Ji / Wisdom at brightness -3, the dimmest major-star placement in the chart",
+     "mapping_rule": "ZW-CHILDREN-PALACE",
+     "basis_type": "unique"
+    },
+    {
+     "domain": "D6",
+     "system": "bazi",
+     "cluster": "sinic",
+     "prominence": "low",
+     "polarity": "mixed",
+     "confidence": "medium",
+     "basis": "Output (Eating God / Hurting Officer) is Wood, 1.9 weighted units. Which of the two appears in the hour stem is SCHOOL-DEPENDENT: Eating God under civil time, Hurting Officer under true solar time",
+     "mapping_rule": "BZ-TEN-GOD-OUTPUT",
+     "basis_type": "unique"
+    }
+   ]
+  },
+  "D7": {
+   "domain": "D7",
+   "domain_name": "Health / routine",
+   "grade": "STRONG",
+   "clusters_speaking": [
+    "jyotisha",
+    "sinic",
+    "western"
+   ],
+   "clusters_speaking_materially": [
+    "jyotisha",
+    "sinic",
+    "western"
+   ],
+   "cluster_count_material": 3,
+   "independence_gate_applied": null,
+   "cluster_stance": {
+    "jyotisha": {
+     "prominence": 2,
+     "polarities": [
+      "mixed"
+     ]
+    },
+    "western": {
+     "prominence": 2,
+     "polarities": [
+      "mixed"
+     ]
+    },
+    "sinic": {
+     "prominence": 1,
+     "polarities": [
+      "positive-leaning"
+     ]
+    }
+   },
+   "conflicts": [],
+   "what_is_agreed": "prominence",
+   "aggregate_prominence": "high",
+   "projections": [
+    {
+     "domain": "D7",
+     "system": "jyotisha",
+     "cluster": "jyotisha",
+     "prominence": "high",
+     "polarity": "mixed",
+     "confidence": "medium",
+     "basis": "Sarvashtakavarga house 6 = 37 bindus, joint highest; house 6 holds Saturn (29 deg 14' Vrishabha, retrograde) and Rahu; its lord Venus is in house 12 -- the declared Vipareeta Raja Yoga (6th lord in the 12th) is satisfied",
+     "mapping_rule": "JY-SAV-H6 + JY-VIPAREETA",
+     "basis_type": "unique"
+    },
+    {
+     "domain": "D7",
+     "system": "western",
+     "cluster": "western",
+     "prominence": "high",
+     "polarity": "mixed",
+     "confidence": "high",
+     "basis": "House 6 (Gemini) holds Saturn, which is retrograde, has triplicity dignity (score 3), and is the malefic CONTRARY to sect. The Lot of Fortune, which governs body and circumstance, also falls in house 6",
+     "mapping_rule": "WE-LOT-FORTUNE-H6 + WE-SECT-SATURN",
+     "basis_type": "unique"
+    },
+    {
+     "domain": "D7",
+     "system": "ziwei",
+     "cluster": "sinic",
+     "prominence": "medium",
+     "polarity": "positive-leaning",
+     "confidence": "medium",
+     "basis": "Health palace (疾厄) at yisi holds Tai Yang / Sun at brightness +2",
+     "mapping_rule": "ZW-HEALTH-PALACE",
+     "basis_type": "unique"
+    }
+   ]
+  },
+  "D8": {
+   "domain": "D8",
+   "domain_name": "Mind / education / craft",
+   "grade": "DIVERGENT",
+   "clusters_speaking": [
+    "jyotisha",
+    "sinic",
+    "western"
+   ],
+   "clusters_speaking_materially": [
+    "jyotisha",
+    "sinic",
+    "western"
+   ],
+   "cluster_count_material": 3,
+   "independence_gate_applied": null,
+   "cluster_stance": {
+    "western": {
+     "prominence": 2,
+     "polarities": [
+      "positive-leaning"
+     ]
+    },
+    "jyotisha": {
+     "prominence": 2,
+     "polarities": [
+      "mixed"
+     ]
+    },
+    "sinic": {
+     "prominence": 1,
+     "polarities": [
+      "negative-leaning",
+      "positive-leaning"
+     ]
+    }
+   },
+   "conflicts": [
+    {
+     "kind": "polarity",
+     "clusters": [
+      "sinic",
+      "western"
+     ],
+     "sinic": [
+      "negative-leaning",
+      "positive-leaning"
+     ],
+     "western": [
+      "positive-leaning"
+     ]
+    }
+   ],
+   "what_is_agreed": null,
+   "aggregate_prominence": "high",
+   "projections": [
+    {
+     "domain": "D8",
+     "system": "western",
+     "cluster": "western",
+     "prominence": "high",
+     "polarity": "positive-leaning",
+     "confidence": "high",
+     "basis": "Mercury and Saturn are in MUTUAL RECEPTION by domicile (Mercury in Capricorn, Saturn in Gemini). Every one of the seven dispositor chains terminates in this Mercury-Saturn loop, making the pair the structural terminus of the whole chart",
+     "mapping_rule": "WE-MUTUAL-RECEPTION + WE-DISPOSITOR-TERMINUS",
+     "basis_type": "unique"
+    },
+    {
+     "domain": "D8",
+     "system": "jyotisha",
+     "cluster": "jyotisha",
+     "prominence": "high",
+     "polarity": "mixed",
+     "confidence": "high",
+     "basis": "Mercury retrograde in house 1 in Purva Ashadha pada 2; house 3 lord Saturn in house 6; Jupiter exalted in house 8, the house of research and hidden matters",
+     "mapping_rule": "JY-MERCURY-H1 + JY-H8-JUPITER",
+     "basis_type": "unique"
+    },
+    {
+     "domain": "D8",
+     "system": "bazi",
+     "cluster": "sinic",
+     "prominence": "medium",
+     "polarity": "negative-leaning",
+     "confidence": "medium",
+     "basis": "Resource (Yin), the learning-support element, is Metal at 0.9 weighted units -- the LOWEST of the five elements, present only as hidden Xin in Chou and hidden Geng in Si",
+     "mapping_rule": "BZ-TEN-GOD-RESOURCE",
+     "basis_type": "unique"
+    },
+    {
+     "domain": "D8",
+     "system": "ziwei",
+     "cluster": "sinic",
+     "prominence": "medium",
+     "polarity": "positive-leaning",
+     "confidence": "medium",
+     "basis": "Zuo Fu carries Hua Ke, the academic/reputation transformation of the Ren year, but it falls in the Friends palace (仆役) rather than in a self, career or study palace",
+     "mapping_rule": "ZW-SIHUA-KE",
+     "basis_type": "unique"
+    }
+   ]
+  },
+  "D9": {
+   "domain": "D9",
+   "domain_name": "Fortune / spirituality / worldview",
+   "grade": "STRONG",
+   "clusters_speaking": [
+    "jyotisha",
+    "sinic",
+    "western"
+   ],
+   "clusters_speaking_materially": [
+    "jyotisha",
+    "sinic",
+    "western"
+   ],
+   "cluster_count_material": 3,
+   "independence_gate_applied": null,
+   "cluster_stance": {
+    "jyotisha": {
+     "prominence": 2,
+     "polarities": [
+      "positive-leaning"
+     ]
+    },
+    "western": {
+     "prominence": 1,
+     "polarities": [
+      "mixed"
+     ]
+    },
+    "sinic": {
+     "prominence": 2,
+     "polarities": [
+      "mixed"
+     ]
+    }
+   },
+   "conflicts": [],
+   "what_is_agreed": "prominence",
+   "aggregate_prominence": "high",
+   "projections": [
+    {
+     "domain": "D9",
+     "system": "jyotisha",
+     "cluster": "jyotisha",
+     "prominence": "high",
+     "polarity": "positive-leaning",
+     "confidence": "high",
+     "basis": "Lagna is Dhanu in Mula nakshatra pada 4 (Mula is ruled by Ketu and is the 'root' asterism); Ketu sits in house 12, the moksha house, alongside Mars and Venus; Jupiter is exalted in house 8",
+     "mapping_rule": "JY-LAGNA-NAKSHATRA + JY-KETU-H12",
+     "basis_type": "unique"
+    },
+    {
+     "domain": "D9",
+     "system": "western",
+     "cluster": "western",
+     "prominence": "medium",
+     "polarity": "mixed",
+     "confidence": "medium",
+     "basis": "House 9 (Virgo) is empty and its ruler Mercury is in house 1. Jupiter, the natural significator, is in house 8, holds triplicity and face, but is the benefic CONTRARY to sect",
+     "mapping_rule": "WE-H9-RULER + WE-SECT-JUPITER",
+     "basis_type": "unique"
+    },
+    {
+     "domain": "D9",
+     "system": "ziwei",
+     "cluster": "sinic",
+     "prominence": "high",
+     "polarity": "mixed",
+     "confidence": "medium",
+     "basis": "Fortune/Spirit palace (福德) at renzi holds Lian Zhen at -1 together with Tian Xiang at +3; this palace is also the CURRENT decadal palace (nominal ages 24-33)",
+     "mapping_rule": "ZW-SPIRIT-PALACE + ZW-DECADAL",
+     "basis_type": "unique"
+    }
+   ]
+  }
+ },
+ "divergence": {
+  "divergent_domains": [
+   "D3",
+   "D4",
+   "D8"
+  ],
+  "divergent_over_all_nine": "3/9 = 33.3%",
+  "divergent_over_sufficient": "3/9 = 33.3%",
+  "insufficient_domains": [],
+  "weak_or_quiet_domains": [
+   "D6"
+  ]
+ },
+ "temperament": {
+  "T1": {
+   "axis": "Leadership / visibility",
+   "computed": [
+    {
+     "cluster": "ziwei",
+     "reading": "elevated",
+     "basis": "Zi Wei / Emperor at +2 with Hua Quan, and Qi Sha at +3 in the career palace"
+    },
+    {
+     "cluster": "western",
+     "reading": "damped",
+     "basis": "Ascendant ruler Saturn contrary to sect and retrograde; Sun in its final degree with face dignity only; both benefic and malefic weight sits in house 12"
+    },
+    {
+     "cluster": "jyotisha",
+     "reading": "damped",
+     "basis": "house 10 empty; Lagna lord in house 8; three planets in house 12"
+    }
+   ]
+  },
+  "T2": {
+   "axis": "Drive / initiative",
+   "computed": [
+    {
+     "cluster": "jyotisha",
+     "reading": "present but privatised",
+     "basis": "Mars in its own sign Vrischika, but in house 12"
+    },
+    {
+     "cluster": "western",
+     "reading": "supported",
+     "basis": "Mars is the malefic OF SECT in a night chart, and applies to a sextile with the Sun (orb 2.32 deg)"
+    },
+    {
+     "cluster": "bazi",
+     "reading": "moderate",
+     "basis": "moderately weak Day Master against 2.45 units of controlling Earth"
+    }
+   ]
+  },
+  "T3": {
+   "axis": "Nurturing / service",
+   "computed": [
+    {
+     "cluster": "jyotisha",
+     "reading": "high",
+     "basis": "Moon in its own sign Karka; SAV house 6 (service) joint highest at 37"
+    },
+    {
+     "cluster": "western",
+     "reading": "high",
+     "basis": "Moon is the sect light; Lot of Fortune in house 6"
+    },
+    {
+     "cluster": "ziwei",
+     "reading": "moderate",
+     "basis": "Tian Xiang at +3 in the Fortune palace"
+    }
+   ]
+  },
+  "T4": {
+   "axis": "Intellect / craft",
+   "computed": [
+    {
+     "cluster": "western",
+     "reading": "high",
+     "basis": "Mercury-Saturn mutual reception is the terminus of every dispositor chain"
+    },
+    {
+     "cluster": "jyotisha",
+     "reading": "high",
+     "basis": "Mercury in house 1 retrograde; Jupiter exalted in house 8"
+    },
+    {
+     "cluster": "bazi",
+     "reading": "under-resourced",
+     "basis": "Resource element Metal is the weakest at 0.9 units"
+    }
+   ]
+  },
+  "T5": {
+   "axis": "Adaptability",
+   "computed": [
+    {
+     "cluster": "ziwei",
+     "reading": "high",
+     "basis": "Tan Lang at +3 in the Ming palace; Po Jun at +3 in the wealth palace"
+    },
+    {
+     "cluster": "bazi",
+     "reading": "high",
+     "basis": "yin Water Day Master, the most adaptive of the ten stems in classical description"
+    },
+    {
+     "cluster": "jyotisha",
+     "reading": "moderate",
+     "basis": "Lagna in the dual sign Dhanu; four of nine grahas retrograde"
+    }
+   ]
+  },
+  "T6": {
+   "axis": "Discipline / structure",
+   "computed": [
+    {
+     "cluster": "western",
+     "reading": "high",
+     "basis": "Capricorn Ascendant; Saturn holds triplicity and is in mutual reception with Mercury"
+    },
+    {
+     "cluster": "jyotisha",
+     "reading": "mixed",
+     "basis": "Saturn retrograde at 29 deg 14', the final degree of Vrishabha, conjoined Rahu in house 6"
+    },
+    {
+     "cluster": "bazi",
+     "reading": "moderate",
+     "basis": "Chou month command; Earth (structure/officer) is the second heaviest element at 2.45"
+    }
+   ]
+  }
+ },
+ "symbolic_overlay": {
+  "policy": "Maya and Tibetan content below is ATTRIBUTED SYMBOLISM, not computed temperament. It may corroborate, soften or dissent. It never changes a domain grade.",
+  "maya": {
+   "calendar_round": "8 Caban 10 Muwan",
+   "long_count": "12.19.9.16.17",
+   "interpretation": "NONE ASSERTED",
+   "reason": "The conversion is verified, but no day-sign personality meaning is attached. Popular 'Mayan astrology' personality descriptions are a modern invention without a classical or living-lineage source, so nothing is claimed."
+  },
+  "tibetan": {
+   "year": "Water Male Horse",
+   "rabjung": "cycle 17, year 16",
+   "interpretation": "Limited overlay only: a Water-element Horse year in male/yang polarity. Water-year symbolism in Tibetan usage is associated with adaptability and flow; the Horse with movement. This is offered as attributed symbolism.",
+   "omitted": [
+    "mewa",
+    "parkha",
+    "la_force",
+    "srog_life_force",
+    "lu_body_force",
+    "wangthang_power",
+    "lungta_windhorse",
+    "annual_relations_and_obstacles"
+   ]
+  }
+ },
+ "chronology": {
+  "axis": "ISO dates",
+  "tracks": {
+   "jyotisha_vimshottari": {
+    "mahadasha": "Venus 2016-02-11 -> 2036-02-11",
+    "antardasha": "Venus-Jupiter 2026-04-13 -> 2028-12-12",
+    "pratyantardasha": "Venus-Jupiter-Saturn 2026-08-21 -> 2027-01-22",
+    "mechanism": "position of the Moon within its nakshatra at birth"
+   },
+   "western_profection": {
+    "current": "age 23, 12th house (Sagittarius), Lord of the Year JUPITER",
+    "window": "2026-01-20 -> 2027-01-20",
+    "mechanism": "whole years of age counted from the Ascendant"
+   },
+   "western_zodiacal_releasing": {
+    "L1_from_spirit": "Cancer 2003-01-20 -> 2028-01-20 (ruler Moon)",
+    "counted": false,
+    "why_not_counted": "A second Western technique. Counting it beside profection would manufacture agreement inside one cluster."
+   },
+   "bazi_da_yun": {
+    "current": "Yi-Mao (乙卯) 2018 -> 2027",
+    "next": "Bing-Chen (丙辰) 2028 -> 2037",
+    "annual_2026": "Bing-Wu (丙午), Direct Wealth (正财) to the Gui Day Master",
+    "mechanism": "distance from birth to the next sectional solar term, 3 days = 1 year"
+   },
+   "ziwei_periods": {
+    "decadal": "Fortune palace 福德 (renzi), nominal ages 24-33",
+    "annual_2026": "the 2026 (丙午) year palace falls on the natal WEALTH palace 财帛",
+    "mechanism": "Five-Elements Bureau (Metal 4) counted from the Ming palace"
+   }
+  },
+  "convergences": [
+   {
+    "window_start": "2026-04-13",
+    "window_end": "2027-01-20",
+    "clusters": [
+     "jyotisha",
+     "western"
+    ],
+    "cluster_count": 2,
+    "strength": "MODERATE",
+    "shared_time_lord": "Jupiter",
+    "mechanisms_are_independent": true,
+    "mechanism_note": "Vimshottari derives Jupiter from the Moon's nakshatra position at birth; annual profection derives Jupiter from whole years of age counted from the Ascendant. Two unrelated procedures arriving at the same time lord.",
+    "domains_activated": [
+     "D9",
+     "D8"
+    ],
+    "domain_basis": "Jupiter is Lagna lord in Jyotisha and 12th-house ruler in the Western chart, and sits in house 8 in both. The profected house is the 12th. Both point at retreat, depth and study rather than at public advancement.",
+    "sinic_agrees": false,
+    "sinic_position": "The Sinic cluster points elsewhere for this window: the 2026 annual pillar Bing-Wu is Direct Wealth to the Day Master, and the 2026 Zi Wei year palace lands on the natal Wealth palace -- that is D3, not D9. One cluster dissenting is why this window is MODERATE and not STRONG."
+   }
+  ],
+  "no_strong_window_note": "No window in the examined range is activated by all three primary clusters on the same domain, so NO strong / star-rated timing window is reported.",
+  "next_transition_points": [
+   {
+    "date": "2027-01-20",
+    "event": "profection moves to the 1st house (Capricorn), Lord of the Year becomes Saturn"
+   },
+   {
+    "date": "2027-01-22",
+    "event": "Venus-Jupiter-Saturn pratyantardasha ends"
+   },
+   {
+    "date": "2028-01-20",
+    "event": "Zodiacal Releasing L1 from Spirit moves Cancer -> Leo (reported, not counted)"
+   },
+   {
+    "date": "2028-12-12",
+    "event": "Venus-Jupiter antardasha ends; Venus-Saturn begins"
+   },
+   {
+    "date": "2028 (Lichun)",
+    "event": "BaZi Da Yun moves Yi-Mao -> Bing-Chen"
+   }
+  ]
+ },
+ "dropped_claims": {
+  "total_dropped": 14,
+  "by_reason": {
+   "no_validated_method": [
+    "Jyotisha Shadbala (all six strength components)",
+    "Tibetan Mewa (sme ba)",
+    "Tibetan Parkha",
+    "Tibetan life force (srog)",
+    "Tibetan body force (lus)",
+    "Tibetan power (dbang thang)",
+    "Tibetan wind-horse (rlung rta)",
+    "Tibetan annual obstacles"
+   ],
+   "no_classical_source": [
+    "Maya day-sign personality meaning for 8 Caban",
+    "Maya Haab month symbolism for 10 Muwan"
+   ],
+   "school_dependent_and_unresolvable_here": [
+    "BaZi Useful God (Yong Shen) / favourable element",
+    "a single BaZi hour pillar (civil and true-solar schools disagree)"
+   ],
+   "duplicate_of_another_cluster": [
+    "Western whole-sign house occupancy as a second vote alongside Jyotisha",
+    "Zodiacal Releasing as a second Western timing vote alongside profection"
+   ]
+  },
+  "barnum_filter_note": "Claims that would fit most people -- 'you are sometimes introverted', 'you value honesty', 'you have untapped potential' -- were not generated, because every sentence in the reading is required to cite a computed datum and a mapping rule."
+ },
+ "standing_caveat": "This is computed symbolic corroboration among traditional systems. It is not a validated forecast, not evidence of causation, and carries no medical, lifespan, fertility, financial or legal conclusion."
+}

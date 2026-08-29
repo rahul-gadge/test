@@ -1,0 +1,129 @@
+{
+ "schema": "six-culture-verified-chart/CALCULATION_MANIFEST/v2",
+ "generated_utc": "2026-08-29T16:19:37.208493+00:00",
+ "runtime": {
+  "python": "3.11.15",
+  "os": "Linux-6.18.44-fc-v22-x86_64-with-glibc2.39",
+  "node": "v22.22.2"
+ },
+ "packages": {
+  "pyswisseph": "2.10.3.2",
+  "skyfield": "1.55",
+  "jplephem": "2.24",
+  "tzdata": "2026.3",
+  "timezonefinder": "8.3.0",
+  "lunar-python": "1.4.8",
+  "convertdate": "2.4.1",
+  "numpy": "2.4.6"
+ },
+ "npm_packages": {
+  "iztro": "2.6.0"
+ },
+ "ephemeris_files": {
+  "de440s.bsp": {
+   "sha256": "c1c7feeab882263fc493a9d5a5b2ddd71b54826cdf65d8d17a76126b260a49f2",
+   "bytes": 32726016
+  },
+  "seas_18.se1": {
+   "sha256": "a2cd8fc33807c78ca9a700c91c2e042258b12fc4796519e00781440b5ad8b2e2",
+   "bytes": 223004
+  },
+  "semo_18.se1": {
+   "sha256": "1ca07bd67c24374d77226180c20a4f9996cba013697894810518e7eb582ca4f7",
+   "bytes": 1304771
+  },
+  "sepl_18.se1": {
+   "sha256": "ca1393ceab3a44fbc895887cf789c68819ae6a1cbc9b22225872dbe4ccd99a66",
+   "bytes": 484061
+  }
+ },
+ "source_checksums": {
+  "build.py": "31cff855d395abdaccd1686834ca4451d67b9a3817b9e715e4df326981aa9d49",
+  "chart/core.py": "371c9c04863a0a86716c6c563b377e1c27e85e173a4ebb14624427c7bb98a007",
+  "chart/jyotisha.py": "d6cec0f741fb67463f6daba5347c4a7a4252389f570f9abbe93f444032219b9f",
+  "chart/sinic.py": "88455a3355d14e6effc1f0e8f2a6f4065c0f4734fec884e1f8be6e8da7712bdc",
+  "chart/western.py": "a9a9f8db91de19d1a2e955ddf9d43fa208a7a0403b7c2a7cb1a42966416deded",
+  "chart/calendars.py": "3680bd7e72149d358528a07f32cc39f4bccd67584007c212fa3f0d55bf07e048",
+  "chart/validate.py": "9cee97e0e2fd4e4da91fe397fb95c8e916a5a973a556a3837b74ea46074d008c"
+ },
+ "engine_independence_disclosure": "Swiss Ephemeris .se1 files are compressed from a JPL DE integration (DE431 lineage); Skyfield here reads JPL DE440s. The two are therefore NOT fully independent in data lineage, but they are separate code paths and separate DE releases. Agreement is reported as a code-and-release cross-check, not as independent observational confirmation. lunar_python's solar-term algorithm and the Maya modular arithmetic ARE independent of both. py-iztro was deliberately NOT used alongside iztro, since it wraps the same logic and would not constitute a second method.",
+ "conventions": {
+  "shared": {
+   "frame": "geocentric apparent, true ecliptic and equinox of date",
+   "delta_t_source": "Swiss Ephemeris built-in",
+   "time_scale": "UT1/UTC"
+  },
+  "jyotisha": {
+   "zodiac": "sidereal",
+   "ayanamsha": "Lahiri (swe SIDM_LAHIRI)",
+   "houses": "whole sign",
+   "node": "mean node (primary), true node computed as alternate",
+   "school": "Parasari",
+   "dasha": "Vimshottari",
+   "dasha_year_length_days": 365.2425,
+   "dasha_year_alternate_days": 365.25636,
+   "combustion_orbs": {
+    "Moon": 12.0,
+    "Mars": 17.0,
+    "Mercury": 14.0,
+    "Jupiter": 11.0,
+    "Venus": 10.0,
+    "Saturn": 15.0
+   },
+   "divisionals": "D9 continuous count; D10 odd signs from self, even signs from the 9th"
+  },
+  "bazi": {
+   "day_boundary": "midnight (Zi hour); late-Zi rule not triggered",
+   "primary_time_track": "local civil clock time",
+   "alternate_time_tracks": [
+    "local mean solar time",
+    "local apparent (true) solar time"
+   ],
+   "solar_terms": "astronomical, sectional (節) terms only govern the month pillar",
+   "strength_rule_set": "declared weighted tally (see chart/sinic.py) -- not a classical authority"
+  },
+  "western": {
+   "zodiac": "tropical",
+   "houses": "whole sign",
+   "planets": "seven traditional for all scored judgements",
+   "bounds": "Egyptian",
+   "triplicity": "Dorothean",
+   "faces": "Chaldean decans",
+   "sect": "computed from the actual horizon",
+   "lots": "Fortune and Spirit, sect-reversed",
+   "profection": "annual, whole-sign",
+   "modern_planets": "separate optional track, contributes no Hellenistic score"
+  },
+  "ziwei": {
+   "implementation": "iztro 2.6.0",
+   "language": "en-US and zh-CN cross-read",
+   "lunar_conversion": "iztro internal",
+   "leap_month": "fixLeap = true",
+   "time_index": "3 (Mao 卯 05:00-07:00), from local civil time",
+   "gender": "male",
+   "age_convention": "nominal (虚岁), counted from the lunar year of birth"
+  },
+  "maya": {
+   "correlation": "GMT 584283",
+   "jdn_convention": "noon-based integer day number"
+  },
+  "tibetan": {
+   "cycle_anchor": "1027 CE = Fire-Female-Rabbit, 1st Rabjung",
+   "year_boundary": "Losar",
+   "computed": [
+    "element-animal year"
+   ],
+   "omitted": [
+    "mewa",
+    "parkha",
+    "la_force",
+    "srog_life_force",
+    "lu_body_force",
+    "wangthang_power",
+    "lungta_windhorse",
+    "annual_relations_and_obstacles",
+    "policy"
+   ]
+  }
+ }
+}
