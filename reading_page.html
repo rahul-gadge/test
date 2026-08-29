@@ -1,0 +1,616 @@
+<title>Six-Culture Verified Chart</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --paper:#F2F4F6; --surface:#FFFFFF; --surface-2:#E9EDF1;
+  --ink:#14171C; --ink-2:#48515C; --ink-3:#6E7885;
+  --rule:#D3D9DF; --rule-strong:#B6BFC9;
+  --prussian:#17395B; --prussian-ink:#17395B; --prussian-soft:#E2EAF2;
+  --oxide:#8F3F2A; --oxide-ink:#8F3F2A; --oxide-soft:#F5E6E0;
+  --slate:#5C6672; --slate-soft:#E4E7EA;
+  --shadow:0 1px 2px rgba(20,23,28,.05),0 8px 24px -12px rgba(23,57,91,.18);
+  --serif:"Spectral",Georgia,"Times New Roman",serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --measure:64ch;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#0E1116; --surface:#161A21; --surface-2:#1D222B;
+    --ink:#E4E8ED; --ink-2:#A3ACB8; --ink-3:#7C8693;
+    --rule:#262C35; --rule-strong:#38414D;
+    --prussian:#82B2DD; --prussian-ink:#A8CBEC; --prussian-soft:#15283A;
+    --oxide:#D98A6E; --oxide-ink:#E8A88F; --oxide-soft:#2F1F19;
+    --slate:#8892A0; --slate-soft:#20252D;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -12px rgba(0,0,0,.6);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0E1116; --surface:#161A21; --surface-2:#1D222B;
+  --ink:#E4E8ED; --ink-2:#A3ACB8; --ink-3:#7C8693;
+  --rule:#262C35; --rule-strong:#38414D;
+  --prussian:#82B2DD; --prussian-ink:#A8CBEC; --prussian-soft:#15283A;
+  --oxide:#D98A6E; --oxide-ink:#E8A88F; --oxide-soft:#2F1F19;
+  --slate:#8892A0; --slate-soft:#20252D;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -12px rgba(0,0,0,.6);
+}
+
+*{box-sizing:border-box}
+body{
+  background:var(--paper); color:var(--ink);
+  font-family:var(--serif); font-size:17px; line-height:1.62;
+  -webkit-font-smoothing:antialiased; font-weight:400;
+}
+.wrap{max-width:1080px;margin:0 auto;padding:0 28px 96px}
+
+/* ---------- masthead ---------- */
+.mast{padding:72px 0 34px;border-bottom:2px solid var(--ink)}
+.eyebrow{
+  font-family:var(--mono); font-size:11px; font-weight:500;
+  letter-spacing:.16em; text-transform:uppercase; color:var(--prussian-ink);
+}
+h1{
+  font-family:var(--serif); font-weight:600; font-size:clamp(2.1rem,5.4vw,3.4rem);
+  line-height:1.06; letter-spacing:-.02em; margin:14px 0 0; text-wrap:balance;
+}
+h1 em{font-style:italic;font-weight:300;color:var(--ink-2)}
+.subject{
+  margin-top:20px; font-family:var(--mono); font-size:13px; line-height:1.85;
+  color:var(--ink-2); font-variant-numeric:tabular-nums;
+}
+.subject b{color:var(--ink);font-weight:500}
+.trace{
+  margin-top:18px; max-width:var(--measure); font-size:15.5px;
+  color:var(--ink-2); font-style:italic;
+}
+
+/* ---------- instrument strip ---------- */
+.strip{
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(148px,1fr));
+  gap:1px; background:var(--rule); border:1px solid var(--rule);
+  margin:32px 0 8px;
+}
+.cell{background:var(--surface);padding:16px 18px}
+.cell .k{
+  font-family:var(--mono); font-size:10px; letter-spacing:.13em;
+  text-transform:uppercase; color:var(--ink-3);
+}
+.cell .v{
+  font-family:var(--mono); font-size:23px; font-weight:500; margin-top:7px;
+  font-variant-numeric:tabular-nums; letter-spacing:-.02em; color:var(--prussian-ink);
+}
+.cell .v.warn{color:var(--oxide-ink)}
+.cell .n{font-size:12.5px;color:var(--ink-3);margin-top:3px;font-family:var(--mono)}
+
+/* ---------- sections ---------- */
+section{
+  border-top:1px solid var(--rule); margin-top:56px; padding-top:34px;
+  display:grid; grid-template-columns:64px minmax(0,1fr); gap:0 26px;
+}
+.num{
+  font-family:var(--mono); font-size:12px; font-weight:600; letter-spacing:.08em;
+  color:var(--prussian-ink); padding-top:9px;
+}
+.num span{display:block;color:var(--ink-3);font-weight:400;font-size:10px;margin-top:5px;letter-spacing:.13em}
+.body{min-width:0}
+h2{
+  font-family:var(--serif); font-weight:600; font-size:clamp(1.4rem,3vw,1.85rem);
+  line-height:1.2; letter-spacing:-.015em; margin:0 0 18px; text-wrap:balance;
+}
+h3{
+  font-family:var(--serif); font-weight:600; font-size:1.13rem; line-height:1.32;
+  margin:36px 0 12px; text-wrap:balance;
+}
+h3 .grade{margin-left:8px;vertical-align:2px}
+p{margin:0 0 15px;max-width:var(--measure)}
+.body>ul,.body>ol{max-width:var(--measure);margin:0 0 15px;padding-left:20px}
+li{margin:0 0 9px}
+strong{font-weight:600}
+em{font-style:italic}
+code,.m{
+  font-family:var(--mono); font-size:.855em; font-variant-numeric:tabular-nums;
+  background:var(--surface-2); padding:.1em .38em; border-radius:2px;
+}
+.lead{font-size:19px;line-height:1.5;color:var(--ink);max-width:var(--measure)}
+
+/* ---------- callouts ---------- */
+.note{
+  border-left:3px solid var(--prussian); background:var(--prussian-soft);
+  padding:16px 20px; margin:20px 0; max-width:var(--measure);
+}
+.note.alert{border-left-color:var(--oxide);background:var(--oxide-soft)}
+.note p:last-child{margin-bottom:0}
+.note .lbl{
+  font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--prussian-ink);display:block;margin-bottom:7px;font-weight:500;
+}
+.note.alert .lbl{color:var(--oxide-ink)}
+
+/* ---------- tables ---------- */
+.scroll{overflow-x:auto;margin:20px 0;border:1px solid var(--rule);background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:14.5px}
+th,td{padding:9px 14px;text-align:left;border-bottom:1px solid var(--rule);vertical-align:top}
+thead th{
+  font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink-3);font-weight:500;background:var(--surface-2);white-space:nowrap;
+}
+tbody tr:last-child td{border-bottom:none}
+td.d,th.d{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+tr.hi td{background:var(--oxide-soft)}
+tr.hi td:first-child{box-shadow:inset 3px 0 0 var(--oxide)}
+
+/* key-value table, borderless */
+.kv{margin:22px 0;max-width:var(--measure)}
+.kv dl{display:grid;grid-template-columns:minmax(130px,auto) 1fr;gap:0;margin:0;
+  border-top:1px solid var(--rule)}
+.kv dt{
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.05em;color:var(--ink-3);
+  padding:8px 16px 8px 0;border-bottom:1px solid var(--rule);text-transform:uppercase;
+}
+.kv dd{
+  margin:0;padding:8px 0;border-bottom:1px solid var(--rule);
+  font-family:var(--mono);font-size:13.5px;font-variant-numeric:tabular-nums;
+}
+.kv dd b{font-weight:600;color:var(--prussian-ink)}
+.kv dd .g{font-family:var(--serif);font-size:15px;color:var(--ink-2);font-style:italic}
+
+/* ---------- grade chips ---------- */
+.grade{
+  display:inline-block;font-family:var(--mono);font-size:10px;font-weight:600;
+  letter-spacing:.11em;text-transform:uppercase;padding:3px 8px;border-radius:2px;
+  white-space:nowrap;
+}
+.g-strong{background:var(--prussian);color:var(--surface)}
+:root[data-theme="dark"] .g-strong{background:var(--prussian);color:#0E1116}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .g-strong{background:var(--prussian);color:#0E1116}}
+.g-div{background:transparent;color:var(--oxide-ink);border:1.5px solid var(--oxide)}
+.g-weak{background:var(--slate-soft);color:var(--slate);border:1px solid var(--rule)}
+
+/* ---------- domain grid ---------- */
+.domains{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(238px,1fr));
+  gap:1px;background:var(--rule);border:1px solid var(--rule);margin:24px 0;
+}
+.dom{background:var(--surface);padding:14px 16px;display:flex;flex-direction:column;gap:8px}
+.dom.is-div{background:var(--oxide-soft)}
+.dom.is-weak{background:var(--surface-2)}
+.dom .top{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.dom .code{font-family:var(--mono);font-size:11px;font-weight:600;color:var(--ink-3);letter-spacing:.08em}
+.dom .name{font-size:15.5px;font-weight:500;line-height:1.25}
+.dom .who{font-family:var(--mono);font-size:10.5px;color:var(--ink-3);letter-spacing:.04em;line-height:1.5}
+.dom .who b{color:var(--ink-2);font-weight:500}
+
+/* ---------- two-column survives/fails ---------- */
+.split{display:grid;grid-template-columns:repeat(auto-fit,minmax(272px,1fr));gap:20px;margin:22px 0}
+.col{border:1px solid var(--rule);background:var(--surface);padding:18px 20px}
+.col.robust{border-top:3px solid var(--prussian)}
+.col.fragile{border-top:3px solid var(--oxide)}
+.col h4{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;
+  margin:0 0 12px;font-weight:600;
+}
+.col.robust h4{color:var(--prussian-ink)}
+.col.fragile h4{color:var(--oxide-ink)}
+.col ul{margin:0;padding-left:17px;font-size:14.5px;line-height:1.55}
+.col li{margin-bottom:10px}
+.col li:last-child{margin-bottom:0}
+
+/* ---------- timing window ---------- */
+.window{
+  border:1px solid var(--rule);background:var(--surface);margin:22px 0;
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;
+  background:var(--rule);
+}
+.window>div{background:var(--surface);padding:16px 18px}
+.window .wk{font-family:var(--mono);font-size:10px;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--ink-3);margin-bottom:8px}
+.window .wv{font-family:var(--mono);font-size:14px;font-variant-numeric:tabular-nums;line-height:1.6}
+.window .wv b{color:var(--prussian-ink);font-weight:600}
+.window .wv .dis{color:var(--oxide-ink)}
+
+/* ---------- footer ---------- */
+footer{
+  border-top:2px solid var(--ink);margin-top:64px;padding-top:26px;
+  font-size:14.5px;color:var(--ink-2);
+}
+footer p{max-width:var(--measure)}
+footer .fin{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--ink-3);margin-top:22px;
+}
+hr.rule{border:none;border-top:1px solid var(--rule);margin:30px 0;max-width:var(--measure)}
+
+a{color:var(--prussian-ink);text-decoration-thickness:1px;text-underline-offset:2px}
+a:focus-visible,summary:focus-visible{outline:2px solid var(--prussian);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media (max-width:660px){
+  body{font-size:16px}
+  .wrap{padding:0 18px 72px}
+  section{grid-template-columns:1fr;gap:0}
+  .num{padding-top:0;margin-bottom:12px}
+  .num span{display:inline;margin-left:10px}
+  .kv dl{grid-template-columns:1fr}
+  .kv dt{padding-bottom:0;border-bottom:none}
+  .kv dd{padding-top:2px}
+}
+</style>
+
+<div class="wrap">
+
+<header class="mast">
+  <div class="eyebrow">Computed · Verified · Reconciled</div>
+  <h1>Six-Culture <em>Verified</em> Chart</h1>
+  <div class="subject">
+    <b>20 January 2003 · 05:24 IST</b><br>
+    Warud, Amravati district, Maharashtra, India · male<br>
+    Time certainty: exact minutes (±30 s)
+  </div>
+  <p class="trace">Every statement below traces to a computed value in the master dataset and a mapping rule in the synthesis. Nothing is asserted that was not calculated.</p>
+
+  <div class="strip">
+    <div class="cell"><div class="k">Data verified</div><div class="v">43</div><div class="n">0 failures</div></div>
+    <div class="cell"><div class="k">Engine agreement</div><div class="v">0.0026″</div><div class="n">3 engines</div></div>
+    <div class="cell"><div class="k">Divergent domains</div><div class="v warn">4 / 9</div><div class="n">44.4 %</div></div>
+    <div class="cell"><div class="k">Claims withheld</div><div class="v">13</div><div class="n">no valid basis</div></div>
+    <div class="cell"><div class="k">Strong windows</div><div class="v">0</div><div class="n">1 moderate</div></div>
+  </div>
+</header>
+
+<!-- ============ 1 ============ -->
+<section>
+  <div class="num">01<span>INPUT</span></div>
+  <div class="body">
+    <h2>Input and sensitivity</h2>
+
+    <div class="kv"><dl>
+      <dt>Local civil</dt><dd>2003-01-20T05:24:00+05:30</dd>
+      <dt>UTC</dt><dd>2003-01-19T23:54:00Z</dd>
+      <dt>Julian Day</dt><dd>2452659.4958333</dd>
+      <dt>Coordinates</dt><dd>21.4737672 °N, 78.2569898 °E</dd>
+      <dt>Civil weekday</dt><dd><b>Monday</b></dd>
+      <dt>Panchanga vara</dt><dd><b>Sunday</b> <span class="g">— the Vedic day begins at sunrise, and you were born 94 minutes before it</span></dd>
+      <dt>Mean solar</dt><dd>05:07:02</dd>
+      <dt>True solar</dt><dd><b>04:56:15</b></dd>
+      <dt>Sunrise / sunset</dt><dd>06:58:26 / 17:57:25</dd>
+    </dl></div>
+
+    <p><strong>Historical civil time is reliable.</strong> India held IST = UTC+05:30 with no daylight saving throughout 2003 — Indian DST existed only in 1942–45 and briefly in 1965 and 1971. The date is post-1970, so the IANA database governs. There is no offset ambiguity to preserve.</p>
+
+    <p><strong>Everything material is stable at your stated precision.</strong> "Exact minutes" means a ±30-second rounding window. All three ensemble instants (T−30 s, T, T+30 s) give identical results for every categorical output: Lagna sign, nakshatra and pada, Navamsa and Dasamsa Lagna, tropical Ascendant sign, the Moon's nakshatra and pada, and all four BaZi pillars under both time schools. <em>No rectification was performed and none is proposed.</em></p>
+
+    <h3>Three boundaries you should know about</h3>
+    <ul>
+      <li><strong>The Dasamsa (D10) Lagna is 1.86 minutes of clock time from a boundary.</strong> Stable at ±30 s, so it is reported — but if the recorded minute is off by even two minutes, the D10 Lagna moves from Meena to Mesha. Treat every D10-derived career statement as contingent on the minute being exactly right.</li>
+      <li><strong>Your true solar time falls 3 minutes 45 seconds on the far side of a BaZi hour boundary.</strong> The single most consequential convention split in your chart; section 05 deals with it directly.</li>
+      <li><strong>Your Sun sits at 29°29′ Capricorn — the final degree.</strong> The sign is stable for your birth time, but the Sun crosses into Aquarius roughly 12 hours later.</li>
+    </ul>
+
+    <div class="note">
+      <span class="lbl">Tested, not assumed away</span>
+      <p>Two settlements named Warud exist in Amravati district, about 68 km apart, and you named the district but not the tehsil. Both were computed. The Ascendant differs by 3.7 arcminutes and <em>every</em> categorical output is identical — same sign, nakshatra, pada, D9, D10, sect, and BaZi hour under both schools. The ambiguity is immaterial here.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 2 ============ -->
+<section>
+  <div class="num">02<span>METHOD</span></div>
+  <div class="body">
+    <h2>Verification</h2>
+    <p class="lead">43 material data were independently verified across three engines. Zero failures. Zero alerts.</p>
+
+    <ul>
+      <li><strong>Three independent engines, not two.</strong> Swiss Ephemeris vs JPL DE440s (Skyfield) agree to <span class="m">0.0026″</span>. A third path — the Moshier analytic ephemeris, which carries no data files and is mathematically independent of both the compressed-JPL <code>.se1</code> files <em>and</em> of DE440s — agrees to <span class="m">0.52″</span> at worst, on the Moon.</li>
+      <li><strong>A frame error was caught before any claim rested on it.</strong> The first comparison showed a <em>constant</em> 14.168″ offset on every body — the signature of a reference-frame mismatch, not an ephemeris difference. It was identified as the nutation in longitude (Δψ = −14.168017″ at this instant) and the frames were matched. Agreement then fell to 0.0026″. The engines were never averaged.</li>
+      <li><strong>Solar terms cross-checked by two genuinely independent algorithms</strong> — Swiss Ephemeris longitude crossings vs lunar_python's own routine — agreed to <strong>under one second</strong> on Xiaohan, Dahan and Lichun.</li>
+      <li><strong>The Maya conversion was validated against an external anchor:</strong> the same code reproduces 2012-12-21 = 13.0.0.0.0, 4 Ahau 3 Kankin.</li>
+      <li><strong>The Zi Wei chart was checked against classical rules by hand,</strong> not merely trusted: the Ming palace (寅 + month − hour index = 戌), the Shen palace (= 辰), and all four 壬-year transformations (天梁→祿, 紫微→權, 左輔→科, 武曲→忌).</li>
+      <li>Invariants passed: Rahu–Ketu exactly 180°, Vimshottari totalling 120 years, Ashtakavarga per-planet totals summing to 337, Egyptian bounds summing to 360°, 12 distinct Zi Wei palaces, 14 major stars, Maya round-trip exact, all timing periods continuous and non-overlapping.</li>
+    </ul>
+
+    <div class="note">
+      <span class="lbl">Engine independence, stated honestly</span>
+      <p>Swiss Ephemeris files descend from a JPL integration (DE431 lineage) and Skyfield here reads DE440s. These are <em>not</em> fully independent in data lineage — they are separate code paths and separate DE releases, and that is what their agreement demonstrates. The solar-term and Maya cross-checks <em>are</em> genuinely independent. <strong>py-iztro was deliberately not run alongside iztro</strong>, because it wraps the same logic and would have produced a fake second opinion.</p>
+    </div>
+
+    <p><strong>A validation gate caught a genuine bug in my own code.</strong> Checking the sixteen divisional charts revealed that <code>int(lon // (30/9))</code> mis-floors on exact boundaries, because 30/9 is not representable in binary — so 30.000° returned the 9th navamsa instead of the 10th. Fixed by multiplying first, then re-verified across 36,000 samples and every exact division boundary.</p>
+
+    <p><strong>Still not computed, and still not used:</strong> Tibetan Mewa, Parkha and all personal-force calculations (no validated lineage anchors); any Maya day-sign personality meaning (no classical or living-lineage source). <strong>13 claims remain withheld</strong> — 7 Tibetan components, 2 Maya meanings, 2 deliberately left as school splits rather than collapsed to one answer, and 2 duplicates of another cluster's vote.</p>
+
+    <h3>What survives a change of school</h3>
+    <p>The point of hardening the data was never more decimal places — the astronomy was already at 0.0026″, far past astrological relevance. It was to find out <strong>which convention choices actually move a conclusion in this chart.</strong> Twelve ayanamshas, twelve house systems, five sunrise conventions, three combustion tables and geocentric-vs-topocentric were each computed in full.</p>
+
+    <div class="split">
+      <div class="col robust">
+        <h4>Survives everything — state firmly</h4>
+        <ul>
+          <li>The <strong>Lagna is Dhanu under all twelve ayanamshas</strong>, across an 8.37° spread.</li>
+          <li>The <strong>Vimshottari starting lord is Mercury under all twelve</strong> — the entire dasha timeline, including the current Venus–Jupiter period, is ayanamsha-independent.</li>
+          <li><strong>Nocturnal sect holds under all five sunrise conventions</strong> (they span only 3.96 minutes).</li>
+          <li><strong>No planet is combust</strong> under BPHS, Surya Siddhanta or Western orbs.</li>
+          <li><strong>Fifteen of sixteen vargas are stable</strong> at ±30 s.</li>
+        </ul>
+      </div>
+      <div class="col fragile">
+        <h4>Does not survive — hedge, or name your school</h4>
+        <ul>
+          <li>The <strong>D10 Lagna changes under seven of twelve ayanamshas.</strong> With its 1.86-minute boundary, it is the most fragile thing in your chart — doubly contingent.</li>
+          <li><strong>D60 is unusable.</strong> It flips <em>within</em> the ±30 s window itself. No honest reading should use it here.</li>
+          <li><strong>Mars moves from the 12th house to the 11th in every quadrant system.</strong> At 1°48′ Sagittarius it is inside the sign but outside the cusp. A convention, not a fact.</li>
+          <li>The <strong>Moon shifts 38.6′ topocentrically</strong>, moving six of the finer vargas.</li>
+          <li><strong>Saturn changes sign under at least one ayanamsha</strong> — it sits at 29°14′, the last degree.</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>Panchanga</h3>
+    <div class="scroll"><table>
+      <thead><tr><th>Tithi</th><th>Vara</th><th>Nakshatra</th><th>Yoga</th><th>Karana</th></tr></thead>
+      <tbody><tr>
+        <td class="d">Krishna Dvitiya <span style="color:var(--ink-3)">#17</span></td>
+        <td class="d">Ravivara · lord Sun</td>
+        <td class="d">Ashlesha pada 3</td>
+        <td class="d">Ayushman</td>
+        <td class="d">Gara</td>
+      </tr></tbody>
+    </table></div>
+  </div>
+</section>
+
+<!-- ============ 3 ============ -->
+<section>
+  <div class="num">03<span>DIVERGENCE</span></div>
+  <div class="body">
+    <h2>Divergence rate — before any positive theme</h2>
+    <p class="lead"><strong>4 of 9 domains diverge (44.4 %).</strong> One further domain is quiet. Only 4 of 9 carry a convergent theme, and in every one the convergence is about <em>prominence</em>, not about outcome.</p>
+
+    <div class="domains">
+      <div class="dom is-strong"><div class="top"><span class="code">D1</span><span class="grade g-strong">Strong</span></div><div class="name">Self / identity</div><div class="who"><b>Jyotisha · Western · Sinic</b><br>prominence only; all mixed polarity</div></div>
+      <div class="dom is-strong"><div class="top"><span class="code">D2</span><span class="grade g-strong">Strong</span></div><div class="name">Career / status</div><div class="who"><b>Jyotisha · Western · Sinic</b><br>prominence only; all mixed polarity</div></div>
+      <div class="dom is-div"><div class="top"><span class="code">D3</span><span class="grade g-div">Divergent</span></div><div class="name">Wealth / gains</div><div class="who">prominence conflict<br><b>Jyotisha ↔ Sinic</b></div></div>
+      <div class="dom is-div"><div class="top"><span class="code">D4</span><span class="grade g-div">Divergent</span></div><div class="name">Partnership</div><div class="who">polarity <em>and</em> prominence<br><b>Jyotisha ↔ Sinic</b></div></div>
+      <div class="dom is-strong"><div class="top"><span class="code">D5</span><span class="grade g-strong">Strong</span></div><div class="name">Family / roots / home</div><div class="who"><b>Jyotisha · Western · Sinic</b><br>prominence only</div></div>
+      <div class="dom is-weak"><div class="top"><span class="code">D6</span><span class="grade g-weak">Quiet</span></div><div class="name">Children / creation</div><div class="who">all clusters report <b>low</b> prominence<br>not a convergent theme</div></div>
+      <div class="dom is-div"><div class="top"><span class="code">D7</span><span class="grade g-div">Divergent</span></div><div class="name">Health / routine</div><div class="who">polarity conflict<br><b>Jyotisha ↔ Sinic</b></div></div>
+      <div class="dom is-div"><div class="top"><span class="code">D8</span><span class="grade g-div">Divergent</span></div><div class="name">Mind / education / craft</div><div class="who">polarity conflict<br><b>Jyotisha + Western ↔ Sinic</b></div></div>
+      <div class="dom is-strong"><div class="top"><span class="code">D9</span><span class="grade g-strong">Strong</span></div><div class="name">Fortune / worldview</div><div class="who"><b>Jyotisha · Western · Sinic</b><br>prominence only</div></div>
+    </div>
+
+    <div class="note alert">
+      <span class="lbl">The divergence rate went up when the data got better</span>
+      <p>In the first pass it was 3 of 9. Computing Shadbala moved <strong>D7 from STRONG to DIVERGENT</strong>: Jyotisha's own strength arithmetic puts Saturn — the graha sitting in house 6 — last of the seven and below its classical minimum, contradicting Zi Wei's bright Sun in the health palace. More rigour found <em>more</em> disagreement, not less. That is the expected direction when you stop letting vague agreement stand in for real agreement.</p>
+    </div>
+
+    <p>Before the agreements are worth anything, one structural finding has to be stated, because it would otherwise inflate everything that follows.</p>
+
+    <div class="note">
+      <span class="lbl">Jyotisha and Hellenistic houses are mechanically correlated</span>
+      <p>Both use whole-sign houses. The Lahiri ayanamsha (23°53′59″) shifts your Ascendant <em>and</em> every planet by the same amount, so the house number survives the translation. <strong>6 of your 7 traditional planets land in the same house in both systems</strong> — only the Sun differs, because the ayanamsha carried the Ascendant back from Capricorn into Sagittarius while the Sun stayed in Capricorn.</p>
+      <p>So when a Jyotisha reading and a Western reading "agree" that Jupiter is in your 8th house, that is one observation stated twice. An independence gate enforces this: these two clusters earn two votes only when at least one side rests on a mechanism the other does not have — dignity, sect, lots, nakshatra, or a timing technique.</p>
+    </div>
+
+    <p>Where they <em>genuinely</em> differ is <strong>dignity</strong>, because dignity depends on the sign, and the sign does change:</p>
+
+    <div class="scroll"><table>
+      <thead><tr><th>Planet</th><th>Jyotisha (sidereal)</th><th>Western (tropical)</th></tr></thead>
+      <tbody>
+        <tr><td class="d">Moon</td><td class="d">Cancer — <strong>own sign</strong></td><td class="d">Leo — no essential dignity</td></tr>
+        <tr><td class="d">Mars</td><td class="d">Scorpio — <strong>own sign</strong></td><td class="d">Sagittarius — no essential dignity</td></tr>
+        <tr><td class="d">Jupiter</td><td class="d">Cancer — <strong>exalted</strong></td><td class="d">Leo — triplicity + face only</td></tr>
+      </tbody>
+    </table></div>
+
+    <p>That is a real, material disagreement between two of your three primary clusters about how well-placed your three most-discussed planets actually are. It is not smoothed over anywhere below.</p>
+  </div>
+</section>
+
+<!-- ============ 4 ============ -->
+<section>
+  <div class="num">04<span>CONVERGENT</span></div>
+  <div class="body">
+    <h2>Strongest cross-cultural themes</h2>
+    <div class="note">
+      <span class="lbl">Read this before the four themes</span>
+      <p>All four are <strong>strong on prominence with mixed polarity</strong>. That distinction is the whole point: three traditions independently marking an area as <em>significant</em> is not the same as three traditions predicting it will go <em>well</em>. None of the four carries a directional claim.</p>
+    </div>
+
+    <h3>D1 · Self / identity <span class="grade g-strong">Strong</span></h3>
+    <p>Three unrelated mechanisms each place the anchor of your identity somewhere effortful rather than somewhere easy:</p>
+    <ul>
+      <li><strong>Jyotisha:</strong> Lagna is Dhanu 11°33′ in Mula pada 4. Its lord Jupiter is <em>exalted</em> — but sits in the 8th house and is retrograde.</li>
+      <li><strong>Western:</strong> Ascendant Capricorn 5°27′; its ruler Saturn is in the 6th, retrograde, holds triplicity dignity — and is the malefic <strong>contrary to sect</strong> in a night chart, its least comfortable condition.</li>
+      <li><strong>Sinic:</strong> Day Master 癸 Gui (yin Water) computes as <em>moderately weak</em> (support ratio 0.427), rooted only in the month branch 丑, which stores 癸 as a hidden stem rather than exposing it. Zi Wei places 貪狼 at brightness +3 in the Ming palace.</li>
+    </ul>
+    <p>Shadbala sharpens this rather than softening it: the Lagna lord Jupiter ranks <strong>second strongest of the seven at 8.19 rupas against a 6.5 requirement</strong> — genuinely strong in absolute terms, and still sitting in a dusthana.</p>
+    <p>The convergent theme is that the significator of "you" is capable in principle but positioned where it has to work indirectly. Note the clusters disagree on <em>which planet that even is</em> — Jupiter in Jyotisha, Saturn in the Western chart — which is why the theme is about placement, not about a planet.</p>
+
+    <h3>D2 · Career / status <span class="grade g-strong">Strong</span></h3>
+    <ul>
+      <li><strong>Jyotisha:</strong> Sarvashtakavarga gives house 10 <strong>37 bindus — the joint highest</strong> of your twelve houses. Yet house 10 is empty, and its lord Mercury sits in house 1.</li>
+      <li><strong>Western:</strong> whole-sign house 10 is Libra and holds the Midheaven at 17°02′. Its ruler Venus is the <strong>benefic of sect</strong> in your night chart and occupies its own bound — but sits in house 12.</li>
+      <li><strong>Sinic:</strong> the career palace 官禄 holds 七殺 at brightness +3, a decisive and demanding star. In BaZi the Officer element is structurally present but appears <em>only</em> as hidden stems — never in a visible stem.</li>
+    </ul>
+    <p>Three systems, three mechanisms, one shape: career registers as a high-prominence area whose significators are strong but positioned out of direct view — the 12th house, an empty 10th worked through its lord, hidden stems.</p>
+
+    <h3>D5 · Family / roots / home <span class="grade g-strong">Strong</span></h3>
+    <p>Jyotisha's 4th lord Jupiter is exalted but in the 8th; the Western 4th ruler Mars — the malefic <em>of</em> sect, so not the harder one — is in the 12th; Zi Wei's property palace 田宅 carries 天梁 at +2 with <strong>化祿, the prosperity transformation of your 壬 birth year</strong>. The Zi Wei signal leans positive where the other two read as displaced; no cluster contradicts another outright, so this is agreement on prominence only.</p>
+
+    <h3>D9 · Fortune / spirituality / worldview <span class="grade g-strong">Strong</span></h3>
+    <ul>
+      <li><strong>Jyotisha:</strong> Lagna in <strong>Mula</strong> pada 4 — the "root" asterism, ruled by Ketu; Ketu itself in the 12th, the moksha house, with Mars and Venus; Jupiter exalted in the 8th.</li>
+      <li><strong>Western:</strong> house 9 is empty and worked through Mercury in house 1; Jupiter holds triplicity and face but is the benefic <strong>contrary to sect</strong>.</li>
+      <li><strong>Sinic:</strong> the Fortune palace 福德 holds 廉貞 (−1) with 天相 (+3) — and it is your <strong>current decadal palace</strong>, nominal ages 24–33.</li>
+    </ul>
+    <p>Three independent routes to the same emphasis: an orientation toward depth, roots and what is hidden rather than toward what is displayed. The Jyotisha side is the only one leaning positive; the other two read mixed.</p>
+  </div>
+</section>
+
+<!-- ============ 5 ============ -->
+<section>
+  <div class="num">05<span>CONFLICT</span></div>
+  <div class="body">
+    <h2>Disagreements — not smoothed over</h2>
+
+    <h3>The BaZi hour pillar is unresolved, and I will not pick one</h3>
+    <p>This is the sharpest split in your chart.</p>
+    <div class="scroll"><table>
+      <thead><tr><th>Convention</th><th class="d">Time used</th><th class="d">Hour pillar</th><th class="d">Hour Ten God</th></tr></thead>
+      <tbody>
+        <tr><td>Civil clock</td><td class="d">05:24:00</td><td class="d">乙卯 Yi-Mao</td><td class="d">食神 Eating God</td></tr>
+        <tr><td>Local mean solar time</td><td class="d">05:07:02</td><td class="d">乙卯 Yi-Mao</td><td class="d">食神 Eating God</td></tr>
+        <tr class="hi"><td><strong>True solar time</strong></td><td class="d"><strong>04:56:15</strong></td><td class="d"><strong>甲寅 Jia-Yin</strong></td><td class="d"><strong>傷官 Hurting Officer</strong></td></tr>
+      </tbody>
+    </table></div>
+    <p>Your longitude is 4.24° west of the IST meridian (−16.97 min) and the equation of time on 20 January is −10.78 min. Together they pull true solar time to 04:56:15 — <strong>3 minutes 45 seconds</strong> before the 卯 boundary, into the 寅 hour.</p>
+    <p>Two of three conventions give 乙卯, which is worth knowing, but it is not a majority verdict — <em>schools are not votes</em>. The branch relations change too: under 寅 you additionally get a 寅-巳 harm <em>and</em> a partial 寅-巳-申 punishment that simply do not exist under 卯. What both schools agree on: the year (壬午), month (癸丑) and day (癸巳) pillars, the 癸 yin-Water Day Master, and its "moderately weak" label. <strong>Anything resting on the hour pillar alone is low confidence. Anything resting on the other three is not.</strong></p>
+
+    <h3>The BaZi favourable element splits three ways</h3>
+    <div class="scroll"><table>
+      <thead><tr><th>School</th><th class="d">Favourable elements</th><th class="d">Hour-dependent?</th></tr></thead>
+      <tbody>
+        <tr><td>扶抑 Fu Yi — support / suppress</td><td class="d"><strong>Water, Metal</strong></td><td class="d">yes</td></tr>
+        <tr><td>調候 Tiao Hou — climate regulation</td><td class="d"><strong>Fire</strong></td><td class="d">no</td></tr>
+        <tr><td>通關 Tong Guan — bridging</td><td class="d"><strong>Wood</strong></td><td class="d">yes</td></tr>
+      </tbody>
+    </table></div>
+    <p><strong>Three schools, three answers, zero overlap.</strong> Fu Yi supports a moderately weak Day Master with its own element and its resource. Tiao Hou reads 癸 born in the 丑 month as frozen water needing 丙 to warm it. Tong Guan bridges the heavy Water–Fire control clash with Wood. Two of the three additionally depend on the hour pillar, which is itself unresolved.</p>
+    <p><em>Any practitioner who hands you a single favourable element for this chart has silently picked a school. Ask which one.</em></p>
+
+    <h3>D3 · Wealth <span class="grade g-div">Divergent</span></h3>
+    <ul>
+      <li><strong>Jyotisha says quiet:</strong> Sarvashtakavarga house 2 = <strong>21 bindus, the second lowest</strong>; the 2nd lord Saturn is in the 6th; the 11th lord Venus is in the 12th; and the declared <strong>Dhana Yoga is absent</strong> — the two lords are not conjunct.</li>
+      <li><strong>Zi Wei says loud:</strong> the wealth palace 财帛 holds <strong>破軍 at brightness +3</strong> — a high-amplitude, disruption-and-rebuild star. In BaZi, Fire totals 2.1 units against a moderately weak Day Master: the classical "wealth heavier than the self" configuration.</li>
+    </ul>
+    <p>One cluster reads a low-emphasis area; another reads a high-amplitude one. They are not describing the same thing and cannot be reconciled by averaging.</p>
+
+    <h3>D4 · Partnership <span class="grade g-div">Divergent</span></h3>
+    <ul>
+      <li><strong>Jyotisha says weak:</strong> Sarvashtakavarga house 7 = <strong>19 bindus — the lowest of all twelve</strong>; the house is empty; its lord Mercury is retrograde.</li>
+      <li><strong>Zi Wei says the opposite:</strong> the spouse palace 夫妻 holds <strong>紫微 at +2 carrying 化權</strong>, the power transformation, together with <strong>天府 at +1</strong> — the most dignified star pairing anywhere in your chart.</li>
+      <li><strong>Western sits between:</strong> the 7th ruler is the Moon, your sect light, but with no essential dignity and placed in the 8th; the <strong>Lot of Spirit falls in the 7th</strong>; Venus, benefic of sect, is in the 12th.</li>
+    </ul>
+    <p>This is the starkest contradiction in the whole chart: your weakest house by Jyotisha's own arithmetic is your strongest palace by Zi Wei's. <em>Anyone who tells you these "really agree" is choosing one and hiding the other.</em></p>
+
+    <h3>D7 · Health and daily routine <span class="grade g-div">Divergent</span></h3>
+    <p>This one changed when Shadbala was computed, and the change is instructive.</p>
+    <ul>
+      <li><strong>Jyotisha marks it prominent but weak.</strong> Sarvashtakavarga gives house 6 <strong>37 bindus, joint highest</strong>. But the graha sitting there is Saturn, and Shadbala puts <strong>Saturn last of the seven at 3.77 rupas against a 5.0 requirement</strong> — one of only two planets failing their classical minimum. Its lord Venus is in the 12th, satisfying a <strong>Vipareeta Raja Yoga</strong>.</li>
+      <li><strong>Western agrees on the loading:</strong> house 6 holds Saturn, retrograde, with triplicity dignity but <strong>contrary to sect</strong>; the <strong>Lot of Fortune</strong> also falls in house 6, as does the Lot of Courage.</li>
+      <li><strong>Zi Wei says the opposite:</strong> the health palace 疾厄 holds <strong>太陽 at +2</strong>, a bright benefic placement.</li>
+    </ul>
+    <div class="note alert">
+      <span class="lbl">Boundary of this reading</span>
+      <p>Read this domain as <em>routine, regimen and work-discipline being a structurally loaded area</em>. <strong>No medical inference is drawn, and none should be.</strong> This protocol makes no diagnostic, prognostic or health-outcome claim, and a symbolic system is not evidence about your body.</p>
+    </div>
+
+    <h3>D8 · Mind / education / craft <span class="grade g-div">Divergent</span></h3>
+    <ul>
+      <li><strong>Western says strong:</strong> Mercury and Saturn are in <strong>mutual reception by domicile</strong>, and <strong>all seven dispositor chains terminate in that pair</strong> — the structural terminus of your entire chart.</li>
+      <li><strong>BaZi says under-resourced:</strong> the Resource element 印 is <strong>Metal at 0.9 units — the weakest of your five</strong>, present only as hidden 辛 in 丑 and hidden 庚 in 巳.</li>
+      <li><strong>Jyotisha now sides with the Western chart, by its own arithmetic:</strong> Shadbala makes <strong>Mercury the strongest graha at 8.61 rupas against a 7.0 requirement</strong>. So the Mercury–Saturn pair the Hellenistic chart calls its terminus is, in Jyotisha's own reckoning, a pairing of the chart's <strong>strongest and weakest planets</strong> — which sharpens the divergence rather than settling it.</li>
+    </ul>
+    <p>Two clusters now say the craft structure is the best-built thing you have; the BaZi says the fuel supply is the thinnest. Note that Jyotisha and Western agreeing here is <strong>not</strong> double-counting — one is a Shadbala total, the other a reception-and-dispositor argument, and neither derives from the shared whole-sign frame.</p>
+  </div>
+</section>
+
+<!-- ============ 6 ============ -->
+<section>
+  <div class="num">06<span>QUIET</span></div>
+  <div class="body">
+    <h2>Weak and quiet — where not to over-read</h2>
+    <h3>D6 · Children / creation <span class="grade g-weak">Quiet</span></h3>
+    <p>Every cluster that speaks reports <strong>low</strong> prominence: house 5 empty with 26 bindus and its lord Mars in the 12th; the Western 5th ruler Venus also in the 12th; Zi Wei's 子女 palace holding 天機 at <strong>−3, the dimmest major-star placement in your chart</strong>; BaZi output at 1.9 units — and <em>which</em> output star it is, Eating God or Hurting Officer, is one of the casualties of the unresolved hour pillar.</p>
+    <div class="note">
+      <span class="lbl">Unanimous quiet is not agreement</span>
+      <p>Four systems agreeing there is little signal means there is little signal — nothing more. It is not a convergent theme and certainly not a prediction. No fertility, pregnancy or family-planning inference is drawn from this or from anything else in this chart.</p>
+    </div>
+    <p>Also genuinely absent, and worth stating because absences are often glossed over: the <strong>Dhana Yoga</strong> does <strong>not</strong> form. Three <strong>Vipareeta Raja Yogas</strong> do form (6th lord in the 12th, 8th lord in the 8th, 12th lord in the 12th), and <strong>Gajakesari</strong> forms. <strong>Kemadruma is cancelled</strong> — Jupiter sits with the Moon. No <strong>Pancha Mahapurusha Yoga</strong> forms: Mars is in its own sign but in the 12th, Jupiter is exalted but in the 8th, so neither reaches a kendra.</p>
+  </div>
+</section>
+
+<!-- ============ 7 ============ -->
+<section>
+  <div class="num">07<span>TEMPERAMENT</span></div>
+  <div class="body">
+    <h2>Temperament overlay</h2>
+    <div class="scroll"><table>
+      <thead><tr><th>Axis</th><th>Reading</th><th>Basis</th></tr></thead>
+      <tbody>
+        <tr><td class="d">T1 Leadership</td><td><strong>contested</strong></td><td>Zi Wei elevated (紫微 +2 with 化權; 七殺 +3); Western and Jyotisha both damped — Ascendant ruler contrary to sect and retrograde, empty 10th, three planets in the 12th</td></tr>
+        <tr><td class="d">T2 Drive</td><td>present, privatised</td><td>Mars in own sign but in the 12th; the malefic <em>of sect</em>, applying to a sextile with the Sun at 2.32° — though by whole sign the two are in <strong>aversion</strong>, so the degree aspect is weaker testimony</td></tr>
+        <tr><td class="d">T3 Nurturing</td><td><strong>high — all three clusters</strong></td><td>Moon in own sign Karka; Moon is the sect light; Lot of Fortune in the 6th; SAV house 6 joint-highest at 37</td></tr>
+        <tr><td class="d">T4 Intellect</td><td>high but under-fuelled</td><td>Mercury–Saturn mutual reception as chart terminus; Mercury strongest by Shadbala at 8.61 rupas; but the BaZi Resource element weakest at 0.9</td></tr>
+        <tr><td class="d">T5 Adaptability</td><td><strong>high — all three clusters</strong></td><td>貪狼 +3 and 破軍 +3; yin-Water Day Master; dual-sign Lagna with three of seven true grahas retrograde</td></tr>
+        <tr><td class="d">T6 Discipline</td><td>high with friction</td><td>Capricorn Ascendant, Saturn in triplicity and mutual reception; but Saturn last by Shadbala at 3.77 rupas, retrograde at 29°14′, sharing house 6 with Rahu</td></tr>
+      </tbody>
+    </table></div>
+
+    <div class="note">
+      <span class="lbl">Attributed symbolism — no domain weight, no grade changes</span>
+      <p><strong>Maya:</strong> Long Count <span class="m">12.19.9.16.17</span>, Calendar Round <span class="m">8 Caban 10 Muwan</span>. The conversion is verified three ways. <strong>No personality meaning is asserted</strong> — popular "Mayan astrology" day-sign lists are a modern invention with no classical or living-lineage source.</p>
+      <p><strong>Tibetan:</strong> <strong>Water Male Horse</strong>, 17th Rabjung, year 16 — cross-checked against the BaZi year pillar 壬午, since the two sexagenary cycles run in lockstep. Water symbolism is associated with adaptability and flow, the Horse with movement; that is offered as attributed symbolism and nothing more. Mewa, Parkha and all personal-force calculations were <strong>omitted</strong> rather than guessed.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 8 ============ -->
+<section>
+  <div class="num">08<span>TIMING</span></div>
+  <div class="body">
+    <h2>Timing</h2>
+    <p class="lead">Current window: <strong>13 April 2026 → 20 January 2027.</strong> Moderate — two of three clusters.</p>
+
+    <div class="window">
+      <div>
+        <div class="wk">Jyotisha — Vimshottari</div>
+        <div class="wv">Venus Mahadasha<br>2016-02-11 → 2036-02-11<br><b>Jupiter Antardasha</b><br>2026-04-13 → 2028-12-12<br><span style="color:var(--ink-3)">from the Moon in Ashlesha</span></div>
+      </div>
+      <div>
+        <div class="wk">Western — profection</div>
+        <div class="wv">Age 23 → 12th house<br>Sagittarius<br><b>Lord of the Year: Jupiter</b><br>2026-01-20 → 2027-01-20<br><span style="color:var(--ink-3)">from years of age</span></div>
+      </div>
+      <div>
+        <div class="wk">Sinic — dissenting</div>
+        <div class="wv"><span class="dis">丙午 Direct Wealth 正财</span><br>Zi Wei year palace lands on<br>natal <span class="dis">财帛</span> wealth palace<br><span style="color:var(--ink-3)">points at D3, not D9</span></div>
+      </div>
+    </div>
+
+    <p>Two primary clusters arrive at <strong>Jupiter</strong> as time lord by wholly unrelated procedures — one derived from the Moon's position within its nakshatra at birth, the other from whole years of age counted from the Ascendant. The exact overlap is <strong>2026-04-13 → 2027-01-20</strong>. Both point at the same register: Jupiter rules the 1st in Jyotisha and the 12th in the Western chart, and sits in the 8th house in both; the profected house is the 12th. Retreat, depth and study rather than public advancement — domains <strong>D9</strong> and <strong>D8</strong>.</p>
+
+    <p><strong>The Sinic cluster dissents, and that is why this is not a strong window.</strong> Two clusters agree; one points elsewhere.</p>
+
+    <div class="note alert">
+      <span class="lbl">There is no strong window</span>
+      <p>No period in the examined range is activated by all three primary clusters on the same domain. Zodiacal Releasing was computed but is <strong>reported separately and not counted</strong> — it is a second Western technique, and stacking it beside profection would manufacture agreement inside a single cluster.</p>
+    </div>
+
+    <p><strong>Next transitions:</strong> <span class="m">2027-01-20</span> profection moves to the 1st house, Lord of the Year becomes Saturn · <span class="m">2027-01-22</span> the Saturn pratyantardasha ends · <span class="m">Lichun 2028</span> BaZi Da Yun turns 乙卯 → 丙辰 · <span class="m">2028-12-12</span> Venus–Jupiter gives way to Venus–Saturn.</p>
+  </div>
+</section>
+
+<!-- ============ 9 ============ -->
+<section>
+  <div class="num">09<span>FRAME</span></div>
+  <div class="body">
+    <h2>Closing frame</h2>
+    <p>What you have here is a reproducible calculation and an honest tally of where six traditional symbolic systems corroborate one another and where they contradict one another. The arithmetic is verified: three ephemeris engines agree sub-arcsecond, two independent algorithms agree on the solar terms to under a second, every structural invariant passes, and the conclusions have been tested against twelve ayanamshas, twelve house systems and five sunrise conventions.</p>
+
+    <p class="lead"><strong>None of that makes any of it a validated method of prediction.</strong> Verified inputs and correct arithmetic produce a verified chart, not a verified forecast. The agreements above are agreements between interpretive traditions — several of which, as section 03 shows, are not even as independent of each other as they appear.</p>
+
+    <p>And note which direction the extra rigour pushed things: measured divergence rose from 33 % to 44 % once Shadbala was computed. Better data found <em>more</em> disagreement between these traditions, not less.</p>
+
+    <hr class="rule">
+
+    <p>Three things this document deliberately does not do: it names no favourable outcome, it makes no claim about health, lifespan, fertility, finances or legal matters, and it does not choose between schools where the schools genuinely disagree. Where your chart is ambiguous — the hour pillar, partnership, wealth, the fuel behind your craft — it is left ambiguous, because that is what the calculation actually says.</p>
+
+    <p><strong>Read the strong themes as areas your chart marks as loaded, not as areas that will go well or badly.</strong> Nothing here is fate, and nothing here should displace your own judgement about your life.</p>
+  </div>
+</section>
+
+<footer>
+  <p>Computed with Swiss Ephemeris 2.10.03, JPL DE440s via Skyfield 1.55, the Moshier analytic ephemeris, lunar_python 1.4.8, iztro 2.6.0 and convertdate 2.4.1. Full dataset, verification report, precision report and source are in the accompanying repository; the pipeline rebuilds byte-identically from a single input file.</p>
+  <div class="fin">43 data verified · 0 failures · 13 claims withheld</div>
+</footer>
+
+</div>

@@ -106,7 +106,7 @@ That is a real, material disagreement between two of your three primary clusters
 
 ## 4. Strongest cross-cultural themes
 
-**All four of these are STRONG on prominence with mixed polarity.** That distinction is the whole point: three traditions independently marking an area as *significant* is not the same as three traditions predicting it will go *well*. None of the five carries a directional claim.
+**All four of these are STRONG on prominence with mixed polarity.** That distinction is the whole point: three traditions independently marking an area as *significant* is not the same as three traditions predicting it will go *well*. None of the four carries a directional claim.
 
 ### D1 · Self / identity — STRONG (prominence), polarity mixed in all three clusters
 
