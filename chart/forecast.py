@@ -375,10 +375,21 @@ def score(logged, outcomes):
         by_window[key]["flagged"].add(w["domain"])
         by_window[key]["grades"].add(w["grade"])
 
+    today = dt.date.today()
     rows, observed, expected = [], 0, 0.0
+    not_yet, no_data = [], []
     for key, info in sorted(by_window.items()):
+        w_end = dt.date.fromisoformat(key.split("..")[1])
         reported = set(outcomes.get(key, []))
+        if w_end > today:
+            # A window that has not closed cannot be scored. Scoring one in progress
+            # is how a forecast gets marked correct before it has had a chance to fail.
+            not_yet.append({"window": key, "closes": key.split("..")[1],
+                            "days_remaining": (w_end - today).days,
+                            "outcomes_supplied": sorted(reported)})
+            continue
         if not reported:
+            no_data.append(key)
             continue
         flagged = info["flagged"]
         f, r = len(flagged), len(reported)
@@ -391,9 +402,19 @@ def score(logged, outcomes):
                      "chance_of_hit_if_random": round(p_chance, 4),
                      "grade": "STRONG" if "STRONG" in info["grades"] else "MODERATE"})
     if not rows:
-        return {"scored_windows": 0,
-                "note": ("No outcomes supplied yet. Fill the template and re-run. Record what was "
-                         "notable BEFORE re-reading the forecast, or this measures hindsight.")}
+        out = {"scored_windows": 0}
+        if not_yet:
+            out["nothing_to_score_yet"] = (
+                f"{len(not_yet)} of {len(by_window)} windows have not closed. A window still "
+                f"running cannot be scored -- that is how a forecast gets marked correct before "
+                f"it has had a chance to fail.")
+            out["still_open"] = not_yet
+        if no_data:
+            out["closed_but_no_outcomes_recorded"] = no_data
+        out["next_step"] = ("Keep notes as the year goes. When a window closes, write down which "
+                            "domains actually mattered -- from your notes, BEFORE re-reading the "
+                            "forecast -- then run --score again.")
+        return out
 
     n = len(rows)
     verdict = ("above chance in this sample" if observed > expected else
@@ -411,6 +432,8 @@ def score(logged, outcomes):
             f"{abs(observed - expected):.1f} hits is well inside what noise produces. "
             f"Dozens of windows would be needed before the comparison meant anything, and "
             f"a single person's life supplies only a few per year."),
+        "windows_still_open_not_scored": not_yet,
+        "windows_closed_without_outcomes": no_data,
         "known_biases": [
             "The scorer knows which domains were flagged, which invites hindsight fitting.",
             "'Notable' is judged by the same person the forecast is about.",
