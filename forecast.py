@@ -11,11 +11,22 @@ exact dates and the computed basis. It does not predict events, outcomes, or whe
 anything will go well. See the module docstring in chart/forecast.py.
 """
 import argparse, datetime as dt, json, os, sys
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
+ROOT = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, ROOT)
+
+# Re-exec under the project venv if this interpreter lacks the dependencies, so
+# `./forecast.py` works without the caller having to know about .venv.
+_VENV = os.path.join(ROOT, ".venv", "bin", "python")
+if os.path.exists(_VENV) and not os.environ.get("_FORECAST_REEXEC"):
+    try:
+        import swisseph  # noqa: F401
+    except ImportError:
+        os.environ["_FORECAST_REEXEC"] = "1"
+        os.execv(_VENV, [_VENV, os.path.abspath(__file__)] + sys.argv[1:])
 from chart.forecast import (Engine, DOMAINS, seal, score, aggregate,
                             effective_window, BACKGROUND_RATIO)
 
-ROOT = os.path.dirname(os.path.abspath(__file__))
 LOGDIR = os.path.join(ROOT, "forecast_log")
 
 BANNER = (
@@ -93,6 +104,8 @@ def detail(wins, n=3):
         for c, whys in sorted(w["basis"].items()):
             for x in whys:
                 print(f"      {c:9s} {x}")
+        if w.get("basis_changes_mid_window"):
+            print("      (the basis changes partway through this window -- all reasons listed)")
         nat = w.get("underlying_cluster_windows") or {}
         for c, (a2, b2) in sorted(nat.items()):
             if a2 > w["start"] or b2 < w["end"] or a2 < w["start"]:

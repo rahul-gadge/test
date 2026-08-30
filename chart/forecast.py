@@ -322,7 +322,25 @@ class Engine:
                 p = merged[-1]
                 if (p["domain"] == h["domain"] and p["end"] == h["start"]
                         and p["clusters"] == h["clusters"]):
+                    # The window continues, but the REASON can change across the join --
+                    # e.g. the BaZi annual pillar turns at Lichun mid-window. Union the
+                    # bases so the printed justification covers the whole span rather
+                    # than only its first segment.
                     p["end"] = h["end"]
+                    for c, whys in h["basis"].items():
+                        cur = p["basis"].setdefault(c, [])
+                        for w in whys:
+                            if w not in cur:
+                                cur.append(w)
+                    for c, span in h.get("underlying_cluster_windows", {}).items():
+                        p.setdefault("underlying_cluster_windows", {})
+                        prev = p["underlying_cluster_windows"].get(c)
+                        if prev and prev != span:
+                            p["underlying_cluster_windows"][c] = [
+                                min(prev[0], span[0]), max(prev[1], span[1])]
+                        elif not prev:
+                            p["underlying_cluster_windows"][c] = span
+                    p["basis_changes_mid_window"] = True
                     continue
             merged.append(dict(h))
         merged.sort(key=lambda h: (h["start"], -h["cluster_count"], h["domain"]))

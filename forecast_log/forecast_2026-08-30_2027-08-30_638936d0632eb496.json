@@ -1,0 +1,151 @@
+{
+ "generated_utc": "2026-08-30T07:23:42.957390+00:00",
+ "range": [
+  "2026-08-30",
+  "2027-08-30"
+ ],
+ "min_clusters": 2,
+ "windows": [
+  {
+   "domain": "D9",
+   "domain_name": "Fortune / spirituality / worldview",
+   "start": "2026-08-30",
+   "end": "2027-01-20",
+   "underlying_cluster_windows": {
+    "jyotisha": [
+     "2026-04-13",
+     "2028-12-12"
+    ],
+    "western": [
+     "2026-01-20",
+     "2027-01-20"
+    ]
+   },
+   "clusters": [
+    "jyotisha",
+    "western"
+   ],
+   "cluster_count": 2,
+   "grade": "MODERATE",
+   "basis": {
+    "jyotisha": [
+     "antardasha lord Jupiter occupies house 8"
+    ],
+    "western": [
+     "profected house 12 itself",
+     "Lord of the Year Jupiter rules house 12",
+     "Lord of the Year Jupiter occupies house 8"
+    ]
+   },
+   "background_not_counted": {
+    "sinic": [
+     "Zi Wei decadal palace falls on natal 福德 [3652 d = 10.0x the finest active period -- background, not counted]"
+    ]
+   }
+  },
+  {
+   "domain": "D1",
+   "domain_name": "Self / identity",
+   "start": "2027-01-20",
+   "end": "2027-08-30",
+   "underlying_cluster_windows": {
+    "jyotisha": [
+     "2026-04-13",
+     "2028-12-12"
+    ],
+    "western": [
+     "2027-01-20",
+     "2028-01-20"
+    ]
+   },
+   "clusters": [
+    "jyotisha",
+    "western"
+   ],
+   "cluster_count": 2,
+   "grade": "MODERATE",
+   "basis": {
+    "jyotisha": [
+     "antardasha lord Jupiter rules house 1"
+    ],
+    "western": [
+     "profected house 1 itself",
+     "Lord of the Year Saturn rules house 1"
+    ]
+   },
+   "background_not_counted": {},
+   "basis_changes_mid_window": true
+  },
+  {
+   "domain": "D3",
+   "domain_name": "Wealth / gains",
+   "start": "2027-01-20",
+   "end": "2027-08-30",
+   "underlying_cluster_windows": {
+    "western": [
+     "2027-01-20",
+     "2028-01-20"
+    ],
+    "sinic": [
+     "2026-02-03",
+     "2028-02-04"
+    ]
+   },
+   "clusters": [
+    "sinic",
+    "western"
+   ],
+   "cluster_count": 2,
+   "grade": "MODERATE",
+   "basis": {
+    "western": [
+     "Lord of the Year Saturn rules house 2"
+    ],
+    "sinic": [
+     "BaZi annual pillar 丙午 is 正财 to the Day Master",
+     "Zi Wei annual palace falls on natal 财帛",
+     "BaZi annual pillar 丁未 is 偏财 to the Day Master"
+    ]
+   },
+   "background_not_counted": {
+    "jyotisha": [
+     "mahadasha lord Venus rules house 11 [7305 d = 20.0x the finest active period -- background, not counted]"
+    ]
+   },
+   "basis_changes_mid_window": true
+  },
+  {
+   "domain": "D5",
+   "domain_name": "Family / roots / home",
+   "start": "2027-01-20",
+   "end": "2027-08-30",
+   "underlying_cluster_windows": {
+    "jyotisha": [
+     "2026-04-13",
+     "2028-12-12"
+    ],
+    "western": [
+     "2027-01-20",
+     "2028-01-20"
+    ]
+   },
+   "clusters": [
+    "jyotisha",
+    "western"
+   ],
+   "cluster_count": 2,
+   "grade": "MODERATE",
+   "basis": {
+    "jyotisha": [
+     "antardasha lord Jupiter rules house 4"
+    ],
+    "western": [
+     "Lord of the Year Saturn rules house 2"
+    ]
+   },
+   "background_not_counted": {},
+   "basis_changes_mid_window": true
+  }
+ ],
+ "seal": "638936d0632eb496"
+}
