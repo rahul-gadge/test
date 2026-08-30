@@ -18,7 +18,10 @@ sys.path.insert(0, ROOT)
 # Re-exec under the project venv if this interpreter lacks the dependencies, so
 # `./forecast.py` works without the caller having to know about .venv.
 _VENV = os.path.join(ROOT, ".venv", "bin", "python")
-if os.path.exists(_VENV) and not os.environ.get("_FORECAST_REEXEC"):
+# Scoring needs no ephemeris, so do not force a re-exec for it: a sealed forecast must
+# stay scoreable in a bare environment long after the toolchain is gone.
+_SCORING = "--score" in sys.argv
+if os.path.exists(_VENV) and not _SCORING and not os.environ.get("_FORECAST_REEXEC"):
     try:
         import swisseph  # noqa: F401
     except ImportError:

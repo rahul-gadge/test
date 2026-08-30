@@ -20,7 +20,10 @@ import json
 import subprocess
 import os
 
-from . import core
+# NOTE: `core` (Swiss Ephemeris) is imported lazily inside lichun(), not at module
+# level. Scoring a sealed forecast is pure arithmetic and must keep working in a bare
+# Python with no ephemeris installed -- a forecast sealed today may be scored a year
+# later in a fresh environment, and that must not require rebuilding the toolchain.
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -199,8 +202,9 @@ class Engine:
         repository turns on precisely this boundary.
         """
         if year not in self._lichun_cache:
+            from . import core
             guess = core.jd_ut(dt.datetime(year, 2, 4, tzinfo=dt.timezone.utc))
-            j = core.solar_longitude_crossing(315.0, guess)
+            j = core.solar_longitude_crossing(315.0, guess)  # noqa: F821 (core imported above)
             self._lichun_cache[year] = core.jd_to_utc(j).date()
         return self._lichun_cache[year]
 
