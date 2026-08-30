@@ -5,3 +5,6 @@ __pycache__/
 # Ephemeris data files are large binaries fetched by scripts/fetch_ephemeris.sh.
 # Their SHA-256 checksums are recorded in CALCULATION_MANIFEST.json.
 ephe/
+# Sealed forecasts and outcome logs are personal records. Commit your own if you
+# want them version-controlled for accountability; test runs should not be.
+forecast_log/

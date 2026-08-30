@@ -69,6 +69,38 @@ Convention sensitivity is computed rather than assumed: 12 ayanamshas, 12 house 
 conventions, 3 combustion tables, and geocentric vs topocentric are each run in full, and
 `PRECISION_REPORT.md` records which conclusions move and which do not.
 
+## Period forecaster
+
+`forecast.py` reports which life domains the traditions **flag as salient** in a window,
+with exact dates and the computed basis. It does **not** predict events, outcomes, or
+whether anything will go well — the registry maps to domain salience only, and there is
+no verb vocabulary in it, so outcome, health, lifespan, fertility, financial and legal
+claims are structurally impossible to emit.
+
+```bash
+./forecast.py --on 2026-08-29                    # what is active on one date
+./forecast.py --from 2026-01-01 --to 2031-01-01  # activation windows in a range
+./forecast.py --years 5 --log                    # seal a forecast for later scoring
+./forecast.py --score forecast_log/outcomes_template_*.json
+```
+
+Two rules keep it from manufacturing agreement:
+
+- **Each cluster votes with its finest active period,** and that vote counts only if the
+  period is within 4x the window length. A ten-year Zi Wei decadal palace is constant
+  background across a nine-month window — it cannot discriminate that window from any
+  other inside the decade, so it is reported separately and not counted. Without this
+  rule the engine reported the current window as STRONG 3/3; with it, it reproduces the
+  synthesis's MODERATE 2/3.
+- **BaZi and Zi Wei together contribute one vote,** as everywhere else in the project.
+
+`--log` seals a forecast with a content hash and writes an outcomes template. Fill in
+which domains actually turned out notable, then `--score` compares hits against an exact
+hypergeometric baseline — the chance of overlap if the same number of domains had been
+flagged at random. Scoring is grouped by time window, not by (window, domain) pair, and
+refuses to run if the sealed file was edited after the fact. It reports its own sample-size
+limits and the biases it cannot control.
+
 ## Counting rules
 
 Three primary clusters vote: **Jyotisha**, **Western/Hellenistic**, and **Sinic** (BaZi and Zi Wei
