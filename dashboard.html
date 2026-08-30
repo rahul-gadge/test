@@ -1,0 +1,563 @@
+<title>Rahul's Life Advantage Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&display=swap">
+<style>
+:root{
+  --paper:#F3F2EE; --surface:#FFFFFF; --surface-2:#EAE8E1; --sunken:#E2DFD6;
+  --ink:#1B1A16; --ink-2:#4E4B42; --ink-3:#7A756A;
+  --rule:#D8D4C9; --rule-2:#BFB9AA;
+  --brass:#8A6420; --brass-ink:#7A5518; --brass-soft:#F0E7D3;
+  --pine:#2F6B4E; --pine-soft:#DFEDE5;
+  --amber:#A8762A; --amber-soft:#F5E9D4;
+  --clay:#9A4632; --clay-soft:#F6E3DD;
+  --ui:"Archivo",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --prose:"Newsreader",Georgia,serif;
+  --measure:66ch;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#131310; --surface:#1B1B17; --surface-2:#23231E; --sunken:#0E0E0C;
+    --ink:#EDEAE1; --ink-2:#ADA79A; --ink-3:#807A6D;
+    --rule:#2C2C25; --rule-2:#3E3D34;
+    --brass:#CE9E48; --brass-ink:#DDB264; --brass-soft:#2A2113;
+    --pine:#6FB08C; --pine-soft:#16261E;
+    --amber:#D2A254; --amber-soft:#2A2114;
+    --clay:#C9755C; --clay-soft:#2B1913;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#131310; --surface:#1B1B17; --surface-2:#23231E; --sunken:#0E0E0C;
+  --ink:#EDEAE1; --ink-2:#ADA79A; --ink-3:#807A6D;
+  --rule:#2C2C25; --rule-2:#3E3D34;
+  --brass:#CE9E48; --brass-ink:#DDB264; --brass-soft:#2A2113;
+  --pine:#6FB08C; --pine-soft:#16261E;
+  --amber:#D2A254; --amber-soft:#2A2114;
+  --clay:#C9755C; --clay-soft:#2B1913;
+}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--ui);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1140px;margin:0 auto;padding:0 24px 90px}
+h1,h2,h3,h4{text-wrap:balance}
+.mono{font-variant-numeric:tabular-nums}
+
+/* header */
+header.top{padding:56px 0 24px;border-bottom:3px solid var(--ink)}
+.kicker{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--brass-ink)}
+h1{font-size:clamp(2rem,5vw,3rem);font-weight:700;letter-spacing:-.03em;line-height:1.02;margin:12px 0 0}
+.who{margin-top:14px;font-size:14px;color:var(--ink-2);font-variant-numeric:tabular-nums}
+.who b{color:var(--ink);font-weight:600}
+
+/* verdict strip */
+.verdict{display:grid;grid-template-columns:repeat(auto-fit,minmax(178px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);margin:26px 0 0}
+.vc{background:var(--surface);padding:15px 17px}
+.vc .k{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.vc .v{font-size:21px;font-weight:700;margin-top:6px;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.vc .n{font-size:12.5px;color:var(--ink-3);margin-top:3px;line-height:1.4}
+.vc.good .v{color:var(--pine)} .vc.mid .v{color:var(--amber)} .vc.low .v{color:var(--clay)}
+
+section{margin-top:52px}
+h2{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--brass-ink);
+   padding-bottom:9px;border-bottom:1px solid var(--rule-2);margin:0 0 20px}
+h3{font-size:1.22rem;font-weight:600;letter-spacing:-.015em;margin:30px 0 10px}
+h4{font-size:1rem;font-weight:600;margin:20px 0 7px}
+p{margin:0 0 13px;max-width:var(--measure)}
+ul,ol{margin:0 0 13px;padding-left:20px;max-width:var(--measure)}
+li{margin-bottom:7px}
+.prose{font-family:var(--prose);font-size:17.5px;line-height:1.62}
+.prose p{margin-bottom:14px}
+strong{font-weight:600}
+.tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+     padding:2px 7px;border-radius:2px;vertical-align:2px;margin-left:6px}
+.t-vh{background:var(--pine);color:var(--surface)} .t-h{background:var(--pine-soft);color:var(--pine);border:1px solid var(--pine)}
+.t-m{background:var(--amber-soft);color:var(--amber);border:1px solid var(--amber)}
+.t-l{background:var(--clay-soft);color:var(--clay);border:1px solid var(--clay)}
+.t-s{background:var(--surface-2);color:var(--ink-3);border:1px solid var(--rule-2)}
+:root[data-theme="dark"] .t-vh{color:#131310}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .t-vh{color:#131310}}
+
+/* dashboard grid */
+.dash{border:1px solid var(--rule);background:var(--surface);overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{padding:10px 13px;text-align:left;border-bottom:1px solid var(--rule);vertical-align:middle}
+thead th{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);background:var(--surface-2);white-space:nowrap}
+tbody tr:last-child td{border-bottom:none}
+td.num{font-variant-numeric:tabular-nums;font-weight:700;white-space:nowrap;width:1%}
+.bar{display:inline-block;width:74px;height:7px;background:var(--sunken);border-radius:1px;overflow:hidden;vertical-align:middle;margin-left:9px}
+.bar i{display:block;height:100%}
+.s-hi{color:var(--pine)} .s-hi .bar i{background:var(--pine)}
+.s-mid{color:var(--amber)} .s-mid .bar i{background:var(--amber)}
+.s-low{color:var(--clay)} .s-low .bar i{background:var(--clay)}
+.trend{font-weight:700;font-size:15px}
+.up{color:var(--pine)} .flat{color:var(--ink-3)} .down{color:var(--clay)}
+td.sm{font-size:13px;color:var(--ink-2);line-height:1.4}
+
+/* callouts */
+.box{border:1px solid var(--rule-2);background:var(--surface);padding:17px 20px;margin:20px 0}
+.box.brass{border-left:4px solid var(--brass);background:var(--brass-soft)}
+.box.warn{border-left:4px solid var(--clay);background:var(--clay-soft)}
+.box.good{border-left:4px solid var(--pine);background:var(--pine-soft)}
+.box .lbl{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;display:block;margin-bottom:8px}
+.box.brass .lbl{color:var(--brass-ink)} .box.warn .lbl{color:var(--clay)} .box.good .lbl{color:var(--pine)}
+.box p:last-child,.box ul:last-child{margin-bottom:0}
+.eli5{background:var(--surface-2);border:none;border-left:4px solid var(--brass);padding:15px 19px;margin:16px 0;font-family:var(--prose);font-size:17px;line-height:1.6}
+.eli5 .lbl{font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brass-ink);display:block;margin-bottom:7px}
+.eli5 p:last-child{margin-bottom:0}
+
+/* tiers */
+.tier{border:1px solid var(--rule);background:var(--surface);margin:14px 0;padding:0}
+.tier .head{display:flex;align-items:baseline;gap:11px;padding:13px 18px;background:var(--surface-2);border-bottom:1px solid var(--rule);flex-wrap:wrap}
+.tier .rank{font-size:12px;font-weight:700;letter-spacing:.12em;padding:3px 9px;border-radius:2px}
+.r-s{background:var(--pine);color:var(--surface)} .r-a{background:var(--brass);color:var(--surface)}
+.r-b{background:var(--amber-soft);color:var(--amber);border:1px solid var(--amber)}
+.r-c{background:var(--clay-soft);color:var(--clay);border:1px solid var(--clay)}
+:root[data-theme="dark"] .r-s,:root[data-theme="dark"] .r-a{color:#131310}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .r-s,:root:not([data-theme="light"]) .r-a{color:#131310}}
+.tier .name{font-size:1.05rem;font-weight:600}
+.tier .body{padding:15px 18px}
+.tier dl{display:grid;grid-template-columns:minmax(120px,auto) 1fr;gap:0;margin:0}
+.tier dt{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);padding:7px 14px 7px 0;border-bottom:1px solid var(--rule)}
+.tier dd{margin:0;padding:7px 0;border-bottom:1px solid var(--rule);font-size:14.5px;line-height:1.5}
+.tier dl>:nth-last-child(-n+2){border-bottom:none}
+
+/* timeline */
+.tl{border:1px solid var(--rule);background:var(--surface);overflow-x:auto;margin:20px 0}
+.tl table{font-size:13.5px}
+.yr{font-weight:700;font-variant-numeric:tabular-nums}
+.mode{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;padding:2px 7px;border-radius:2px;white-space:nowrap}
+.m-attack{background:var(--pine);color:var(--surface)}
+.m-build{background:var(--brass-soft);color:var(--brass-ink);border:1px solid var(--brass)}
+.m-trans{background:var(--amber-soft);color:var(--amber);border:1px solid var(--amber)}
+.m-caution{background:var(--clay-soft);color:var(--clay);border:1px solid var(--clay)}
+.m-harvest{background:var(--pine-soft);color:var(--pine);border:1px solid var(--pine)}
+:root[data-theme="dark"] .m-attack{color:#131310}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .m-attack{color:#131310}}
+
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(288px,1fr));gap:18px;margin:18px 0}
+.card{border:1px solid var(--rule);background:var(--surface);padding:16px 19px}
+.card h4{margin-top:0}
+.card ul{padding-left:18px;font-size:14.5px}
+footer{margin-top:60px;padding-top:24px;border-top:3px solid var(--ink);font-size:14px;color:var(--ink-2)}
+a{color:var(--brass-ink)}
+:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media (max-width:680px){
+  .wrap{padding:0 15px 70px}
+  .tier dl{grid-template-columns:1fr}
+  .tier dt{padding-bottom:0;border-bottom:none}
+  .tier dd{padding-top:2px}
+}
+</style>
+
+<div class="wrap">
+
+<header class="top">
+  <div class="kicker">Life Advantage Dashboard · Computed, not narrated</div>
+  <h1>Rahul's Strategic Chart Console</h1>
+  <div class="who">
+    <b>Rahul Nathuji Gadge</b> · 20 Jan 2003, 05:24 IST · Warud, Maharashtra · now Ghaziabad, UP<br>
+    Lagna <b>Dhanu 11°33′49″</b> (Mula pada 4) · Lahiri sidereal · whole sign · Vimshottari primary
+  </div>
+
+  <div class="verdict">
+    <div class="vc"><div class="k">Life phase</div><div class="v">Build</div><div class="n">Venus MD to Feb 2036</div></div>
+    <div class="vc good"><div class="k">Strongest area</div><div class="v">Career 8.1</div><div class="n">Mercury, strongest graha</div></div>
+    <div class="vc low"><div class="k">Weakest area</div><div class="v">Wealth 4.5</div><div class="n">Saturn rules it, ranks last</div></div>
+    <div class="vc"><div class="k">Peak career window</div><div class="v mono">2032–34</div><div class="n">Venus–Mercury, ages 29–31</div></div>
+    <div class="vc mid"><div class="k">Current mode</div><div class="v">Prepare</div><div class="n">to 20 Jan 2027</div></div>
+  </div>
+</header>
+
+<section>
+  <h2>Read this first — three things I am not giving you</h2>
+  <div class="box warn">
+    <span class="lbl">Declined, with what you get instead</span>
+    <ul>
+      <li><strong>A 24-month grid of 8 scores each (~200 numbers).</strong> There is no computed basis at monthly resolution beyond four pratyantardasha changes and twelve BaZi month pillars. I would be typing 200 numbers I made up. <strong>Instead:</strong> the four real monthly transitions, dated.</li>
+      <li><strong>"Best month for exams."</strong> That is a prediction about your CAT result, which I will not make. <strong>Instead:</strong> which months your chart's own preparation-favouring period actually covers, and how that lines up with the real CAT calendar.</li>
+      <li><strong>15 career archetypes × 5 scores (75 numbers).</strong> No chart distinguishes "AI automation operator" from "product manager" — those categories did not exist when these systems were written. <strong>Instead:</strong> the planetary signature that <em>is</em> computable, and career mapping done on economics with astrology as the secondary input, clearly separated.</li>
+    </ul>
+  </div>
+  <p><strong>Correction to your correction:</strong> your 11°34′ Ascendant is exactly what this repo computed — 11°33′49″, a difference of 10.9 arcseconds. Nothing needed changing. No 25°36′ figure was ever produced here; that came from another source and was wrong.</p>
+</section>
+
+<section>
+  <h2>1 · The dashboard</h2>
+  <p>Every score comes from one declared formula, not from judgement:</p>
+  <div class="box brass">
+    <span class="lbl">The formula</span>
+    <p style="margin:0"><code>score = 5 × (SAV bindus ÷ 28.1) × (house lord's Shadbala rupas ÷ its classical minimum)</code>, capped 1–10. 28.1 is the average bindu count per house (337 ÷ 12). Both inputs are classical computations that passed their invariants: Sarvashtakavarga totals exactly 337, and Shadbala uses five exact components with Cheshta flagged as approximate. <strong>The blend is my construction</strong> — reproducible and auditable, but not a classical authority.</p>
+  </div>
+
+  <div class="dash">
+    <table>
+      <thead><tr><th>Area</th><th>Score</th><th>Trend</th><th>Opportunity</th><th>Risk</th><th>Do now</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Career</strong></td><td class="num s-hi">8.1<span class="bar"><i style="width:81%"></i></span></td><td class="trend up">↑</td><td class="sm">10th house 37 bindus, joint highest; lord Mercury is the strongest graha and sits in your own Lagna</td><td class="sm">10th house is empty — nothing comes to you, you must go to it</td><td class="sm">Build a visible analytical track record</td></tr>
+        <tr><td><strong>Reputation</strong></td><td class="num s-hi">7.5<span class="bar"><i style="width:75%"></i></span></td><td class="trend up">↑</td><td class="sm">10th + 1st both strong; Arudha Lagna in Aquarius (public image = systems, networks, tech)</td><td class="sm">Image outruns substance if you market before you can deliver</td><td class="sm">Publish work, not opinions</td></tr>
+        <tr><td><strong>Health / Energy</strong></td><td class="num s-hi">7.1<span class="bar"><i style="width:71%"></i></span></td><td class="trend flat">→</td><td class="sm">6th house 37 bindus — you handle strain, competition and routine well</td><td class="sm">Saturn + Rahu in the 6th: the risk is chronic overwork, not weakness</td><td class="sm">Fixed sleep, fixed hours. Non-negotiable</td></tr>
+        <tr><td><strong>Travel / Relocation</strong></td><td class="num s-mid">5.7<span class="bar"><i style="width:57%"></i></span></td><td class="trend up">↑</td><td class="sm">Ketu in 12th with Mars and Venus; 9th lord Sun well-placed</td><td class="sm">Restlessness disguised as opportunity</td><td class="sm">Relocate for a specific role, never generally</td></tr>
+        <tr><td><strong>Inner Growth</strong></td><td class="num s-mid">5.7<span class="bar"><i style="width:57%"></i></span></td><td class="trend up">↑</td><td class="sm">Mula lagna, Ketu in 12th, Jupiter exalted in 8th — genuine depth capacity</td><td class="sm">Using introspection to postpone action</td><td class="sm">Cap reflection; convert it to writing</td></tr>
+        <tr><td><strong>Business</strong></td><td class="num s-mid">5.5<span class="bar"><i style="width:55%"></i></span></td><td class="trend up">↑</td><td class="sm">10th and 3rd strong; Mercury rules both 7th and 10th</td><td class="sm">7th house is your lowest (19 bindus) — partnerships are the weak leg</td><td class="sm">Build solo or majority-owned first</td></tr>
+        <tr><td><strong>Education</strong></td><td class="num s-mid">5.4<span class="bar"><i style="width:54%"></i></span></td><td class="trend up">↑</td><td class="sm">Jupiter exalted rules the 4th; D24 puts Mercury + Jupiter + Sun together in Scorpio</td><td class="sm">4th/5th houses only average (26 bindus each)</td><td class="sm">Depth over breadth — one exam, fully</td></tr>
+        <tr><td><strong>Investments</strong></td><td class="num s-mid">5.1<span class="bar"><i style="width:51%"></i></span></td><td class="trend flat">→</td><td class="sm">11th house 31 bindus; Venus MD active until 2036</td><td class="sm">8th lord Moon fails its Shadbala minimum (5.70 vs 6.0)</td><td class="sm">Index funds and boring compounding, not stock picking</td></tr>
+        <tr><td><strong>Networking</strong></td><td class="num s-mid">5.1<span class="bar"><i style="width:51%"></i></span></td><td class="trend up">↑</td><td class="sm">11th and 3rd both 31 bindus; Arudha in Aquarius favours networks</td><td class="sm">3rd lord Saturn is your weakest planet — effort does not come free</td><td class="sm">Systematise outreach; do not improvise it</td></tr>
+        <tr><td><strong>Creativity</strong></td><td class="num s-low">4.9<span class="bar"><i style="width:49%"></i></span></td><td class="trend flat">→</td><td class="sm">5th lord Mars in own sign Scorpio</td><td class="sm">Mars sits in the 12th — output happens privately or not at all</td><td class="sm">Ship in public on a schedule</td></tr>
+        <tr><td><strong>Wealth</strong></td><td class="num s-low">4.5<span class="bar"><i style="width:45%"></i></span></td><td class="trend flat">→</td><td class="sm">11th (gains) at 31 bindus is the healthy half</td><td class="sm"><strong>2nd house 21 bindus, and its lord Saturn ranks last of seven, below minimum. Dhana Yoga absent.</strong></td><td class="sm">Automate saving. Do not rely on instinct</td></tr>
+        <tr><td><strong>Relationships</strong></td><td class="num s-low">4.2<span class="bar"><i style="width:42%"></i></span></td><td class="trend flat">→</td><td class="sm">7th lord Mercury is your strongest planet and sits in the Lagna</td><td class="sm"><strong>7th house is 19 bindus — the lowest of all twelve — and empty</strong></td><td class="sm">Choose deliberately; do not drift into it</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="eli5">
+    <span class="lbl">Explain like I'm 5</span>
+    <p>Your chart is good at <em>doing the work and being seen doing it</em>, and weak at <em>holding on to what the work earns</em>. Career and reputation are your best rooms. Money and partnership are your worst.</p>
+    <p>That is not a prophecy of poverty. It means saving and investing will never feel natural to you the way analysis does — so it has to be a <strong>system</strong>, not a habit you hope develops. Automatic transfers on payday. Boring index funds. Written rules you follow when you do not feel like it.</p>
+  </div>
+</section>
+
+<section>
+  <h2>2 · Your unfair advantages</h2>
+
+  <div class="tier">
+    <div class="head"><span class="rank r-s">S-tier</span><span class="name">Analytical &amp; commercial intelligence — the Mercury signature</span><span class="tag t-vh">Very high confidence</span></div>
+    <div class="body"><dl>
+      <dt>Astrology</dt><dd><strong>Four independent confirmations.</strong> (1) Mercury is the strongest graha by Shadbala — 8.61 rupas against a 7.0 minimum. (2) It rules the 10th (career) <em>and</em> the 7th, and sits in your own Lagna. (3) In D10, the career chart, Mercury is in <strong>its own sign Gemini</strong>. (4) Independently, the Hellenistic chart finds Mercury in mutual reception with Saturn, with all seven dispositor chains terminating in that pair.</dd>
+      <dt>Real world</dt><dd>Fast structured thinking, comfort with numbers <em>and</em> words, explaining complex things simply, seeing the commercial angle in a technical problem.</dd>
+      <dt>Where it pays</dt><dd>Consulting, strategy, analytics, product, research-heavy finance, anything where the deliverable is <em>a clear answer to a messy question</em>.</dd>
+      <dt>Exploit it</dt><dd>CAT is almost purely a Mercury exam — quant, verbal, logic under time pressure. This is your home ground. Post-MBA, aim at roles judged on analysis quality, not on managing headcount early.</dd>
+      <dt>What ruins it</dt><dd>Mercury is retrograde and the 10th is empty. Nothing arrives on its own. Also: strong Mercury with a weak 2nd house is a classic profile for <em>earning well and keeping little</em>.</dd>
+    </dl></div>
+  </div>
+
+  <div class="tier">
+    <div class="head"><span class="rank r-a">A-tier</span><span class="name">Depth, research and advisory weight — exalted Jupiter</span><span class="tag t-h">High confidence</span></div>
+    <div class="body"><dl>
+      <dt>Astrology</dt><dd>Jupiter is <strong>exalted in Cancer</strong>, rules your 1st <em>and</em> 4th (the best functional combination available to a Sagittarius lagna), and ranks second by Shadbala at 8.19 against 6.5. It also forms <strong>Gajakesari Yoga</strong> with the Moon.</dd>
+      <dt>The catch</dt><dd>It sits in the <strong>8th house</strong> and is retrograde. Exalted, but working underground.</dd>
+      <dt>Real world</dt><dd>You go deeper than peers on things you care about, and people trust your read once you have done the work. Advisory credibility rather than charismatic authority.</dd>
+      <dt>Where it pays</dt><dd>Research, due diligence, risk, strategy, teaching, anything rewarding depth over speed.</dd>
+      <dt>Exploit it</dt><dd>Pick <em>one</em> domain and get genuinely deep. Your edge is being the person who actually read the thing.</dd>
+      <dt>What ruins it</dt><dd>The 8th house rewards depth and punishes display. Do not go wide and shallow to look impressive.</dd>
+    </dl></div>
+  </div>
+
+  <div class="tier">
+    <div class="head"><span class="rank r-a">A-tier</span><span class="name">Thriving in competition and pressure</span><span class="tag t-h">High confidence</span></div>
+    <div class="body"><dl>
+      <dt>Astrology</dt><dd>The 6th house — competition, obstacles, sustained effort — carries <strong>37 bindus, joint highest</strong>. It holds <strong>Rahu</strong>, classically one of Rahu's strongest placements. Its lord Venus in the 12th forms a <strong>Vipareeta Raja Yoga</strong>: gain arising specifically <em>through</em> difficulty.</dd>
+      <dt>Real world</dt><dd>Competitive exams, contested markets, adversarial work. You perform better with a scoreboard and a deadline than with open-ended freedom.</dd>
+      <dt>Where it pays</dt><dd>CAT and similar filters. Consulting's up-or-out. Any environment with explicit ranking.</dd>
+      <dt>Exploit it</dt><dd>Deliberately keep yourself in contests. Mock tests with percentile scores will move you more than untimed study.</dd>
+      <dt>What ruins it</dt><dd>Saturn and Rahu in the same house make overwork feel like virtue. This advantage burns you if unmanaged.</dd>
+    </dl></div>
+  </div>
+
+  <div class="tier">
+    <div class="head"><span class="rank r-b">B-tier</span><span class="name">Unconventional and technology-facing positioning</span><span class="tag t-m">Moderate confidence</span></div>
+    <div class="body"><dl>
+      <dt>Astrology</dt><dd><strong>Arudha Lagna in Aquarius</strong> — how the world reads you tilts toward systems, networks and the unorthodox. Its ruler Saturn sits in the 6th with Rahu (technology, foreign, non-traditional routes).</dd>
+      <dt>Honest caveat</dt><dd>Arudha is a single technique from one tradition, and its ruler is your weakest planet. Treat this as a tilt, not a mandate.</dd>
+      <dt>Where it pays</dt><dd>AI/automation applied to a specific industry, rather than AI as a field in itself.</dd>
+      <dt>Exploit it</dt><dd>Pair it with the S-tier: be the analyst who automates the analysis. That pairing is defensible for a decade.</dd>
+    </dl></div>
+  </div>
+
+  <div class="tier">
+    <div class="head"><span class="rank r-c">C-tier — must build deliberately</span><span class="name">Capital retention, partnership, and public assertion</span><span class="tag t-h">High confidence</span></div>
+    <div class="body"><dl>
+      <dt>Astrology</dt><dd>2nd house 21 bindus with Saturn — your weakest planet — as its lord. 7th house 19 bindus, the lowest, and empty. No Dhana Yoga. Three planets in the 12th (Mars, Venus, Ketu) — the house of outflow and things done out of sight.</dd>
+      <dt>Real world</dt><dd>Money leaves quietly. Partnerships are entered passively. Work happens behind the scenes and gets credited to someone else.</dd>
+      <dt>Counter</dt><dd>Systems, not willpower. Automated savings. Written partnership terms before anything starts. A public record of your work with your name on it.</dd>
+    </dl></div>
+  </div>
+
+  <div class="box good">
+    <span class="lbl">Rahul's top 5 — build your life on these</span>
+    <ol style="margin-bottom:0">
+      <li><strong>Structured analysis under time pressure</strong> — your single strongest, four-way confirmed asset</li>
+      <li><strong>Explaining complex things simply</strong> — Mercury in the Lagna, ruling the 10th</li>
+      <li><strong>Going deeper than everyone else on one chosen thing</strong> — exalted Jupiter, 8th house</li>
+      <li><strong>Performing when there is a scoreboard</strong> — 6th house at 37 bindus with Rahu</li>
+      <li><strong>Building systems that replace your own effort</strong> — this covers the C-tier weakness with an S-tier strength</li>
+    </ol>
+  </div>
+</section>
+
+<section>
+  <h2>3 · Self-sabotage patterns</h2>
+  <div class="grid2">
+    <div class="card"><h4>Money leaks quietly <span class="tag t-l">Critical</span></h4>
+      <p style="font-size:14.5px"><strong>Why:</strong> 2nd house 21 bindus; its lord Saturn ranks last of seven and fails its minimum; three planets in the 12th (outflow).</p>
+      <p style="font-size:14.5px"><strong>Looks like:</strong> good income, nothing accumulating. Subscriptions, convenience spending, lending to friends, no written budget.</p>
+      <p style="font-size:14.5px"><strong>Cost:</strong> a decade of strong earning with no net worth to show for it. This is the single most likely way you miss your stated goal.</p>
+      <p style="font-size:14.5px;margin-bottom:0"><strong>Counter:</strong> automate the transfer on payday <em>before</em> you see the balance. Target 30%+ of post-tax income. Never rely on discipline.</p>
+    </div>
+    <div class="card"><h4>Overwork read as virtue <span class="tag t-l">High</span></h4>
+      <p style="font-size:14.5px"><strong>Why:</strong> Saturn and Rahu together in the 6th, the house of labour, at 37 bindus.</p>
+      <p style="font-size:14.5px"><strong>Looks like:</strong> equating hours with progress; grinding past the point of return; guilt when resting.</p>
+      <p style="font-size:14.5px;margin-bottom:0"><strong>Counter:</strong> measure output, not hours. Fixed stop time. Your 6th-house strength is real but it will happily consume you.</p>
+    </div>
+    <div class="card"><h4>Depth becomes avoidance <span class="tag t-m">Moderate</span></h4>
+      <p style="font-size:14.5px"><strong>Why:</strong> Jupiter exalted but in the 8th; Ketu in the 12th; Mula lagna. Strong pull toward research and reflection.</p>
+      <p style="font-size:14.5px"><strong>Looks like:</strong> a fifth course instead of a first application; preparing forever; "not ready yet".</p>
+      <p style="font-size:14.5px;margin-bottom:0"><strong>Counter:</strong> a hard rule — every study block ends in something submitted, sent or published.</p>
+    </div>
+    <div class="card"><h4>Drifting into partnerships <span class="tag t-m">Moderate</span></h4>
+      <p style="font-size:14.5px"><strong>Why:</strong> 7th house lowest at 19 bindus and empty; its lord Mercury is strong but retrograde.</p>
+      <p style="font-size:14.5px"><strong>Looks like:</strong> business partners chosen by proximity; no written terms; equity split on a handshake.</p>
+      <p style="font-size:14.5px;margin-bottom:0"><strong>Counter:</strong> written terms and vesting before any joint venture. This applies to co-founders more than to romance.</p>
+    </div>
+    <div class="card"><h4>Invisible work <span class="tag t-m">Moderate</span></h4>
+      <p style="font-size:14.5px"><strong>Why:</strong> three planets in the 12th; 10th house empty; Mercury retrograde.</p>
+      <p style="font-size:14.5px;margin-bottom:0"><strong>Counter:</strong> a public artefact trail — writing, repos, case studies. Not self-promotion; evidence.</p>
+    </div>
+    <div class="card"><h4>Shiny-object risk <span class="tag t-s">Low</span></h4>
+      <p style="font-size:14.5px"><strong>Why:</strong> Rahu amplifies novelty appetite; dual-sign lagna.</p>
+      <p style="font-size:14.5px;margin-bottom:0"><strong>Honest note:</strong> weaker evidence than the others. Saturn's heaviness and the fixed-sign 6th push the other way. Watch it; do not assume it.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>4 · Karmic themes</h2>
+
+  <div class="box brass">
+    <span class="lbl">The central finding</span>
+    <p><strong>Your Atmakaraka is Saturn</strong> — the highest-degree planet at 29°14′, and the same under both the 7-planet and 8-body reckonings. In Jaimini terms, that is the soul's chosen curriculum.</p>
+    <p style="margin-bottom:0"><strong>And Saturn is the weakest planet in your chart</strong> — last of seven at 3.77 rupas against a 5.0 minimum. It also rules your 2nd house (money) and sits in the 6th with Rahu. The subject you are here to learn is the one you are least naturally equipped for. That is not a curse; it is a workload, and it is unusually legible.</p>
+  </div>
+
+  <h4>Theme 1 — Structure, patience, and the compounding of unglamorous effort</h4>
+  <p><strong>Immature version:</strong> resenting slowness; seeking shortcuts; treating discipline as something that should feel motivating. <strong>Mature version:</strong> building systems that work when motivation is absent. <strong>If mastered:</strong> the weak 2nd house stops mattering, because saving becomes structural rather than emotional. <strong>Action:</strong> one automated financial system and one automated study system, this month.</p>
+
+  <h4>Theme 2 — Rahu in the 6th, Ketu in the 12th: earn it in the arena</h4>
+  <p>Rahu in the 6th is one of its better placements — genuine appetite for competition and problem-solving. Ketu in the 12th pulls toward withdrawal, foreign things, and letting go. <strong>What life keeps teaching:</strong> your growth comes through contest, not through retreat — but you need real retreat to sustain the contest. <strong>Immature:</strong> oscillating between grinding and vanishing. <strong>Mature:</strong> scheduled recovery treated as part of the training, not a failure of it.</p>
+
+  <h4>Theme 3 — Depth that must surface</h4>
+  <p>Exalted Jupiter in the 8th, Mula lagna, Ketu in the 12th, Mars and Venus in the 12th. A great deal of your chart happens out of sight. <strong>The lesson is not to become extroverted</strong> — it is to leave evidence. Publish, submit, ship. <strong>If mastered:</strong> your 8.1 career score becomes real, because the empty 10th house gets filled by things you made.</p>
+
+  <div class="eli5">
+    <span class="lbl">Explain like I'm 5</span>
+    <p>The thing you are worst at — being patient, boring and consistent with money and effort — is the exact thing your chart keeps putting in front of you. Not as punishment. Because that is the one skill that unlocks everything else you want.</p>
+    <p>Your talent is already there. It is the container that leaks.</p>
+  </div>
+</section>
+
+<section>
+  <h2>5 · Life phase map</h2>
+  <div class="tl"><table>
+    <thead><tr><th>Ages</th><th>Period</th><th>Phase</th><th>Theme</th><th>Do</th><th>Avoid</th></tr></thead>
+    <tbody>
+      <tr><td class="yr">6–13</td><td class="sm">Ketu MD to 2016</td><td><span class="mode m-build">Foundation</span></td><td class="sm">Unsettled, inward</td><td class="sm">—</td><td class="sm">—</td></tr>
+      <tr><td class="yr">13–23</td><td class="sm">Venus MD begins 2016</td><td><span class="mode m-build">Foundation</span></td><td class="sm">Education, identity forming; Venus is a functional malefic here, so progress came through effort not ease</td><td class="sm">—</td><td class="sm">—</td></tr>
+      <tr><td class="yr"><strong>23–26</strong></td><td class="sm">Venus–Jupiter<br>Apr 2026 – Dec 2028</td><td><span class="mode m-build">Acceleration</span></td><td class="sm"><strong>You are here.</strong> Jupiter is your best functional planet and rules the 1st. Best sub-period of your entire Venus cycle for education and credentialing</td><td class="sm">CAT, MBA, credentials, one deep skill</td><td class="sm">Starting a business that needs capital you do not have</td></tr>
+      <tr><td class="yr">26–29</td><td class="sm">Venus–Saturn<br>Dec 2028 – Feb 2032</td><td><span class="mode m-caution">Consolidation</span></td><td class="sm">Your Atmakaraka and weakest planet runs the sub-period. Demanding, slow, formative. Saturn rules your 2nd — money lessons land here</td><td class="sm">Systems, savings, staying put, compounding</td><td class="sm">Job-hopping, leverage, impatience</td></tr>
+      <tr><td class="yr"><strong>29–31</strong></td><td class="sm">Venus–Mercury<br>Feb 2032 – Dec 2034</td><td><span class="mode m-attack">Breakthrough</span></td><td class="sm"><strong>Your strongest planet runs the sub-period.</strong> Mercury rules the 10th, sits in the Lagna, owns its sign in D10. The best career window visible in the next decade</td><td class="sm">Push hard. Take the bigger role, the equity, the risk</td><td class="sm">Being too cautious out of habit formed in the previous phase</td></tr>
+      <tr><td class="yr">31–33</td><td class="sm">Venus–Ketu → Sun MD<br>Dec 2034 – 2042</td><td><span class="mode m-trans">Transition</span></td><td class="sm">Venus cycle closes Feb 2036; Sun MD (9th lord, functional benefic) begins</td><td class="sm">Convert career capital into ownership</td><td class="sm">Assuming the 2032–34 momentum continues automatically</td></tr>
+    </tbody>
+  </table></div>
+  <p class="prose" style="margin-top:14px">The shape of the next decade is unusually clear: <strong>credential now, endure the middle, then push hard at 29.</strong> That sequencing happens to match how MBA careers actually compound — school at 25–27, four to six years building, then the step-change. Astrology and economics agree here, which is worth more than either alone.</p>
+</section>
+
+<section>
+  <h2>6 · Year map 2026–2035</h2>
+  <div class="tl"><table>
+    <thead><tr><th>Year</th><th>Age</th><th>Mode</th><th>Vimshottari</th><th>Profection</th><th>Domains flagged</th><th>Best use</th></tr></thead>
+    <tbody>
+      <tr><td class="yr">2026</td><td>23</td><td><span class="mode m-build">Build</span></td><td class="sm">Venus–Jupiter</td><td class="sm">12th · Jupiter</td><td class="sm">D9 depth/study</td><td class="sm">Prepare. Head down. Exam and skill</td></tr>
+      <tr><td class="yr">2027</td><td>24</td><td><span class="mode m-trans">Transition</span></td><td class="sm">Venus–Jupiter</td><td class="sm">1st · Saturn</td><td class="sm">D1, D3, D5</td><td class="sm">Reposition. Identity year — admissions, relocation</td></tr>
+      <tr><td class="yr">2028</td><td>25</td><td><span class="mode m-build">Build</span></td><td class="sm">Venus–Jupiter → Saturn</td><td class="sm">2nd · Saturn</td><td class="sm">D1, D5</td><td class="sm">Money house year with Saturn as lord. Set the savings system</td></tr>
+      <tr><td class="yr">2029</td><td>26</td><td><span class="mode m-build">Build</span></td><td class="sm">Venus–Saturn</td><td class="sm">3rd · Jupiter</td><td class="sm">D8 craft</td><td class="sm">Skill and communication. Publish</td></tr>
+      <tr><td class="yr">2030</td><td>27</td><td><span class="mode m-build">Build</span></td><td class="sm">Venus–Saturn</td><td class="sm">4th · Mars</td><td class="sm">D3, D5, D8</td><td class="sm">Home, base, assets. Widest activation of the decade</td></tr>
+      <tr><td class="yr">2031</td><td>28</td><td><span class="mode m-caution">Caution</span></td><td class="sm">Venus–Saturn</td><td class="sm">5th · Venus</td><td class="sm">D5, D8</td><td class="sm">Slow stretch. Protect capital and energy</td></tr>
+      <tr><td class="yr">2032</td><td>29</td><td><span class="mode m-attack">Attack</span></td><td class="sm"><strong>Venus–Mercury begins Feb</strong></td><td class="sm">6th · Mercury</td><td class="sm">D1, D9</td><td class="sm"><strong>Mercury sub-period + Mercury year. Push</strong></td></tr>
+      <tr><td class="yr">2033</td><td>30</td><td><span class="mode m-attack">Attack</span></td><td class="sm">Venus–Mercury</td><td class="sm">7th · Moon</td><td class="sm">D4</td><td class="sm">Partnership year — business or personal</td></tr>
+      <tr><td class="yr">2034</td><td>31</td><td><span class="mode m-harvest">Harvest</span></td><td class="sm">Venus–Mercury to Dec</td><td class="sm">8th · Sun</td><td class="sm">D1, D2</td><td class="sm">Monetise. Career domain flagged for the only time in ten years</td></tr>
+      <tr><td class="yr">2035</td><td>32</td><td><span class="mode m-trans">Transition</span></td><td class="sm">Venus–Ketu</td><td class="sm">9th · Mercury</td><td class="sm">D9</td><td class="sm">Wind down the cycle. Prepare for Sun MD</td></tr>
+    </tbody>
+  </table></div>
+  <p><strong>Note what is <em>not</em> here:</strong> in ten years, <strong>D2 (career/status) is flagged by two or more traditions exactly once</strong>, in 2034. D3 (wealth) appears three times. This is a chart whose timing rewards <em>preparation and craft</em> far more often than it rewards <em>status</em>. Plan accordingly rather than waiting for a career year that mostly does not come.</p>
+</section>
+
+<section>
+  <h2>7 · The next 18 months, at real resolution</h2>
+  <p>Four pratyantardasha changes. These are the only genuine monthly-scale transitions in your chart — everything finer would be invented.</p>
+  <div class="tl"><table>
+    <thead><tr><th>From</th><th>To</th><th>Period</th><th>Character</th></tr></thead>
+    <tbody>
+      <tr><td class="mono">2026-08-21</td><td class="mono">2027-01-22</td><td class="sm">Venus–Jupiter–<strong>Saturn</strong></td><td class="sm">Heaviest sub-sub-period of the stretch. Saturn is your AK and weakest planet. Grind, not glory. <strong>This covers CAT 2026 and its result.</strong></td></tr>
+      <tr><td class="mono">2027-01-22</td><td class="mono">2027-06-09</td><td class="sm">Venus–Jupiter–<strong>Mercury</strong></td><td class="sm">Your strongest planet at the finest level, overlapping the profection shift to the 1st house. <strong>Best window in the next 18 months for interviews, applications and negotiation.</strong></td></tr>
+      <tr><td class="mono">2027-06-09</td><td class="mono">2027-08-05</td><td class="sm">Venus–Jupiter–<strong>Ketu</strong></td><td class="sm">Short, unsettled, detaching. Poor for launches; fine for closing things out.</td></tr>
+      <tr><td class="mono">2027-08-05</td><td class="mono">2028-01-14</td><td class="sm">Venus–Jupiter–<strong>Venus</strong></td><td class="sm">Mahadasha lord repeating at two levels. Amplifies whatever structure you have built by then.</td></tr>
+    </tbody>
+  </table></div>
+  <div class="box brass">
+    <span class="lbl">On CAT specifically</span>
+    <p style="margin-bottom:0">CAT is late November; results mid-January; interviews February–April. Your <strong>Saturn sub-sub-period covers the exam and the result</strong> — a period of effort and weight, not ease. Your <strong>Mercury sub-sub-period (22 Jan – 9 Jun 2027) covers exactly the interview and admission season</strong>, and Mercury is your strongest planet and 10th lord. That alignment is genuinely favourable <strong>for the conversion stage</strong>. It says nothing about your score, which is determined by mocks, accuracy and time management. <span class="tag t-m">Moderate confidence</span></p>
+  </div>
+</section>
+
+<section>
+  <h2>8 · Opportunity windows</h2>
+  <div class="dash"><table>
+    <thead><tr><th>Opportunity</th><th>Window</th><th>Probability</th><th>Astrological basis</th><th>Real-world requirement</th></tr></thead>
+    <tbody>
+      <tr><td><strong>MBA admission conversion</strong></td><td class="mono">Jan–Jun 2027</td><td><span class="tag t-h">High</span></td><td class="sm">Mercury pratyantardasha; profection to 1st house; Mercury rules 10th, own sign in D10</td><td class="sm">A competitive CAT percentile. The window converts a score; it does not produce one</td></tr>
+      <tr><td><strong>First major salary step</strong></td><td class="mono">2029–2030</td><td><span class="tag t-m">Moderate</span></td><td class="sm">Post-MBA timing; D8 craft flagged 2029; D3 flagged 2030</td><td class="sm">MBA completed; 2+ years of delivery</td></tr>
+      <tr><td><strong>Career breakthrough</strong></td><td class="mono">Feb 2032 – Dec 2034</td><td><span class="tag t-h">High</span></td><td class="sm"><strong>Strongest signal in the decade.</strong> Venus–Mercury with Mercury strongest by Shadbala, 10th lord, own sign in D10; D2 flagged 2034</td><td class="sm">Positioned in a role where a step-change is structurally possible</td></tr>
+      <tr><td><strong>Business ownership</strong></td><td class="mono">2032–2034</td><td><span class="tag t-m">Moderate</span></td><td class="sm">Mercury rules 7th and 10th; D10 Mercury in own sign</td><td class="sm">Capital and a track record first. 7th house is your weakest — favour solo or majority ownership</td></tr>
+      <tr><td><strong>Serious partnership</strong></td><td class="mono">2033</td><td><span class="tag t-m">Moderate</span></td><td class="sm">Profection to 7th house; D4 flagged for the only time in ten years</td><td class="sm">Deliberate choice. The 7th at 19 bindus argues against drifting into it</td></tr>
+      <tr><td><strong>Relocation / foreign exposure</strong></td><td class="mono">2027, 2030</td><td><span class="tag t-m">Moderate</span></td><td class="sm">Ketu in 12th; profection to 1st (2027) and 4th (2030)</td><td class="sm">Tied to admissions or a specific role, not sought for its own sake</td></tr>
+      <tr><td><strong>First net-worth milestone</strong></td><td class="mono">2030–2032</td><td><span class="tag t-l">Speculative</span></td><td class="sm">D3 flagged 2030; Saturn sub-period is a savings-discipline phase</td><td class="sm"><strong>Depends almost entirely on savings rate, not on income or timing.</strong> This is the weakest astrological claim here and the strongest real-world lever</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section>
+  <h2>9 · Wealth engine ranking</h2>
+  <p>Ranked on <em>economics first</em>, with astrology as the secondary input. The chart cannot distinguish an index fund from a startup — but it can say something about how you earn versus how you keep.</p>
+  <div class="dash"><table>
+    <thead><tr><th>Engine</th><th>Fit</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr><td><strong>High-skill salary → equity</strong></td><td class="num s-hi">8<span class="bar"><i style="width:80%"></i></span></td><td class="sm">Directly matches the Mercury signature: strong 10th, strongest planet as its lord. Consulting/strategy/product. <strong>Your primary engine.</strong></td></tr>
+      <tr><td><strong>Systematic investing</strong></td><td class="num s-hi">7<span class="bar"><i style="width:70%"></i></span></td><td class="sm">Not because the chart favours investing — because it fixes your worst weakness mechanically. Automated, boring, index-based. <strong>Your secondary engine.</strong></td></tr>
+      <tr><td><strong>Advisory / independent consulting</strong></td><td class="num s-mid">6<span class="bar"><i style="width:60%"></i></span></td><td class="sm">Exalted Jupiter plus Mercury in Lagna. Strong later — after credentials, not before</td></tr>
+      <tr><td><strong>Owned business (solo/majority)</strong></td><td class="num s-mid">6<span class="bar"><i style="width:60%"></i></span></td><td class="sm">Mercury rules 7th and 10th and owns its D10 sign — but the 7th house is your weakest. Own it outright</td></tr>
+      <tr><td><strong>AI/automation applied to a domain</strong></td><td class="num s-mid">6<span class="bar"><i style="width:60%"></i></span></td><td class="sm">Arudha in Aquarius, Rahu in 6th. Moderate evidence; strong economics. Pair with the analytical edge</td></tr>
+      <tr><td><strong>Real estate</strong></td><td class="num s-mid">5<span class="bar"><i style="width:50%"></i></span></td><td class="sm">4th lord Jupiter exalted but in the 8th. Fine as a later store of value, poor as a first engine</td></tr>
+      <tr><td><strong>Equal partnership venture</strong></td><td class="num s-low">3<span class="bar"><i style="width:30%"></i></span></td><td class="sm">7th house 19 bindus, lowest of twelve, and empty. The clearest negative in your chart</td></tr>
+      <tr><td><strong>Active trading / speculation</strong></td><td class="num s-low">2<span class="bar"><i style="width:20%"></i></span></td><td class="sm">8th lord Moon fails its Shadbala minimum; 2nd house weak. Both astrology and base rates say no</td></tr>
+    </tbody>
+  </table></div>
+  <div class="box warn">
+    <span class="lbl">Never rely on this financially</span>
+    <p style="margin-bottom:0"><strong>Your own instinct to save.</strong> The 2nd house is 21 bindus with your weakest planet as lord, and no Dhana Yoga forms. This is the most repeated negative signal in your chart. It does not mean you will be poor — it means <strong>accumulation must be automated out of your own hands.</strong> Everything else in this document is secondary to that one mechanism.</p>
+  </div>
+  <div class="eli5">
+    <span class="lbl">Explain like I'm 5</span>
+    <p>You will probably be good at earning. You are unlikely to be naturally good at keeping. So make the keeping automatic — money moves out of your account on payday before you can spend it — and let your talent handle the earning.</p>
+  </div>
+</section>
+
+<section>
+  <h2>10 · Right now</h2>
+  <div class="grid2">
+    <div class="card"><h4>Next 30 days</h4><ol style="font-size:14.5px">
+      <li>Set one automated transfer — any amount — to a separate account you do not carry a card for</li>
+      <li>Take one full timed CAT mock and record the percentile</li>
+      <li>Pick <strong>one</strong> deep domain to be known for; write it down</li>
+      <li>Fix a sleep window and a hard daily stop time</li>
+      <li>Publish one piece of analytical work publicly with your name on it</li>
+    </ol></div>
+    <div class="card"><h4>Next 90 days</h4><ol style="font-size:14.5px">
+      <li>Weekly timed mocks with a tracked percentile trend, not a study-hours count</li>
+      <li>Raise the automated savings rate to 20%+ of anything you earn</li>
+      <li>Three published artefacts in your chosen domain</li>
+      <li>Ten real conversations with people 5–10 years ahead of you</li>
+      <li>A written one-page plan for the Jan–Jun 2027 admission window</li>
+    </ol></div>
+    <div class="card"><h4>Next 12 months</h4><ol style="font-size:14.5px">
+      <li>Sit CAT with a percentile that opens the schools you actually want</li>
+      <li>Convert in the Jan–Jun 2027 Mercury window — the strongest near-term alignment you have</li>
+      <li>Savings system running untouched for twelve straight months</li>
+      <li>A public body of work substantial enough to be linked, not described</li>
+      <li>One automation skill applied to a real problem, not learned in the abstract</li>
+    </ol></div>
+  </div>
+</section>
+
+<section>
+  <h2>11 · Stop worrying about these</h2>
+  <div class="grid2">
+    <div class="card"><h4>You can trust yourself here</h4><ul style="font-size:14.5px">
+      <li><strong>Raw intellectual capability.</strong> Four independent confirmations. It is not the constraint</li>
+      <li><strong>Handling pressure.</strong> 6th house 37 bindus — contest suits you</li>
+      <li><strong>Health and stamina.</strong> 7.1 with no negative signal; the risk is overwork, not fragility</li>
+      <li><strong>Whether you are "smart enough" for a top MBA.</strong> Wrong question. Preparation is the variable</li>
+    </ul></div>
+    <div class="card"><h4>These need active work</h4><ul style="font-size:14.5px">
+      <li><strong>Saving and keeping.</strong> The most repeated weakness in the chart</li>
+      <li><strong>Making work visible.</strong> Three planets in the 12th, empty 10th</li>
+      <li><strong>Partnership terms.</strong> Weakest house — never informal</li>
+      <li><strong>Rest as discipline.</strong> Saturn and Rahu will let you run yourself down</li>
+    </ul></div>
+    <div class="card"><h4>Astrology cannot responsibly say</h4><ul style="font-size:14.5px">
+      <li>Your CAT score, or which school admits you</li>
+      <li>Any health outcome or diagnosis — not attempted anywhere here</li>
+      <li>Whom you marry, or when</li>
+      <li>Any specific income figure or investment return</li>
+      <li>Anything about lifespan, legal outcomes or children</li>
+    </ul></div>
+  </div>
+</section>
+
+<section>
+  <h2>12 · Adversarial check &amp; contradictions</h2>
+  <div class="dash"><table>
+    <thead><tr><th>Claim</th><th>Confirmations</th><th>Contradicting evidence</th><th>Confidence</th></tr></thead>
+    <tbody>
+      <tr><td class="sm">Mercury/analytical work is your strongest path</td><td class="sm">Shadbala rank 1 · rules 10th · in Lagna · own sign in D10 · Hellenistic mutual reception</td><td class="sm">Mercury is retrograde; 10th house empty; kendradhipati dosha for a Sagittarius lagna</td><td><span class="tag t-vh">Very high</span></td></tr>
+      <tr><td class="sm">Wealth retention is your key weakness</td><td class="sm">2nd house 21 bindus · lord Saturn last by Shadbala · Dhana Yoga absent · 3 planets in 12th</td><td class="sm">11th house healthy at 31 bindus — <em>gains</em> are fine; it is <em>keeping</em> that is weak</td><td><span class="tag t-vh">Very high</span></td></tr>
+      <tr><td class="sm">2032–34 is the decade's best career window</td><td class="sm">Venus–Mercury · Mercury strongest · D2 flagged 2034 · Mercury profection year 2032</td><td class="sm">Rests heavily on one planet. Seven years out; life circumstances dominate at that range</td><td><span class="tag t-h">High</span></td></tr>
+      <tr><td class="sm">Partnership is structurally weak</td><td class="sm">7th house 19 bindus, lowest and empty</td><td class="sm">Its lord Mercury is the strongest planet and sits in the Lagna — a genuine conflict, not resolved</td><td><span class="tag t-m">Moderate</span></td></tr>
+      <tr><td class="sm">You thrive in competition</td><td class="sm">6th house 37 bindus · Rahu in 6th · Vipareeta Raja Yoga</td><td class="sm">Saturn, also in the 6th, is your weakest planet — capacity is real but costly</td><td><span class="tag t-h">High</span></td></tr>
+      <tr><td class="sm">Aquarius Arudha means tech/unconventional positioning</td><td class="sm">Arudha Lagna in Aquarius; ruler with Rahu in 6th</td><td class="sm">Single technique, one tradition; ruler is the weakest planet. Thin</td><td><span class="tag t-l">Low</span></td></tr>
+      <tr><td class="sm">D10 Lagna is Pisces</td><td class="sm">Computed from a verified birth time</td><td class="sm"><strong>1.86 minutes from a boundary, and changes under 7 of 12 ayanamshas.</strong> Not used for any conclusion above</td><td><span class="tag t-s">Unverified</span></td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section>
+  <h2>13 · Prediction ledger</h2>
+  <p>Testable, dated, and recorded so they can be checked rather than remembered selectively. A sealed machine-readable version already exists in the repository under hash <span class="mono">638936d0632eb496</span>.</p>
+  <div class="dash"><table>
+    <thead><tr><th>Prediction</th><th>Period</th><th>Prob.</th><th>Basis</th><th>Real-world requirement</th><th>Outcome</th></tr></thead>
+    <tbody>
+      <tr><td class="sm">Study/depth is the dominant register, not public advancement</td><td class="mono">to 2027-01-20</td><td class="sm">2 of 3 clusters</td><td class="sm">Vimshottari + profection both on Jupiter, 12th house</td><td class="sm">Actually studying</td><td class="sm">open</td></tr>
+      <tr><td class="sm">Identity/repositioning register opens</td><td class="mono">2027-01-20 →</td><td class="sm">2 of 3</td><td class="sm">Profection to 1st house; D1 flagged</td><td class="sm">A decision to make</td><td class="sm">open</td></tr>
+      <tr><td class="sm">Admission-conversion window favourable</td><td class="mono">2027-01-22 → 06-09</td><td class="sm">Moderate</td><td class="sm">Mercury pratyantardasha + 1st-house profection</td><td class="sm">A qualifying percentile</td><td class="sm">open</td></tr>
+      <tr><td class="sm">Career step-change window</td><td class="mono">2032-02 → 2034-12</td><td class="sm">High</td><td class="sm">Venus–Mercury; Mercury strongest, 10th lord</td><td class="sm">Positioned for it by then</td><td class="sm">open</td></tr>
+      <tr><td class="sm">Net worth tracks savings rate, not chart timing</td><td class="mono">2026–2036</td><td class="sm">Very high</td><td class="sm">Weak 2nd house — the chart argues <em>against</em> windfall timing</td><td class="sm">Automated saving</td><td class="sm">open</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section>
+  <h2>14 · Master summary</h2>
+  <div class="grid2">
+    <div class="card">
+      <h4>The short version</h4>
+      <ul style="font-size:15px">
+        <li><strong>Life theme:</strong> earn it in the arena, then build the container to hold it</li>
+        <li><strong>Biggest advantage:</strong> structured analysis under pressure — four-way confirmed</li>
+        <li><strong>Biggest weakness:</strong> keeping money. Not earning it</li>
+        <li><strong>Biggest karmic lesson:</strong> Saturn — patience and system, the subject you are least equipped for and most assigned</li>
+        <li><strong>Best wealth strategy:</strong> high-skill income, automated savings, boring compounding, equity later</li>
+        <li><strong>Best career strategy:</strong> analytical depth in one domain, made public</li>
+        <li><strong>Most important skill:</strong> building systems that work without motivation</li>
+        <li><strong>Focus now:</strong> CAT, and one automated savings transfer</li>
+        <li><strong>Stop:</strong> measuring effort in hours</li>
+        <li><strong>Next window:</strong> 22 Jan – 9 Jun 2027, Mercury</li>
+      </ul>
+    </div>
+    <div class="card" style="background:var(--brass-soft);border-color:var(--brass)">
+      <h4 style="color:var(--brass-ink)">Current life score</h4>
+      <div style="font-size:3.4rem;font-weight:700;line-height:1;letter-spacing:-.03em;font-variant-numeric:tabular-nums">5.9<span style="font-size:1.4rem;color:var(--ink-3)"> / 10</span></div>
+      <p style="font-size:13.5px;color:var(--ink-2);margin-top:8px">Mean of twelve computed area scores. High ceiling, weak floor — strong capability, weak retention.</p>
+      <h4 style="color:var(--brass-ink);margin-top:20px">Current mode</h4>
+      <div style="font-size:1.7rem;font-weight:700;letter-spacing:-.02em">BUILD</div>
+      <p style="font-size:13.5px;color:var(--ink-2)">Not attack. Your own chart's flagged register right now is preparation, and the next real push is 2032.</p>
+      <h4 style="color:var(--brass-ink);margin-top:20px">One sentence</h4>
+      <p class="prose" style="font-size:18px;margin-bottom:0"><strong>Your talent was never the bottleneck — build the boring system that keeps what your talent earns, and the rest of this chart takes care of itself.</strong></p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p><strong>What this is.</strong> A decision aid built from computed, verified positions — three ephemeris engines agreeing sub-arcsecond, Sarvashtakavarga summing to its required 337, Shadbala with five exact components. Every score traces to a stated formula.</p>
+  <p><strong>What this is not.</strong> A forecast. Astrology is not a validated predictive method, and this document names no guaranteed outcome for wealth, career, exams, marriage, health, lifespan or legal matters. Where the chart contradicts itself — partnership especially — the contradiction is printed, not resolved. Where evidence is thin, it is labelled thin.</p>
+  <p style="margin-bottom:0"><strong>The honest bottom line:</strong> the single highest-leverage action in this entire document is automating your savings, and that conclusion needs no astrology at all — the chart merely happens to agree, loudly and repeatedly.</p>
+</footer>
+
+</div>
