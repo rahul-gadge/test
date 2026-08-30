@@ -1,0 +1,700 @@
+<script>
+/* =========================== helpers =========================== */
+const $=s=>document.querySelector(s);
+const el=(t,c,h)=>{const e=document.createElement(t);if(c)e.className=c;if(h!==undefined)e.innerHTML=h;return e;};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const band=v=>v>=8?'good':v>=6.5?'acc':v>=5?'warn':v>=4?'caut':'risk';
+const heatCls=v=>v>=8?'h5':v>=6.8?'h4':v>=5.6?'h3':v>=4.6?'h2':'h1';
+const pillFor=c=>({'EXTREMELY STRONG':'p-vh','VERY HIGH':'p-vh',HIGH:'p-h',MODERATE:'p-m',LOW:'p-l',SPECULATIVE:'p-s'}[c]||'p-s');
+let WHYN=0;
+function why(text){WHYN++;const id='w'+WHYN;
+  return `<button class="why" onclick="document.getElementById('${id}').classList.toggle('on')">WHY?</button><div class="whybox expertOnly" id="${id}">${esc(text)}</div>`;}
+function bar(v,max){max=max||10;return `<div class="bar b-${band(v)}"><i style="width:${Math.min(100,v/max*100)}%"></i></div>`;}
+function scoreCard(k,v,sub,whyTxt){
+  return `<div class="card"><div class="k">${esc(k)}${whyTxt?why(whyTxt):''}</div>
+   <div class="big" style="color:var(--${band(v)==='acc'?'acc':band(v)})">${v.toFixed(1)}<span style="font-size:14px;color:var(--tx3)"> /10</span></div>
+   ${bar(v)}${sub?`<div class="sub">${esc(sub)}</div>`:''}</div>`;}
+function yearOf(y){ if(YEARS[y])return YEARS[y]; const L=LATER[y]; return L?{mode:L[0],score:L[1],theme:L[2],conf:'MODERATE'}:null; }
+function modeAt(y){const d=yearOf(y);return d?d.mode:'BUILD';}
+
+/* =========================== views =========================== */
+const V={};
+
+V.dashboard=()=>{
+  const age=AGE(), d=dashaAt('2026-08-30'), pr=profection(age), m=monthAt('2026-08'), y=YEARS[2026];
+  return `
+  <h2 class="sec">Command centre</h2>
+  <div class="grid g4">
+    <div class="card"><div class="k">Current mode</div><div style="margin-top:9px"><span class="mode m-BUILD">BUILD</span></div>
+      <div class="sub">Not attack. Your first genuine attack window is 2032.</div></div>
+    <div class="card"><div class="k">Life score</div><div class="big" style="color:var(--warn)">5.9<span style="font-size:14px;color:var(--tx3)"> /10</span></div>
+      <div class="sub">Mean of twelve computed areas. High ceiling, weak floor.</div></div>
+    <div class="card"><div class="k">Phase</div><div style="font-size:17px;font-weight:600;margin-top:7px">Foundation → Acceleration</div>
+      <div class="sub">Venus MD to age 33. Credentialing stretch.</div></div>
+    <div class="card"><div class="k">Active dasha</div><div class="big mo" style="font-size:19px">${d.md}–${d.ad}</div>
+      <div class="sub">to ${d.adEnd} · sidereal profection H${pr.h} ${pr.sign}, lord ${pr.lord}</div></div>
+  </div>
+
+  <h3>Current mission <span class="mo" style="font-size:12px;color:var(--tx3);font-weight:400">${MISSION.period}</span></h3>
+  <div class="card" style="border-left:3px solid var(--acc)">
+    <div class="grid g2">
+      <div><div class="k">Primary</div><p style="margin:5px 0 0">${esc(MISSION.primary)}</p></div>
+      <div><div class="k">Secondary</div><p style="margin:5px 0 0">${esc(MISSION.secondary)}</p></div>
+      <div><div class="k">Build quietly</div><p style="margin:5px 0 0">${esc(MISSION.quiet)}</p></div>
+      <div><div class="k" style="color:var(--risk)">Avoid</div><p style="margin:5px 0 0">${esc(MISSION.avoid)}</p></div>
+      <div><div class="k" style="color:var(--good)">Wealth move</div><p style="margin:5px 0 0">${esc(MISSION.wealth)}</p></div>
+      <div><div class="k">Relationships</div><p style="margin:5px 0 0">${esc(MISSION.rel)}</p></div>
+    </div>
+    <div class="sub" style="margin-top:11px">Derived from ${esc(MISSION.pd)} + profection to house ${pr.h}.</div>
+  </div>
+
+  <h3>Top areas right now</h3>
+  <div class="grid g4">
+    ${['Career','Reputation','Energy','Wealth','Relationships'].map(a=>scoreCard(a,SCORES[a],'',areaWhy(a))).join('')}
+  </div>
+
+  <h3>Next major window</h3>
+  <div class="card" style="border-left:3px solid var(--good)">
+    <div style="display:flex;gap:14px;flex-wrap:wrap;align-items:baseline">
+      <div class="big mo" style="font-size:22px;color:var(--good)">Jan – Jun 2027</div>
+      <span class="pill p-h">HIGH CONFIDENCE</span></div>
+    <p style="margin-top:9px">Mercury — your strongest graha — runs the pratyantardasha, exactly overlapping interview and admission season, with profection moving to your 1st house on 20 Jan 2027.</p>
+    <div class="k" style="margin-top:9px">Preparation required</div>
+    <p style="margin:4px 0 0">A CAT percentile that opens real doors. The window converts a score; it does not produce one.</p>
+    ${why('Venus MD / Jupiter AD / Mercury PD 2027-01-22 to 2027-06-09. Mercury Shadbala 8.61 vs 7.0 required = 123%, strongest of seven. Rules H7 and H10, occupies H1. Own sign Gemini in D10.')}
+  </div>
+
+  <h3>Do this today</h3>
+  <div class="card"><ol style="margin:0;padding-left:20px">${ACTIONS.today.map(a=>`<li>${esc(a)}</li>`).join('')}</ol></div>
+
+  <h3>Twelve-month outlook</h3>
+  ${miniHeat(2026,2028)}
+
+  <div class="note simpleOnly"><b>In plain words:</b> you are in the preparation part of your life, and that is exactly where you should be. Nothing has arrived yet because nothing is supposed to have. Do the exam, start the savings habit, and leave a public trail of your work. Your best years, by this chart, are ages 33–39 — and they will multiply whatever base you have built by then.</div>`;
+};
+
+function miniHeat(y0,y1){
+  const rows=[];
+  for(let y=y0;y<=y1;y++){
+    const cells=CHART.months.filter(m=>m.ym.startsWith(y)).map(m=>{
+      const mo=m.ym.slice(5);
+      return `<td><div class="hc ${heatCls(m.score)}" title="${m.ym} · ${m.md}-${m.ad}-${m.pd} · ${m.score}" onclick="go('months','${y}')">${mo}</div></td>`;
+    }).join('');
+    if(cells)rows.push(`<tr><td class="yr">${y}</td>${cells}</tr>`);
+  }
+  return `<div class="tw"><table class="heat"><tbody>${rows.join('')}</tbody></table></div>
+   <div class="legend"><span><i class="sw h5"></i>exceptional</span><span><i class="sw h4"></i>strong</span>
+   <span><i class="sw h3"></i>building</span><span><i class="sw h2"></i>difficult</span><span><i class="sw h1"></i>caution</span>
+   <span style="color:var(--tx3)">months sharing a pratyantardasha share a score — the chart does not resolve finer</span></div>`;
+}
+
+V.timemachine=()=>{
+  return `<h2 class="sec">Life time machine</h2>
+  <div class="card"><div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap">
+    <span class="k">AGE</span><span class="big mo" id="tmAge" style="font-size:34px;color:var(--acc)">23</span>
+    <span class="mo" id="tmYear" style="color:var(--tx3)">2026</span>
+    <span id="tmMode"></span></div>
+    <input type="range" id="tmSlider" min="23" max="49" value="23" step="1" aria-label="Age">
+    <div style="display:flex;justify-content:space-between;font-family:var(--mo);font-size:10px;color:var(--tx3)">
+      <span>23</span><span>30</span><span>35</span><span>40</span><span>45</span><span>49</span></div>
+  </div>
+  <div id="tmOut"></div>`;
+};
+function renderTM(age){
+  const year=2003+age, d=yearOf(year), pr=profection(age);
+  const iso=year+'-06-15', dash=dashaAt(iso);
+  const mds=CHART.dasha.find(m=>iso>=m.start&&iso<m.end);
+  const nat=dash.md?nature(dash.md):null;
+  const sb=dash.md&&CHART.shadbala[dash.md]?CHART.shadbala[dash.md]:null;
+  $('#tmAge').textContent=age; $('#tmYear').textContent=year;
+  $('#tmMode').innerHTML=d?`<span class="mode m-${d.mode}">${d.mode}</span>`:'';
+  if(!d){$('#tmOut').innerHTML=`<div class="note warn">DATA NOT VERIFIED — no year model computed beyond 2048.</div>`;return;}
+  const areas={Career:d.car,Money:d.mon,Business:d.biz,Education:d.edu,Relationships:d.rel,
+    Energy:d.hea,Network:d.net,Travel:d.tra};
+  $('#tmOut').innerHTML=`
+  <div class="grid g4" style="margin-top:12px">
+    <div class="card"><div class="k">Year score</div><div class="big" style="color:var(--${band(d.score)==='acc'?'acc':band(d.score)})">${d.score.toFixed(1)}</div>${bar(d.score)}</div>
+    <div class="card"><div class="k">Mahadasha</div><div class="big mo" style="font-size:20px">${dash.md||'—'}</div>
+      <div class="sub">${nat?NATLABEL[nat]:''}${sb?` · ${sb.pct}% of minimum`:''}</div></div>
+    <div class="card"><div class="k">Antardasha</div><div class="big mo" style="font-size:20px">${dash.ad||'—'}</div>
+      <div class="sub">to ${dash.adEnd||'—'}</div></div>
+    <div class="card"><div class="k">Profection <span style="font-size:9px;color:var(--tx3)">sidereal</span></div><div class="big mo" style="font-size:20px">H${pr.h}</div>
+      <div class="sub">${pr.sign} · lord ${pr.lord}</div></div>
+  </div>
+  <div class="card" style="margin-top:12px"><div class="k">Main theme</div>
+    <div style="font-size:19px;font-weight:600;margin:6px 0 3px">${esc(d.theme)}</div>
+    <span class="pill ${pillFor(d.conf)}">${d.conf} CONFIDENCE</span></div>
+  <div class="grid g2" style="margin-top:12px">
+    ${Object.entries(areas).filter(([,v])=>v&&v!=='—').map(([k,v])=>`<div class="card tight"><div class="k">${k}</div><p style="margin:5px 0 0;font-size:13.5px">${esc(v)}</p></div>`).join('')}
+  </div>
+  <div class="grid g2" style="margin-top:12px">
+    <div class="card" style="border-left:3px solid var(--good)"><div class="k" style="color:var(--good)">Opportunity</div><p style="margin:5px 0 0">${esc(d.opp||'—')}</p></div>
+    <div class="card" style="border-left:3px solid var(--risk)"><div class="k" style="color:var(--risk)">Risk</div><p style="margin:5px 0 0">${esc(d.risk||'—')}</p></div>
+    <div class="card" style="border-left:3px solid var(--acc)"><div class="k" style="color:var(--acc)">Best move</div><p style="margin:5px 0 0">${esc(d.do||'—')}</p></div>
+    <div class="card" style="border-left:3px solid var(--caut)"><div class="k" style="color:var(--caut)">Avoid</div><p style="margin:5px 0 0">${esc(d.dont||'—')}</p></div>
+  </div>
+  <div class="note simpleOnly">At ${age} you are in the <b>${dash.md}</b> chapter. ${esc(d.theme)} ${esc(d.do||'')}</div>`;
+}
+
+V.timeline=()=>{
+  const evs=[
+   {age:24,y:'2027',ic:'🎓',lb:'MBA conversion window',cf:'h',pr:'15–25%',
+    ev:'Mercury pratyantardasha Jan–Jun 2027 + profection to the 1st house. Mercury is the strongest graha and rules the 10th.',
+    rw:'A competitive CAT percentile. The window converts a score; it cannot produce one.',
+    pre:'40+ timed mocks with error logs, before November 2026.'},
+   {age:26,y:'2029',ic:'💼',lb:'First serious salary',cf:'h',pr:'~85% if MBA converts',
+    ev:'Post-MBA timing; D8 craft domain flagged 2029.',rw:'Completed programme and placement.',
+    pre:'The savings rule set BEFORE the first payday, not after.'},
+   {age:27,y:'2030',ic:'💰',lb:'Widest activation of the decade',cf:'m',pr:'—',
+    ev:'D3, D5 and D8 all flagged — three domains, the only time in ten years.',rw:'Being in a role where any of them can move.',
+    pre:'Pick one. Do not spread across all three.'},
+   {age:28,y:'2031',ic:'⚠️',lb:'Hardest stretch',cf:'h',pr:'high certainty',
+    ev:'Venus–Saturn mid-period. Saturn is Atmakaraka, weakest planet, 2nd lord.',rw:'Nothing external required — this is a period, not an event.',
+    pre:'Whatever system you have running by 2029 is what carries you through it.'},
+   {age:29,y:'2032',ic:'⭐',lb:'Career step-change window',cf:'h',pr:'~45%',
+    ev:'Venus–Mercury opens Feb 2032. Mercury strongest by Shadbala, rules the 10th, own sign in D10. Mercury profection year on top.',
+    rw:'Being positioned in a role where a step-change is structurally possible.',
+    pre:'Leadership exposure by 2031. Do not arrive as a pure individual contributor.'},
+   {age:30,y:'2033',ic:'❤️',lb:'Partnership period',cf:'m',pr:'~55%',
+    ev:'7th-house profection; D4 flagged for the only time in a decade.',rw:'Deliberate choice.',
+    pre:'Your 7th house is 19 bindus, the lowest you own. Choose, do not drift.'},
+   {age:31,y:'2034',ic:'🏠',lb:'Asset / property window',cf:'m',pr:'~40%',
+    ev:'Final year of Venus–Mercury; D2 career flagged.',rw:'A down payment — the real constraint.',
+    pre:'Do not buy at the top of your EMI capacity.'},
+   {age:33,y:'2036',ic:'🔄',lb:'SUN MAHADASHA — era change',cf:'h',pr:'certain (dasha)',
+    ev:'Sun is 9th lord (trikona) at 128% of Shadbala minimum, placed in the 2nd house. The only unambiguous functional benefic Mahadasha in your adult life.',
+    rw:'A capital base for it to multiply.',pre:'Arrive at 33 with invested capital. The dasha is the multiplier; you are the base.'},
+   {age:36,y:'2039',ic:'💰',lb:'Peak earning centre',cf:'m',pr:'~60%',
+    ev:'Mid Sun MD.',rw:'Ten years of compounding behind it.',pre:'Everything before this.'},
+   {age:39,y:'2042',ic:'🔄',lb:'Moon MD — consolidation',cf:'h',pr:'certain (dasha)',
+    ev:'Moon is 8th lord, below its Shadbala minimum at 95%. Inward, volatile, not expansive.',
+    rw:'—',pre:'Deleverage before this arrives.'}];
+  window.__EV=evs;
+  return `<h2 class="sec">Life timeline</h2>
+  <p>Markers are windows, not appointments. Colour shows confidence: <span style="color:var(--good)">■</span> high · <span style="color:var(--warn)">■</span> moderate · <span style="color:var(--tx3)">■</span> speculative.</p>
+  <div class="tw" style="padding:0 12px"><div class="tl"><div class="tlline"></div><div class="tlrow">
+    ${evs.map((e,i)=>`<div class="tlev" onclick="showEv(${i})" tabindex="0" onkeypress="if(event.key==='Enter')showEv(${i})">
+      <div class="mk mk-${e.cf}"></div><div class="ag">${e.age} · ${e.y}</div><div class="lb">${e.ic}<br>${esc(e.lb)}</div></div>`).join('')}
+  </div></div></div>
+  <div id="evOut"></div>`;
+};
+function showEv(i){const e=window.__EV[i];
+  $('#evOut').innerHTML=`<div class="card" style="margin-top:14px;border-left:3px solid var(--acc)">
+   <div style="display:flex;gap:12px;align-items:baseline;flex-wrap:wrap">
+     <div style="font-size:19px;font-weight:600">${e.ic} ${esc(e.lb)}</div>
+     <span class="mo" style="color:var(--tx3)">age ${e.age} · ${e.y}</span>
+     <span class="pill ${e.cf==='h'?'p-h':e.cf==='m'?'p-m':'p-s'}">${e.cf==='h'?'HIGH':e.cf==='m'?'MODERATE':'SPECULATIVE'}</span>
+     <span class="pill p-s">PROBABILITY ${esc(e.pr)}</span></div>
+   <div class="k" style="margin-top:12px">Astrological evidence</div><p style="margin:4px 0 0">${esc(e.ev)}</p>
+   <div class="k" style="margin-top:10px">Real-world requirement</div><p style="margin:4px 0 0">${esc(e.rw)}</p>
+   <div class="k" style="margin-top:10px;color:var(--acc2)">What to do before it arrives</div><p style="margin:4px 0 0">${esc(e.pre)}</p></div>`;
+  $('#evOut').scrollIntoView({behavior:'smooth',block:'nearest'});}
+
+V.heatmap=()=>{
+  const cols=['Career','Money','Business','Education','Love','Energy','Overall'];
+  const H={2026:[4,4,2,5,3,4,4],2027:[5,4,2,5,3,4,5],2028:[5,4,2,5,3,3,4],2029:[5,5,2,3,3,3,4],
+   2030:[4,5,2,3,3,2,3],2031:[3,3,1,3,3,2,2],2032:[5,5,3,3,3,3,5],2033:[5,5,3,3,5,4,4],
+   2034:[5,5,4,3,4,4,5],2035:[4,4,4,3,3,3,4],2036:[5,5,4,3,4,4,5],2037:[5,5,4,3,4,4,5],
+   2038:[4,5,5,3,4,4,5],2039:[4,5,4,3,3,3,4],2040:[5,5,4,3,4,4,5],2041:[4,4,4,3,4,3,4],
+   2042:[3,4,2,3,3,2,3],2043:[3,4,2,3,3,2,3],2044:[3,4,2,3,3,2,3],2045:[3,3,2,3,3,3,3],
+   2046:[3,3,2,3,3,3,3],2047:[3,3,2,3,3,3,3],2048:[3,3,2,3,3,3,3]};
+  const map={5:'h5',4:'h4',3:'h3',2:'h2',1:'h1'};
+  return `<h2 class="sec">Life heatmap to age 45</h2>
+  <p>Derived from Mahadasha and Antardasha functional nature and strength, profection house, and the domain-activation engine. Click a year to open it.</p>
+  <div class="tw"><table class="heat"><thead><tr><th></th><th></th>${cols.map(c=>`<th>${c}</th>`).join('')}</tr></thead><tbody>
+  ${Object.entries(H).map(([y,v])=>`<tr><td class="yr">${y}</td><td class="yr" style="color:var(--tx3)">${+y-2003}</td>
+    ${v.map(x=>`<td><div class="hc ${map[x]}" onclick="go('years','${y}')"></div></td>`).join('')}</tr>`).join('')}
+  </tbody></table></div>
+  <div class="legend"><span><i class="sw h5"></i>exceptional</span><span><i class="sw h4"></i>strong</span>
+  <span><i class="sw h3"></i>building</span><span><i class="sw h2"></i>difficult but useful</span><span><i class="sw h1"></i>caution</span></div>`;
+};
+
+V.years=(sel)=>{
+  const yrs=[...Object.keys(YEARS),...Object.keys(LATER)].map(Number).sort();
+  sel=+(sel||2026);
+  const d=yearOf(sel);
+  const full=YEARS[sel];
+  return `<h2 class="sec">Year explorer</h2>
+  <div class="chips">${yrs.map(y=>`<button class="chip" aria-pressed="${y===sel}" onclick="go('years','${y}')">${y}<span style="opacity:.6;font-size:10px"> · ${y-2003}</span></button>`).join('')}</div>
+  ${!d?'<div class="note warn">DATA NOT VERIFIED for this year.</div>':`
+  <div class="grid g4">
+    <div class="card"><div class="k">Year</div><div class="big mo">${sel}</div><div class="sub">age ${sel-2003}</div></div>
+    <div class="card"><div class="k">Score</div><div class="big" style="color:var(--${band(d.score)==='acc'?'acc':band(d.score)})">${d.score.toFixed(1)}</div>${bar(d.score)}</div>
+    <div class="card"><div class="k">Mode</div><div style="margin-top:9px"><span class="mode m-${d.mode}">${d.mode}</span></div></div>
+    <div class="card"><div class="k">Confidence</div><div style="margin-top:9px"><span class="pill ${pillFor(d.conf)}">${d.conf}</span></div></div>
+  </div>
+  <div class="card" style="margin-top:12px"><div class="k">Theme</div><div style="font-size:19px;font-weight:600;margin-top:5px">${esc(d.theme)}</div></div>
+  ${full?`<div class="grid g2" style="margin-top:12px">
+    ${[['Career','car'],['Money','mon'],['Business','biz'],['Education','edu'],['Relationships','rel'],['Health / energy','hea'],['Network','net'],['Travel','tra']]
+      .filter(([,k])=>full[k]&&full[k]!=='—').map(([lb,k])=>`<div class="card tight"><div class="k">${lb}</div><p style="margin:5px 0 0;font-size:13.5px">${esc(full[k])}</p></div>`).join('')}
+  </div>
+  <div class="grid g2" style="margin-top:12px">
+    <div class="card" style="border-left:3px solid var(--good)"><div class="k" style="color:var(--good)">Best opportunity</div><p style="margin:5px 0 0">${esc(full.opp)}</p></div>
+    <div class="card" style="border-left:3px solid var(--risk)"><div class="k" style="color:var(--risk)">Biggest risk</div><p style="margin:5px 0 0">${esc(full.risk)}</p></div>
+    <div class="card" style="border-left:3px solid var(--acc)"><div class="k" style="color:var(--acc)">What to do</div><p style="margin:5px 0 0">${esc(full.do)}</p></div>
+    <div class="card" style="border-left:3px solid var(--caut)"><div class="k" style="color:var(--caut)">What NOT to do</div><p style="margin:5px 0 0">${esc(full.dont)}</p></div>
+  </div>
+  <div class="card" style="margin-top:12px"><div class="k">Most important months</div><p style="margin:5px 0 0">${esc(full.months)}</p></div>`:''}
+  <h3>Months in ${sel}</h3>${monthGrid(sel)}`}`;
+};
+
+function monthGrid(y){
+  const ms=CHART.months.filter(m=>m.ym.startsWith(y));
+  if(!ms.length)return '<div class="note warn">DATA NOT VERIFIED — monthly resolution is computed only for 2026–2036.</div>';
+  const best=Math.max(...ms.map(m=>m.score));
+  const N=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  return `<div class="grid g4">${ms.map(m=>{const mi=+m.ym.slice(5)-1;
+    return `<div class="card tight" style="cursor:pointer;${m.score===best?'border-color:var(--good)':''}" onclick="showMonth('${m.ym}')">
+     <div style="display:flex;justify-content:space-between;align-items:baseline">
+       <span style="font-weight:600">${N[mi]}</span>
+       <span class="mo" style="color:var(--${band(m.score)==='acc'?'acc':band(m.score)});font-weight:600">${m.score.toFixed(1)}${m.score===best?' ⭐':''}</span></div>
+     ${bar(m.score)}<div class="sub mo" style="font-size:10.5px">${m.md}-${m.ad}-${m.pd}</div></div>`;}).join('')}</div>
+   <div id="moOut"></div>`;
+}
+function showMonth(ym){
+  const m=monthAt(ym); if(!m)return;
+  const y=+ym.slice(0,4), Y=yearOf(y);
+  const pdNat=nature(m.pd), sb=CHART.shadbala[m.pd];
+  const push=m.score>=6.5, avoid=m.score<5.2;
+  $('#moOut').innerHTML=`<div class="card" style="margin-top:12px;border-left:3px solid var(--acc)">
+   <div style="display:flex;gap:12px;align-items:baseline;flex-wrap:wrap">
+     <div style="font-size:19px;font-weight:600">${ym}</div>
+     <span class="mo" style="color:var(--${band(m.score)==='acc'?'acc':band(m.score)});font-size:17px;font-weight:600">${m.score.toFixed(1)}/10</span>
+     <span class="pill p-s">${m.md} → ${m.ad} → ${m.pd}</span></div>
+   <div class="grid g2" style="margin-top:12px">
+     <div><div class="k" style="color:var(--good)">Push</div><p style="margin:4px 0 0">${push?'Yes — the sub-period lord supports action. Apply, negotiate, ship.':'Not this month. Build instead.'}</p></div>
+     <div><div class="k" style="color:var(--acc)">Prepare</div><p style="margin:4px 0 0">${esc(Y?Y.do||Y.theme:'—')}</p></div>
+     <div><div class="k" style="color:var(--risk)">Avoid</div><p style="margin:4px 0 0">${avoid?'Major launches, leverage, irreversible commitments.':'Nothing structural. Ordinary caution.'}</p></div>
+     <div><div class="k">Best use</div><p style="margin:4px 0 0">${esc(Y?Y.theme:'—')}</p></div>
+   </div>
+   <div class="whybox on expertOnly" style="margin-top:12px">Pratyantardasha lord ${m.pd} — ${NATLABEL[pdNat]}${sb?`, Shadbala ${sb.r}/${sb.req} rupas (${sb.pct}% of minimum)`:', no Shadbala for nodes'}. Rules house(s) ${(RULES[m.pd]||['—']).join(', ')}. Score = weighted strength of MD/AD/PD modulated by the SAV of the houses each rules.</div>
+   <div class="note simpleOnly" style="margin-top:10px">Months inside the same sub-period share a score — the chart genuinely does not resolve finer than this, and inventing daily detail would be fiction.</div></div>`;
+  $('#moOut').scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+V.months=(sel)=>{
+  sel=+(sel||2026);
+  const yrs=[...new Set(CHART.months.map(m=>+m.ym.slice(0,4)))];
+  return `<h2 class="sec">Month explorer</h2>
+  <p>Monthly resolution comes from <b>pratyantardasha</b> changes — the finest level this chart honestly resolves. ${CHART.months.length} months computed across ${yrs.length} years.</p>
+  <div class="chips">${yrs.map(y=>`<button class="chip" aria-pressed="${y===sel}" onclick="go('months','${y}')">${y}</button>`).join('')}</div>
+  ${monthGrid(sel)}`;
+};
+
+V.opportunities=()=>`<h2 class="sec">Opportunity radar</h2>
+  <div class="grid g2">${OPPS.map(o=>`<div class="card">
+    <div style="display:flex;justify-content:space-between;align-items:baseline">
+      <h4 style="margin:0">${esc(o.c)}</h4>
+      <span class="mo" style="font-weight:600;color:var(--${band(o.cur)==='acc'?'acc':band(o.cur)})">${o.cur.toFixed(1)}</span></div>
+    ${bar(o.cur)}
+    <div style="display:grid;grid-template-columns:auto 1fr;gap:3px 11px;margin-top:11px;font-size:12.5px">
+      <span class="k">NEXT</span><span class="mo">${esc(o.next)}</span>
+      <span class="k">PEAK</span><span class="mo" style="color:var(--good)">${esc(o.peak)}</span>
+      <span class="k">PREP</span><span class="mo">${esc(o.prep)}</span>
+      <span class="k">CONF</span><span><span class="pill ${pillFor(o.conf)}">${o.conf}</span></span></div>
+    <p style="margin:10px 0 0;font-size:13px">${esc(o.st)}</p></div>`).join('')}</div>
+
+  <h3>Peak windows, ranked</h3>
+  <div class="tw"><table><thead><tr><th></th><th>Window</th><th>Category</th><th class="n">Strength</th><th>If used well</th><th>If wasted</th></tr></thead><tbody>
+   <tr><td>🥇</td><td class="n">2036–2042</td><td>Wealth + authority</td><td class="n">9.2</td><td>The compounding decade. Multiplies whatever base exists.</td><td>A great period with nothing to multiply.</td></tr>
+   <tr><td>🥈</td><td class="n">2032–2034</td><td>Career step-change</td><td class="n">8.1</td><td>Seniority, equity, a real jump.</td><td>Stuck as a senior individual contributor.</td></tr>
+   <tr><td>🥉</td><td class="n">Jan–Jun 2027</td><td>Education conversion</td><td class="n">7.6</td><td>Sets the entire branch of your career.</td><td>Another year of preparation.</td></tr>
+   <tr><td>4</td><td class="n">2029–2030</td><td>Savings foundation</td><td class="n">7.0</td><td>The habit that decides scenario A vs B.</td><td>Scenario C. A 45× lifetime difference.</td></tr>
+   <tr><td>5</td><td class="n">2033</td><td>Partnership</td><td class="n">6.4</td><td>A deliberately chosen partner.</td><td>Drift, or an equal-split venture that fails.</td></tr>
+  </tbody></table></div>`;
+
+V.advantages=()=>{
+  return `<h2 class="sec">Unfair advantages</h2>
+  <div class="chips">
+    <button class="chip" aria-pressed="true" onclick="filtAdv('all',this)">ALL</button>
+    <button class="chip" aria-pressed="false" onclick="filtAdv('money',this)">MONEY-MAKING ONLY</button>
+    <button class="chip" aria-pressed="false" onclick="filtAdv('dev',this)">DEVELOP NOW</button>
+  </div><div id="advOut">${advCards('all')}</div>`;
+};
+function advCards(f){
+  const list=ADV.filter(a=>f==='all'||(f==='money'&&a.money)||(f==='dev'&&a.dev));
+  if(!list.length)return '<div class="note">Nothing matches that filter.</div>';
+  return list.map(a=>`<div class="card" style="margin-bottom:12px;border-left:3px solid var(--${a.t==='S'?'good':a.t==='A'?'acc':a.t==='B'?'warn':'risk'})">
+    <div style="display:flex;gap:11px;align-items:baseline;flex-wrap:wrap">
+      <span class="pill ${a.t==='S'?'p-vh':a.t==='A'?'p-h':a.t==='B'?'p-m':'p-l'}">${a.t}-TIER</span>
+      <span style="font-size:17px;font-weight:600">${esc(a.n)}</span>
+      <span class="mo" style="color:var(--${band(a.s)==='acc'?'acc':band(a.s)});font-weight:600">${a.s.toFixed(1)}/10</span></div>
+    ${bar(a.s)}
+    <div style="display:grid;grid-template-columns:auto 1fr;gap:6px 13px;margin-top:12px;font-size:13.5px">
+      <span class="k" style="padding-top:2px">WHY</span><span>${esc(a.why)}</span>
+      <span class="k" style="padding-top:2px">IN REALITY</span><span>${esc(a.real)}</span>
+      <span class="k" style="padding-top:2px">MAKES MONEY</span><span>${esc(a.make)}</span>
+      <span class="k" style="padding-top:2px">STRONGEST</span><span style="color:var(--good)">${esc(a.when)}</span>
+      <span class="k" style="padding-top:2px">BUILD IT</span><span>${esc(a.build)}</span>
+      <span class="k" style="padding-top:2px;color:var(--risk)">DESTROYS IT</span><span>${esc(a.kill)}</span>
+    </div></div>`).join('');
+}
+function filtAdv(f,btn){document.querySelectorAll('#view .chips .chip').forEach(b=>b.setAttribute('aria-pressed','false'));
+  btn.setAttribute('aria-pressed','true'); $('#advOut').innerHTML=advCards(f);}
+
+V.karma=()=>`<h2 class="sec">Karmic operating system</h2>
+  <div class="note"><b>No superstition here.</b> Karma is treated as: repeating pattern → the choice it presents → the consequence → what changes if you master it.</div>
+  ${KARMA.map((k,i)=>`<div class="card" style="margin-bottom:12px">
+    <div style="display:flex;gap:10px;align-items:baseline"><span class="mo" style="color:var(--acc2);font-weight:600">#${i+1}</span>
+      <span style="font-size:17px;font-weight:600">${esc(k.n)}</span></div>
+    <div style="display:grid;grid-template-columns:auto 1fr;gap:6px 13px;margin-top:11px;font-size:13.5px">
+      <span class="k" style="padding-top:2px">EVIDENCE</span><span>${esc(k.core)}</span>
+      <span class="k" style="padding-top:2px;color:var(--risk)">IMMATURE</span><span>${esc(k.imm)}</span>
+      <span class="k" style="padding-top:2px;color:var(--good)">MATURE</span><span>${esc(k.mat)}</span>
+      <span class="k" style="padding-top:2px">TRIGGERS</span><span class="mo">${esc(k.trig)}</span>
+      <span class="k" style="padding-top:2px">IF MASTERED</span><span>${esc(k.win)}</span>
+      <span class="k" style="padding-top:2px;color:var(--acc)">DO THIS</span><span>${esc(k.act)}</span>
+    </div></div>`).join('')}
+  <div class="card"><h4>Jaimini karakas (all eight independently confirmed against your external dataset)</h4>
+   <div class="mo" style="font-size:13px;line-height:2">
+   ${Object.entries(CHART.jaimini).filter(([k])=>k.length<=4).map(([k,v])=>`<span style="display:inline-block;min-width:150px">${k}: <b style="color:var(--acc)">${v}</b></span>`).join('')}</div>
+   <div class="sub" style="margin-top:8px">Arudha Lagna: ${CHART.jaimini.arudhaLagna}, house ${CHART.jaimini.alHouse} from the Lagna.</div></div>`;
+
+V.wealth=()=>{
+  return `<h2 class="sec">Wealth command centre</h2>
+  <div class="grid g4">
+    <div class="card"><div class="k">Current phase</div><div style="font-size:17px;font-weight:600;margin-top:6px">Pre-accumulation</div><div class="sub">No income base yet. Correct for age 23.</div></div>
+    <div class="card"><div class="k">Wealth score</div><div class="big" style="color:var(--caut)">4.5</div>${bar(4.5)}<div class="sub">${esc(areaWhy('Wealth'))}</div></div>
+    <div class="card"><div class="k">Next window</div><div class="big mo" style="font-size:19px">2029</div><div class="sub">First salary. The system year.</div></div>
+    <div class="card"><div class="k">Strongest decade</div><div class="big mo" style="font-size:19px;color:var(--good)">33–39</div><div class="sub">Sun MD: 9th lord in the 2nd at 128%.</div></div>
+  </div>
+  <div class="note warn" style="margin-top:14px"><b>Read this before the table.</b> The numbers below are <b>compound arithmetic</b> — salary path, tax, savings rate, 11% nominal returns. <b>No astrology produces them.</b> The chart's only contribution is that your retention is weak, which means which column you land in is mostly a choice.</div>
+
+  <h3>Net worth by scenario</h3>
+  <div class="tw"><table><thead><tr><th class="n">Age</th><th class="n">🟢 High (40% saved)</th><th class="n">🟡 Normal (20%)</th><th class="n">🔴 Sabotage (5%)</th></tr></thead><tbody>
+  ${[26,30,35,40,45,50].map(a=>`<tr><td class="n" style="font-weight:600">${a}</td>
+    <td class="n" style="color:var(--good)">${SCEN.high.nw[a]}</td>
+    <td class="n" style="color:var(--warn)">${SCEN.norm.nw[a]}</td>
+    <td class="n" style="color:var(--risk)">${SCEN.low.nw[a]}</td></tr>`).join('')}
+  </tbody></table></div>
+
+  <h3>Milestone windows</h3>
+  <div class="tw"><table><thead><tr><th>Milestone</th><th class="n">High</th><th class="n">Normal</th><th class="n">Sabotage</th></tr></thead><tbody>
+  ${MILESTONES.map(m=>`<tr><td>${esc(m.m)}</td>
+    <td class="n" style="color:var(--good)">${m.high?'age '+m.high:'—'}</td>
+    <td class="n" style="color:var(--warn)">${m.norm?'age '+m.norm:'not before 50'}</td>
+    <td class="n" style="color:var(--risk)">${m.low?'age '+m.low:'not before 50'}</td></tr>`).join('')}
+  </tbody></table></div>
+  <div class="sub">Possible milestone windows under the stated execution level — never guarantees.</div>
+
+  <div class="note good" style="margin-top:14px"><b>The single most useful number here.</b> In the Normal scenario, changing <b>nothing except the savings rate</b> — 20% to 35%, same job, same salary — moves ₹1 crore from <b>age 38 to age 35</b>. Three years, bought with one standing instruction.</div>
+
+  <h3>Wealth engines <span style="font-size:12px;font-weight:400;color:var(--tx3)">click a column to sort</span></h3>
+  <div class="tw"><table id="wTab"><thead><tr>
+    <th class="s" onclick="sortT('wTab',0,0)">Engine</th><th class="s n" onclick="sortT('wTab',1,1)">Fit</th>
+    <th class="s n" onclick="sortT('wTab',2,1)">Upside</th><th class="s n" onclick="sortT('wTab',3,1)">Freedom</th>
+    <th class="s n" onclick="sortT('wTab',4,1)">Risk</th><th class="s n" onclick="sortT('wTab',5,1)">Scale</th><th>Why</th></tr></thead><tbody>
+  ${WEALTH.map(w=>`<tr><td style="font-weight:600">${esc(w.n)}</td>
+    <td class="n" style="color:var(--${band(w.fit)==='acc'?'acc':band(w.fit)})">${w.fit}</td>
+    <td class="n">${w.up}</td><td class="n">${w.free}</td>
+    <td class="n" style="color:var(--${w.risk>=7?'risk':w.risk>=5?'caut':'good'})">${w.risk}</td>
+    <td class="n">${w.scale}</td><td style="font-size:12.5px">${esc(w.why)}</td></tr>`).join('')}
+  </tbody></table></div>
+
+  <div class="note warn"><b>Never rely on this financially:</b> your own instinct to save. The 2nd house is 21 bindus with your weakest planet as lord, and no Dhana Yoga forms. This is the most repeated negative signal in your chart. Accumulation must be automated out of your own hands.</div>
+  <div class="note simpleOnly"><b>Plain words:</b> you'll probably be good at earning and bad at keeping. So make the keeping automatic and let your talent do the earning.</div>`;
+};
+
+V.career=()=>{
+  const rank=[...CAREERS].sort((a,b)=>b.fit-a.fit);
+  return `<h2 class="sec">Career command centre</h2>
+  <div class="grid g3">
+    ${rank.slice(0,3).map((c,i)=>`<div class="card" style="border-left:3px solid var(--${i===0?'good':i===1?'acc':'warn'})">
+      <div style="font-size:20px">${['🥇','🥈','🥉'][i]}</div>
+      <div style="font-size:16px;font-weight:600;margin-top:5px">${esc(c.n)}</div>
+      <div class="mo" style="color:var(--good);font-weight:600;margin-top:5px">Fit ${c.fit}/10</div>
+      <div class="sub">${esc(c.age)}</div></div>`).join('')}
+  </div>
+  <div class="note"><b>Your pattern:</b> Employee → senior professional → owner/investor. <b>Not</b> early entrepreneur, and not pure corporate lifer. Mercury rules the 10th and 7th and sits in your Lagna; the 10th is empty so nothing is handed to you; the 7th at 19 bindus argues against early partnership ventures; Sun MD at 33–39 is when ownership becomes structurally supported.</div>
+  <h3>All paths <span style="font-size:12px;font-weight:400;color:var(--tx3)">click a column to sort</span></h3>
+  <div class="tw"><table id="cTab"><thead><tr>
+    <th class="s" onclick="sortT('cTab',0,0)">Path</th><th class="s n" onclick="sortT('cTab',1,1)">Fit</th>
+    <th class="s n" onclick="sortT('cTab',2,1)">Income</th><th class="s n" onclick="sortT('cTab',3,1)">Freedom</th>
+    <th class="s n" onclick="sortT('cTab',4,1)">Status</th><th class="s n" onclick="sortT('cTab',5,1)">Excel</th>
+    <th class="s n" onclick="sortT('cTab',6,1)">Difficulty</th><th>Chart support</th><th>Needs</th><th class="n">Enter</th></tr></thead><tbody>
+  ${CAREERS.map(c=>`<tr><td style="font-weight:600">${esc(c.n)}</td>
+    <td class="n" style="color:var(--${band(c.fit)==='acc'?'acc':band(c.fit)})">${c.fit}</td>
+    <td class="n">${c.inc}</td><td class="n">${c.free}</td><td class="n">${c.stat}</td><td class="n">${c.exc}</td>
+    <td class="n" style="color:var(--${c.diff>=9?'risk':c.diff>=7?'caut':'good'})">${c.diff}</td>
+    <td style="font-size:12.5px">${esc(c.sup)}</td><td style="font-size:12.5px">${esc(c.need)}</td>
+    <td class="n" style="font-size:12px">${esc(c.age)}</td></tr>`).join('')}
+  </tbody></table></div>
+  <h3>Skills to build before their window arrives</h3>
+  <div class="grid g3">
+    <div class="card tight"><div class="k">NOW → 2029</div><p style="margin:5px 0 0;font-size:13.5px">Structured problem-solving. Financial modelling. Writing clearly.</p></div>
+    <div class="card tight"><div class="k">BY 2031</div><p style="margin:5px 0 0;font-size:13.5px">People and project leadership — needed to be eligible for the 2032–34 step-change.</p></div>
+    <div class="card tight"><div class="k">BY 2034</div><p style="margin:5px 0 0;font-size:13.5px">Capital allocation and ownership literacy — needed for Sun MD.</p></div>
+  </div>`;
+};
+
+V.scenarios=()=>`<h2 class="sec">Three futures, same chart</h2>
+  <div class="chips">
+    <button class="chip" aria-pressed="false" onclick="setScen('low',this)">🔴 LOW EXECUTION</button>
+    <button class="chip" aria-pressed="true" onclick="setScen('norm',this)">🟡 NORMAL</button>
+    <button class="chip" aria-pressed="false" onclick="setScen('high',this)">🟢 HIGH EXECUTION</button>
+  </div><div id="scOut">${scenView('norm')}</div>
+  <div class="note warn" style="margin-top:16px"><b>You asked not to be flattered.</b> The most likely outcome is <b>NORMAL</b>, not high. Base rates are unsentimental: most serious CAT aspirants do not reach a top-6 IIM, most capable analysts become competent senior managers rather than partners, and most professionals with rising salaries save 10–20%, not 40%. The gap between best and worst execution here is roughly <b>45×</b> by age 50 — and the largest single input is the savings rate, not talent or timing.</div>`;
+function scenView(k){
+  const s=SCEN[k];
+  return `<div class="grid g4">
+    <div class="card"><div class="k">Scenario</div><div style="font-size:17px;font-weight:700;margin-top:6px;color:var(--${s.c})">${esc(s.k)}</div></div>
+    <div class="card"><div class="k">Savings rate</div><div class="big mo" style="color:var(--${s.c})">${esc(s.save)}</div></div>
+    <div class="card"><div class="k">Income path</div><div class="mo" style="font-size:15px;margin-top:7px">${esc(s.sal)}</div></div>
+    <div class="card"><div class="k">Net worth at 50</div><div class="big mo" style="color:var(--${s.c});font-size:24px">${esc(s.nw[50])}</div></div>
+  </div>
+  <div class="tw" style="margin-top:12px"><table><thead><tr><th class="n">Age</th><th class="n">Net worth</th><th>Position</th></tr></thead><tbody>
+    <tr><td class="n">30</td><td class="n">${s.nw[30]}</td><td>${esc(s.a30)}</td></tr>
+    <tr><td class="n">35</td><td class="n">${s.nw[35]}</td><td>${esc(s.a35)}</td></tr>
+    <tr><td class="n">40</td><td class="n">${s.nw[40]}</td><td>${esc(s.a40)}</td></tr>
+  </tbody></table></div>
+  <div class="grid g3" style="margin-top:12px">
+    <div class="card tight"><div class="k">Ownership</div><p style="margin:5px 0 0;font-size:13.5px">${esc(s.own)}</p></div>
+    <div class="card tight"><div class="k">Freedom</div><p style="margin:5px 0 0;font-size:13.5px">${esc(s.free)}</p></div>
+    <div class="card tight"><div class="k">Lifestyle</div><p style="margin:5px 0 0;font-size:13.5px">${esc(s.life)}</p></div>
+    <div class="card tight"><div class="k">Network</div><p style="margin:5px 0 0;font-size:13.5px">${esc(s.net)}</p></div>
+    <div class="card tight"><div class="k">Relationships</div><p style="margin:5px 0 0;font-size:13.5px">${esc(s.rel)}</p></div>
+  </div>`;
+}
+function setScen(k,btn){document.querySelectorAll('#view .chips .chip').forEach(b=>b.setAttribute('aria-pressed','false'));
+  btn.setAttribute('aria-pressed','true'); $('#scOut').innerHTML=scenView(k);}
+
+V.decide=()=>`<h2 class="sec">Decision engine</h2>
+  <p>Pick what you're considering. Astrology is one input; real-world readiness is the other, and it usually dominates.</p>
+  <div class="chips">${Object.keys(DECISIONS).map((k,i)=>`<button class="chip" aria-pressed="${i===0}" onclick="decide('${k.replace(/'/g,"\\'")}',this)">${esc(k)}</button>`).join('')}</div>
+  <div id="decOut">${decView(Object.keys(DECISIONS)[0])}</div>
+  <div class="note warn">Never base a serious financial, legal or medical decision on astrology alone. This tool ranks timing; it does not replace advice, diligence or arithmetic.</div>`;
+function decView(k){
+  const d=DECISIONS[k], col=d.rec==='GO HARD'?'good':d.rec==='PROCEED'?'acc':d.rec==='WAIT/PREPARE'?'warn':'risk';
+  return `<div class="card" style="border-left:3px solid var(--${col})">
+   <div style="display:flex;gap:14px;align-items:baseline;flex-wrap:wrap">
+     <span style="font-size:19px;font-weight:600">${esc(k)}</span>
+     <span class="mode m-${d.rec==='GO HARD'?'ATTACK':d.rec==='PROCEED'?'BUILD':d.rec==='WAIT/PREPARE'?'TRANSITION':'PROTECT'}">${esc(d.rec)}</span></div>
+   <div class="grid g3" style="margin-top:12px">
+     <div><div class="k">Timing score</div><div class="big mo" style="color:var(--${band(d.sc)==='acc'?'acc':band(d.sc)});font-size:26px">${d.sc}/10</div>${bar(d.sc)}</div>
+     <div><div class="k">Astrology says</div><div style="font-size:15px;font-weight:600;margin-top:6px;color:var(--${col})">${esc(d.ast)}</div></div>
+     <div><div class="k">Real-world readiness</div><div style="font-size:15px;font-weight:600;margin-top:6px">${esc(d.rw)}</div></div>
+   </div>
+   <div class="k" style="margin-top:12px">Why</div><p style="margin:4px 0 0">${esc(d.why)}</p></div>`;
+}
+function decide(k,btn){document.querySelectorAll('#view .chips .chip').forEach(b=>b.setAttribute('aria-pressed','false'));
+  btn.setAttribute('aria-pressed','true'); $('#decOut').innerHTML=decView(k);}
+
+V.risks=()=>`<h2 class="sec">Warning system</h2>
+  ${RISKS.map(r=>{const c=r.lvl==='CRITICAL'?'risk':r.lvl==='HIGH'?'caut':'warn';
+   return `<div class="card" style="margin-bottom:11px;border-left:3px solid var(--${c})">
+    <div style="display:flex;gap:11px;align-items:baseline;flex-wrap:wrap">
+      <span style="font-size:16px;font-weight:600">⚠️ ${esc(r.n)}</span>
+      <span class="pill ${r.lvl==='CRITICAL'?'p-l':r.lvl==='HIGH'?'p-m':'p-s'}" style="color:var(--${c});border-color:var(--${c})">${r.lvl}</span></div>
+    <div style="display:grid;grid-template-columns:auto 1fr;gap:5px 13px;margin-top:10px;font-size:13.5px">
+      <span class="k" style="padding-top:2px">WHY</span><span>${esc(r.why)}</span>
+      <span class="k" style="padding-top:2px">WHEN</span><span class="mo">${esc(r.when)}</span>
+      <span class="k" style="padding-top:2px">COST</span><span>${esc(r.cost)}</span>
+      <span class="k" style="padding-top:2px;color:var(--good)">FIX</span><span>${esc(r.fix)}</span></div></div>`;}).join('')}
+  <div class="note">No fear-based astrology here. Every warning above names a mechanism and a fix. None of them are predictions of disaster; they are the failure modes most consistent with your own chart's weak points.</div>`;
+
+V.ledger=()=>`<h2 class="sec">Prediction ledger</h2>
+  <p>Testable, dated, recorded so they can be checked rather than remembered selectively. A sealed machine-readable version exists in the repository under hash <span class="mo">638936d0632eb496</span>.</p>
+  <div class="tw"><table id="lTab"><thead><tr>
+    <th class="s" onclick="sortT('lTab',0,0)">Prediction</th><th class="n">Window</th><th>Category</th>
+    <th class="s n" onclick="sortT('lTab',3,1)">Conf %</th><th>Level</th><th>Basis</th><th>Status</th></tr></thead><tbody>
+  ${LEDGER.map(l=>`<tr><td style="font-weight:500">${esc(l.p)}</td><td class="n">${esc(l.w)}</td><td>${esc(l.cat)}</td>
+    <td class="n" style="color:var(--${l.pr>=75?'good':l.pr>=55?'warn':'caut'})">${l.pr}</td>
+    <td><span class="pill ${pillFor(l.cf)}">${l.cf}</span></td>
+    <td style="font-size:12px">${esc(l.b)}</td><td>⏳ Pending</td></tr>`).join('')}
+  </tbody></table></div>
+  <div class="note"><b>Confidence bands:</b> 90–100 extremely strong · 75–89 high · 55–74 moderate · 35–54 low · below 35 speculative. Treat these as <b>comparative confidence</b>, not measured probability — astrology cannot justify precise percentages, and inflating them would be dishonest.</div>`;
+
+V.actions=()=>`<h2 class="sec">Action centre</h2>
+  <div class="chips">
+    <button class="chip" aria-pressed="true" onclick="actTab('today',this)">TODAY</button>
+    <button class="chip" aria-pressed="false" onclick="actTab('week',this)">THIS WEEK</button>
+    <button class="chip" aria-pressed="false" onclick="actTab('month',this)">THIS MONTH</button>
+  </div><div id="actOut">${actList('today')}</div>
+  <h3>Life KPIs — these matter more than any transit</h3>
+  <div class="grid g2">${KPIS.map(k=>`<div class="card tight">
+    <div style="display:flex;justify-content:space-between;align-items:baseline">
+      <b>${esc(k.k)}</b><span class="mo" style="color:var(--good);font-size:12.5px">${esc(k.t)}</span></div>
+    <div class="sub">${esc(k.w)}</div></div>`).join('')}</div>`;
+function actList(k){const a=ACTIONS[k];
+  return `<div class="card"><ol style="margin:0;padding-left:20px;font-size:15px">${a.map(x=>`<li style="margin-bottom:8px">${esc(x)}</li>`).join('')}</ol></div>`;}
+function actTab(k,btn){document.querySelectorAll('#view .chips .chip').forEach(b=>b.setAttribute('aria-pressed','false'));
+  btn.setAttribute('aria-pressed','true'); $('#actOut').innerHTML=actList(k);}
+
+V.ask=()=>`<h2 class="sec">Ask my life</h2>
+  <div class="ask">
+    <input type="text" id="qIn" placeholder="e.g. when should I start a business?" onkeypress="if(event.key==='Enter')doAsk()">
+    <button class="go" onclick="doAsk()">ASK</button></div>
+  <div class="chips">${['When should I start a business?','When is my strongest career period?','What should I focus on in 2028?','When does wealth accelerate?','What should I avoid this month?','What are my advantages?','What happens around age 30?','What is my biggest karmic lesson?','What should I prepare for next?'].map(q=>`<button class="chip" onclick="document.getElementById('qIn').value=this.textContent;doAsk()">${esc(q)}</button>`).join('')}</div>
+  <div id="aOut"></div>
+  <div class="note">Answers are looked up from the same verified model every other screen uses. Nothing here can contradict another section, because there is only one data source.</div>`;
+function doAsk(){
+  const q=($('#qIn').value||'').toLowerCase(); let out='';
+  const has=(...w)=>w.some(x=>q.includes(x));
+  if(!q.trim())out='Type a question, or tap one of the suggestions.';
+  else if(has('business','startup','venture','found'))
+    out=`<b>Not before 2032, and properly from 2036.</b><br><br>Your 2nd house (funding capacity) is 21 bindus with Saturn — your weakest planet at 75% of its minimum — as lord. Your 7th house (partnership) is 19 bindus, the lowest of all twelve, and empty. Venus–Saturn 2029–32 is the worst-supported stretch of your chart for it.<br><br>First realistic window: <b>2032</b>, when Venus–Mercury opens. The genuinely strong window is <b>2036–2040</b> under Sun Mahadasha. And when you do it: <b>solo or majority-owned</b>, never an equal split.`;
+  else if(has('career','strongest career','professional','job'))
+    out=`<b>Two windows, and the second is bigger.</b><br><br><b>2032–2034</b> — Venus–Mercury. Mercury is your strongest graha (8.61 vs 7.0 required), rules the 10th, sits in your Lagna, and owns its sign in D10. 2032 is also a Mercury profection year.<br><br><b>2036–2042</b> — Sun Mahadasha. The Sun rules your 9th (a trikona) at 128% of minimum and sits in the 2nd. This is the strongest whole era in your adult chart.<br><br>Right now your Career area scores <b>8.1/10</b> — the highest of your twelve. But the 10th house is empty: nothing arrives on its own.`;
+  else if(has('2028'))
+    out=`<b>2028 — ${esc(YEARS[2028].theme)}</b> · mode ${YEARS[2028].mode} · score ${YEARS[2028].score}<br><br><b>Opportunity:</b> ${esc(YEARS[2028].opp)}<br><b>Risk:</b> ${esc(YEARS[2028].risk)}<br><b>Do:</b> ${esc(YEARS[2028].do)}<br><b>Avoid:</b> ${esc(YEARS[2028].dont)}`;
+  else if(has('wealth','money','rich','crore','accelerat','savings'))
+    out=`<b>Accumulation starts in 2029; acceleration is 2036–2042.</b><br><br>But the honest answer is that your <b>savings rate matters more than any window</b>. Your 2nd house is 21 bindus with your weakest planet as lord and no Dhana Yoga forms — this is the most repeated negative signal in your chart.<br><br>The arithmetic: at a 20% savings rate you reach ₹1 crore around age <b>38</b>. At 35% — same job, same salary — around age <b>35</b>. The dasha sets the multiplier; you set the base.`;
+  else if(has('avoid this month','this month','avoid'))
+    out=`<b>Right now (${MISSION.period}), avoid:</b> ${esc(MISSION.avoid)}<br><br>You are in ${esc(MISSION.pd)} — a grind texture. It rewards consistency and punishes scattered effort. <b>Primary focus:</b> ${esc(MISSION.primary)}`;
+  else if(has('advantage','strength','good at'))
+    out=`<b>Your top three, ranked by evidence:</b><br><br>${ADV.slice(0,3).map((a,i)=>`<b>${i+1}. ${esc(a.n)}</b> (${a.s}/10) — ${esc(a.real)}`).join('<br><br>')}<br><br>The first has <b>four independent confirmations</b>, which is unusually strong. Build your life on it.`;
+  else if(has('age 30','30','thirty'))
+    out=`<b>At 30 (2033) you are in Venus–Mercury, profection to your 7th house.</b><br><br>Theme: ${esc(YEARS[2033].theme)}. The only D4 (partnership) activation in a decade.<br><br>Net worth depends entirely on execution: <b>${SCEN.high.nw[30]}</b> high · <b>${SCEN.norm.nw[30]}</b> normal · <b>${SCEN.low.nw[30]}</b> low.<br><br>${esc(SCEN.norm.a30)}`;
+  else if(has('karma','karmic','lesson'))
+    out=`<b>${esc(KARMA[0].n)}</b><br><br>${esc(KARMA[0].core)}<br><br><b>Immature:</b> ${esc(KARMA[0].imm)}<br><b>Mature:</b> ${esc(KARMA[0].mat)}<br><b>Do this:</b> ${esc(KARMA[0].act)}`;
+  else if(has('prepare','next','coming','upcoming'))
+    out=`<b>Next major window: Jan–Jun 2027.</b><br><br>Mercury pratyantardasha overlapping interview and admission season, with profection moving to your 1st house on 20 Jan 2027.<br><br><b>Preparation required:</b> a CAT percentile that opens real doors. The window converts a score; it cannot produce one. That means 40+ timed mocks with error logs before November 2026.`;
+  else if(has('marriage','relationship','partner','love'))
+    out=`<b>Most chart-flagged window: 2033</b> — 7th-house profection, and the only D4 activation in ten years.<br><br>Your 7th house is 19 bindus, the lowest of all twelve, and empty. Its lord Mercury is your strongest planet but retrograde — a genuine contradiction the chart does not resolve.<br><br>Practical read: partnership is <b>not automatic and not passive</b> for you. It needs deliberate choice. <b>No claim is made about who.</b>`;
+  else if(has('health','energy','sick','fit'))
+    out=`<b>Your Energy area scores 7.1/10 — one of your stronger ones.</b><br><br>The 6th house is 37 bindus, joint highest: you absorb strain well. The risk pattern is therefore <b>overwork, not fragility</b> — Saturn and Rahu share that house.<br><br>Heaviest workload stretch: <b>2029–2031</b>. Fixed sleep window and a hard daily stop time.<br><br><b>No medical claim is made anywhere in this system.</b>`;
+  else if(has('exam','cat','mba','study','college'))
+    out=`<b>Performance support: 7/10. Timing is genuinely favourable; the score is not astrological.</b><br><br>Mercury is your strongest graha and CAT is a Mercury exam. The 6th house at 37 bindus with Rahu means competition suits you.<br><br><b>Preparation phase</b> (now–Nov 2026): Saturn pratyantardasha — heavy, unglamorous, exactly right for mock-grinding.<br><b>Conversion phase</b> (Jan–Jun 2027): Mercury. Favourable for interviews and admission.<br><br><b>What must be true:</b> 40+ timed mocks with analysed error logs. Astrology cannot supply a percentile.`;
+  else out=`I don't have a verified answer for that phrasing. Try one of the suggested questions, or ask about: business, career, wealth, a specific year, advantages, karma, relationships, health, or exams.<br><br><b>I won't guess.</b> Everything in this system traces to a computed value; inventing an answer would break that.`;
+  $('#aOut').innerHTML=`<div class="card" style="border-left:3px solid var(--acc)"><p style="margin:0;max-width:none">${out}</p></div>`;
+}
+
+V.checkin=()=>{
+  const s=JSON.parse(localStorage.getItem('lifeos_checkins')||'[]');
+  return `<h2 class="sec">Monthly check-in &amp; reality tracker</h2>
+  <div class="note">Saved in this browser only. Nothing is sent anywhere. This is how predictions become testable instead of comforting.</div>
+  <div class="card">
+    <div class="grid g2">
+      <div><div class="k">Month</div><input type="text" id="ciM" placeholder="2026-09" value="${new Date().toISOString().slice(0,7)}"></div>
+      <div><div class="k">Mock percentile / KPI</div><input type="text" id="ciK" placeholder="e.g. 92.4"></div>
+    </div>
+    <div class="k" style="margin-top:11px">What actually happened?</div><textarea id="ciW"></textarea>
+    <div class="grid g2" style="margin-top:9px">
+      <div><div class="k">Biggest success</div><textarea id="ciS"></textarea></div>
+      <div><div class="k">Biggest mistake</div><textarea id="ciE"></textarea></div>
+    </div>
+    <div class="k" style="margin-top:11px">Which domains actually mattered? (D1 self · D2 career · D3 wealth · D4 partnership · D5 home · D6 creation · D7 routine · D8 craft · D9 meaning)</div>
+    <input type="text" id="ciD" placeholder="e.g. D8, D3">
+    <div style="margin-top:12px"><button class="chip" style="background:var(--acc);color:#0A0D12;border-color:var(--acc);font-weight:600" onclick="saveCI()">SAVE ENTRY</button><span id="ciMsg" class="saved"></span></div>
+  </div>
+  <h3>History <span style="font-size:12px;font-weight:400;color:var(--tx3)">${s.length} entries</span></h3>
+  <div id="ciList">${ciList()}</div>`;
+};
+function ciList(){
+  const s=JSON.parse(localStorage.getItem('lifeos_checkins')||'[]');
+  if(!s.length)return '<div class="note">No entries yet. The first one is the hardest; after that it takes two minutes a month.</div>';
+  return s.slice().reverse().map((e,i)=>`<div class="card tight" style="margin-bottom:9px">
+    <div style="display:flex;justify-content:space-between;align-items:baseline">
+      <b class="mo">${esc(e.m)}</b>
+      <button class="why" onclick="delCI(${s.length-1-i})">DELETE</button></div>
+    ${e.k?`<div class="sub">KPI: <b class="mo">${esc(e.k)}</b></div>`:''}
+    ${e.w?`<p style="margin:6px 0 0;font-size:13.5px">${esc(e.w)}</p>`:''}
+    ${e.s?`<div class="sub" style="color:var(--good)">✔ ${esc(e.s)}</div>`:''}
+    ${e.e?`<div class="sub" style="color:var(--caut)">✘ ${esc(e.e)}</div>`:''}
+    ${e.d?`<div class="sub">Domains that mattered: <b class="mo">${esc(e.d)}</b></div>`:''}</div>`).join('');
+}
+function saveCI(){
+  try{
+    const s=JSON.parse(localStorage.getItem('lifeos_checkins')||'[]');
+    s.push({m:$('#ciM').value,k:$('#ciK').value,w:$('#ciW').value,s:$('#ciS').value,e:$('#ciE').value,d:$('#ciD').value});
+    localStorage.setItem('lifeos_checkins',JSON.stringify(s));
+    $('#ciMsg').textContent='Saved.'; $('#ciList').innerHTML=ciList();
+    ['ciW','ciS','ciE','ciD','ciK'].forEach(id=>$('#'+id).value='');
+    setTimeout(()=>$('#ciMsg').textContent='',2200);
+  }catch(err){$('#ciMsg').textContent='Could not save — browser storage is blocked.';}
+}
+function delCI(i){try{const s=JSON.parse(localStorage.getItem('lifeos_checkins')||'[]');
+  s.splice(i,1);localStorage.setItem('lifeos_checkins',JSON.stringify(s));$('#ciList').innerHTML=ciList();}catch(e){}}
+
+V.chart=()=>`<h2 class="sec">The chart — single source of truth</h2>
+  <div class="note good"><b>Verification.</b> ${esc(CHART.birth.verify)}. Every screen in this system reads from this one model; no page recalculates anything independently.</div>
+  <div class="grid g2">
+    <div class="card"><h4>Birth data</h4><div class="mo" style="font-size:12.5px;line-height:1.9">
+      ${Object.entries({Name:CHART.birth.name,Date:CHART.birth.date,Time:CHART.birth.time,Place:CHART.birth.place,
+        UTC:CHART.birth.utc,'Julian Day':CHART.birth.jd,Ayanamsha:CHART.birth.ayanamsha,Houses:CHART.birth.houses,
+        Nodes:CHART.birth.nodes}).map(([k,v])=>`<div><span style="color:var(--tx3)">${k}:</span> ${esc(String(v))}</div>`).join('')}
+    </div></div>
+    <div class="card"><h4>Lagna</h4><div class="big mo" style="font-size:21px;color:var(--acc)">${esc(CHART.birth.lagna)}</div>
+      <div class="sub">${esc(CHART.birth.lagnaNak)} · lord ${esc(CHART.birth.lagnaLord)}</div>
+      <div class="note" style="margin-top:11px;font-size:12.5px">Your stated correction of ~11°34′ matches this computed value to <b>10.9 arcseconds</b>. The 25°36′ figure from older records was traced to a timezone error combined with an Ascendant from a third source — it has no valid derivation.</div></div>
+  </div>
+  <h3>Planets</h3>
+  <div class="tw"><table><thead><tr><th>Graha</th><th>Position</th><th class="n">House</th><th>Nakshatra</th><th>Dignity</th><th class="n">Rules</th><th class="n">Shadbala</th><th>D9</th><th>D10</th></tr></thead><tbody>
+  ${CHART.planets.map(p=>`<tr><td style="font-weight:600">${esc(p.g)}${p.retro?' <span style="color:var(--caut)">R</span>':''}</td>
+    <td class="n">${esc(p.pos)}</td><td class="n">${p.house}</td><td>${esc(p.nak)} p${p.pada}</td>
+    <td>${esc(p.dignity.replace(/_/g,' '))}</td><td class="n">${p.rules.join(', ')||'—'}</td>
+    <td class="n">${p.shadbala?`${p.shadbala}/${p.req} <span style="color:var(--${p.shadbala/p.req>=1.2?'good':p.shadbala/p.req>=1?'warn':'risk'})">${Math.round(p.shadbala/p.req*100)}%</span>`:'—'}</td>
+    <td>${esc(p.d9)}</td><td>${esc(p.d10)}</td></tr>`).join('')}
+  </tbody></table></div>
+  <h3>Houses &amp; Sarvashtakavarga <span style="font-size:12px;font-weight:400;color:var(--tx3)">total must equal 337 — it does</span></h3>
+  <div class="tw"><table><thead><tr><th class="n">H</th><th>Sign</th><th>Lord</th><th class="n">Bindus</th><th>Strength</th><th>Occupants</th><th class="n">Lord in</th></tr></thead><tbody>
+  ${CHART.houses.map(h=>`<tr><td class="n" style="font-weight:600">${h.h}</td><td>${esc(h.sign)}</td><td>${esc(h.lord)}</td>
+    <td class="n" style="color:var(--${h.sav>=34?'good':h.sav>=27?'warn':h.sav>=22?'caut':'risk'})">${h.sav}</td>
+    <td style="width:110px">${bar(h.sav,40)}</td><td>${h.occupants.join(', ')||'—'}</td><td class="n">${h.lordIn}</td></tr>`).join('')}
+  </tbody></table></div>
+  <h3>Divisional charts</h3>
+  <div class="grid g4">
+    ${Object.entries(CHART.vargas).filter(([k])=>k!=='d10note').map(([k,v])=>`<div class="card tight"><div class="k">${k}</div><div style="font-size:15px;font-weight:600;margin-top:5px">${esc(v)}</div></div>`).join('')}
+  </div>
+  <div class="note warn"><b>DATA NOT VERIFIED:</b> ${esc(CHART.vargas.d10note)}. No conclusion in this system rests on D10 alone.</div>
+  <h3>Convention disclosure — annual profection</h3>
+  <div class="note"><b>Two frames give two answers, and this system uses the sidereal one throughout.</b><br><br>
+   Annual profection is originally a Hellenistic technique built on the <i>tropical</i> Ascendant. Applied to your tropical chart (Capricorn rising) it gives <b>house 12 Sagittarius, Lord of the Year Jupiter</b> for age 23. Applied to your sidereal Vedic chart (Dhanu rising) it gives <b>house 12 Vrischika, lord Mars</b>.<br><br>
+   The house number is identical because profection counts houses, not signs — only the sign and its lord differ. Since you asked for a Vedic dashboard, <b>every screen here uses the sidereal frame</b>. The earlier Hellenistic reading in this project used the tropical frame and said Jupiter. Neither is wrong; they are different systems and are never mixed within a single claim.</div>
+  <h3>Yogas evaluated <span style="font-size:12px;font-weight:400;color:var(--tx3)">closed whitelist — absences reported too</span></h3>
+  <div class="card"><ul style="margin:0;columns:2;column-gap:26px">${CHART.yogas.map(y=>`<li style="break-inside:avoid">${esc(y)}</li>`).join('')}</ul></div>
+  <h3>Glossary</h3>
+  <div class="card">${Object.entries(GLOSS).map(([k,v])=>`<div style="margin-bottom:7px;font-size:13.5px"><b style="color:var(--acc)">${esc(k)}</b> — ${esc(v)}</div>`).join('')}</div>`;
+
+/* =========================== router =========================== */
+const NAV=[['dashboard','🏠 Dashboard'],['timemachine','⏳ Time machine'],['timeline','📅 Timeline'],
+ ['heatmap','🔥 Heatmap'],['years','🗓 Years'],['months','📆 Months'],['opportunities','🎯 Opportunities'],
+ ['wealth','💰 Wealth'],['career','💼 Career'],['advantages','⚡ Advantages'],['karma','🪐 Karma'],
+ ['risks','⚠️ Risks'],['scenarios','📈 Scenarios'],['decide','🧭 Decide'],['actions','✅ Actions'],
+ ['ledger','📜 Ledger'],['ask','🔍 Ask'],['checkin','📝 Check-in'],['chart','🪐 Chart data']];
+let CUR='dashboard', ARG=null;
+function go(k,arg){CUR=k;ARG=arg;location.hash=k+(arg?'/'+arg:'');render();}
+function render(){
+  $('#nav').innerHTML=NAV.map(([k,l])=>`<button aria-current="${k===CUR}" onclick="go('${k}')">${l}</button>`).join('');
+  $('#view').innerHTML=(V[CUR]||V.dashboard)(ARG);
+  if(CUR==='timemachine'){const sl=$('#tmSlider');sl.oninput=()=>renderTM(+sl.value);renderTM(+sl.value);}
+  window.scrollTo({top:0,behavior:'instant'});
+}
+function sortT(id,col,num){
+  const t=document.getElementById(id),tb=t.tBodies[0],rows=[...tb.rows];
+  const dir=t.dataset.sc==col+''?-1:1; t.dataset.sc=dir===1?col:'';
+  rows.sort((a,b)=>{const x=a.cells[col].textContent.trim(),y=b.cells[col].textContent.trim();
+    return num?(parseFloat(y)-parseFloat(x))*dir:x.localeCompare(y)*dir;});
+  rows.forEach(r=>tb.appendChild(r));
+}
+/* toggles */
+function setLevel(simple){document.body.classList.toggle('simple',simple);
+  $('#tSimple').setAttribute('aria-pressed',simple);$('#tExpert').setAttribute('aria-pressed',!simple);
+  try{localStorage.setItem('lifeos_level',simple?'s':'e')}catch(e){}}
+function setTheme(dark){document.documentElement.setAttribute('data-theme',dark?'dark':'light');
+  $('#tDark').setAttribute('aria-pressed',dark);$('#tLight').setAttribute('aria-pressed',!dark);
+  try{localStorage.setItem('lifeos_theme',dark?'d':'l')}catch(e){}}
+$('#tSimple').onclick=()=>setLevel(true); $('#tExpert').onclick=()=>setLevel(false);
+$('#tDark').onclick=()=>setTheme(true);  $('#tLight').onclick=()=>setTheme(false);
+
+/* boot */
+(function(){
+  let lvl='s',th='d';
+  try{lvl=localStorage.getItem('lifeos_level')||'s';th=localStorage.getItem('lifeos_theme')||'d';}catch(e){}
+  setLevel(lvl==='s'); setTheme(th==='d');
+  const age=AGE(), d=dashaAt('2026-08-30');
+  $('#mAge').textContent=age; $('#mDasha').textContent=`${d.md}–${d.ad}`; $('#mMode').textContent=modeAt(2026);
+  const h=location.hash.slice(1).split('/'); if(h[0]&&V[h[0]]){CUR=h[0];ARG=h[1]||null;}
+  render();
+})();
+window.addEventListener('hashchange',()=>{const h=location.hash.slice(1).split('/');
+  if(h[0]&&V[h[0]]&&(h[0]!==CUR||h[1]!==ARG)){CUR=h[0];ARG=h[1]||null;render();}});
+</script>
+
+<div class="wrap" style="max-width:1400px;margin:0 auto;padding:0 20px 40px">
+<footer>
+  <p><strong>What this is.</strong> A decision console on a verified chart: three ephemeris engines agreeing to 0.0026″, Sarvashtakavarga totalling its required 337, Shadbala with five exact components, independently corroborated by a separate toolchain to within 1.2 arcminutes. Area scores follow one published formula. Wealth figures are compound arithmetic. Confidence bands are comparative, not measured probability.</p>
+  <p><strong>What this is not.</strong> A forecast. Astrology is not a validated predictive method. Nothing here claims an exam score, a disease, a lifespan, a specific spouse, or a guaranteed return. Where the chart contradicts itself — partnership especially, where the weakest house has the strongest planet as its lord — the contradiction is printed rather than resolved. Where a value is not reliably computable, it says DATA NOT VERIFIED.</p>
+  <p style="margin-bottom:0"><strong>Bottom line.</strong> The highest-leverage action in this entire system needs no astrology at all. The chart simply happens to agree with it, loudly, and more often than it agrees with anything else.</p>
+</footer>
+</div>

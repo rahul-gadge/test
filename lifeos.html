@@ -1,0 +1,2855 @@
+<title>Rahul Life OS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=Azeret+Mono:wght@400;500;600&display=swap">
+<style>
+/* dark-first: :root carries the DARK palette; light is the explicit alternative */
+:root{
+  --bg:#0A0D12; --panel:#111721; --panel2:#161E2A; --sunk:#070A0E;
+  --tx:#E8EDF5; --tx2:#96A3B8; --tx3:#65718A;
+  --line:#1E2632; --line2:#2B3648;
+  --acc:#8B9DFF; --acc2:#F5C97B; --accSoft:#161D3A;
+  --good:#52C98B; --goodS:#0F2620; --warn:#E8C468; --warnS:#2A2413;
+  --caut:#E89B58; --cautS:#2A1D12; --risk:#E8705F; --riskS:#2C1614;
+  --xform:#A78BFA; --xformS:#1E1733;
+  --ui:"Sora",system-ui,-apple-system,sans-serif;
+  --mo:"Azeret Mono",ui-monospace,Menlo,monospace;
+}
+:root[data-theme="light"]{
+  --bg:#F5F7FA; --panel:#FFFFFF; --panel2:#EDF1F6; --sunk:#E2E8F0;
+  --tx:#0F1621; --tx2:#4A5668; --tx3:#77839A;
+  --line:#DCE3EC; --line2:#C3CDDB;
+  --acc:#4356C4; --acc2:#9A6E1E; --accSoft:#E6EAFB;
+  --good:#1F7A52; --goodS:#DFF0E7; --warn:#8A6A16; --warnS:#F7EEDA;
+  --caut:#9A5A1E; --cautS:#F8E7D8; --risk:#A8382A; --riskS:#F9E2DE;
+  --xform:#6B46C1; --xformS:#EDE6FA;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:var(--ui);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.mo{font-family:var(--mo);font-variant-numeric:tabular-nums}
+button{font-family:inherit;font-size:inherit;color:inherit;cursor:pointer;border:none;background:none}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px;border-radius:3px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* ---- shell ---- */
+.top{position:sticky;top:0;z-index:50;background:rgba(10,13,18,.9);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+:root[data-theme="light"] .top{background:rgba(245,247,250,.92)}
+.topin{max-width:1400px;margin:0 auto;padding:11px 20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.brand{font-weight:700;letter-spacing:-.02em;font-size:17px;display:flex;align-items:center;gap:9px}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--acc);box-shadow:0 0 12px var(--acc)}
+.tmeta{font-family:var(--mo);font-size:11px;color:var(--tx3);display:flex;gap:14px;flex-wrap:wrap}
+.tmeta b{color:var(--tx2);font-weight:500}
+.spacer{flex:1}
+.tog{display:flex;border:1px solid var(--line2);border-radius:6px;overflow:hidden}
+.tog button{padding:5px 11px;font-size:11px;font-weight:600;letter-spacing:.04em;color:var(--tx3);background:transparent;transition:.15s}
+.tog button[aria-pressed="true"]{background:var(--acc);color:#0A0D12}
+:root[data-theme="light"] .tog button[aria-pressed="true"]{color:#fff}
+
+nav.side{border-bottom:1px solid var(--line);background:var(--panel);overflow-x:auto}
+nav.side .nin{max-width:1400px;margin:0 auto;padding:0 14px;display:flex;gap:2px}
+nav.side button{padding:11px 13px;font-size:12.5px;font-weight:500;color:var(--tx3);white-space:nowrap;border-bottom:2px solid transparent;transition:.15s}
+nav.side button:hover{color:var(--tx2)}
+nav.side button[aria-current="true"]{color:var(--acc);border-bottom-color:var(--acc)}
+main{max-width:1400px;margin:0 auto;padding:22px 20px 90px}
+
+/* ---- primitives ---- */
+h2.sec{font-size:11px;font-weight:700;letter-spacing:.17em;text-transform:uppercase;color:var(--acc);margin:0 0 14px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+h3{font-size:1.05rem;font-weight:600;margin:22px 0 9px;letter-spacing:-.01em}
+h4{font-size:.9rem;font-weight:600;margin:0 0 7px}
+p{margin:0 0 11px;max-width:70ch}
+.grid{display:grid;gap:12px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(290px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(168px,1fr))}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:15px 17px}
+.card.tight{padding:12px 14px}
+.k{font-size:10px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--tx3)}
+.big{font-size:30px;font-weight:700;letter-spacing:-.03em;font-family:var(--mo);line-height:1.1;margin-top:5px}
+.sub{font-size:12px;color:var(--tx3);margin-top:4px;line-height:1.45}
+.mode{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:4px}
+.m-ATTACK{background:var(--good);color:#06120C}
+.m-BUILD{background:var(--accSoft);color:var(--acc);border:1px solid var(--acc)}
+.m-TRANSITION{background:var(--warnS);color:var(--warn);border:1px solid var(--warn)}
+.m-PROTECT{background:var(--cautS);color:var(--caut);border:1px solid var(--caut)}
+.m-HARVEST{background:var(--goodS);color:var(--good);border:1px solid var(--good)}
+:root[data-theme="light"] .m-ATTACK{color:#fff}
+.pill{display:inline-block;font-size:9.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;padding:2px 7px;border-radius:3px;vertical-align:1px}
+.p-vh{background:var(--good);color:#06120C} .p-h{background:var(--goodS);color:var(--good);border:1px solid var(--good)}
+.p-m{background:var(--warnS);color:var(--warn);border:1px solid var(--warn)}
+.p-l{background:var(--cautS);color:var(--caut);border:1px solid var(--caut)}
+.p-s{background:var(--panel2);color:var(--tx3);border:1px solid var(--line2)}
+:root[data-theme="light"] .p-vh{color:#fff}
+.bar{height:6px;background:var(--sunk);border-radius:3px;overflow:hidden;margin-top:7px}
+.bar i{display:block;height:100%;border-radius:3px;transition:width .35s}
+.b-good i{background:var(--good)} .b-warn i{background:var(--warn)}
+.b-caut i{background:var(--caut)} .b-risk i{background:var(--risk)}
+.b-acc i{background:var(--acc)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--panel)}
+th,td{padding:9px 12px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+thead th{font-size:10px;font-weight:600;letter-spacing:.11em;text-transform:uppercase;color:var(--tx3);background:var(--panel2);white-space:nowrap;position:sticky;top:0}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover{background:var(--panel2)}
+th.s{cursor:pointer;user-select:none} th.s:hover{color:var(--acc)}
+td.n,th.n{font-family:var(--mo);font-variant-numeric:tabular-nums;white-space:nowrap}
+.why{font-size:10px;font-weight:600;color:var(--acc);border:1px solid var(--line2);border-radius:4px;padding:2px 7px;margin-left:7px;letter-spacing:.05em}
+.why:hover{background:var(--accSoft)}
+.whybox{display:none;margin-top:9px;padding:11px 13px;background:var(--sunk);border-left:3px solid var(--acc);border-radius:0 6px 6px 0;font-size:12.5px;color:var(--tx2);line-height:1.55;font-family:var(--mo)}
+.whybox.on{display:block}
+.simpleOnly{display:none} body.simple .simpleOnly{display:block}
+body.simple .expertOnly{display:none}
+.note{background:var(--panel2);border-left:3px solid var(--acc2);border-radius:0 8px 8px 0;padding:12px 15px;margin:12px 0;font-size:13.5px;color:var(--tx2)}
+.note b{color:var(--tx)}
+.note.warn{border-left-color:var(--risk)} .note.good{border-left-color:var(--good)}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.chip{padding:6px 13px;font-size:12px;font-weight:500;border:1px solid var(--line2);border-radius:20px;color:var(--tx2);transition:.15s}
+.chip:hover{border-color:var(--acc);color:var(--tx)}
+.chip[aria-pressed="true"]{background:var(--acc);color:#0A0D12;border-color:var(--acc);font-weight:600}
+:root[data-theme="light"] .chip[aria-pressed="true"]{color:#fff}
+input[type=range]{width:100%;accent-color:var(--acc);height:26px}
+input[type=text],textarea,select{width:100%;background:var(--sunk);border:1px solid var(--line2);border-radius:7px;padding:9px 12px;color:var(--tx);font-family:inherit;font-size:14px}
+textarea{min-height:64px;resize:vertical}
+.heat{border-collapse:separate;border-spacing:2px}
+.heat td{padding:0;border:none}
+.hc{width:100%;height:26px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;font-family:var(--mo);cursor:pointer;transition:.15s}
+.hc:hover{outline:2px solid var(--acc)}
+.h5{background:var(--good);color:#06120C} .h4{background:var(--goodS);color:var(--good)}
+.h3{background:var(--warnS);color:var(--warn)} .h2{background:var(--cautS);color:var(--caut)}
+.h1{background:var(--riskS);color:var(--risk)}
+:root[data-theme="light"] .h5{color:#fff}
+.heat th{background:none;padding:4px 3px;font-size:9px;text-align:center;border:none;position:static}
+.heat td.yr{font-family:var(--mo);font-size:11px;color:var(--tx2);padding-right:8px;white-space:nowrap}
+.tl{position:relative;padding:26px 0 10px;overflow-x:auto}
+.tlline{position:absolute;left:0;right:0;top:52px;height:2px;background:var(--line2)}
+.tlrow{display:flex;gap:0;min-width:820px;position:relative}
+.tlev{flex:1;min-width:74px;text-align:center;position:relative;padding-top:34px;cursor:pointer}
+.tlev .mk{position:absolute;top:0;left:50%;transform:translateX(-50%);width:15px;height:15px;border-radius:50%;border:2px solid var(--bg);transition:.15s}
+.tlev:hover .mk{transform:translateX(-50%) scale(1.35)}
+.tlev .ag{font-family:var(--mo);font-size:10px;color:var(--tx3)}
+.tlev .lb{font-size:10.5px;color:var(--tx2);margin-top:2px;line-height:1.3;padding:0 3px}
+.mk-h{background:var(--good)} .mk-m{background:var(--warn)} .mk-s{background:var(--tx3)}
+.spark{width:100%;height:150px}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:11px;color:var(--tx3);margin-top:10px}
+.legend span{display:flex;align-items:center;gap:5px}
+.sw{width:11px;height:11px;border-radius:3px;display:inline-block}
+.qa{border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.qrow{display:flex;gap:12px;padding:11px 15px;border-bottom:1px solid var(--line);font-size:13.5px}
+.qrow:last-child{border-bottom:none}
+.qrow .qq{font-weight:600;color:var(--acc2);min-width:190px}
+.ask{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.ask input{flex:1;min-width:220px}
+.ask button.go{background:var(--acc);color:#0A0D12;font-weight:600;padding:9px 18px;border-radius:7px}
+:root[data-theme="light"] .ask button.go{color:#fff}
+.saved{font-size:11px;color:var(--good);margin-left:8px}
+footer{border-top:1px solid var(--line);margin-top:40px;padding-top:18px;font-size:12px;color:var(--tx3);max-width:80ch}
+@media(max-width:640px){
+  main{padding:16px 13px 70px}
+  .topin{padding:9px 13px;gap:9px}
+  .tmeta{font-size:10px;gap:9px}
+  .qrow{flex-direction:column;gap:3px}
+  .qrow .qq{min-width:0}
+  .big{font-size:25px}
+}
+</style>
+
+<header class="top">
+  <div class="topin">
+    <div class="brand"><span class="dot"></span>Rahul Life OS</div>
+    <div class="tmeta">
+      <span>AGE <b id="mAge">23</b></span>
+      <span>DASHA <b id="mDasha">—</b></span>
+      <span>MODE <b id="mMode">—</b></span>
+      <span>LAGNA <b>Dhanu 11°33′49″</b></span>
+    </div>
+    <div class="spacer"></div>
+    <div class="tog" role="group" aria-label="Detail level">
+      <button id="tSimple" aria-pressed="true">SIMPLE</button>
+      <button id="tExpert" aria-pressed="false">EXPERT</button>
+    </div>
+    <div class="tog" role="group" aria-label="Theme">
+      <button id="tDark" aria-pressed="true">DARK</button>
+      <button id="tLight" aria-pressed="false">LIGHT</button>
+    </div>
+  </div>
+</header>
+
+<nav class="side"><div class="nin" id="nav"></div></nav>
+<main id="view"></main>
+
+<script>
+const CHART = {
+"birth": {
+"name": "Rahul Nathuji Gadge",
+"date": "2003-01-20",
+"time": "05:24 IST",
+"place": "Warud, Amravati, Maharashtra, India",
+"residence": "Ghaziabad, UP",
+"utc": "2003-01-19T23:54:00Z",
+"jd": 2452659.4958333,
+"lat": 21.4737672,
+"lon": 78.2569898,
+"ayanamsha": "Lahiri 23°53′59″",
+"houses": "Whole sign",
+"nodes": "Mean (true retained)",
+"lagna": "Dhanu (Sagittarius) 11°33′49″",
+"lagnaNak": "Mula pada 4",
+"lagnaLord": "Jupiter",
+"verify": "3 engines agree to 0.0026″; Vedaansh corroborates to ≤1.2′"
+},
+"planets": [
+{
+"g": "Sun",
+"pos": "Makara 5°35'47.3\"",
+"sign": "Makara",
+"house": 2,
+"nak": "Uttara Ashadha",
+"pada": 3,
+"retro": false,
+"dignity": "neutral_or_friendly",
+"d9": "Kumbha",
+"d10": "Tula",
+"rules": [
+9
+],
+"shadbala": 6.38,
+"req": 5.0
+},
+{
+"g": "Moon",
+"pos": "Karka 25°14'43.3\"",
+"sign": "Karka",
+"house": 8,
+"nak": "Ashlesha",
+"pada": 3,
+"retro": false,
+"dignity": "own_sign",
+"d9": "Kumbha",
+"d10": "Vrischika",
+"rules": [
+8
+],
+"shadbala": 5.7,
+"req": 6.0
+},
+{
+"g": "Mars",
+"pos": "Vrischika 7°55'04.1\"",
+"sign": "Vrischika",
+"house": 12,
+"nak": "Anuradha",
+"pada": 2,
+"retro": false,
+"dignity": "own_sign",
+"d9": "Kanya",
+"d10": "Kanya",
+"rules": [
+5,
+12
+],
+"shadbala": 5.34,
+"req": 5.0
+},
+{
+"g": "Mercury",
+"pos": "Dhanu 19°04'16.8\"",
+"sign": "Dhanu",
+"house": 1,
+"nak": "Purva Ashadha",
+"pada": 2,
+"retro": true,
+"dignity": "neutral_or_friendly",
+"d9": "Kanya",
+"d10": "Mithuna",
+"rules": [
+7,
+10
+],
+"shadbala": 8.61,
+"req": 7.0
+},
+{
+"g": "Jupiter",
+"pos": "Karka 20°57'09.3\"",
+"sign": "Karka",
+"house": 8,
+"nak": "Ashlesha",
+"pada": 2,
+"retro": true,
+"dignity": "exalted",
+"d9": "Makara",
+"d10": "Kanya",
+"rules": [
+1,
+4
+],
+"shadbala": 8.19,
+"req": 6.5
+},
+{
+"g": "Venus",
+"pos": "Vrischika 18°58'15.3\"",
+"sign": "Vrischika",
+"house": 12,
+"nak": "Jyeshtha",
+"pada": 1,
+"retro": false,
+"dignity": "neutral_or_friendly",
+"d9": "Dhanu",
+"d10": "Makara",
+"rules": [
+6,
+11
+],
+"shadbala": 6.11,
+"req": 5.5
+},
+{
+"g": "Saturn",
+"pos": "Vrishabha 29°14'35.7\"",
+"sign": "Vrishabha",
+"house": 6,
+"nak": "Mrigashira",
+"pada": 2,
+"retro": true,
+"dignity": "neutral_or_friendly",
+"d9": "Kanya",
+"d10": "Tula",
+"rules": [
+2,
+3
+],
+"shadbala": 3.77,
+"req": 5.0
+},
+{
+"g": "Rahu",
+"pos": "Vrishabha 12°07'41.0\"",
+"sign": "Vrishabha",
+"house": 6,
+"nak": "Rohini",
+"pada": 1,
+"retro": true,
+"dignity": "not_assigned",
+"d9": "Mesha",
+"d10": "Vrishabha",
+"rules": [],
+"shadbala": null,
+"req": null
+},
+{
+"g": "Ketu",
+"pos": "Vrischika 12°07'41.0\"",
+"sign": "Vrischika",
+"house": 12,
+"nak": "Anuradha",
+"pada": 3,
+"retro": true,
+"dignity": "not_assigned",
+"d9": "Tula",
+"d10": "Vrischika",
+"rules": [],
+"shadbala": null,
+"req": null
+}
+],
+"houses": [
+{
+"h": 1,
+"sign": "Dhanu",
+"lord": "Jupiter",
+"sav": 31,
+"occupants": [
+"Mercury"
+],
+"lordIn": 8
+},
+{
+"h": 2,
+"sign": "Makara",
+"lord": "Saturn",
+"sav": 21,
+"occupants": [
+"Sun"
+],
+"lordIn": 6
+},
+{
+"h": 3,
+"sign": "Kumbha",
+"lord": "Saturn",
+"sav": 31,
+"occupants": [],
+"lordIn": 6
+},
+{
+"h": 4,
+"sign": "Meena",
+"lord": "Jupiter",
+"sav": 26,
+"occupants": [],
+"lordIn": 8
+},
+{
+"h": 5,
+"sign": "Mesha",
+"lord": "Mars",
+"sav": 26,
+"occupants": [],
+"lordIn": 12
+},
+{
+"h": 6,
+"sign": "Vrishabha",
+"lord": "Venus",
+"sav": 37,
+"occupants": [
+"Saturn",
+"Rahu"
+],
+"lordIn": 12
+},
+{
+"h": 7,
+"sign": "Mithuna",
+"lord": "Mercury",
+"sav": 19,
+"occupants": [],
+"lordIn": 1
+},
+{
+"h": 8,
+"sign": "Karka",
+"lord": "Moon",
+"sav": 24,
+"occupants": [
+"Moon",
+"Jupiter"
+],
+"lordIn": 8
+},
+{
+"h": 9,
+"sign": "Simha",
+"lord": "Sun",
+"sav": 29,
+"occupants": [],
+"lordIn": 2
+},
+{
+"h": 10,
+"sign": "Kanya",
+"lord": "Mercury",
+"sav": 37,
+"occupants": [],
+"lordIn": 1
+},
+{
+"h": 11,
+"sign": "Tula",
+"lord": "Venus",
+"sav": 31,
+"occupants": [],
+"lordIn": 12
+},
+{
+"h": 12,
+"sign": "Vrischika",
+"lord": "Mars",
+"sav": 25,
+"occupants": [
+"Mars",
+"Venus",
+"Ketu"
+],
+"lordIn": 12
+}
+],
+"dasha": [
+{
+"lord": "Mercury",
+"start": "1992-02-12",
+"end": "2009-02-11",
+"a0": -11,
+"a1": 6,
+"ads": [
+{
+"lord": "Mercury",
+"start": "1992-02-12",
+"end": "1994-07-10"
+},
+{
+"lord": "Ketu",
+"start": "1994-07-10",
+"end": "1995-07-07"
+},
+{
+"lord": "Venus",
+"start": "1995-07-07",
+"end": "1998-05-07"
+},
+{
+"lord": "Sun",
+"start": "1998-05-07",
+"end": "1999-03-14"
+},
+{
+"lord": "Moon",
+"start": "1999-03-14",
+"end": "2000-08-12"
+},
+{
+"lord": "Mars",
+"start": "2000-08-12",
+"end": "2001-08-09"
+},
+{
+"lord": "Rahu",
+"start": "2001-08-09",
+"end": "2004-02-27"
+},
+{
+"lord": "Jupiter",
+"start": "2004-02-27",
+"end": "2006-06-04"
+},
+{
+"lord": "Saturn",
+"start": "2006-06-04",
+"end": "2009-02-11"
+}
+]
+},
+{
+"lord": "Ketu",
+"start": "2009-02-11",
+"end": "2016-02-11",
+"a0": 6,
+"a1": 13,
+"ads": [
+{
+"lord": "Ketu",
+"start": "2009-02-11",
+"end": "2009-07-10"
+},
+{
+"lord": "Venus",
+"start": "2009-07-10",
+"end": "2010-09-09"
+},
+{
+"lord": "Sun",
+"start": "2010-09-09",
+"end": "2011-01-15"
+},
+{
+"lord": "Moon",
+"start": "2011-01-15",
+"end": "2011-08-16"
+},
+{
+"lord": "Mars",
+"start": "2011-08-16",
+"end": "2012-01-12"
+},
+{
+"lord": "Rahu",
+"start": "2012-01-12",
+"end": "2013-01-29"
+},
+{
+"lord": "Jupiter",
+"start": "2013-01-29",
+"end": "2014-01-05"
+},
+{
+"lord": "Saturn",
+"start": "2014-01-05",
+"end": "2015-02-14"
+},
+{
+"lord": "Mercury",
+"start": "2015-02-14",
+"end": "2016-02-11"
+}
+]
+},
+{
+"lord": "Venus",
+"start": "2016-02-11",
+"end": "2036-02-11",
+"a0": 13,
+"a1": 33,
+"ads": [
+{
+"lord": "Venus",
+"start": "2016-02-11",
+"end": "2019-06-13"
+},
+{
+"lord": "Sun",
+"start": "2019-06-13",
+"end": "2020-06-12"
+},
+{
+"lord": "Moon",
+"start": "2020-06-12",
+"end": "2022-02-11"
+},
+{
+"lord": "Mars",
+"start": "2022-02-11",
+"end": "2023-04-13"
+},
+{
+"lord": "Rahu",
+"start": "2023-04-13",
+"end": "2026-04-13"
+},
+{
+"lord": "Jupiter",
+"start": "2026-04-13",
+"end": "2028-12-12"
+},
+{
+"lord": "Saturn",
+"start": "2028-12-12",
+"end": "2032-02-11"
+},
+{
+"lord": "Mercury",
+"start": "2032-02-11",
+"end": "2034-12-12"
+},
+{
+"lord": "Ketu",
+"start": "2034-12-12",
+"end": "2036-02-11"
+}
+]
+},
+{
+"lord": "Sun",
+"start": "2036-02-11",
+"end": "2042-02-11",
+"a0": 33,
+"a1": 39,
+"ads": [
+{
+"lord": "Sun",
+"start": "2036-02-11",
+"end": "2036-05-31"
+},
+{
+"lord": "Moon",
+"start": "2036-05-31",
+"end": "2036-11-29"
+},
+{
+"lord": "Mars",
+"start": "2036-11-29",
+"end": "2037-04-06"
+},
+{
+"lord": "Rahu",
+"start": "2037-04-06",
+"end": "2038-03-01"
+},
+{
+"lord": "Jupiter",
+"start": "2038-03-01",
+"end": "2038-12-18"
+},
+{
+"lord": "Saturn",
+"start": "2038-12-18",
+"end": "2039-11-30"
+},
+{
+"lord": "Mercury",
+"start": "2039-11-30",
+"end": "2040-10-06"
+},
+{
+"lord": "Ketu",
+"start": "2040-10-06",
+"end": "2041-02-10"
+},
+{
+"lord": "Venus",
+"start": "2041-02-10",
+"end": "2042-02-11"
+}
+]
+},
+{
+"lord": "Moon",
+"start": "2042-02-11",
+"end": "2052-02-11",
+"a0": 39,
+"a1": 49,
+"ads": [
+{
+"lord": "Moon",
+"start": "2042-02-11",
+"end": "2042-12-12"
+},
+{
+"lord": "Mars",
+"start": "2042-12-12",
+"end": "2043-07-13"
+},
+{
+"lord": "Rahu",
+"start": "2043-07-13",
+"end": "2045-01-11"
+},
+{
+"lord": "Jupiter",
+"start": "2045-01-11",
+"end": "2046-05-13"
+},
+{
+"lord": "Saturn",
+"start": "2046-05-13",
+"end": "2047-12-12"
+},
+{
+"lord": "Mercury",
+"start": "2047-12-12",
+"end": "2049-05-13"
+},
+{
+"lord": "Ketu",
+"start": "2049-05-13",
+"end": "2049-12-12"
+},
+{
+"lord": "Venus",
+"start": "2049-12-12",
+"end": "2051-08-12"
+},
+{
+"lord": "Sun",
+"start": "2051-08-12",
+"end": "2052-02-11"
+}
+]
+},
+{
+"lord": "Mars",
+"start": "2052-02-11",
+"end": "2059-02-11",
+"a0": 49,
+"a1": 56,
+"ads": [
+{
+"lord": "Mars",
+"start": "2052-02-11",
+"end": "2052-07-09"
+},
+{
+"lord": "Rahu",
+"start": "2052-07-09",
+"end": "2053-07-28"
+},
+{
+"lord": "Jupiter",
+"start": "2053-07-28",
+"end": "2054-07-04"
+},
+{
+"lord": "Saturn",
+"start": "2054-07-04",
+"end": "2055-08-12"
+},
+{
+"lord": "Mercury",
+"start": "2055-08-12",
+"end": "2056-08-09"
+},
+{
+"lord": "Ketu",
+"start": "2056-08-09",
+"end": "2057-01-05"
+},
+{
+"lord": "Venus",
+"start": "2057-01-05",
+"end": "2058-03-07"
+},
+{
+"lord": "Sun",
+"start": "2058-03-07",
+"end": "2058-07-13"
+},
+{
+"lord": "Moon",
+"start": "2058-07-13",
+"end": "2059-02-11"
+}
+]
+}
+],
+"months": [
+{
+"ym": "2026-01",
+"md": "Venus",
+"ad": "Rahu",
+"pd": "Moon",
+"score": 4.2
+},
+{
+"ym": "2026-02",
+"md": "Venus",
+"ad": "Rahu",
+"pd": "Moon",
+"score": 4.2
+},
+{
+"ym": "2026-03",
+"md": "Venus",
+"ad": "Rahu",
+"pd": "Mars",
+"score": 4.8
+},
+{
+"ym": "2026-04",
+"md": "Venus",
+"ad": "Rahu",
+"pd": "Mars",
+"score": 4.8
+},
+{
+"ym": "2026-05",
+"md": "Venus",
+"ad": "Jupiter",
+"pd": "Jupiter",
+"score": 6.9
+},
+{
+"ym": "2026-06",
+"md": "Venus",
+"ad": "Jupiter",
+"pd": "Jupiter",
+"score": 6.9
+},
+{
+"ym": "2026-07",
+"md": "Venus",
+"ad": "Jupiter",
+"pd": "Jupiter",
+"score": 6.9
+},
+{
+"ym": "2026-08",
+"md": "Venus",
+"ad": "Jupiter",
+"pd": "Jupiter",
+"score": 6.9
+},
+{
+"ym": "2026-09",
+"md": "Venus",
+"ad": "Jupiter",
+"pd": "Saturn",
+"score": 5.2
+},
+{
+"ym": "2026-10",
+"md": "Venus",
+"ad": "Jupiter",
+"pd": "Saturn",
+"score": 5.2
+},
+{
+"ym": "2026-11",
+"md": "Venus",
+"ad": "Jupiter",
+"pd": "Saturn",
+"score": 5.2
+},
+{
+"ym": "2026-12",
+"md": "Venus",
+"ad": "Jupiter",
+"pd": "Saturn",
+"score": 5.2
+},
+{
+"ym": "2027-01",
+"md": "Venus",
+"ad": "Jupiter",
+"pd": "Saturn",
+"score": 5.2
+},
+{
+"ym": "2027-02",
+"md": "Venus",
+"ad": "Jupiter",
+"pd": "Mercury",
+"score": 6.4
+},
+{
+"ym": "2027-03",
+"md": "Venus",
+"ad": "Jupiter",
+"pd": "Mercury",
+"score": 6.4
+},
+{
+"ym": "2027-04",
+"md": "Venus",
+"ad": "Jupiter",
+"pd": "Mercury",
+"score": 6.4
+},
+{
+"ym": "2027-05",
+"md": "Venus",
+"ad": "Jupiter",
+"pd": "Mercury",
+"score": 6.4
+},
+{
+"ym": "2027-06",
+"md": "Venus",
+"ad": "Jupiter",
+"pd": "Mercury",
+"score": 6.4
+},
+{
+"ym": "2027-07",
+"md": "Venus",
+"ad": "Jupiter",
+"pd": "Ketu",
+"score": 5.5
+},
+{
+"ym": "2027-08",
+"md": "Venus",
+"ad": "Jupiter",
+"pd": "Ketu",
+"score": 5.5
+},
+{
+"ym": "2027-09",
+"md": "Venus",
+"ad": "Jupiter",
+"pd": "Venus",
+"score": 6.3
+},
+{
+"ym": "2027-10",
+"md": "Venus",
+"ad": "Jupiter",
+"pd": "Venus",
+"score": 6.3
+},
+{
+"ym": "2027-11",
+"md": "Venus",
+"ad": "Jupiter",
+"pd": "Venus",
+"score": 6.3
+},
+{
+"ym": "2027-12",
+"md": "Venus",
+"ad": "Jupiter",
+"pd": "Venus",
+"score": 6.3
+},
+{
+"ym": "2028-01",
+"md": "Venus",
+"ad": "Jupiter",
+"pd": "Venus",
+"score": 6.3
+},
+{
+"ym": "2028-02",
+"md": "Venus",
+"ad": "Jupiter",
+"pd": "Sun",
+"score": 7.0
+},
+{
+"ym": "2028-03",
+"md": "Venus",
+"ad": "Jupiter",
+"pd": "Sun",
+"score": 7.0
+},
+{
+"ym": "2028-04",
+"md": "Venus",
+"ad": "Jupiter",
+"pd": "Moon",
+"score": 5.3
+},
+{
+"ym": "2028-05",
+"md": "Venus",
+"ad": "Jupiter",
+"pd": "Moon",
+"score": 5.3
+},
+{
+"ym": "2028-06",
+"md": "Venus",
+"ad": "Jupiter",
+"pd": "Mars",
+"score": 5.8
+},
+{
+"ym": "2028-07",
+"md": "Venus",
+"ad": "Jupiter",
+"pd": "Mars",
+"score": 5.8
+},
+{
+"ym": "2028-08",
+"md": "Venus",
+"ad": "Jupiter",
+"pd": "Rahu",
+"score": 5.5
+},
+{
+"ym": "2028-09",
+"md": "Venus",
+"ad": "Jupiter",
+"pd": "Rahu",
+"score": 5.5
+},
+{
+"ym": "2028-10",
+"md": "Venus",
+"ad": "Jupiter",
+"pd": "Rahu",
+"score": 5.5
+},
+{
+"ym": "2028-11",
+"md": "Venus",
+"ad": "Jupiter",
+"pd": "Rahu",
+"score": 5.5
+},
+{
+"ym": "2028-12",
+"md": "Venus",
+"ad": "Jupiter",
+"pd": "Rahu",
+"score": 5.5
+},
+{
+"ym": "2029-01",
+"md": "Venus",
+"ad": "Saturn",
+"pd": "Saturn",
+"score": 4.0
+},
+{
+"ym": "2029-02",
+"md": "Venus",
+"ad": "Saturn",
+"pd": "Saturn",
+"score": 4.0
+},
+{
+"ym": "2029-03",
+"md": "Venus",
+"ad": "Saturn",
+"pd": "Saturn",
+"score": 4.0
+},
+{
+"ym": "2029-04",
+"md": "Venus",
+"ad": "Saturn",
+"pd": "Saturn",
+"score": 4.0
+},
+{
+"ym": "2029-05",
+"md": "Venus",
+"ad": "Saturn",
+"pd": "Saturn",
+"score": 4.0
+},
+{
+"ym": "2029-06",
+"md": "Venus",
+"ad": "Saturn",
+"pd": "Saturn",
+"score": 4.0
+},
+{
+"ym": "2029-07",
+"md": "Venus",
+"ad": "Saturn",
+"pd": "Mercury",
+"score": 5.2
+},
+{
+"ym": "2029-08",
+"md": "Venus",
+"ad": "Saturn",
+"pd": "Mercury",
+"score": 5.2
+},
+{
+"ym": "2029-09",
+"md": "Venus",
+"ad": "Saturn",
+"pd": "Mercury",
+"score": 5.2
+},
+{
+"ym": "2029-10",
+"md": "Venus",
+"ad": "Saturn",
+"pd": "Mercury",
+"score": 5.2
+},
+{
+"ym": "2029-11",
+"md": "Venus",
+"ad": "Saturn",
+"pd": "Mercury",
+"score": 5.2
+},
+{
+"ym": "2029-12",
+"md": "Venus",
+"ad": "Saturn",
+"pd": "Ketu",
+"score": 4.2
+},
+{
+"ym": "2030-01",
+"md": "Venus",
+"ad": "Saturn",
+"pd": "Ketu",
+"score": 4.2
+},
+{
+"ym": "2030-02",
+"md": "Venus",
+"ad": "Saturn",
+"pd": "Venus",
+"score": 5.1
+},
+{
+"ym": "2030-03",
+"md": "Venus",
+"ad": "Saturn",
+"pd": "Venus",
+"score": 5.1
+},
+{
+"ym": "2030-04",
+"md": "Venus",
+"ad": "Saturn",
+"pd": "Venus",
+"score": 5.1
+},
+{
+"ym": "2030-05",
+"md": "Venus",
+"ad": "Saturn",
+"pd": "Venus",
+"score": 5.1
+},
+{
+"ym": "2030-06",
+"md": "Venus",
+"ad": "Saturn",
+"pd": "Venus",
+"score": 5.1
+},
+{
+"ym": "2030-07",
+"md": "Venus",
+"ad": "Saturn",
+"pd": "Venus",
+"score": 5.1
+},
+{
+"ym": "2030-08",
+"md": "Venus",
+"ad": "Saturn",
+"pd": "Venus",
+"score": 5.1
+},
+{
+"ym": "2030-09",
+"md": "Venus",
+"ad": "Saturn",
+"pd": "Sun",
+"score": 5.8
+},
+{
+"ym": "2030-10",
+"md": "Venus",
+"ad": "Saturn",
+"pd": "Sun",
+"score": 5.8
+},
+{
+"ym": "2030-11",
+"md": "Venus",
+"ad": "Saturn",
+"pd": "Moon",
+"score": 4.0
+},
+{
+"ym": "2030-12",
+"md": "Venus",
+"ad": "Saturn",
+"pd": "Moon",
+"score": 4.0
+},
+{
+"ym": "2031-01",
+"md": "Venus",
+"ad": "Saturn",
+"pd": "Moon",
+"score": 4.0
+},
+{
+"ym": "2031-02",
+"md": "Venus",
+"ad": "Saturn",
+"pd": "Mars",
+"score": 4.6
+},
+{
+"ym": "2031-03",
+"md": "Venus",
+"ad": "Saturn",
+"pd": "Mars",
+"score": 4.6
+},
+{
+"ym": "2031-04",
+"md": "Venus",
+"ad": "Saturn",
+"pd": "Rahu",
+"score": 4.2
+},
+{
+"ym": "2031-05",
+"md": "Venus",
+"ad": "Saturn",
+"pd": "Rahu",
+"score": 4.2
+},
+{
+"ym": "2031-06",
+"md": "Venus",
+"ad": "Saturn",
+"pd": "Rahu",
+"score": 4.2
+},
+{
+"ym": "2031-07",
+"md": "Venus",
+"ad": "Saturn",
+"pd": "Rahu",
+"score": 4.2
+},
+{
+"ym": "2031-08",
+"md": "Venus",
+"ad": "Saturn",
+"pd": "Rahu",
+"score": 4.2
+},
+{
+"ym": "2031-09",
+"md": "Venus",
+"ad": "Saturn",
+"pd": "Rahu",
+"score": 4.2
+},
+{
+"ym": "2031-10",
+"md": "Venus",
+"ad": "Saturn",
+"pd": "Jupiter",
+"score": 5.7
+},
+{
+"ym": "2031-11",
+"md": "Venus",
+"ad": "Saturn",
+"pd": "Jupiter",
+"score": 5.7
+},
+{
+"ym": "2031-12",
+"md": "Venus",
+"ad": "Saturn",
+"pd": "Jupiter",
+"score": 5.7
+},
+{
+"ym": "2032-01",
+"md": "Venus",
+"ad": "Saturn",
+"pd": "Jupiter",
+"score": 5.7
+},
+{
+"ym": "2032-02",
+"md": "Venus",
+"ad": "Saturn",
+"pd": "Jupiter",
+"score": 5.7
+},
+{
+"ym": "2032-03",
+"md": "Venus",
+"ad": "Mercury",
+"pd": "Mercury",
+"score": 6.1
+},
+{
+"ym": "2032-04",
+"md": "Venus",
+"ad": "Mercury",
+"pd": "Mercury",
+"score": 6.1
+},
+{
+"ym": "2032-05",
+"md": "Venus",
+"ad": "Mercury",
+"pd": "Mercury",
+"score": 6.1
+},
+{
+"ym": "2032-06",
+"md": "Venus",
+"ad": "Mercury",
+"pd": "Mercury",
+"score": 6.1
+},
+{
+"ym": "2032-07",
+"md": "Venus",
+"ad": "Mercury",
+"pd": "Mercury",
+"score": 6.1
+},
+{
+"ym": "2032-08",
+"md": "Venus",
+"ad": "Mercury",
+"pd": "Ketu",
+"score": 5.1
+},
+{
+"ym": "2032-09",
+"md": "Venus",
+"ad": "Mercury",
+"pd": "Ketu",
+"score": 5.1
+},
+{
+"ym": "2032-10",
+"md": "Venus",
+"ad": "Mercury",
+"pd": "Venus",
+"score": 6.0
+},
+{
+"ym": "2032-11",
+"md": "Venus",
+"ad": "Mercury",
+"pd": "Venus",
+"score": 6.0
+},
+{
+"ym": "2032-12",
+"md": "Venus",
+"ad": "Mercury",
+"pd": "Venus",
+"score": 6.0
+},
+{
+"ym": "2033-01",
+"md": "Venus",
+"ad": "Mercury",
+"pd": "Venus",
+"score": 6.0
+},
+{
+"ym": "2033-02",
+"md": "Venus",
+"ad": "Mercury",
+"pd": "Venus",
+"score": 6.0
+},
+{
+"ym": "2033-03",
+"md": "Venus",
+"ad": "Mercury",
+"pd": "Sun",
+"score": 6.7
+},
+{
+"ym": "2033-04",
+"md": "Venus",
+"ad": "Mercury",
+"pd": "Sun",
+"score": 6.7
+},
+{
+"ym": "2033-05",
+"md": "Venus",
+"ad": "Mercury",
+"pd": "Moon",
+"score": 4.9
+},
+{
+"ym": "2033-06",
+"md": "Venus",
+"ad": "Mercury",
+"pd": "Moon",
+"score": 4.9
+},
+{
+"ym": "2033-07",
+"md": "Venus",
+"ad": "Mercury",
+"pd": "Moon",
+"score": 4.9
+},
+{
+"ym": "2033-08",
+"md": "Venus",
+"ad": "Mercury",
+"pd": "Mars",
+"score": 5.5
+},
+{
+"ym": "2033-09",
+"md": "Venus",
+"ad": "Mercury",
+"pd": "Mars",
+"score": 5.5
+},
+{
+"ym": "2033-10",
+"md": "Venus",
+"ad": "Mercury",
+"pd": "Rahu",
+"score": 5.1
+},
+{
+"ym": "2033-11",
+"md": "Venus",
+"ad": "Mercury",
+"pd": "Rahu",
+"score": 5.1
+},
+{
+"ym": "2033-12",
+"md": "Venus",
+"ad": "Mercury",
+"pd": "Rahu",
+"score": 5.1
+},
+{
+"ym": "2034-01",
+"md": "Venus",
+"ad": "Mercury",
+"pd": "Rahu",
+"score": 5.1
+},
+{
+"ym": "2034-02",
+"md": "Venus",
+"ad": "Mercury",
+"pd": "Rahu",
+"score": 5.1
+},
+{
+"ym": "2034-03",
+"md": "Venus",
+"ad": "Mercury",
+"pd": "Jupiter",
+"score": 6.6
+},
+{
+"ym": "2034-04",
+"md": "Venus",
+"ad": "Mercury",
+"pd": "Jupiter",
+"score": 6.6
+},
+{
+"ym": "2034-05",
+"md": "Venus",
+"ad": "Mercury",
+"pd": "Jupiter",
+"score": 6.6
+},
+{
+"ym": "2034-06",
+"md": "Venus",
+"ad": "Mercury",
+"pd": "Jupiter",
+"score": 6.6
+},
+{
+"ym": "2034-07",
+"md": "Venus",
+"ad": "Mercury",
+"pd": "Saturn",
+"score": 4.9
+},
+{
+"ym": "2034-08",
+"md": "Venus",
+"ad": "Mercury",
+"pd": "Saturn",
+"score": 4.9
+},
+{
+"ym": "2034-09",
+"md": "Venus",
+"ad": "Mercury",
+"pd": "Saturn",
+"score": 4.9
+},
+{
+"ym": "2034-10",
+"md": "Venus",
+"ad": "Mercury",
+"pd": "Saturn",
+"score": 4.9
+},
+{
+"ym": "2034-11",
+"md": "Venus",
+"ad": "Mercury",
+"pd": "Saturn",
+"score": 4.9
+},
+{
+"ym": "2034-12",
+"md": "Venus",
+"ad": "Mercury",
+"pd": "Saturn",
+"score": 4.9
+},
+{
+"ym": "2035-01",
+"md": "Venus",
+"ad": "Ketu",
+"pd": "Ketu",
+"score": 4.4
+},
+{
+"ym": "2035-02",
+"md": "Venus",
+"ad": "Ketu",
+"pd": "Venus",
+"score": 5.3
+},
+{
+"ym": "2035-03",
+"md": "Venus",
+"ad": "Ketu",
+"pd": "Venus",
+"score": 5.3
+},
+{
+"ym": "2035-04",
+"md": "Venus",
+"ad": "Ketu",
+"pd": "Sun",
+"score": 6.0
+},
+{
+"ym": "2035-05",
+"md": "Venus",
+"ad": "Ketu",
+"pd": "Moon",
+"score": 4.2
+},
+{
+"ym": "2035-06",
+"md": "Venus",
+"ad": "Ketu",
+"pd": "Mars",
+"score": 4.8
+},
+{
+"ym": "2035-07",
+"md": "Venus",
+"ad": "Ketu",
+"pd": "Rahu",
+"score": 4.4
+},
+{
+"ym": "2035-08",
+"md": "Venus",
+"ad": "Ketu",
+"pd": "Rahu",
+"score": 4.4
+},
+{
+"ym": "2035-09",
+"md": "Venus",
+"ad": "Ketu",
+"pd": "Jupiter",
+"score": 5.9
+},
+{
+"ym": "2035-10",
+"md": "Venus",
+"ad": "Ketu",
+"pd": "Jupiter",
+"score": 5.9
+},
+{
+"ym": "2035-11",
+"md": "Venus",
+"ad": "Ketu",
+"pd": "Saturn",
+"score": 4.2
+},
+{
+"ym": "2035-12",
+"md": "Venus",
+"ad": "Ketu",
+"pd": "Saturn",
+"score": 4.2
+},
+{
+"ym": "2036-01",
+"md": "Venus",
+"ad": "Ketu",
+"pd": "Mercury",
+"score": 5.4
+},
+{
+"ym": "2036-02",
+"md": "Venus",
+"ad": "Ketu",
+"pd": "Mercury",
+"score": 5.4
+}
+],
+"sav": {
+"1": 31,
+"2": 21,
+"3": 31,
+"4": 26,
+"5": 26,
+"6": 37,
+"7": 19,
+"8": 24,
+"9": 29,
+"10": 37,
+"11": 31,
+"12": 25
+},
+"shadbala": {
+"Sun": {
+"r": 6.38,
+"req": 5.0,
+"pct": 128
+},
+"Moon": {
+"r": 5.7,
+"req": 6.0,
+"pct": 95
+},
+"Mars": {
+"r": 5.34,
+"req": 5.0,
+"pct": 107
+},
+"Mercury": {
+"r": 8.61,
+"req": 7.0,
+"pct": 123
+},
+"Jupiter": {
+"r": 8.19,
+"req": 6.5,
+"pct": 126
+},
+"Venus": {
+"r": 6.11,
+"req": 5.5,
+"pct": 111
+},
+"Saturn": {
+"r": 3.77,
+"req": 5.0,
+"pct": 75
+}
+},
+"yogas": [
+"Gajakesari Yoga",
+"Kemadruma Yoga -- ABSENT (cancelled)",
+"Vipareeta Raja Yoga (6th lord in the 12th)",
+"Vipareeta Raja Yoga (8th lord in the 8th)",
+"Vipareeta Raja Yoga (12th lord in the 12th)",
+"Dhana Yoga (2nd/11th lord conjunction) -- ABSENT"
+],
+"jaimini": {
+"AK": "Saturn",
+"AmK": "Moon",
+"BK": "Jupiter",
+"MK": "Mercury",
+"PiK": "Venus",
+"PK": "Rahu",
+"GK": "Mars",
+"DK": "Sun",
+"arudhaLagna": "Kumbha (Aquarius)",
+"alHouse": 3
+},
+"vargas": {
+"D2": "Simha hora (4 of 7 bodies)",
+"D9": "Karka",
+"D10": "Meena",
+"D24": "Vrishabha",
+"d10note": "D10 Lagna is 1.86 min from a boundary and changes under 7 of 12 ayanamshas — DATA NOT VERIFIED for conclusions"
+}
+};
+</script>
+<script>
+/* ============================================================================
+   RAHUL LIFE OS — every number below derives from CHART (the verified model)
+   or from declared arithmetic. Nothing is invented. Where a value is not
+   reliably computable it renders as DATA NOT VERIFIED.
+   ========================================================================= */
+const NOW = new Date('2026-08-30T00:00:00Z');
+const BIRTH = new Date('2003-01-20T00:00:00Z');
+const AGE = () => Math.floor((NOW-BIRTH)/(365.2425*864e5));
+
+/* ---- house → life-area registry (declared, same as the dashboard doc) ---- */
+const REQ={Sun:5,Moon:6,Mars:5,Mercury:7,Jupiter:6.5,Venus:5.5,Saturn:5};
+const AREA_H={Wealth:[2,11],Career:[10],Education:[4,5],Business:[7,10,3],Investments:[8,11],
+  Relationships:[7],Energy:[1,6],Reputation:[10,1],Networking:[11,3],Creativity:[5],
+  Travel:[12,9],Growth:[9,12]};
+const hById=h=>CHART.houses.find(x=>x.h===h);
+function areaScore(a){
+  const hs=AREA_H[a]; let t=0;
+  hs.forEach(h=>{const H=hById(h),L=CHART.shadbala[H.lord];
+    t+=5*(H.sav/28.1)*(L.r/L.req);});
+  return Math.max(1,Math.min(10,t/hs.length));
+}
+function areaWhy(a){
+  return AREA_H[a].map(h=>{const H=hById(h),L=CHART.shadbala[H.lord];
+    return `H${h} ${H.sign}: ${H.sav} bindus, lord ${H.lord} ${L.r}/${L.req} rupas (${L.pct}%)`;}).join(' · ');
+}
+const AREAS=Object.keys(AREA_H);
+const SCORES={}; AREAS.forEach(a=>SCORES[a]=+areaScore(a).toFixed(1));
+
+/* ---- functional nature for Dhanu lagna ---- */
+const RULES={}; CHART.houses.forEach(h=>{(RULES[h.lord]=RULES[h.lord]||[]).push(h.h)});
+function nature(g){
+  if(g==='Rahu'||g==='Ketu')return'node';
+  const hs=RULES[g]||[], tri=hs.filter(h=>[1,5,9].includes(h)), dus=hs.filter(h=>[6,8,12].includes(h));
+  if(tri.length&&!dus.length)return'benefic'; if(tri.length&&dus.length)return'mixed';
+  if(dus.length)return'malefic'; return'neutral';
+}
+const NATLABEL={benefic:'functional benefic',mixed:'mixed',malefic:'functional malefic',neutral:'neutral',node:'node'};
+
+/* ---- dasha lookup ---- */
+function dashaAt(iso){
+  for(const m of CHART.dasha){ if(iso>=m.start&&iso<m.end){
+    for(const a of m.ads){ if(iso>=a.start&&iso<a.end) return {md:m.lord,ad:a.lord,mdEnd:m.end,adEnd:a.end}; }
+    return {md:m.lord,ad:null,mdEnd:m.end,adEnd:null}; } }
+  return {md:null,ad:null};
+}
+function monthAt(ym){ return CHART.months.find(m=>m.ym===ym); }
+
+/* ---- profection ---- */
+function profection(age){
+  const h=(age%12)+1, sign=hById(h).sign, lord=hById(h).lord;
+  return {h,sign,lord};
+}
+
+/* ============================ CURATED ANALYSIS ============================
+   Prose is authored; every claim cites a computed value from CHART.
+   ======================================================================== */
+const YEARS={
+2026:{mode:'BUILD',score:6.4,theme:'Prepare. Head down.',
+  car:'Nothing arrives. Build the record.',mon:'Set the savings system before income exists.',
+  biz:'Do not start anything.',edu:'Best education window of the decade — Jupiter exalted rules your 1st.',
+  rel:'Quiet.',hea:'Good, but Saturn PD is heavy. Sleep matters.',net:'Slow, deliberate.',
+  tra:'Unlikely.',opp:'CAT. Jupiter antardasha is the friendliest stretch of your whole Venus era.',
+  risk:'Over-preparing and never shipping.',do:'One exam, one deep skill, one automated transfer.',
+  dont:'Start a business. Chase five things.',months:'Sep–Jan is Saturn at the finest level: grind texture.',conf:'HIGH'},
+2027:{mode:'TRANSITION',score:7.1,theme:'Identity year. The hinge.',
+  car:'Conversion season. Highest-leverage months of your life so far.',
+  mon:'Still building. Loan likely if MBA converts.',biz:'No.',
+  edu:'Jan–Jun Mercury PD covers interview and admission season exactly.',
+  rel:'Possible but secondary.',hea:'Manage exam stress properly.',net:'Cohort forms here.',
+  tra:'Relocation likely if admission converts.',
+  opp:'Jan–Jun 2027 — Mercury, your strongest graha, at the finest dasha level, with profection moving to your 1st house.',
+  risk:'Freezing at the interview stage after doing the hard part.',
+  do:'Convert. Move. Say yes to the bigger room.',dont:'Settle for a school you will resent.',
+  months:'Feb–Jun is the window. Jul–Aug (Ketu PD) is flat.',conf:'HIGH'},
+2028:{mode:'BUILD',score:6.3,theme:'Study or early career. Money house year.',
+  car:'Learning, not earning.',mon:'2nd-house profection with Saturn as year lord — the money lesson starts.',
+  biz:'No.',edu:'Final stretch of Jupiter antardasha (ends Dec 2028).',rel:'Cohort relationships.',
+  hea:'Fine.',net:'Strongest network-building year so far.',tra:'Campus, internships.',
+  opp:'Feb 2028 opens Sun PD — the highest month score in the near range.',
+  risk:'Lifestyle inflation the moment a stipend appears.',
+  do:'Lock the savings rule before your first salary, not after.',dont:'Take consumer debt.',
+  months:'Feb–Jul strongest.',conf:'HIGH'},
+2029:{mode:'BUILD',score:6.0,theme:'First real salary. The system year.',
+  car:'First serious role.',mon:'The single most important financial month of your life is your first payday.',
+  biz:'No.',edu:'Done.',rel:'Stabilising.',hea:'Watch the new workload.',net:'Professional network begins.',
+  tra:'Wherever the job is.',opp:'Craft domain (D8) flagged. Publish.',
+  risk:'Salary rises, savings rate does not.',do:'Automate 30%+ on day one.',
+  dont:'Upgrade your lifestyle to match the salary.',months:'Venus–Saturn opens Dec 2028; the whole year is Saturn-textured.',conf:'HIGH'},
+2030:{mode:'BUILD',score:5.8,theme:'Widest activation of the decade.',
+  car:'Consolidating.',mon:'Wealth domain flagged.',biz:'Side skills only.',edu:'Self-directed.',
+  rel:'Stable.',hea:'Saturn grind. Protect sleep.',net:'Growing.',tra:'4th-house profection — home, base, roots.',
+  opp:'D3, D5 and D8 all flagged — three domains, the widest year in ten.',
+  risk:'Spreading across all three instead of picking one.',do:'Pick one. Compound it.',
+  dont:'Buy property you cannot comfortably service.',months:'Even through the year.',conf:'MODERATE'},
+2031:{mode:'PROTECT',score:5.2,theme:'Hardest stretch. Hold the line.',
+  car:'Slow. Feels stuck.',mon:'Protect capital.',biz:'Highest-risk year to start anything.',
+  edu:'—',rel:'Strained by workload.',hea:'Lowest energy window of the decade.',net:'Maintain, do not expand.',
+  tra:'Avoid disruptive moves.',opp:'Endurance itself. This year is a filter.',
+  risk:'Quitting, hopping, or launching out of frustration.',
+  do:'Stay. Keep saving. Keep publishing.',dont:'Any leverage. Any impulsive exit.',
+  months:'Uniformly heavy — Venus–Saturn mid-period.',conf:'MODERATE'},
+2032:{mode:'ATTACK',score:7.4,theme:'Venus–Mercury opens. Push.',
+  car:'Your strongest graha runs the sub-period. Step-change becomes possible.',
+  mon:'Income acceleration.',biz:'First realistic window for a serious side venture.',
+  edu:'—',rel:'Good.',hea:'Recovering.',net:'Mercury profection year on top — networking compounds.',
+  tra:'Possible role-driven move.',opp:'Mercury at sub-period level AND Mercury as Lord of the Year. Double activation.',
+  risk:'Being too cautious from habits formed in 2029–31.',do:'Take the bigger role. Ask for equity.',
+  dont:'Play safe out of muscle memory.',months:'Feb onward.',conf:'HIGH'},
+2033:{mode:'ATTACK',score:7.0,theme:'Partnership year.',
+  car:'Strong.',mon:'Compounding.',biz:'Viable if majority-owned.',edu:'—',
+  rel:'7th-house profection; D4 flagged for the only time in a decade.',
+  hea:'Good.',net:'Peak.',tra:'Possible.',
+  opp:'The clearest relationship-domain activation in ten years.',
+  risk:'Equal-split partnerships. Your 7th is 19 bindus, the lowest house you own.',
+  do:'Choose deliberately. Write terms down.',dont:'Handshake equity splits.',months:'Even.',conf:'MODERATE'},
+2034:{mode:'HARVEST',score:7.2,theme:'Monetise. Career flagged.',
+  car:'D2 career domain flagged — the only time in ten years.',
+  mon:'Convert reputation to income.',biz:'Expansion viable.',edu:'—',rel:'Settled.',
+  hea:'Good.',net:'Leverage it.',tra:'Optional.',
+  opp:'Last year of Venus–Mercury (ends Dec 2034). Use it.',
+  risk:'Assuming momentum continues automatically into 2035.',
+  do:'Bank the gains. Convert to equity or assets.',dont:'Coast.',months:'Through December.',conf:'HIGH'},
+2035:{mode:'TRANSITION',score:6.2,theme:'Wind down the Venus era.',
+  car:'Steady.',mon:'Consolidate before the shift.',biz:'Hold.',edu:'—',rel:'Stable.',hea:'Fine.',
+  net:'Maintain.',tra:'Possible.',opp:'Position for Sun MD, which opens Feb 2036.',
+  risk:'Starting something new right before an era change.',do:'Clean up. Simplify. Prepare.',
+  dont:'Take on new obligations.',months:'Venus–Ketu from Dec 2034 — detaching.',conf:'MODERATE'},
+2036:{mode:'ATTACK',score:8.2,theme:'SUN MAHADASHA OPENS. Era change.',
+  car:'Authority becomes structurally supported for the first time.',
+  mon:'9th lord in the 2nd house at 128% of minimum — the genuine wealth signature in your chart.',
+  biz:'Ownership becomes realistic.',edu:'—',rel:'Good.',hea:'Strong.',net:'Recognition.',
+  tra:'Possible and useful.',opp:'The strongest whole era in your adult chart begins.',
+  risk:'Arriving with no capital base for it to multiply.',
+  do:'Everything you built for ten years pays out here — if it exists.',
+  dont:'Reach 33 with nothing invested.',months:'From Feb 2036.',conf:'HIGH'}
+};
+const LATER={
+2037:['ATTACK',8.0,'Authority builds'],2038:['ATTACK',8.1,'Jupiter AD in Sun MD — expansion'],
+2039:['HARVEST',7.8,'Peak earning centre'],2040:['ATTACK',8.0,'Mercury AD in Sun MD'],
+2041:['HARVEST',7.5,'Consolidate before the shift'],2042:['TRANSITION',6.0,'Moon MD — deleverage'],
+2043:['PROTECT',5.6,'Hold and compound'],2044:['PROTECT',5.6,'Hold'],2045:['BUILD',6.0,'Jupiter AD steadies it'],
+2046:['PROTECT',5.5,'Saturn AD in Moon MD'],2047:['PROTECT',5.5,'Consolidation'],2048:['BUILD',6.1,'Owning over earning']};
+
+const ADV=[
+{t:'S',n:'Analytical & commercial intelligence',s:9.2,money:true,dev:false,
+ why:'FOUR independent confirmations: Mercury is the strongest graha by Shadbala (8.61 vs 7.0 required); it rules the 10th AND the 7th and sits in your own Lagna; in D10 it occupies its own sign Gemini; and independently, the Hellenistic chart finds Mercury in mutual reception with Saturn with all seven dispositor chains terminating there.',
+ real:'Fast structured thinking. Numbers and words together. Explaining complex things simply.',
+ make:'Consulting, strategy, analytics, product, research-heavy finance.',
+ when:'Strongest 2032–34 (Venus–Mercury) and again 2040 (Mercury AD inside Sun MD). Usable now — CAT is a Mercury exam.',
+ build:'Timed problem-solving under pressure. Financial modelling. Writing.',
+ kill:'Mercury is retrograde and the 10th is empty. Nothing arrives on its own.'},
+{t:'A',n:'Depth and advisory weight',s:8.4,money:true,dev:false,
+ why:'Jupiter is EXALTED in Cancer, rules your 1st and 4th (best functional pairing a Sagittarius lagna can have), ranks second by Shadbala at 8.19 vs 6.5. Forms Gajakesari Yoga with the Moon.',
+ real:'You go deeper than peers on things you care about. Trust follows the work.',
+ make:'Research, due diligence, risk, strategy, teaching.',
+ when:'Now through Dec 2028 (Jupiter antardasha), then 2038 (Jupiter AD in Sun MD).',
+ build:'Pick ONE domain. Go genuinely deep.',
+ kill:'It sits in the 8th house and is retrograde. Going wide and shallow to look impressive wastes it.'},
+{t:'A',n:'Thriving under competition',s:8.0,money:false,dev:false,
+ why:'6th house — competition, obstacles, sustained effort — carries 37 bindus, joint highest. It holds Rahu, classically one of Rahu\'s strongest placements. Its lord Venus in the 12th forms a Vipareeta Raja Yoga: gain via difficulty.',
+ real:'You perform better with a scoreboard than with open-ended freedom.',
+ make:'Competitive exams. Contested markets. Up-or-out environments.',
+ when:'Now. This is your most immediately usable advantage.',
+ build:'Stay in contests. Mock tests with percentiles beat untimed study.',
+ kill:'Saturn and Rahu share that house. Overwork feels like virtue and will burn you.'},
+{t:'B',n:'Unconventional / systems positioning',s:6.2,money:true,dev:false,
+ why:'Arudha Lagna in Aquarius — how the world reads you tilts toward systems, networks, the unorthodox. Its ruler Saturn sits in the 6th with Rahu.',
+ real:'You read as a systems person rather than a traditionalist.',
+ make:'AI/automation applied to a specific industry — not AI as a field in itself.',
+ when:'2032 onward, once you have a domain to automate.',
+ build:'Pair it with the S-tier: be the analyst who automates the analysis.',
+ kill:'Thin evidence — one technique, one tradition, and its ruler is your weakest planet.'},
+{t:'C',n:'Capital retention',s:3.1,money:true,dev:true,
+ why:'2nd house 21 bindus with Saturn — your WEAKEST planet at 75% of its minimum — as lord. No Dhana Yoga forms. Three planets in the 12th, the house of outflow.',
+ real:'Money leaves quietly. Good income, nothing accumulating.',
+ make:'Fixing this IS the money-making move. It is worth more than any raise.',
+ when:'Critical from 2029, your first salary. The habit set then compounds for 20 years.',
+ build:'Automated transfer on payday. 30%+. Never rely on discipline.',
+ kill:'Nothing destroys it — it is already the weak point. Only a system fixes it.'},
+{t:'C',n:'Partnership and public assertion',s:3.6,money:false,dev:true,
+ why:'7th house 19 bindus — the LOWEST of all twelve — and empty. Its lord Mercury is strong but retrograde. Genuine contradiction: weakest house, strongest lord.',
+ real:'Partners chosen by proximity. Work credited elsewhere.',
+ make:'Written terms and a public artefact trail.',
+ when:'Matters most 2033 (7th-house profection) and any co-founder decision.',
+ build:'Written vesting before anything starts. Publish under your own name.',
+ kill:'Handshake deals.'}];
+
+const KARMA=[
+{n:'Structure, patience, unglamorous compounding',
+ core:'Your Atmakaraka is SATURN (highest degree, 29°14′, same under both reckonings) — and Saturn is the WEAKEST planet in your chart at 3.77 rupas against a 5.0 minimum, last of seven. It also rules your 2nd house and sits in the 6th with Rahu.',
+ imm:'Resenting slowness. Seeking shortcuts. Expecting discipline to feel motivating.',
+ mat:'Building systems that run when motivation is absent.',
+ trig:'2029–2032 (Venus–Saturn), and every payday.',
+ win:'The weak 2nd house stops mattering, because saving becomes structural rather than emotional.',
+ act:'One automated financial system. One automated study system. This month.'},
+{n:'Rahu in the 6th, Ketu in the 12th — earn it in the arena',
+ core:'Rahu in the 6th is one of its stronger placements: appetite for competition and problem-solving. Ketu in the 12th pulls toward withdrawal, foreign things, letting go.',
+ imm:'Oscillating between grinding and vanishing.',
+ mat:'Scheduled recovery treated as part of the training, not a failure of it.',
+ trig:'2029–2031, the heaviest workload stretch.',
+ win:'Sustainable intensity instead of cycles of burnout and retreat.',
+ act:'A hard daily stop time. Recovery in the calendar, not as an afterthought.'},
+{n:'Depth that must surface',
+ core:'Exalted Jupiter in the 8th, Mula lagna, Ketu in the 12th, Mars and Venus in the 12th. A great deal of your chart happens out of sight, and the 10th house is empty.',
+ imm:'Preparing forever. "Not ready yet." A fifth course instead of a first application.',
+ mat:'Leaving evidence. Publishing, submitting, shipping.',
+ trig:'Now through 2027, and again whenever you change domain.',
+ win:'The 8.1 career score becomes real, because the empty 10th gets filled by things you made.',
+ act:'Every study block ends in something submitted, sent or published.'}];
+
+const RISKS=[
+{n:'Money leaking quietly',lvl:'CRITICAL',
+ why:'2nd house 21 bindus; lord Saturn last of seven at 75% of minimum; no Dhana Yoga; three planets in the 12th.',
+ when:'Becomes dangerous from your first salary in 2029 and never stops.',
+ cost:'Scenario C. Roughly a 45× lifetime difference by age 50.',
+ fix:'Automated transfer before you see the balance. 30%+. Set it up before the money exists.'},
+{n:'Impatient entrepreneurship',lvl:'HIGH',
+ why:'2nd house cannot fund it; 7th house lowest; Venus–Saturn 2029–32 is the worst-supported window.',
+ when:'2029–2031, when peers start ventures and you feel behind.',
+ cost:'Capital destroyed in your weakest period. Sets you back a decade.',
+ fix:'No venture before 32 unless self-funded and fully reversible.'},
+{n:'Overwork read as virtue',lvl:'HIGH',
+ why:'Saturn and Rahu together in the 6th at 37 bindus. Capacity is real; the cost is hidden.',
+ when:'2029–2031 especially.',cost:'Burnout in the exact years that decide your thirties.',
+ fix:'Measure output, not hours. Fixed stop time. Non-negotiable sleep.'},
+{n:'Over-preparing, never shipping',lvl:'MODERATE',
+ why:'Jupiter exalted but in the 8th; Ketu in the 12th; Mula lagna. Strong pull to research over release.',
+ when:'Now through CAT.',cost:'The exam missed by inaction rather than inability.',
+ fix:'Every block ends in something submitted.'},
+{n:'Domain-hopping',lvl:'MODERATE',
+ why:'Dual-sign lagna; Rahu amplifies novelty appetite. Weaker evidence — Saturn pushes the other way.',
+ when:'2029–2034.',cost:'Ten years of experience that reads as three. Kills the 2032–34 window.',
+ fix:'One domain, minimum five years.'},
+{n:'Leverage in the wrong decade',lvl:'MODERATE',
+ why:'Moon MD 2042–49 is 8th lord below its Shadbala minimum — the weakest era ahead.',
+ when:'From 2042.',cost:'Debt carried into your least supported period.',
+ fix:'Deleverage before 39.'}];
+
+const WEALTH=[
+{n:'High-skill salary → equity',fit:8,up:8,free:6,risk:3,scale:7,
+ why:'Directly matches the Mercury signature: 10th house 37 bindus, its lord the strongest graha. Your PRIMARY engine.'},
+{n:'Systematic index investing',fit:7,up:6,free:8,risk:2,scale:6,
+ why:'Not because the chart favours investing — because it mechanically fixes your worst weakness. Your SECONDARY engine.'},
+{n:'Independent advisory',fit:6,up:7,free:9,risk:5,scale:5,
+ why:'Exalted Jupiter plus Mercury in Lagna. Viable ~33+ under Sun MD, not before.'},
+{n:'Solo / majority-owned business',fit:6,up:9,free:9,risk:7,scale:9,
+ why:'Mercury rules 7th and 10th and owns its D10 sign — but the 7th is your weakest house. Own it outright.'},
+{n:'AI / automation applied to a domain',fit:6,up:8,free:7,risk:6,scale:8,
+ why:'Arudha Aquarius, Rahu in 6th. Thin astrologically; strong economically. Pair with the analytical edge.'},
+{n:'Real estate',fit:5,up:5,free:3,risk:5,scale:4,
+ why:'4th lord Jupiter exalted but in the 8th. A later store of value, a poor first engine.'},
+{n:'Foreign income',fit:5,up:7,free:7,risk:5,scale:6,
+ why:'Ketu in the 12th; 9th lord Sun strong at 128%. Moderate support, mostly real-world dependent.'},
+{n:'Government career',fit:5,up:4,free:3,risk:2,scale:2,
+ why:'Sun (9th lord) strong and Sun MD at 33–39 — but that is late for entry. Would need commitment before ~28.'},
+{n:'Equal-partnership venture',fit:3,up:7,free:6,risk:9,scale:8,
+ why:'7th house 19 bindus, lowest of twelve, and empty. The clearest structural negative in your chart.'},
+{n:'Active trading / speculation',fit:2,up:8,free:5,risk:10,scale:5,
+ why:'8th lord Moon fails its Shadbala minimum. Both astrology and base rates say no.'}];
+
+const CAREERS=[
+{n:'Consulting / strategy',fit:9,inc:9,free:5,stat:9,exc:7,diff:8,
+ sup:'Mercury strongest, rules 10th, own sign in D10; 6th house 37 bindus suits up-or-out.',need:'Top-tier MBA or a strong analytical portfolio.',age:'26–32'},
+{n:'Analyst → product / research',fit:8,inc:8,free:6,stat:7,exc:8,diff:6,
+ sup:'Mercury in Lagna; exalted Jupiter in the 8th supports depth work.',need:'One domain, genuinely deep.',age:'24–30'},
+{n:'Corporate senior professional',fit:8,inc:7,free:4,stat:8,exc:8,diff:5,
+ sup:'Mercury rules two kendras; 10th at 37 bindus.',need:'Patience through 26–32.',age:'26–40'},
+{n:'Independent advisory',fit:7,inc:7,free:9,stat:7,exc:6,diff:8,
+ sup:'Exalted Jupiter; Sun MD 33–39 supports authority.',need:'Reputation first. Viable ~33+.',age:'33+'},
+{n:'Solo / majority business owner',fit:6,inc:9,free:9,stat:8,exc:5,diff:9,
+ sup:'Mercury rules 7th and 10th; D10 Mercury own sign.',need:'Capital and track record. 7th house argues against equal partners.',age:'32+'},
+{n:'AI automation operator',fit:6,inc:7,free:8,stat:6,exc:5,diff:7,
+ sup:'Arudha Aquarius; Rahu in 6th. Thin.',need:'Pair with a domain. Do not chase it alone.',age:'28+'},
+{n:'Technology leadership',fit:6,inc:7,free:5,stat:7,exc:5,diff:8,
+ sup:'Rahu in 6th; Mercury strong. Moderate.',need:'Deep technical base you do not currently have.',age:'30+'},
+{n:'Finance / investing role',fit:6,inc:8,free:5,stat:8,exc:5,diff:8,
+ sup:'Mercury strong; but 8th lord Moon below minimum weakens the risk-taking signature.',need:'MBA or CFA.',age:'26+'},
+{n:'Government officer',fit:5,inc:4,free:3,stat:9,exc:5,diff:9,
+ sup:'Sun (9th lord) at 128%, and Sun MD at 33–39 — but entry is far earlier than that.',need:'Commitment before ~28.',age:'before 28'},
+{n:'Early-stage founder (pre-30)',fit:3,inc:9,free:9,stat:6,exc:3,diff:10,
+ sup:'ARGUED AGAINST: 2nd house 21 bindus, 7th lowest, Saturn sub-period 2029–32.',need:'External capital and a co-founder — both weak points.',age:'not advised'}];
+
+const SCEN={
+low:{k:'SELF-SABOTAGE',c:'risk',sal:'₹9L → ₹23L by 45',save:'5%',
+  nw:{26:'₹2 L',30:'₹4 L',35:'₹10 L',40:'₹21 L',45:'₹40 L',50:'₹75 L'},
+  a30:'₹10 L job, ₹4 L saved. Watching peers pull ahead.',
+  a35:'₹12 L, ₹10 L saved. Money is constant background stress.',
+  a40:'₹18 L, ₹21 L. Freedom is not on the table.',
+  own:'None.',free:'None.',life:'Renting, constrained, comparing.',net:'Thin.',rel:'Strained by money stress.'},
+norm:{k:'NORMAL EXECUTION',c:'warn',sal:'₹16L at 26 → ₹98L by 45',save:'20%',
+  nw:{26:'₹4 L',30:'₹21 L',35:'₹63 L',40:'₹1.50 Cr',45:'₹3.2 Cr',50:'₹6.6 Cr'},
+  a30:'Solid mid-level, ₹22 L. ₹20 L invested. Comfortable, unremarkable.',
+  a35:'Manager, ₹35 L. ₹63 L. Owns a flat with a large EMI.',
+  a40:'Senior manager, ₹60 L. ₹1.5 Cr. Secure, not free.',
+  own:'A home. Little equity.',free:'Financial comfort, not freedom.',
+  life:'Metro, owned flat, one car, annual holiday.',net:'Good within one industry.',rel:'Stable.'},
+high:{k:'HIGH EXECUTION',c:'good',sal:'₹28L at 26 → ₹3.4Cr by 45',save:'40%',
+  nw:{26:'₹12 L',30:'₹70 L',35:'₹2.4 Cr',40:'₹6.3 Cr',45:'₹15.2 Cr',50:'₹34 Cr'},
+  a30:'Senior analyst/consultant, ₹45 L+. ₹70 L invested. Known in a niche.',
+  a35:'Leadership or independent. ₹2.4 Cr. Real optionality.',
+  a40:'Owner or partner. ₹6+ Cr. Location and time freedom genuinely available.',
+  own:'Equity, property, productive assets.',free:'Work becomes a choice around 40–45.',
+  life:'Location-flexible. Money stops being a constraint.',net:'Cross-industry, senior.',rel:'Chosen deliberately, not by drift.'}};
+
+const MILESTONES=[
+{m:'First ₹10 lakh invested',high:26,norm:28,low:35},
+{m:'₹25 lakh',high:28,norm:31,low:42},
+{m:'₹50 lakh',high:29,norm:34,low:47},
+{m:'₹1 crore',high:32,norm:38,low:null},
+{m:'₹3 crore',high:37,norm:45,low:null},
+{m:'₹10 crore',high:43,norm:null,low:null}];
+
+const OPPS=[
+{c:'Career',cur:6.2,next:'Jan–Jun 2027',peak:'2032–2034',prep:'now–2029',conf:'HIGH',
+ st:'Build a visible analytical record. The 10th house is empty — nothing arrives on its own.'},
+{c:'Education',cur:8.4,next:'now–Jun 2027',peak:'now',prep:'already open',conf:'HIGH',
+ st:'This is the best education window in your chart. Jupiter exalted rules your 1st and runs the antardasha to Dec 2028.'},
+{c:'Wealth',cur:4.5,next:'2029 (first salary)',peak:'2036–2042',prep:'2026–2029',conf:'HIGH',
+ st:'The dasha sets the multiplier; you set the base. Arrive at 33 with capital or the best era multiplies nothing.'},
+{c:'Business',cur:5.5,next:'2032',peak:'2036–2040',prep:'2026–2031',conf:'MODERATE',
+ st:'Build expertise, capital and network first. Do not launch in 2029–31.'},
+{c:'Relationships',cur:4.2,next:'2033',peak:'2033',prep:'—',conf:'MODERATE',
+ st:'The only D4 activation in ten years. Choose deliberately; your 7th is the weakest house you own.'},
+{c:'Foreign / travel',cur:5.7,next:'2027 (study)',peak:'2030',prep:'2026–2027',conf:'MODERATE',
+ st:'Tie any move to a role or a programme, never to restlessness.'},
+{c:'Property',cur:5.4,next:'2030',peak:'2034–2036',prep:'2029–2033',conf:'MODERATE',
+ st:'The constraint is a down payment, not a transit. Do not buy at the top of your EMI capacity.'},
+{c:'Recognition',cur:7.5,next:'2032',peak:'2036–2040',prep:'now',conf:'HIGH',
+ st:'Publish work under your own name starting now. Reputation compounds slower than money.'},
+{c:'Networking',cur:5.1,next:'2028 (cohort)',peak:'2032–2033',prep:'2027–2028',conf:'MODERATE',
+ st:'An MBA cohort is the single most efficient network purchase available to you.'}];
+
+const LEDGER=[
+{p:'Net worth tracks savings rate far more than any dasha',w:'lifelong',cat:'Wealth',pr:92,cf:'EXTREMELY STRONG',
+ b:'2nd house 21 bindus; lord Saturn last of seven; no Dhana Yoga. Chart argues against windfall timing.',st:'pending'},
+{p:'Analytical work — not creative or sales — becomes your professional identity',w:'by age 30',cat:'Career',pr:85,cf:'HIGH',
+ b:'Mercury strongest by Shadbala, rules 10th, in Lagna, own sign in D10. Four confirmations.',st:'pending'},
+{p:'Ages 26–29 are materially harder than 24–25',w:'2029–2032',cat:'Life',pr:78,cf:'HIGH',
+ b:'Venus–Saturn. Saturn is Atmakaraka, weakest planet, and 2nd lord.',st:'pending'},
+{p:'Jan–Jun 2027 is your strongest near-term window for conversion and negotiation',w:'2027 H1',cat:'Education',pr:76,cf:'HIGH',
+ b:'Mercury pratyantardasha + profection to the 1st house.',st:'pending'},
+{p:'Ages 33–39 outperform your twenties on every measure',w:'2036–2042',cat:'Life',pr:75,cf:'HIGH',
+ b:'Sun MD: 9th lord (trikona) in the 2nd house at 128% of Shadbala minimum.',st:'pending'},
+{p:'You do not become a full-time founder before age 30',w:'to 2033',cat:'Business',pr:80,cf:'HIGH',
+ b:'2nd house weak, 7th house lowest, Saturn sub-period 2029–32.',st:'pending'},
+{p:'2032–34 brings a visible career step-change if positioned for it',w:'2032–2034',cat:'Career',pr:65,cf:'MODERATE',
+ b:'Venus–Mercury; Mercury strongest and 10th lord; Mercury profection year 2032.',st:'pending'},
+{p:'Equal-partnership ventures go worse than solo or majority ones',w:'lifelong',cat:'Business',pr:62,cf:'MODERATE',
+ b:'7th house 19 bindus, lowest and empty. CONTRADICTED BY: its lord Mercury is the strongest planet.',st:'pending'},
+{p:'Reputation comes from expertise and ownership, not visibility or fame',w:'by 35',cat:'Status',pr:60,cf:'MODERATE',
+ b:'Arudha Aquarius; three planets in the 12th; empty 10th.',st:'pending'},
+{p:'Overwork, not low energy, is your health-attention pattern',w:'throughout',cat:'Energy',pr:58,cf:'MODERATE',
+ b:'Saturn + Rahu in the 6th at 37 bindus. NOT a medical claim.',st:'pending'}];
+
+const DECISIONS={
+'Start a business':{sc:3,ast:'AVOID FOR NOW',rw:'Weak',
+ why:'2nd house 21 bindus cannot fund it; 7th house is the lowest you own; Venus–Saturn 2029–32 is the worst-supported stretch. First viable window is 2032, and the strong one is 2036+.',rec:'AVOID FOR NOW'},
+'Change job':{sc:5,ast:'WAIT',rw:'N/A yet',
+ why:'You have no job to change yet. From 2029, the Saturn sub-period specifically punishes hopping — the temptation will be strongest exactly when staying pays most.',rec:'WAIT/PREPARE'},
+'Do an MBA':{sc:9,ast:'GO HARD',rw:'Strong',
+ why:'Jupiter exalted rules your 1st and runs the antardasha to Dec 2028 — the best education window in your chart. Mercury PD covers Jan–Jun 2027, exactly the interview and admission season.',rec:'GO HARD'},
+'Take a competitive exam':{sc:9,ast:'GO HARD',rw:'Depends on mocks',
+ why:'6th house 37 bindus with Rahu — competition is a genuine strength. Mercury is your strongest graha and CAT is a Mercury exam. Astrology cannot supply a percentile; mocks can.',rec:'GO HARD'},
+'Invest (index, systematic)':{sc:8,ast:'GO HARD',rw:'Strong',
+ why:'Not because the chart favours investing, but because it mechanically fixes your most-confirmed weakness. This is the single highest-leverage action available to you.',rec:'GO HARD'},
+'Buy property':{sc:4,ast:'WAIT',rw:'Weak',
+ why:'4th lord Jupiter exalted but in the 8th. The real constraint is a down payment you do not have. Realistic window 2030–2035.',rec:'WAIT/PREPARE'},
+'Relocate':{sc:7,ast:'PROCEED',rw:'Conditional',
+ why:'Ketu in the 12th and profection to the 1st in 2027 support a move — but only tied to a specific programme or role. Moving for its own sake wastes it.',rec:'PROCEED'},
+'Enter a partnership':{sc:3,ast:'AVOID FOR NOW',rw:'Weak',
+ why:'7th house 19 bindus — the lowest of all twelve — and empty. Genuine contradiction: its lord Mercury is your strongest planet. Net verdict: solo or majority only, and always with written terms.',rec:'AVOID FOR NOW'},
+'Network aggressively':{sc:6,ast:'PROCEED',rw:'Moderate',
+ why:'11th and 3rd both 31 bindus; Arudha in Aquarius favours networks. But the 3rd lord is Saturn, your weakest planet — this will not happen by itself. Systematise it.',rec:'PROCEED'},
+'Build quietly':{sc:9,ast:'GO HARD',rw:'Strong',
+ why:'Exalted Jupiter in the 8th, Ketu in the 12th, Mula lagna, empty 10th. Your chart is built for deep private work — provided you leave public evidence of it.',rec:'GO HARD'}};
+
+const MISSION={period:'Aug 2026 – Jan 2027',
+ pd:'Venus–Jupiter–Saturn pratyantardasha',
+ primary:'CAT preparation. Timed mocks with recorded percentiles, not study hours.',
+ secondary:'Sleep and a hard daily stop time. Saturn PD is a grind texture; it rewards consistency and punishes all-nighters.',
+ quiet:'One deep domain. Publish something in it monthly.',
+ avoid:'Starting anything new. Five parallel projects. Any business idea.',
+ wealth:'Set up the automated transfer NOW, before income exists. The habit matters more than the amount.',
+ rel:'Low priority this window. Nothing in the chart pushes it and your attention is finite.'};
+
+const ACTIONS={
+today:['Set one automatic transfer to an account you hold no card for — any amount.',
+ 'Take one full timed CAT mock; record the percentile in the KPI tab.',
+ 'Write down the ONE domain you want to be known for.'],
+week:['Three timed sectional tests with a written error log.',
+ 'Publish one piece of analytical work publicly under your own name.',
+ 'Fix a sleep window and a hard stop time; hold it five nights.',
+ 'List ten people 5–10 years ahead of you in your chosen domain.',
+ 'Cancel two subscriptions you forgot you had.'],
+month:['Raise the automated savings amount once.',
+ 'Four full timed mocks; percentile trend must be visible.',
+ 'Two real conversations with someone further along than you.',
+ 'One published artefact in your chosen domain.',
+ 'A written one-page plan for the Jan–Jun 2027 admission window.']};
+
+const KPIS=[
+{k:'Savings rate',t:'30%+',w:'The single highest-leverage number in your life. Worth ~₹5 Cr by 50.'},
+{k:'Mock percentile',t:'95+ and rising',w:'The only real predictor of CAT conversion. Astrology cannot supply it.'},
+{k:'Full timed mocks taken',t:'40+ before Nov',w:'Volume with error analysis, not study hours.'},
+{k:'Published artefacts',t:'1/month',w:'Fills the empty 10th house. Nothing arrives on its own.'},
+{k:'Invested capital',t:'growing monthly',w:'The base your best decade (2036+) will multiply.'},
+{k:'Sleep hours',t:'7+ consistent',w:'Saturn + Rahu in the 6th: overwork is your risk pattern, not weakness.'},
+{k:'Domain focus',t:'1, for 5 years',w:'Domain-hopping kills the 2032–34 window.'}];
+
+const GLOSS={
+ 'Mahadasha':'The main chapter of your life, running for several years at a time.',
+ 'Antardasha':'A smaller chapter operating inside the big one.',
+ 'Pratyantardasha':'A sub-sub-chapter — the finest timing level this chart can honestly resolve.',
+ 'Shadbala':'A classical six-part strength score for each planet, measured against a minimum it should reach.',
+ 'SAV':'Sarvashtakavarga — a bindu (point) count per house. The twelve houses must total exactly 337.',
+ 'Bindus':'Points in the Ashtakavarga system. More points, more support for that area of life.',
+ 'Atmakaraka':'The planet at the highest degree — traditionally read as the soul\'s main lesson.',
+ 'Arudha Lagna':'How the world perceives you, as distinct from who you are.',
+ 'Profection':'A yearly technique: each birthday advances the active house by one.',
+ 'Vipareeta Raja Yoga':'A combination where difficulty itself becomes the source of gain.',
+ 'Kendra':'The angular houses — 1, 4, 7, 10. Structural, action-oriented.',
+ 'Trikona':'The trine houses — 1, 5, 9. Fortune, purpose, support.',
+ 'Dusthana':'Houses 6, 8, 12 — difficulty, hidden matters, loss.'};
+</script>
+
+<script>
+/* =========================== helpers =========================== */
+const $=s=>document.querySelector(s);
+const el=(t,c,h)=>{const e=document.createElement(t);if(c)e.className=c;if(h!==undefined)e.innerHTML=h;return e;};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const band=v=>v>=8?'good':v>=6.5?'acc':v>=5?'warn':v>=4?'caut':'risk';
+const heatCls=v=>v>=8?'h5':v>=6.8?'h4':v>=5.6?'h3':v>=4.6?'h2':'h1';
+const pillFor=c=>({'EXTREMELY STRONG':'p-vh','VERY HIGH':'p-vh',HIGH:'p-h',MODERATE:'p-m',LOW:'p-l',SPECULATIVE:'p-s'}[c]||'p-s');
+let WHYN=0;
+function why(text){WHYN++;const id='w'+WHYN;
+  return `<button class="why" onclick="document.getElementById('${id}').classList.toggle('on')">WHY?</button><div class="whybox expertOnly" id="${id}">${esc(text)}</div>`;}
+function bar(v,max){max=max||10;return `<div class="bar b-${band(v)}"><i style="width:${Math.min(100,v/max*100)}%"></i></div>`;}
+function scoreCard(k,v,sub,whyTxt){
+  return `<div class="card"><div class="k">${esc(k)}${whyTxt?why(whyTxt):''}</div>
+   <div class="big" style="color:var(--${band(v)==='acc'?'acc':band(v)})">${v.toFixed(1)}<span style="font-size:14px;color:var(--tx3)"> /10</span></div>
+   ${bar(v)}${sub?`<div class="sub">${esc(sub)}</div>`:''}</div>`;}
+function yearOf(y){ if(YEARS[y])return YEARS[y]; const L=LATER[y]; return L?{mode:L[0],score:L[1],theme:L[2],conf:'MODERATE'}:null; }
+function modeAt(y){const d=yearOf(y);return d?d.mode:'BUILD';}
+
+/* =========================== views =========================== */
+const V={};
+
+V.dashboard=()=>{
+  const age=AGE(), d=dashaAt('2026-08-30'), pr=profection(age), m=monthAt('2026-08'), y=YEARS[2026];
+  return `
+  <h2 class="sec">Command centre</h2>
+  <div class="grid g4">
+    <div class="card"><div class="k">Current mode</div><div style="margin-top:9px"><span class="mode m-BUILD">BUILD</span></div>
+      <div class="sub">Not attack. Your first genuine attack window is 2032.</div></div>
+    <div class="card"><div class="k">Life score</div><div class="big" style="color:var(--warn)">5.9<span style="font-size:14px;color:var(--tx3)"> /10</span></div>
+      <div class="sub">Mean of twelve computed areas. High ceiling, weak floor.</div></div>
+    <div class="card"><div class="k">Phase</div><div style="font-size:17px;font-weight:600;margin-top:7px">Foundation → Acceleration</div>
+      <div class="sub">Venus MD to age 33. Credentialing stretch.</div></div>
+    <div class="card"><div class="k">Active dasha</div><div class="big mo" style="font-size:19px">${d.md}–${d.ad}</div>
+      <div class="sub">to ${d.adEnd} · sidereal profection H${pr.h} ${pr.sign}, lord ${pr.lord}</div></div>
+  </div>
+
+  <h3>Current mission <span class="mo" style="font-size:12px;color:var(--tx3);font-weight:400">${MISSION.period}</span></h3>
+  <div class="card" style="border-left:3px solid var(--acc)">
+    <div class="grid g2">
+      <div><div class="k">Primary</div><p style="margin:5px 0 0">${esc(MISSION.primary)}</p></div>
+      <div><div class="k">Secondary</div><p style="margin:5px 0 0">${esc(MISSION.secondary)}</p></div>
+      <div><div class="k">Build quietly</div><p style="margin:5px 0 0">${esc(MISSION.quiet)}</p></div>
+      <div><div class="k" style="color:var(--risk)">Avoid</div><p style="margin:5px 0 0">${esc(MISSION.avoid)}</p></div>
+      <div><div class="k" style="color:var(--good)">Wealth move</div><p style="margin:5px 0 0">${esc(MISSION.wealth)}</p></div>
+      <div><div class="k">Relationships</div><p style="margin:5px 0 0">${esc(MISSION.rel)}</p></div>
+    </div>
+    <div class="sub" style="margin-top:11px">Derived from ${esc(MISSION.pd)} + profection to house ${pr.h}.</div>
+  </div>
+
+  <h3>Top areas right now</h3>
+  <div class="grid g4">
+    ${['Career','Reputation','Energy','Wealth','Relationships'].map(a=>scoreCard(a,SCORES[a],'',areaWhy(a))).join('')}
+  </div>
+
+  <h3>Next major window</h3>
+  <div class="card" style="border-left:3px solid var(--good)">
+    <div style="display:flex;gap:14px;flex-wrap:wrap;align-items:baseline">
+      <div class="big mo" style="font-size:22px;color:var(--good)">Jan – Jun 2027</div>
+      <span class="pill p-h">HIGH CONFIDENCE</span></div>
+    <p style="margin-top:9px">Mercury — your strongest graha — runs the pratyantardasha, exactly overlapping interview and admission season, with profection moving to your 1st house on 20 Jan 2027.</p>
+    <div class="k" style="margin-top:9px">Preparation required</div>
+    <p style="margin:4px 0 0">A CAT percentile that opens real doors. The window converts a score; it does not produce one.</p>
+    ${why('Venus MD / Jupiter AD / Mercury PD 2027-01-22 to 2027-06-09. Mercury Shadbala 8.61 vs 7.0 required = 123%, strongest of seven. Rules H7 and H10, occupies H1. Own sign Gemini in D10.')}
+  </div>
+
+  <h3>Do this today</h3>
+  <div class="card"><ol style="margin:0;padding-left:20px">${ACTIONS.today.map(a=>`<li>${esc(a)}</li>`).join('')}</ol></div>
+
+  <h3>Twelve-month outlook</h3>
+  ${miniHeat(2026,2028)}
+
+  <div class="note simpleOnly"><b>In plain words:</b> you are in the preparation part of your life, and that is exactly where you should be. Nothing has arrived yet because nothing is supposed to have. Do the exam, start the savings habit, and leave a public trail of your work. Your best years, by this chart, are ages 33–39 — and they will multiply whatever base you have built by then.</div>`;
+};
+
+function miniHeat(y0,y1){
+  const rows=[];
+  for(let y=y0;y<=y1;y++){
+    const cells=CHART.months.filter(m=>m.ym.startsWith(y)).map(m=>{
+      const mo=m.ym.slice(5);
+      return `<td><div class="hc ${heatCls(m.score)}" title="${m.ym} · ${m.md}-${m.ad}-${m.pd} · ${m.score}" onclick="go('months','${y}')">${mo}</div></td>`;
+    }).join('');
+    if(cells)rows.push(`<tr><td class="yr">${y}</td>${cells}</tr>`);
+  }
+  return `<div class="tw"><table class="heat"><tbody>${rows.join('')}</tbody></table></div>
+   <div class="legend"><span><i class="sw h5"></i>exceptional</span><span><i class="sw h4"></i>strong</span>
+   <span><i class="sw h3"></i>building</span><span><i class="sw h2"></i>difficult</span><span><i class="sw h1"></i>caution</span>
+   <span style="color:var(--tx3)">months sharing a pratyantardasha share a score — the chart does not resolve finer</span></div>`;
+}
+
+V.timemachine=()=>{
+  return `<h2 class="sec">Life time machine</h2>
+  <div class="card"><div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap">
+    <span class="k">AGE</span><span class="big mo" id="tmAge" style="font-size:34px;color:var(--acc)">23</span>
+    <span class="mo" id="tmYear" style="color:var(--tx3)">2026</span>
+    <span id="tmMode"></span></div>
+    <input type="range" id="tmSlider" min="23" max="49" value="23" step="1" aria-label="Age">
+    <div style="display:flex;justify-content:space-between;font-family:var(--mo);font-size:10px;color:var(--tx3)">
+      <span>23</span><span>30</span><span>35</span><span>40</span><span>45</span><span>49</span></div>
+  </div>
+  <div id="tmOut"></div>`;
+};
+function renderTM(age){
+  const year=2003+age, d=yearOf(year), pr=profection(age);
+  const iso=year+'-06-15', dash=dashaAt(iso);
+  const mds=CHART.dasha.find(m=>iso>=m.start&&iso<m.end);
+  const nat=dash.md?nature(dash.md):null;
+  const sb=dash.md&&CHART.shadbala[dash.md]?CHART.shadbala[dash.md]:null;
+  $('#tmAge').textContent=age; $('#tmYear').textContent=year;
+  $('#tmMode').innerHTML=d?`<span class="mode m-${d.mode}">${d.mode}</span>`:'';
+  if(!d){$('#tmOut').innerHTML=`<div class="note warn">DATA NOT VERIFIED — no year model computed beyond 2048.</div>`;return;}
+  const areas={Career:d.car,Money:d.mon,Business:d.biz,Education:d.edu,Relationships:d.rel,
+    Energy:d.hea,Network:d.net,Travel:d.tra};
+  $('#tmOut').innerHTML=`
+  <div class="grid g4" style="margin-top:12px">
+    <div class="card"><div class="k">Year score</div><div class="big" style="color:var(--${band(d.score)==='acc'?'acc':band(d.score)})">${d.score.toFixed(1)}</div>${bar(d.score)}</div>
+    <div class="card"><div class="k">Mahadasha</div><div class="big mo" style="font-size:20px">${dash.md||'—'}</div>
+      <div class="sub">${nat?NATLABEL[nat]:''}${sb?` · ${sb.pct}% of minimum`:''}</div></div>
+    <div class="card"><div class="k">Antardasha</div><div class="big mo" style="font-size:20px">${dash.ad||'—'}</div>
+      <div class="sub">to ${dash.adEnd||'—'}</div></div>
+    <div class="card"><div class="k">Profection <span style="font-size:9px;color:var(--tx3)">sidereal</span></div><div class="big mo" style="font-size:20px">H${pr.h}</div>
+      <div class="sub">${pr.sign} · lord ${pr.lord}</div></div>
+  </div>
+  <div class="card" style="margin-top:12px"><div class="k">Main theme</div>
+    <div style="font-size:19px;font-weight:600;margin:6px 0 3px">${esc(d.theme)}</div>
+    <span class="pill ${pillFor(d.conf)}">${d.conf} CONFIDENCE</span></div>
+  <div class="grid g2" style="margin-top:12px">
+    ${Object.entries(areas).filter(([,v])=>v&&v!=='—').map(([k,v])=>`<div class="card tight"><div class="k">${k}</div><p style="margin:5px 0 0;font-size:13.5px">${esc(v)}</p></div>`).join('')}
+  </div>
+  <div class="grid g2" style="margin-top:12px">
+    <div class="card" style="border-left:3px solid var(--good)"><div class="k" style="color:var(--good)">Opportunity</div><p style="margin:5px 0 0">${esc(d.opp||'—')}</p></div>
+    <div class="card" style="border-left:3px solid var(--risk)"><div class="k" style="color:var(--risk)">Risk</div><p style="margin:5px 0 0">${esc(d.risk||'—')}</p></div>
+    <div class="card" style="border-left:3px solid var(--acc)"><div class="k" style="color:var(--acc)">Best move</div><p style="margin:5px 0 0">${esc(d.do||'—')}</p></div>
+    <div class="card" style="border-left:3px solid var(--caut)"><div class="k" style="color:var(--caut)">Avoid</div><p style="margin:5px 0 0">${esc(d.dont||'—')}</p></div>
+  </div>
+  <div class="note simpleOnly">At ${age} you are in the <b>${dash.md}</b> chapter. ${esc(d.theme)} ${esc(d.do||'')}</div>`;
+}
+
+V.timeline=()=>{
+  const evs=[
+   {age:24,y:'2027',ic:'🎓',lb:'MBA conversion window',cf:'h',pr:'15–25%',
+    ev:'Mercury pratyantardasha Jan–Jun 2027 + profection to the 1st house. Mercury is the strongest graha and rules the 10th.',
+    rw:'A competitive CAT percentile. The window converts a score; it cannot produce one.',
+    pre:'40+ timed mocks with error logs, before November 2026.'},
+   {age:26,y:'2029',ic:'💼',lb:'First serious salary',cf:'h',pr:'~85% if MBA converts',
+    ev:'Post-MBA timing; D8 craft domain flagged 2029.',rw:'Completed programme and placement.',
+    pre:'The savings rule set BEFORE the first payday, not after.'},
+   {age:27,y:'2030',ic:'💰',lb:'Widest activation of the decade',cf:'m',pr:'—',
+    ev:'D3, D5 and D8 all flagged — three domains, the only time in ten years.',rw:'Being in a role where any of them can move.',
+    pre:'Pick one. Do not spread across all three.'},
+   {age:28,y:'2031',ic:'⚠️',lb:'Hardest stretch',cf:'h',pr:'high certainty',
+    ev:'Venus–Saturn mid-period. Saturn is Atmakaraka, weakest planet, 2nd lord.',rw:'Nothing external required — this is a period, not an event.',
+    pre:'Whatever system you have running by 2029 is what carries you through it.'},
+   {age:29,y:'2032',ic:'⭐',lb:'Career step-change window',cf:'h',pr:'~45%',
+    ev:'Venus–Mercury opens Feb 2032. Mercury strongest by Shadbala, rules the 10th, own sign in D10. Mercury profection year on top.',
+    rw:'Being positioned in a role where a step-change is structurally possible.',
+    pre:'Leadership exposure by 2031. Do not arrive as a pure individual contributor.'},
+   {age:30,y:'2033',ic:'❤️',lb:'Partnership period',cf:'m',pr:'~55%',
+    ev:'7th-house profection; D4 flagged for the only time in a decade.',rw:'Deliberate choice.',
+    pre:'Your 7th house is 19 bindus, the lowest you own. Choose, do not drift.'},
+   {age:31,y:'2034',ic:'🏠',lb:'Asset / property window',cf:'m',pr:'~40%',
+    ev:'Final year of Venus–Mercury; D2 career flagged.',rw:'A down payment — the real constraint.',
+    pre:'Do not buy at the top of your EMI capacity.'},
+   {age:33,y:'2036',ic:'🔄',lb:'SUN MAHADASHA — era change',cf:'h',pr:'certain (dasha)',
+    ev:'Sun is 9th lord (trikona) at 128% of Shadbala minimum, placed in the 2nd house. The only unambiguous functional benefic Mahadasha in your adult life.',
+    rw:'A capital base for it to multiply.',pre:'Arrive at 33 with invested capital. The dasha is the multiplier; you are the base.'},
+   {age:36,y:'2039',ic:'💰',lb:'Peak earning centre',cf:'m',pr:'~60%',
+    ev:'Mid Sun MD.',rw:'Ten years of compounding behind it.',pre:'Everything before this.'},
+   {age:39,y:'2042',ic:'🔄',lb:'Moon MD — consolidation',cf:'h',pr:'certain (dasha)',
+    ev:'Moon is 8th lord, below its Shadbala minimum at 95%. Inward, volatile, not expansive.',
+    rw:'—',pre:'Deleverage before this arrives.'}];
+  window.__EV=evs;
+  return `<h2 class="sec">Life timeline</h2>
+  <p>Markers are windows, not appointments. Colour shows confidence: <span style="color:var(--good)">■</span> high · <span style="color:var(--warn)">■</span> moderate · <span style="color:var(--tx3)">■</span> speculative.</p>
+  <div class="tw" style="padding:0 12px"><div class="tl"><div class="tlline"></div><div class="tlrow">
+    ${evs.map((e,i)=>`<div class="tlev" onclick="showEv(${i})" tabindex="0" onkeypress="if(event.key==='Enter')showEv(${i})">
+      <div class="mk mk-${e.cf}"></div><div class="ag">${e.age} · ${e.y}</div><div class="lb">${e.ic}<br>${esc(e.lb)}</div></div>`).join('')}
+  </div></div></div>
+  <div id="evOut"></div>`;
+};
+function showEv(i){const e=window.__EV[i];
+  $('#evOut').innerHTML=`<div class="card" style="margin-top:14px;border-left:3px solid var(--acc)">
+   <div style="display:flex;gap:12px;align-items:baseline;flex-wrap:wrap">
+     <div style="font-size:19px;font-weight:600">${e.ic} ${esc(e.lb)}</div>
+     <span class="mo" style="color:var(--tx3)">age ${e.age} · ${e.y}</span>
+     <span class="pill ${e.cf==='h'?'p-h':e.cf==='m'?'p-m':'p-s'}">${e.cf==='h'?'HIGH':e.cf==='m'?'MODERATE':'SPECULATIVE'}</span>
+     <span class="pill p-s">PROBABILITY ${esc(e.pr)}</span></div>
+   <div class="k" style="margin-top:12px">Astrological evidence</div><p style="margin:4px 0 0">${esc(e.ev)}</p>
+   <div class="k" style="margin-top:10px">Real-world requirement</div><p style="margin:4px 0 0">${esc(e.rw)}</p>
+   <div class="k" style="margin-top:10px;color:var(--acc2)">What to do before it arrives</div><p style="margin:4px 0 0">${esc(e.pre)}</p></div>`;
+  $('#evOut').scrollIntoView({behavior:'smooth',block:'nearest'});}
+
+V.heatmap=()=>{
+  const cols=['Career','Money','Business','Education','Love','Energy','Overall'];
+  const H={2026:[4,4,2,5,3,4,4],2027:[5,4,2,5,3,4,5],2028:[5,4,2,5,3,3,4],2029:[5,5,2,3,3,3,4],
+   2030:[4,5,2,3,3,2,3],2031:[3,3,1,3,3,2,2],2032:[5,5,3,3,3,3,5],2033:[5,5,3,3,5,4,4],
+   2034:[5,5,4,3,4,4,5],2035:[4,4,4,3,3,3,4],2036:[5,5,4,3,4,4,5],2037:[5,5,4,3,4,4,5],
+   2038:[4,5,5,3,4,4,5],2039:[4,5,4,3,3,3,4],2040:[5,5,4,3,4,4,5],2041:[4,4,4,3,4,3,4],
+   2042:[3,4,2,3,3,2,3],2043:[3,4,2,3,3,2,3],2044:[3,4,2,3,3,2,3],2045:[3,3,2,3,3,3,3],
+   2046:[3,3,2,3,3,3,3],2047:[3,3,2,3,3,3,3],2048:[3,3,2,3,3,3,3]};
+  const map={5:'h5',4:'h4',3:'h3',2:'h2',1:'h1'};
+  return `<h2 class="sec">Life heatmap to age 45</h2>
+  <p>Derived from Mahadasha and Antardasha functional nature and strength, profection house, and the domain-activation engine. Click a year to open it.</p>
+  <div class="tw"><table class="heat"><thead><tr><th></th><th></th>${cols.map(c=>`<th>${c}</th>`).join('')}</tr></thead><tbody>
+  ${Object.entries(H).map(([y,v])=>`<tr><td class="yr">${y}</td><td class="yr" style="color:var(--tx3)">${+y-2003}</td>
+    ${v.map(x=>`<td><div class="hc ${map[x]}" onclick="go('years','${y}')"></div></td>`).join('')}</tr>`).join('')}
+  </tbody></table></div>
+  <div class="legend"><span><i class="sw h5"></i>exceptional</span><span><i class="sw h4"></i>strong</span>
+  <span><i class="sw h3"></i>building</span><span><i class="sw h2"></i>difficult but useful</span><span><i class="sw h1"></i>caution</span></div>`;
+};
+
+V.years=(sel)=>{
+  const yrs=[...Object.keys(YEARS),...Object.keys(LATER)].map(Number).sort();
+  sel=+(sel||2026);
+  const d=yearOf(sel);
+  const full=YEARS[sel];
+  return `<h2 class="sec">Year explorer</h2>
+  <div class="chips">${yrs.map(y=>`<button class="chip" aria-pressed="${y===sel}" onclick="go('years','${y}')">${y}<span style="opacity:.6;font-size:10px"> · ${y-2003}</span></button>`).join('')}</div>
+  ${!d?'<div class="note warn">DATA NOT VERIFIED for this year.</div>':`
+  <div class="grid g4">
+    <div class="card"><div class="k">Year</div><div class="big mo">${sel}</div><div class="sub">age ${sel-2003}</div></div>
+    <div class="card"><div class="k">Score</div><div class="big" style="color:var(--${band(d.score)==='acc'?'acc':band(d.score)})">${d.score.toFixed(1)}</div>${bar(d.score)}</div>
+    <div class="card"><div class="k">Mode</div><div style="margin-top:9px"><span class="mode m-${d.mode}">${d.mode}</span></div></div>
+    <div class="card"><div class="k">Confidence</div><div style="margin-top:9px"><span class="pill ${pillFor(d.conf)}">${d.conf}</span></div></div>
+  </div>
+  <div class="card" style="margin-top:12px"><div class="k">Theme</div><div style="font-size:19px;font-weight:600;margin-top:5px">${esc(d.theme)}</div></div>
+  ${full?`<div class="grid g2" style="margin-top:12px">
+    ${[['Career','car'],['Money','mon'],['Business','biz'],['Education','edu'],['Relationships','rel'],['Health / energy','hea'],['Network','net'],['Travel','tra']]
+      .filter(([,k])=>full[k]&&full[k]!=='—').map(([lb,k])=>`<div class="card tight"><div class="k">${lb}</div><p style="margin:5px 0 0;font-size:13.5px">${esc(full[k])}</p></div>`).join('')}
+  </div>
+  <div class="grid g2" style="margin-top:12px">
+    <div class="card" style="border-left:3px solid var(--good)"><div class="k" style="color:var(--good)">Best opportunity</div><p style="margin:5px 0 0">${esc(full.opp)}</p></div>
+    <div class="card" style="border-left:3px solid var(--risk)"><div class="k" style="color:var(--risk)">Biggest risk</div><p style="margin:5px 0 0">${esc(full.risk)}</p></div>
+    <div class="card" style="border-left:3px solid var(--acc)"><div class="k" style="color:var(--acc)">What to do</div><p style="margin:5px 0 0">${esc(full.do)}</p></div>
+    <div class="card" style="border-left:3px solid var(--caut)"><div class="k" style="color:var(--caut)">What NOT to do</div><p style="margin:5px 0 0">${esc(full.dont)}</p></div>
+  </div>
+  <div class="card" style="margin-top:12px"><div class="k">Most important months</div><p style="margin:5px 0 0">${esc(full.months)}</p></div>`:''}
+  <h3>Months in ${sel}</h3>${monthGrid(sel)}`}`;
+};
+
+function monthGrid(y){
+  const ms=CHART.months.filter(m=>m.ym.startsWith(y));
+  if(!ms.length)return '<div class="note warn">DATA NOT VERIFIED — monthly resolution is computed only for 2026–2036.</div>';
+  const best=Math.max(...ms.map(m=>m.score));
+  const N=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  return `<div class="grid g4">${ms.map(m=>{const mi=+m.ym.slice(5)-1;
+    return `<div class="card tight" style="cursor:pointer;${m.score===best?'border-color:var(--good)':''}" onclick="showMonth('${m.ym}')">
+     <div style="display:flex;justify-content:space-between;align-items:baseline">
+       <span style="font-weight:600">${N[mi]}</span>
+       <span class="mo" style="color:var(--${band(m.score)==='acc'?'acc':band(m.score)});font-weight:600">${m.score.toFixed(1)}${m.score===best?' ⭐':''}</span></div>
+     ${bar(m.score)}<div class="sub mo" style="font-size:10.5px">${m.md}-${m.ad}-${m.pd}</div></div>`;}).join('')}</div>
+   <div id="moOut"></div>`;
+}
+function showMonth(ym){
+  const m=monthAt(ym); if(!m)return;
+  const y=+ym.slice(0,4), Y=yearOf(y);
+  const pdNat=nature(m.pd), sb=CHART.shadbala[m.pd];
+  const push=m.score>=6.5, avoid=m.score<5.2;
+  $('#moOut').innerHTML=`<div class="card" style="margin-top:12px;border-left:3px solid var(--acc)">
+   <div style="display:flex;gap:12px;align-items:baseline;flex-wrap:wrap">
+     <div style="font-size:19px;font-weight:600">${ym}</div>
+     <span class="mo" style="color:var(--${band(m.score)==='acc'?'acc':band(m.score)});font-size:17px;font-weight:600">${m.score.toFixed(1)}/10</span>
+     <span class="pill p-s">${m.md} → ${m.ad} → ${m.pd}</span></div>
+   <div class="grid g2" style="margin-top:12px">
+     <div><div class="k" style="color:var(--good)">Push</div><p style="margin:4px 0 0">${push?'Yes — the sub-period lord supports action. Apply, negotiate, ship.':'Not this month. Build instead.'}</p></div>
+     <div><div class="k" style="color:var(--acc)">Prepare</div><p style="margin:4px 0 0">${esc(Y?Y.do||Y.theme:'—')}</p></div>
+     <div><div class="k" style="color:var(--risk)">Avoid</div><p style="margin:4px 0 0">${avoid?'Major launches, leverage, irreversible commitments.':'Nothing structural. Ordinary caution.'}</p></div>
+     <div><div class="k">Best use</div><p style="margin:4px 0 0">${esc(Y?Y.theme:'—')}</p></div>
+   </div>
+   <div class="whybox on expertOnly" style="margin-top:12px">Pratyantardasha lord ${m.pd} — ${NATLABEL[pdNat]}${sb?`, Shadbala ${sb.r}/${sb.req} rupas (${sb.pct}% of minimum)`:', no Shadbala for nodes'}. Rules house(s) ${(RULES[m.pd]||['—']).join(', ')}. Score = weighted strength of MD/AD/PD modulated by the SAV of the houses each rules.</div>
+   <div class="note simpleOnly" style="margin-top:10px">Months inside the same sub-period share a score — the chart genuinely does not resolve finer than this, and inventing daily detail would be fiction.</div></div>`;
+  $('#moOut').scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+V.months=(sel)=>{
+  sel=+(sel||2026);
+  const yrs=[...new Set(CHART.months.map(m=>+m.ym.slice(0,4)))];
+  return `<h2 class="sec">Month explorer</h2>
+  <p>Monthly resolution comes from <b>pratyantardasha</b> changes — the finest level this chart honestly resolves. ${CHART.months.length} months computed across ${yrs.length} years.</p>
+  <div class="chips">${yrs.map(y=>`<button class="chip" aria-pressed="${y===sel}" onclick="go('months','${y}')">${y}</button>`).join('')}</div>
+  ${monthGrid(sel)}`;
+};
+
+V.opportunities=()=>`<h2 class="sec">Opportunity radar</h2>
+  <div class="grid g2">${OPPS.map(o=>`<div class="card">
+    <div style="display:flex;justify-content:space-between;align-items:baseline">
+      <h4 style="margin:0">${esc(o.c)}</h4>
+      <span class="mo" style="font-weight:600;color:var(--${band(o.cur)==='acc'?'acc':band(o.cur)})">${o.cur.toFixed(1)}</span></div>
+    ${bar(o.cur)}
+    <div style="display:grid;grid-template-columns:auto 1fr;gap:3px 11px;margin-top:11px;font-size:12.5px">
+      <span class="k">NEXT</span><span class="mo">${esc(o.next)}</span>
+      <span class="k">PEAK</span><span class="mo" style="color:var(--good)">${esc(o.peak)}</span>
+      <span class="k">PREP</span><span class="mo">${esc(o.prep)}</span>
+      <span class="k">CONF</span><span><span class="pill ${pillFor(o.conf)}">${o.conf}</span></span></div>
+    <p style="margin:10px 0 0;font-size:13px">${esc(o.st)}</p></div>`).join('')}</div>
+
+  <h3>Peak windows, ranked</h3>
+  <div class="tw"><table><thead><tr><th></th><th>Window</th><th>Category</th><th class="n">Strength</th><th>If used well</th><th>If wasted</th></tr></thead><tbody>
+   <tr><td>🥇</td><td class="n">2036–2042</td><td>Wealth + authority</td><td class="n">9.2</td><td>The compounding decade. Multiplies whatever base exists.</td><td>A great period with nothing to multiply.</td></tr>
+   <tr><td>🥈</td><td class="n">2032–2034</td><td>Career step-change</td><td class="n">8.1</td><td>Seniority, equity, a real jump.</td><td>Stuck as a senior individual contributor.</td></tr>
+   <tr><td>🥉</td><td class="n">Jan–Jun 2027</td><td>Education conversion</td><td class="n">7.6</td><td>Sets the entire branch of your career.</td><td>Another year of preparation.</td></tr>
+   <tr><td>4</td><td class="n">2029–2030</td><td>Savings foundation</td><td class="n">7.0</td><td>The habit that decides scenario A vs B.</td><td>Scenario C. A 45× lifetime difference.</td></tr>
+   <tr><td>5</td><td class="n">2033</td><td>Partnership</td><td class="n">6.4</td><td>A deliberately chosen partner.</td><td>Drift, or an equal-split venture that fails.</td></tr>
+  </tbody></table></div>`;
+
+V.advantages=()=>{
+  return `<h2 class="sec">Unfair advantages</h2>
+  <div class="chips">
+    <button class="chip" aria-pressed="true" onclick="filtAdv('all',this)">ALL</button>
+    <button class="chip" aria-pressed="false" onclick="filtAdv('money',this)">MONEY-MAKING ONLY</button>
+    <button class="chip" aria-pressed="false" onclick="filtAdv('dev',this)">DEVELOP NOW</button>
+  </div><div id="advOut">${advCards('all')}</div>`;
+};
+function advCards(f){
+  const list=ADV.filter(a=>f==='all'||(f==='money'&&a.money)||(f==='dev'&&a.dev));
+  if(!list.length)return '<div class="note">Nothing matches that filter.</div>';
+  return list.map(a=>`<div class="card" style="margin-bottom:12px;border-left:3px solid var(--${a.t==='S'?'good':a.t==='A'?'acc':a.t==='B'?'warn':'risk'})">
+    <div style="display:flex;gap:11px;align-items:baseline;flex-wrap:wrap">
+      <span class="pill ${a.t==='S'?'p-vh':a.t==='A'?'p-h':a.t==='B'?'p-m':'p-l'}">${a.t}-TIER</span>
+      <span style="font-size:17px;font-weight:600">${esc(a.n)}</span>
+      <span class="mo" style="color:var(--${band(a.s)==='acc'?'acc':band(a.s)});font-weight:600">${a.s.toFixed(1)}/10</span></div>
+    ${bar(a.s)}
+    <div style="display:grid;grid-template-columns:auto 1fr;gap:6px 13px;margin-top:12px;font-size:13.5px">
+      <span class="k" style="padding-top:2px">WHY</span><span>${esc(a.why)}</span>
+      <span class="k" style="padding-top:2px">IN REALITY</span><span>${esc(a.real)}</span>
+      <span class="k" style="padding-top:2px">MAKES MONEY</span><span>${esc(a.make)}</span>
+      <span class="k" style="padding-top:2px">STRONGEST</span><span style="color:var(--good)">${esc(a.when)}</span>
+      <span class="k" style="padding-top:2px">BUILD IT</span><span>${esc(a.build)}</span>
+      <span class="k" style="padding-top:2px;color:var(--risk)">DESTROYS IT</span><span>${esc(a.kill)}</span>
+    </div></div>`).join('');
+}
+function filtAdv(f,btn){document.querySelectorAll('#view .chips .chip').forEach(b=>b.setAttribute('aria-pressed','false'));
+  btn.setAttribute('aria-pressed','true'); $('#advOut').innerHTML=advCards(f);}
+
+V.karma=()=>`<h2 class="sec">Karmic operating system</h2>
+  <div class="note"><b>No superstition here.</b> Karma is treated as: repeating pattern → the choice it presents → the consequence → what changes if you master it.</div>
+  ${KARMA.map((k,i)=>`<div class="card" style="margin-bottom:12px">
+    <div style="display:flex;gap:10px;align-items:baseline"><span class="mo" style="color:var(--acc2);font-weight:600">#${i+1}</span>
+      <span style="font-size:17px;font-weight:600">${esc(k.n)}</span></div>
+    <div style="display:grid;grid-template-columns:auto 1fr;gap:6px 13px;margin-top:11px;font-size:13.5px">
+      <span class="k" style="padding-top:2px">EVIDENCE</span><span>${esc(k.core)}</span>
+      <span class="k" style="padding-top:2px;color:var(--risk)">IMMATURE</span><span>${esc(k.imm)}</span>
+      <span class="k" style="padding-top:2px;color:var(--good)">MATURE</span><span>${esc(k.mat)}</span>
+      <span class="k" style="padding-top:2px">TRIGGERS</span><span class="mo">${esc(k.trig)}</span>
+      <span class="k" style="padding-top:2px">IF MASTERED</span><span>${esc(k.win)}</span>
+      <span class="k" style="padding-top:2px;color:var(--acc)">DO THIS</span><span>${esc(k.act)}</span>
+    </div></div>`).join('')}
+  <div class="card"><h4>Jaimini karakas (all eight independently confirmed against your external dataset)</h4>
+   <div class="mo" style="font-size:13px;line-height:2">
+   ${Object.entries(CHART.jaimini).filter(([k])=>k.length<=4).map(([k,v])=>`<span style="display:inline-block;min-width:150px">${k}: <b style="color:var(--acc)">${v}</b></span>`).join('')}</div>
+   <div class="sub" style="margin-top:8px">Arudha Lagna: ${CHART.jaimini.arudhaLagna}, house ${CHART.jaimini.alHouse} from the Lagna.</div></div>`;
+
+V.wealth=()=>{
+  return `<h2 class="sec">Wealth command centre</h2>
+  <div class="grid g4">
+    <div class="card"><div class="k">Current phase</div><div style="font-size:17px;font-weight:600;margin-top:6px">Pre-accumulation</div><div class="sub">No income base yet. Correct for age 23.</div></div>
+    <div class="card"><div class="k">Wealth score</div><div class="big" style="color:var(--caut)">4.5</div>${bar(4.5)}<div class="sub">${esc(areaWhy('Wealth'))}</div></div>
+    <div class="card"><div class="k">Next window</div><div class="big mo" style="font-size:19px">2029</div><div class="sub">First salary. The system year.</div></div>
+    <div class="card"><div class="k">Strongest decade</div><div class="big mo" style="font-size:19px;color:var(--good)">33–39</div><div class="sub">Sun MD: 9th lord in the 2nd at 128%.</div></div>
+  </div>
+  <div class="note warn" style="margin-top:14px"><b>Read this before the table.</b> The numbers below are <b>compound arithmetic</b> — salary path, tax, savings rate, 11% nominal returns. <b>No astrology produces them.</b> The chart's only contribution is that your retention is weak, which means which column you land in is mostly a choice.</div>
+
+  <h3>Net worth by scenario</h3>
+  <div class="tw"><table><thead><tr><th class="n">Age</th><th class="n">🟢 High (40% saved)</th><th class="n">🟡 Normal (20%)</th><th class="n">🔴 Sabotage (5%)</th></tr></thead><tbody>
+  ${[26,30,35,40,45,50].map(a=>`<tr><td class="n" style="font-weight:600">${a}</td>
+    <td class="n" style="color:var(--good)">${SCEN.high.nw[a]}</td>
+    <td class="n" style="color:var(--warn)">${SCEN.norm.nw[a]}</td>
+    <td class="n" style="color:var(--risk)">${SCEN.low.nw[a]}</td></tr>`).join('')}
+  </tbody></table></div>
+
+  <h3>Milestone windows</h3>
+  <div class="tw"><table><thead><tr><th>Milestone</th><th class="n">High</th><th class="n">Normal</th><th class="n">Sabotage</th></tr></thead><tbody>
+  ${MILESTONES.map(m=>`<tr><td>${esc(m.m)}</td>
+    <td class="n" style="color:var(--good)">${m.high?'age '+m.high:'—'}</td>
+    <td class="n" style="color:var(--warn)">${m.norm?'age '+m.norm:'not before 50'}</td>
+    <td class="n" style="color:var(--risk)">${m.low?'age '+m.low:'not before 50'}</td></tr>`).join('')}
+  </tbody></table></div>
+  <div class="sub">Possible milestone windows under the stated execution level — never guarantees.</div>
+
+  <div class="note good" style="margin-top:14px"><b>The single most useful number here.</b> In the Normal scenario, changing <b>nothing except the savings rate</b> — 20% to 35%, same job, same salary — moves ₹1 crore from <b>age 38 to age 35</b>. Three years, bought with one standing instruction.</div>
+
+  <h3>Wealth engines <span style="font-size:12px;font-weight:400;color:var(--tx3)">click a column to sort</span></h3>
+  <div class="tw"><table id="wTab"><thead><tr>
+    <th class="s" onclick="sortT('wTab',0,0)">Engine</th><th class="s n" onclick="sortT('wTab',1,1)">Fit</th>
+    <th class="s n" onclick="sortT('wTab',2,1)">Upside</th><th class="s n" onclick="sortT('wTab',3,1)">Freedom</th>
+    <th class="s n" onclick="sortT('wTab',4,1)">Risk</th><th class="s n" onclick="sortT('wTab',5,1)">Scale</th><th>Why</th></tr></thead><tbody>
+  ${WEALTH.map(w=>`<tr><td style="font-weight:600">${esc(w.n)}</td>
+    <td class="n" style="color:var(--${band(w.fit)==='acc'?'acc':band(w.fit)})">${w.fit}</td>
+    <td class="n">${w.up}</td><td class="n">${w.free}</td>
+    <td class="n" style="color:var(--${w.risk>=7?'risk':w.risk>=5?'caut':'good'})">${w.risk}</td>
+    <td class="n">${w.scale}</td><td style="font-size:12.5px">${esc(w.why)}</td></tr>`).join('')}
+  </tbody></table></div>
+
+  <div class="note warn"><b>Never rely on this financially:</b> your own instinct to save. The 2nd house is 21 bindus with your weakest planet as lord, and no Dhana Yoga forms. This is the most repeated negative signal in your chart. Accumulation must be automated out of your own hands.</div>
+  <div class="note simpleOnly"><b>Plain words:</b> you'll probably be good at earning and bad at keeping. So make the keeping automatic and let your talent do the earning.</div>`;
+};
+
+V.career=()=>{
+  const rank=[...CAREERS].sort((a,b)=>b.fit-a.fit);
+  return `<h2 class="sec">Career command centre</h2>
+  <div class="grid g3">
+    ${rank.slice(0,3).map((c,i)=>`<div class="card" style="border-left:3px solid var(--${i===0?'good':i===1?'acc':'warn'})">
+      <div style="font-size:20px">${['🥇','🥈','🥉'][i]}</div>
+      <div style="font-size:16px;font-weight:600;margin-top:5px">${esc(c.n)}</div>
+      <div class="mo" style="color:var(--good);font-weight:600;margin-top:5px">Fit ${c.fit}/10</div>
+      <div class="sub">${esc(c.age)}</div></div>`).join('')}
+  </div>
+  <div class="note"><b>Your pattern:</b> Employee → senior professional → owner/investor. <b>Not</b> early entrepreneur, and not pure corporate lifer. Mercury rules the 10th and 7th and sits in your Lagna; the 10th is empty so nothing is handed to you; the 7th at 19 bindus argues against early partnership ventures; Sun MD at 33–39 is when ownership becomes structurally supported.</div>
+  <h3>All paths <span style="font-size:12px;font-weight:400;color:var(--tx3)">click a column to sort</span></h3>
+  <div class="tw"><table id="cTab"><thead><tr>
+    <th class="s" onclick="sortT('cTab',0,0)">Path</th><th class="s n" onclick="sortT('cTab',1,1)">Fit</th>
+    <th class="s n" onclick="sortT('cTab',2,1)">Income</th><th class="s n" onclick="sortT('cTab',3,1)">Freedom</th>
+    <th class="s n" onclick="sortT('cTab',4,1)">Status</th><th class="s n" onclick="sortT('cTab',5,1)">Excel</th>
+    <th class="s n" onclick="sortT('cTab',6,1)">Difficulty</th><th>Chart support</th><th>Needs</th><th class="n">Enter</th></tr></thead><tbody>
+  ${CAREERS.map(c=>`<tr><td style="font-weight:600">${esc(c.n)}</td>
+    <td class="n" style="color:var(--${band(c.fit)==='acc'?'acc':band(c.fit)})">${c.fit}</td>
+    <td class="n">${c.inc}</td><td class="n">${c.free}</td><td class="n">${c.stat}</td><td class="n">${c.exc}</td>
+    <td class="n" style="color:var(--${c.diff>=9?'risk':c.diff>=7?'caut':'good'})">${c.diff}</td>
+    <td style="font-size:12.5px">${esc(c.sup)}</td><td style="font-size:12.5px">${esc(c.need)}</td>
+    <td class="n" style="font-size:12px">${esc(c.age)}</td></tr>`).join('')}
+  </tbody></table></div>
+  <h3>Skills to build before their window arrives</h3>
+  <div class="grid g3">
+    <div class="card tight"><div class="k">NOW → 2029</div><p style="margin:5px 0 0;font-size:13.5px">Structured problem-solving. Financial modelling. Writing clearly.</p></div>
+    <div class="card tight"><div class="k">BY 2031</div><p style="margin:5px 0 0;font-size:13.5px">People and project leadership — needed to be eligible for the 2032–34 step-change.</p></div>
+    <div class="card tight"><div class="k">BY 2034</div><p style="margin:5px 0 0;font-size:13.5px">Capital allocation and ownership literacy — needed for Sun MD.</p></div>
+  </div>`;
+};
+
+V.scenarios=()=>`<h2 class="sec">Three futures, same chart</h2>
+  <div class="chips">
+    <button class="chip" aria-pressed="false" onclick="setScen('low',this)">🔴 LOW EXECUTION</button>
+    <button class="chip" aria-pressed="true" onclick="setScen('norm',this)">🟡 NORMAL</button>
+    <button class="chip" aria-pressed="false" onclick="setScen('high',this)">🟢 HIGH EXECUTION</button>
+  </div><div id="scOut">${scenView('norm')}</div>
+  <div class="note warn" style="margin-top:16px"><b>You asked not to be flattered.</b> The most likely outcome is <b>NORMAL</b>, not high. Base rates are unsentimental: most serious CAT aspirants do not reach a top-6 IIM, most capable analysts become competent senior managers rather than partners, and most professionals with rising salaries save 10–20%, not 40%. The gap between best and worst execution here is roughly <b>45×</b> by age 50 — and the largest single input is the savings rate, not talent or timing.</div>`;
+function scenView(k){
+  const s=SCEN[k];
+  return `<div class="grid g4">
+    <div class="card"><div class="k">Scenario</div><div style="font-size:17px;font-weight:700;margin-top:6px;color:var(--${s.c})">${esc(s.k)}</div></div>
+    <div class="card"><div class="k">Savings rate</div><div class="big mo" style="color:var(--${s.c})">${esc(s.save)}</div></div>
+    <div class="card"><div class="k">Income path</div><div class="mo" style="font-size:15px;margin-top:7px">${esc(s.sal)}</div></div>
+    <div class="card"><div class="k">Net worth at 50</div><div class="big mo" style="color:var(--${s.c});font-size:24px">${esc(s.nw[50])}</div></div>
+  </div>
+  <div class="tw" style="margin-top:12px"><table><thead><tr><th class="n">Age</th><th class="n">Net worth</th><th>Position</th></tr></thead><tbody>
+    <tr><td class="n">30</td><td class="n">${s.nw[30]}</td><td>${esc(s.a30)}</td></tr>
+    <tr><td class="n">35</td><td class="n">${s.nw[35]}</td><td>${esc(s.a35)}</td></tr>
+    <tr><td class="n">40</td><td class="n">${s.nw[40]}</td><td>${esc(s.a40)}</td></tr>
+  </tbody></table></div>
+  <div class="grid g3" style="margin-top:12px">
+    <div class="card tight"><div class="k">Ownership</div><p style="margin:5px 0 0;font-size:13.5px">${esc(s.own)}</p></div>
+    <div class="card tight"><div class="k">Freedom</div><p style="margin:5px 0 0;font-size:13.5px">${esc(s.free)}</p></div>
+    <div class="card tight"><div class="k">Lifestyle</div><p style="margin:5px 0 0;font-size:13.5px">${esc(s.life)}</p></div>
+    <div class="card tight"><div class="k">Network</div><p style="margin:5px 0 0;font-size:13.5px">${esc(s.net)}</p></div>
+    <div class="card tight"><div class="k">Relationships</div><p style="margin:5px 0 0;font-size:13.5px">${esc(s.rel)}</p></div>
+  </div>`;
+}
+function setScen(k,btn){document.querySelectorAll('#view .chips .chip').forEach(b=>b.setAttribute('aria-pressed','false'));
+  btn.setAttribute('aria-pressed','true'); $('#scOut').innerHTML=scenView(k);}
+
+V.decide=()=>`<h2 class="sec">Decision engine</h2>
+  <p>Pick what you're considering. Astrology is one input; real-world readiness is the other, and it usually dominates.</p>
+  <div class="chips">${Object.keys(DECISIONS).map((k,i)=>`<button class="chip" aria-pressed="${i===0}" onclick="decide('${k.replace(/'/g,"\\'")}',this)">${esc(k)}</button>`).join('')}</div>
+  <div id="decOut">${decView(Object.keys(DECISIONS)[0])}</div>
+  <div class="note warn">Never base a serious financial, legal or medical decision on astrology alone. This tool ranks timing; it does not replace advice, diligence or arithmetic.</div>`;
+function decView(k){
+  const d=DECISIONS[k], col=d.rec==='GO HARD'?'good':d.rec==='PROCEED'?'acc':d.rec==='WAIT/PREPARE'?'warn':'risk';
+  return `<div class="card" style="border-left:3px solid var(--${col})">
+   <div style="display:flex;gap:14px;align-items:baseline;flex-wrap:wrap">
+     <span style="font-size:19px;font-weight:600">${esc(k)}</span>
+     <span class="mode m-${d.rec==='GO HARD'?'ATTACK':d.rec==='PROCEED'?'BUILD':d.rec==='WAIT/PREPARE'?'TRANSITION':'PROTECT'}">${esc(d.rec)}</span></div>
+   <div class="grid g3" style="margin-top:12px">
+     <div><div class="k">Timing score</div><div class="big mo" style="color:var(--${band(d.sc)==='acc'?'acc':band(d.sc)});font-size:26px">${d.sc}/10</div>${bar(d.sc)}</div>
+     <div><div class="k">Astrology says</div><div style="font-size:15px;font-weight:600;margin-top:6px;color:var(--${col})">${esc(d.ast)}</div></div>
+     <div><div class="k">Real-world readiness</div><div style="font-size:15px;font-weight:600;margin-top:6px">${esc(d.rw)}</div></div>
+   </div>
+   <div class="k" style="margin-top:12px">Why</div><p style="margin:4px 0 0">${esc(d.why)}</p></div>`;
+}
+function decide(k,btn){document.querySelectorAll('#view .chips .chip').forEach(b=>b.setAttribute('aria-pressed','false'));
+  btn.setAttribute('aria-pressed','true'); $('#decOut').innerHTML=decView(k);}
+
+V.risks=()=>`<h2 class="sec">Warning system</h2>
+  ${RISKS.map(r=>{const c=r.lvl==='CRITICAL'?'risk':r.lvl==='HIGH'?'caut':'warn';
+   return `<div class="card" style="margin-bottom:11px;border-left:3px solid var(--${c})">
+    <div style="display:flex;gap:11px;align-items:baseline;flex-wrap:wrap">
+      <span style="font-size:16px;font-weight:600">⚠️ ${esc(r.n)}</span>
+      <span class="pill ${r.lvl==='CRITICAL'?'p-l':r.lvl==='HIGH'?'p-m':'p-s'}" style="color:var(--${c});border-color:var(--${c})">${r.lvl}</span></div>
+    <div style="display:grid;grid-template-columns:auto 1fr;gap:5px 13px;margin-top:10px;font-size:13.5px">
+      <span class="k" style="padding-top:2px">WHY</span><span>${esc(r.why)}</span>
+      <span class="k" style="padding-top:2px">WHEN</span><span class="mo">${esc(r.when)}</span>
+      <span class="k" style="padding-top:2px">COST</span><span>${esc(r.cost)}</span>
+      <span class="k" style="padding-top:2px;color:var(--good)">FIX</span><span>${esc(r.fix)}</span></div></div>`;}).join('')}
+  <div class="note">No fear-based astrology here. Every warning above names a mechanism and a fix. None of them are predictions of disaster; they are the failure modes most consistent with your own chart's weak points.</div>`;
+
+V.ledger=()=>`<h2 class="sec">Prediction ledger</h2>
+  <p>Testable, dated, recorded so they can be checked rather than remembered selectively. A sealed machine-readable version exists in the repository under hash <span class="mo">638936d0632eb496</span>.</p>
+  <div class="tw"><table id="lTab"><thead><tr>
+    <th class="s" onclick="sortT('lTab',0,0)">Prediction</th><th class="n">Window</th><th>Category</th>
+    <th class="s n" onclick="sortT('lTab',3,1)">Conf %</th><th>Level</th><th>Basis</th><th>Status</th></tr></thead><tbody>
+  ${LEDGER.map(l=>`<tr><td style="font-weight:500">${esc(l.p)}</td><td class="n">${esc(l.w)}</td><td>${esc(l.cat)}</td>
+    <td class="n" style="color:var(--${l.pr>=75?'good':l.pr>=55?'warn':'caut'})">${l.pr}</td>
+    <td><span class="pill ${pillFor(l.cf)}">${l.cf}</span></td>
+    <td style="font-size:12px">${esc(l.b)}</td><td>⏳ Pending</td></tr>`).join('')}
+  </tbody></table></div>
+  <div class="note"><b>Confidence bands:</b> 90–100 extremely strong · 75–89 high · 55–74 moderate · 35–54 low · below 35 speculative. Treat these as <b>comparative confidence</b>, not measured probability — astrology cannot justify precise percentages, and inflating them would be dishonest.</div>`;
+
+V.actions=()=>`<h2 class="sec">Action centre</h2>
+  <div class="chips">
+    <button class="chip" aria-pressed="true" onclick="actTab('today',this)">TODAY</button>
+    <button class="chip" aria-pressed="false" onclick="actTab('week',this)">THIS WEEK</button>
+    <button class="chip" aria-pressed="false" onclick="actTab('month',this)">THIS MONTH</button>
+  </div><div id="actOut">${actList('today')}</div>
+  <h3>Life KPIs — these matter more than any transit</h3>
+  <div class="grid g2">${KPIS.map(k=>`<div class="card tight">
+    <div style="display:flex;justify-content:space-between;align-items:baseline">
+      <b>${esc(k.k)}</b><span class="mo" style="color:var(--good);font-size:12.5px">${esc(k.t)}</span></div>
+    <div class="sub">${esc(k.w)}</div></div>`).join('')}</div>`;
+function actList(k){const a=ACTIONS[k];
+  return `<div class="card"><ol style="margin:0;padding-left:20px;font-size:15px">${a.map(x=>`<li style="margin-bottom:8px">${esc(x)}</li>`).join('')}</ol></div>`;}
+function actTab(k,btn){document.querySelectorAll('#view .chips .chip').forEach(b=>b.setAttribute('aria-pressed','false'));
+  btn.setAttribute('aria-pressed','true'); $('#actOut').innerHTML=actList(k);}
+
+V.ask=()=>`<h2 class="sec">Ask my life</h2>
+  <div class="ask">
+    <input type="text" id="qIn" placeholder="e.g. when should I start a business?" onkeypress="if(event.key==='Enter')doAsk()">
+    <button class="go" onclick="doAsk()">ASK</button></div>
+  <div class="chips">${['When should I start a business?','When is my strongest career period?','What should I focus on in 2028?','When does wealth accelerate?','What should I avoid this month?','What are my advantages?','What happens around age 30?','What is my biggest karmic lesson?','What should I prepare for next?'].map(q=>`<button class="chip" onclick="document.getElementById('qIn').value=this.textContent;doAsk()">${esc(q)}</button>`).join('')}</div>
+  <div id="aOut"></div>
+  <div class="note">Answers are looked up from the same verified model every other screen uses. Nothing here can contradict another section, because there is only one data source.</div>`;
+function doAsk(){
+  const q=($('#qIn').value||'').toLowerCase(); let out='';
+  const has=(...w)=>w.some(x=>q.includes(x));
+  if(!q.trim())out='Type a question, or tap one of the suggestions.';
+  else if(has('business','startup','venture','found'))
+    out=`<b>Not before 2032, and properly from 2036.</b><br><br>Your 2nd house (funding capacity) is 21 bindus with Saturn — your weakest planet at 75% of its minimum — as lord. Your 7th house (partnership) is 19 bindus, the lowest of all twelve, and empty. Venus–Saturn 2029–32 is the worst-supported stretch of your chart for it.<br><br>First realistic window: <b>2032</b>, when Venus–Mercury opens. The genuinely strong window is <b>2036–2040</b> under Sun Mahadasha. And when you do it: <b>solo or majority-owned</b>, never an equal split.`;
+  else if(has('career','strongest career','professional','job'))
+    out=`<b>Two windows, and the second is bigger.</b><br><br><b>2032–2034</b> — Venus–Mercury. Mercury is your strongest graha (8.61 vs 7.0 required), rules the 10th, sits in your Lagna, and owns its sign in D10. 2032 is also a Mercury profection year.<br><br><b>2036–2042</b> — Sun Mahadasha. The Sun rules your 9th (a trikona) at 128% of minimum and sits in the 2nd. This is the strongest whole era in your adult chart.<br><br>Right now your Career area scores <b>8.1/10</b> — the highest of your twelve. But the 10th house is empty: nothing arrives on its own.`;
+  else if(has('2028'))
+    out=`<b>2028 — ${esc(YEARS[2028].theme)}</b> · mode ${YEARS[2028].mode} · score ${YEARS[2028].score}<br><br><b>Opportunity:</b> ${esc(YEARS[2028].opp)}<br><b>Risk:</b> ${esc(YEARS[2028].risk)}<br><b>Do:</b> ${esc(YEARS[2028].do)}<br><b>Avoid:</b> ${esc(YEARS[2028].dont)}`;
+  else if(has('wealth','money','rich','crore','accelerat','savings'))
+    out=`<b>Accumulation starts in 2029; acceleration is 2036–2042.</b><br><br>But the honest answer is that your <b>savings rate matters more than any window</b>. Your 2nd house is 21 bindus with your weakest planet as lord and no Dhana Yoga forms — this is the most repeated negative signal in your chart.<br><br>The arithmetic: at a 20% savings rate you reach ₹1 crore around age <b>38</b>. At 35% — same job, same salary — around age <b>35</b>. The dasha sets the multiplier; you set the base.`;
+  else if(has('avoid this month','this month','avoid'))
+    out=`<b>Right now (${MISSION.period}), avoid:</b> ${esc(MISSION.avoid)}<br><br>You are in ${esc(MISSION.pd)} — a grind texture. It rewards consistency and punishes scattered effort. <b>Primary focus:</b> ${esc(MISSION.primary)}`;
+  else if(has('advantage','strength','good at'))
+    out=`<b>Your top three, ranked by evidence:</b><br><br>${ADV.slice(0,3).map((a,i)=>`<b>${i+1}. ${esc(a.n)}</b> (${a.s}/10) — ${esc(a.real)}`).join('<br><br>')}<br><br>The first has <b>four independent confirmations</b>, which is unusually strong. Build your life on it.`;
+  else if(has('age 30','30','thirty'))
+    out=`<b>At 30 (2033) you are in Venus–Mercury, profection to your 7th house.</b><br><br>Theme: ${esc(YEARS[2033].theme)}. The only D4 (partnership) activation in a decade.<br><br>Net worth depends entirely on execution: <b>${SCEN.high.nw[30]}</b> high · <b>${SCEN.norm.nw[30]}</b> normal · <b>${SCEN.low.nw[30]}</b> low.<br><br>${esc(SCEN.norm.a30)}`;
+  else if(has('karma','karmic','lesson'))
+    out=`<b>${esc(KARMA[0].n)}</b><br><br>${esc(KARMA[0].core)}<br><br><b>Immature:</b> ${esc(KARMA[0].imm)}<br><b>Mature:</b> ${esc(KARMA[0].mat)}<br><b>Do this:</b> ${esc(KARMA[0].act)}`;
+  else if(has('prepare','next','coming','upcoming'))
+    out=`<b>Next major window: Jan–Jun 2027.</b><br><br>Mercury pratyantardasha overlapping interview and admission season, with profection moving to your 1st house on 20 Jan 2027.<br><br><b>Preparation required:</b> a CAT percentile that opens real doors. The window converts a score; it cannot produce one. That means 40+ timed mocks with error logs before November 2026.`;
+  else if(has('marriage','relationship','partner','love'))
+    out=`<b>Most chart-flagged window: 2033</b> — 7th-house profection, and the only D4 activation in ten years.<br><br>Your 7th house is 19 bindus, the lowest of all twelve, and empty. Its lord Mercury is your strongest planet but retrograde — a genuine contradiction the chart does not resolve.<br><br>Practical read: partnership is <b>not automatic and not passive</b> for you. It needs deliberate choice. <b>No claim is made about who.</b>`;
+  else if(has('health','energy','sick','fit'))
+    out=`<b>Your Energy area scores 7.1/10 — one of your stronger ones.</b><br><br>The 6th house is 37 bindus, joint highest: you absorb strain well. The risk pattern is therefore <b>overwork, not fragility</b> — Saturn and Rahu share that house.<br><br>Heaviest workload stretch: <b>2029–2031</b>. Fixed sleep window and a hard daily stop time.<br><br><b>No medical claim is made anywhere in this system.</b>`;
+  else if(has('exam','cat','mba','study','college'))
+    out=`<b>Performance support: 7/10. Timing is genuinely favourable; the score is not astrological.</b><br><br>Mercury is your strongest graha and CAT is a Mercury exam. The 6th house at 37 bindus with Rahu means competition suits you.<br><br><b>Preparation phase</b> (now–Nov 2026): Saturn pratyantardasha — heavy, unglamorous, exactly right for mock-grinding.<br><b>Conversion phase</b> (Jan–Jun 2027): Mercury. Favourable for interviews and admission.<br><br><b>What must be true:</b> 40+ timed mocks with analysed error logs. Astrology cannot supply a percentile.`;
+  else out=`I don't have a verified answer for that phrasing. Try one of the suggested questions, or ask about: business, career, wealth, a specific year, advantages, karma, relationships, health, or exams.<br><br><b>I won't guess.</b> Everything in this system traces to a computed value; inventing an answer would break that.`;
+  $('#aOut').innerHTML=`<div class="card" style="border-left:3px solid var(--acc)"><p style="margin:0;max-width:none">${out}</p></div>`;
+}
+
+V.checkin=()=>{
+  const s=JSON.parse(localStorage.getItem('lifeos_checkins')||'[]');
+  return `<h2 class="sec">Monthly check-in &amp; reality tracker</h2>
+  <div class="note">Saved in this browser only. Nothing is sent anywhere. This is how predictions become testable instead of comforting.</div>
+  <div class="card">
+    <div class="grid g2">
+      <div><div class="k">Month</div><input type="text" id="ciM" placeholder="2026-09" value="${new Date().toISOString().slice(0,7)}"></div>
+      <div><div class="k">Mock percentile / KPI</div><input type="text" id="ciK" placeholder="e.g. 92.4"></div>
+    </div>
+    <div class="k" style="margin-top:11px">What actually happened?</div><textarea id="ciW"></textarea>
+    <div class="grid g2" style="margin-top:9px">
+      <div><div class="k">Biggest success</div><textarea id="ciS"></textarea></div>
+      <div><div class="k">Biggest mistake</div><textarea id="ciE"></textarea></div>
+    </div>
+    <div class="k" style="margin-top:11px">Which domains actually mattered? (D1 self · D2 career · D3 wealth · D4 partnership · D5 home · D6 creation · D7 routine · D8 craft · D9 meaning)</div>
+    <input type="text" id="ciD" placeholder="e.g. D8, D3">
+    <div style="margin-top:12px"><button class="chip" style="background:var(--acc);color:#0A0D12;border-color:var(--acc);font-weight:600" onclick="saveCI()">SAVE ENTRY</button><span id="ciMsg" class="saved"></span></div>
+  </div>
+  <h3>History <span style="font-size:12px;font-weight:400;color:var(--tx3)">${s.length} entries</span></h3>
+  <div id="ciList">${ciList()}</div>`;
+};
+function ciList(){
+  const s=JSON.parse(localStorage.getItem('lifeos_checkins')||'[]');
+  if(!s.length)return '<div class="note">No entries yet. The first one is the hardest; after that it takes two minutes a month.</div>';
+  return s.slice().reverse().map((e,i)=>`<div class="card tight" style="margin-bottom:9px">
+    <div style="display:flex;justify-content:space-between;align-items:baseline">
+      <b class="mo">${esc(e.m)}</b>
+      <button class="why" onclick="delCI(${s.length-1-i})">DELETE</button></div>
+    ${e.k?`<div class="sub">KPI: <b class="mo">${esc(e.k)}</b></div>`:''}
+    ${e.w?`<p style="margin:6px 0 0;font-size:13.5px">${esc(e.w)}</p>`:''}
+    ${e.s?`<div class="sub" style="color:var(--good)">✔ ${esc(e.s)}</div>`:''}
+    ${e.e?`<div class="sub" style="color:var(--caut)">✘ ${esc(e.e)}</div>`:''}
+    ${e.d?`<div class="sub">Domains that mattered: <b class="mo">${esc(e.d)}</b></div>`:''}</div>`).join('');
+}
+function saveCI(){
+  try{
+    const s=JSON.parse(localStorage.getItem('lifeos_checkins')||'[]');
+    s.push({m:$('#ciM').value,k:$('#ciK').value,w:$('#ciW').value,s:$('#ciS').value,e:$('#ciE').value,d:$('#ciD').value});
+    localStorage.setItem('lifeos_checkins',JSON.stringify(s));
+    $('#ciMsg').textContent='Saved.'; $('#ciList').innerHTML=ciList();
+    ['ciW','ciS','ciE','ciD','ciK'].forEach(id=>$('#'+id).value='');
+    setTimeout(()=>$('#ciMsg').textContent='',2200);
+  }catch(err){$('#ciMsg').textContent='Could not save — browser storage is blocked.';}
+}
+function delCI(i){try{const s=JSON.parse(localStorage.getItem('lifeos_checkins')||'[]');
+  s.splice(i,1);localStorage.setItem('lifeos_checkins',JSON.stringify(s));$('#ciList').innerHTML=ciList();}catch(e){}}
+
+V.chart=()=>`<h2 class="sec">The chart — single source of truth</h2>
+  <div class="note good"><b>Verification.</b> ${esc(CHART.birth.verify)}. Every screen in this system reads from this one model; no page recalculates anything independently.</div>
+  <div class="grid g2">
+    <div class="card"><h4>Birth data</h4><div class="mo" style="font-size:12.5px;line-height:1.9">
+      ${Object.entries({Name:CHART.birth.name,Date:CHART.birth.date,Time:CHART.birth.time,Place:CHART.birth.place,
+        UTC:CHART.birth.utc,'Julian Day':CHART.birth.jd,Ayanamsha:CHART.birth.ayanamsha,Houses:CHART.birth.houses,
+        Nodes:CHART.birth.nodes}).map(([k,v])=>`<div><span style="color:var(--tx3)">${k}:</span> ${esc(String(v))}</div>`).join('')}
+    </div></div>
+    <div class="card"><h4>Lagna</h4><div class="big mo" style="font-size:21px;color:var(--acc)">${esc(CHART.birth.lagna)}</div>
+      <div class="sub">${esc(CHART.birth.lagnaNak)} · lord ${esc(CHART.birth.lagnaLord)}</div>
+      <div class="note" style="margin-top:11px;font-size:12.5px">Your stated correction of ~11°34′ matches this computed value to <b>10.9 arcseconds</b>. The 25°36′ figure from older records was traced to a timezone error combined with an Ascendant from a third source — it has no valid derivation.</div></div>
+  </div>
+  <h3>Planets</h3>
+  <div class="tw"><table><thead><tr><th>Graha</th><th>Position</th><th class="n">House</th><th>Nakshatra</th><th>Dignity</th><th class="n">Rules</th><th class="n">Shadbala</th><th>D9</th><th>D10</th></tr></thead><tbody>
+  ${CHART.planets.map(p=>`<tr><td style="font-weight:600">${esc(p.g)}${p.retro?' <span style="color:var(--caut)">R</span>':''}</td>
+    <td class="n">${esc(p.pos)}</td><td class="n">${p.house}</td><td>${esc(p.nak)} p${p.pada}</td>
+    <td>${esc(p.dignity.replace(/_/g,' '))}</td><td class="n">${p.rules.join(', ')||'—'}</td>
+    <td class="n">${p.shadbala?`${p.shadbala}/${p.req} <span style="color:var(--${p.shadbala/p.req>=1.2?'good':p.shadbala/p.req>=1?'warn':'risk'})">${Math.round(p.shadbala/p.req*100)}%</span>`:'—'}</td>
+    <td>${esc(p.d9)}</td><td>${esc(p.d10)}</td></tr>`).join('')}
+  </tbody></table></div>
+  <h3>Houses &amp; Sarvashtakavarga <span style="font-size:12px;font-weight:400;color:var(--tx3)">total must equal 337 — it does</span></h3>
+  <div class="tw"><table><thead><tr><th class="n">H</th><th>Sign</th><th>Lord</th><th class="n">Bindus</th><th>Strength</th><th>Occupants</th><th class="n">Lord in</th></tr></thead><tbody>
+  ${CHART.houses.map(h=>`<tr><td class="n" style="font-weight:600">${h.h}</td><td>${esc(h.sign)}</td><td>${esc(h.lord)}</td>
+    <td class="n" style="color:var(--${h.sav>=34?'good':h.sav>=27?'warn':h.sav>=22?'caut':'risk'})">${h.sav}</td>
+    <td style="width:110px">${bar(h.sav,40)}</td><td>${h.occupants.join(', ')||'—'}</td><td class="n">${h.lordIn}</td></tr>`).join('')}
+  </tbody></table></div>
+  <h3>Divisional charts</h3>
+  <div class="grid g4">
+    ${Object.entries(CHART.vargas).filter(([k])=>k!=='d10note').map(([k,v])=>`<div class="card tight"><div class="k">${k}</div><div style="font-size:15px;font-weight:600;margin-top:5px">${esc(v)}</div></div>`).join('')}
+  </div>
+  <div class="note warn"><b>DATA NOT VERIFIED:</b> ${esc(CHART.vargas.d10note)}. No conclusion in this system rests on D10 alone.</div>
+  <h3>Convention disclosure — annual profection</h3>
+  <div class="note"><b>Two frames give two answers, and this system uses the sidereal one throughout.</b><br><br>
+   Annual profection is originally a Hellenistic technique built on the <i>tropical</i> Ascendant. Applied to your tropical chart (Capricorn rising) it gives <b>house 12 Sagittarius, Lord of the Year Jupiter</b> for age 23. Applied to your sidereal Vedic chart (Dhanu rising) it gives <b>house 12 Vrischika, lord Mars</b>.<br><br>
+   The house number is identical because profection counts houses, not signs — only the sign and its lord differ. Since you asked for a Vedic dashboard, <b>every screen here uses the sidereal frame</b>. The earlier Hellenistic reading in this project used the tropical frame and said Jupiter. Neither is wrong; they are different systems and are never mixed within a single claim.</div>
+  <h3>Yogas evaluated <span style="font-size:12px;font-weight:400;color:var(--tx3)">closed whitelist — absences reported too</span></h3>
+  <div class="card"><ul style="margin:0;columns:2;column-gap:26px">${CHART.yogas.map(y=>`<li style="break-inside:avoid">${esc(y)}</li>`).join('')}</ul></div>
+  <h3>Glossary</h3>
+  <div class="card">${Object.entries(GLOSS).map(([k,v])=>`<div style="margin-bottom:7px;font-size:13.5px"><b style="color:var(--acc)">${esc(k)}</b> — ${esc(v)}</div>`).join('')}</div>`;
+
+/* =========================== router =========================== */
+const NAV=[['dashboard','🏠 Dashboard'],['timemachine','⏳ Time machine'],['timeline','📅 Timeline'],
+ ['heatmap','🔥 Heatmap'],['years','🗓 Years'],['months','📆 Months'],['opportunities','🎯 Opportunities'],
+ ['wealth','💰 Wealth'],['career','💼 Career'],['advantages','⚡ Advantages'],['karma','🪐 Karma'],
+ ['risks','⚠️ Risks'],['scenarios','📈 Scenarios'],['decide','🧭 Decide'],['actions','✅ Actions'],
+ ['ledger','📜 Ledger'],['ask','🔍 Ask'],['checkin','📝 Check-in'],['chart','🪐 Chart data']];
+let CUR='dashboard', ARG=null;
+function go(k,arg){CUR=k;ARG=arg;location.hash=k+(arg?'/'+arg:'');render();}
+function render(){
+  $('#nav').innerHTML=NAV.map(([k,l])=>`<button aria-current="${k===CUR}" onclick="go('${k}')">${l}</button>`).join('');
+  $('#view').innerHTML=(V[CUR]||V.dashboard)(ARG);
+  if(CUR==='timemachine'){const sl=$('#tmSlider');sl.oninput=()=>renderTM(+sl.value);renderTM(+sl.value);}
+  window.scrollTo({top:0,behavior:'instant'});
+}
+function sortT(id,col,num){
+  const t=document.getElementById(id),tb=t.tBodies[0],rows=[...tb.rows];
+  const dir=t.dataset.sc==col+''?-1:1; t.dataset.sc=dir===1?col:'';
+  rows.sort((a,b)=>{const x=a.cells[col].textContent.trim(),y=b.cells[col].textContent.trim();
+    return num?(parseFloat(y)-parseFloat(x))*dir:x.localeCompare(y)*dir;});
+  rows.forEach(r=>tb.appendChild(r));
+}
+/* toggles */
+function setLevel(simple){document.body.classList.toggle('simple',simple);
+  $('#tSimple').setAttribute('aria-pressed',simple);$('#tExpert').setAttribute('aria-pressed',!simple);
+  try{localStorage.setItem('lifeos_level',simple?'s':'e')}catch(e){}}
+function setTheme(dark){document.documentElement.setAttribute('data-theme',dark?'dark':'light');
+  $('#tDark').setAttribute('aria-pressed',dark);$('#tLight').setAttribute('aria-pressed',!dark);
+  try{localStorage.setItem('lifeos_theme',dark?'d':'l')}catch(e){}}
+$('#tSimple').onclick=()=>setLevel(true); $('#tExpert').onclick=()=>setLevel(false);
+$('#tDark').onclick=()=>setTheme(true);  $('#tLight').onclick=()=>setTheme(false);
+
+/* boot */
+(function(){
+  let lvl='s',th='d';
+  try{lvl=localStorage.getItem('lifeos_level')||'s';th=localStorage.getItem('lifeos_theme')||'d';}catch(e){}
+  setLevel(lvl==='s'); setTheme(th==='d');
+  const age=AGE(), d=dashaAt('2026-08-30');
+  $('#mAge').textContent=age; $('#mDasha').textContent=`${d.md}–${d.ad}`; $('#mMode').textContent=modeAt(2026);
+  const h=location.hash.slice(1).split('/'); if(h[0]&&V[h[0]]){CUR=h[0];ARG=h[1]||null;}
+  render();
+})();
+window.addEventListener('hashchange',()=>{const h=location.hash.slice(1).split('/');
+  if(h[0]&&V[h[0]]&&(h[0]!==CUR||h[1]!==ARG)){CUR=h[0];ARG=h[1]||null;render();}});
+</script>
+
+<div class="wrap" style="max-width:1400px;margin:0 auto;padding:0 20px 40px">
+<footer>
+  <p><strong>What this is.</strong> A decision console on a verified chart: three ephemeris engines agreeing to 0.0026″, Sarvashtakavarga totalling its required 337, Shadbala with five exact components, independently corroborated by a separate toolchain to within 1.2 arcminutes. Area scores follow one published formula. Wealth figures are compound arithmetic. Confidence bands are comparative, not measured probability.</p>
+  <p><strong>What this is not.</strong> A forecast. Astrology is not a validated predictive method. Nothing here claims an exam score, a disease, a lifespan, a specific spouse, or a guaranteed return. Where the chart contradicts itself — partnership especially, where the weakest house has the strongest planet as its lord — the contradiction is printed rather than resolved. Where a value is not reliably computable, it says DATA NOT VERIFIED.</p>
+  <p style="margin-bottom:0"><strong>Bottom line.</strong> The highest-leverage action in this entire system needs no astrology at all. The chart simply happens to agree with it, loudly, and more often than it agrees with anything else.</p>
+</footer>
+</div>

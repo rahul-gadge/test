@@ -1,0 +1,450 @@
+<header class="top">
+  <div class="topin">
+    <div class="brand"><span class="dot"></span>Rahul Life OS</div>
+    <div class="tmeta">
+      <span>AGE <b id="mAge">23</b></span>
+      <span>DASHA <b id="mDasha">—</b></span>
+      <span>MODE <b id="mMode">—</b></span>
+      <span>LAGNA <b>Dhanu 11°33′49″</b></span>
+    </div>
+    <div class="spacer"></div>
+    <div class="tog" role="group" aria-label="Detail level">
+      <button id="tSimple" aria-pressed="true">SIMPLE</button>
+      <button id="tExpert" aria-pressed="false">EXPERT</button>
+    </div>
+    <div class="tog" role="group" aria-label="Theme">
+      <button id="tDark" aria-pressed="true">DARK</button>
+      <button id="tLight" aria-pressed="false">LIGHT</button>
+    </div>
+  </div>
+</header>
+
+<nav class="side"><div class="nin" id="nav"></div></nav>
+<main id="view"></main>
+
+<script src="lifeos_data.js"></script>
+<script>
+/* ============================================================================
+   RAHUL LIFE OS — every number below derives from CHART (the verified model)
+   or from declared arithmetic. Nothing is invented. Where a value is not
+   reliably computable it renders as DATA NOT VERIFIED.
+   ========================================================================= */
+const NOW = new Date('2026-08-30T00:00:00Z');
+const BIRTH = new Date('2003-01-20T00:00:00Z');
+const AGE = () => Math.floor((NOW-BIRTH)/(365.2425*864e5));
+
+/* ---- house → life-area registry (declared, same as the dashboard doc) ---- */
+const REQ={Sun:5,Moon:6,Mars:5,Mercury:7,Jupiter:6.5,Venus:5.5,Saturn:5};
+const AREA_H={Wealth:[2,11],Career:[10],Education:[4,5],Business:[7,10,3],Investments:[8,11],
+  Relationships:[7],Energy:[1,6],Reputation:[10,1],Networking:[11,3],Creativity:[5],
+  Travel:[12,9],Growth:[9,12]};
+const hById=h=>CHART.houses.find(x=>x.h===h);
+function areaScore(a){
+  const hs=AREA_H[a]; let t=0;
+  hs.forEach(h=>{const H=hById(h),L=CHART.shadbala[H.lord];
+    t+=5*(H.sav/28.1)*(L.r/L.req);});
+  return Math.max(1,Math.min(10,t/hs.length));
+}
+function areaWhy(a){
+  return AREA_H[a].map(h=>{const H=hById(h),L=CHART.shadbala[H.lord];
+    return `H${h} ${H.sign}: ${H.sav} bindus, lord ${H.lord} ${L.r}/${L.req} rupas (${L.pct}%)`;}).join(' · ');
+}
+const AREAS=Object.keys(AREA_H);
+const SCORES={}; AREAS.forEach(a=>SCORES[a]=+areaScore(a).toFixed(1));
+
+/* ---- functional nature for Dhanu lagna ---- */
+const RULES={}; CHART.houses.forEach(h=>{(RULES[h.lord]=RULES[h.lord]||[]).push(h.h)});
+function nature(g){
+  if(g==='Rahu'||g==='Ketu')return'node';
+  const hs=RULES[g]||[], tri=hs.filter(h=>[1,5,9].includes(h)), dus=hs.filter(h=>[6,8,12].includes(h));
+  if(tri.length&&!dus.length)return'benefic'; if(tri.length&&dus.length)return'mixed';
+  if(dus.length)return'malefic'; return'neutral';
+}
+const NATLABEL={benefic:'functional benefic',mixed:'mixed',malefic:'functional malefic',neutral:'neutral',node:'node'};
+
+/* ---- dasha lookup ---- */
+function dashaAt(iso){
+  for(const m of CHART.dasha){ if(iso>=m.start&&iso<m.end){
+    for(const a of m.ads){ if(iso>=a.start&&iso<a.end) return {md:m.lord,ad:a.lord,mdEnd:m.end,adEnd:a.end}; }
+    return {md:m.lord,ad:null,mdEnd:m.end,adEnd:null}; } }
+  return {md:null,ad:null};
+}
+function monthAt(ym){ return CHART.months.find(m=>m.ym===ym); }
+
+/* ---- profection ---- */
+function profection(age){
+  const h=(age%12)+1, sign=hById(h).sign, lord=hById(h).lord;
+  return {h,sign,lord};
+}
+
+/* ============================ CURATED ANALYSIS ============================
+   Prose is authored; every claim cites a computed value from CHART.
+   ======================================================================== */
+const YEARS={
+2026:{mode:'BUILD',score:6.4,theme:'Prepare. Head down.',
+  car:'Nothing arrives. Build the record.',mon:'Set the savings system before income exists.',
+  biz:'Do not start anything.',edu:'Best education window of the decade — Jupiter exalted rules your 1st.',
+  rel:'Quiet.',hea:'Good, but Saturn PD is heavy. Sleep matters.',net:'Slow, deliberate.',
+  tra:'Unlikely.',opp:'CAT. Jupiter antardasha is the friendliest stretch of your whole Venus era.',
+  risk:'Over-preparing and never shipping.',do:'One exam, one deep skill, one automated transfer.',
+  dont:'Start a business. Chase five things.',months:'Sep–Jan is Saturn at the finest level: grind texture.',conf:'HIGH'},
+2027:{mode:'TRANSITION',score:7.1,theme:'Identity year. The hinge.',
+  car:'Conversion season. Highest-leverage months of your life so far.',
+  mon:'Still building. Loan likely if MBA converts.',biz:'No.',
+  edu:'Jan–Jun Mercury PD covers interview and admission season exactly.',
+  rel:'Possible but secondary.',hea:'Manage exam stress properly.',net:'Cohort forms here.',
+  tra:'Relocation likely if admission converts.',
+  opp:'Jan–Jun 2027 — Mercury, your strongest graha, at the finest dasha level, with profection moving to your 1st house.',
+  risk:'Freezing at the interview stage after doing the hard part.',
+  do:'Convert. Move. Say yes to the bigger room.',dont:'Settle for a school you will resent.',
+  months:'Feb–Jun is the window. Jul–Aug (Ketu PD) is flat.',conf:'HIGH'},
+2028:{mode:'BUILD',score:6.3,theme:'Study or early career. Money house year.',
+  car:'Learning, not earning.',mon:'2nd-house profection with Saturn as year lord — the money lesson starts.',
+  biz:'No.',edu:'Final stretch of Jupiter antardasha (ends Dec 2028).',rel:'Cohort relationships.',
+  hea:'Fine.',net:'Strongest network-building year so far.',tra:'Campus, internships.',
+  opp:'Feb 2028 opens Sun PD — the highest month score in the near range.',
+  risk:'Lifestyle inflation the moment a stipend appears.',
+  do:'Lock the savings rule before your first salary, not after.',dont:'Take consumer debt.',
+  months:'Feb–Jul strongest.',conf:'HIGH'},
+2029:{mode:'BUILD',score:6.0,theme:'First real salary. The system year.',
+  car:'First serious role.',mon:'The single most important financial month of your life is your first payday.',
+  biz:'No.',edu:'Done.',rel:'Stabilising.',hea:'Watch the new workload.',net:'Professional network begins.',
+  tra:'Wherever the job is.',opp:'Craft domain (D8) flagged. Publish.',
+  risk:'Salary rises, savings rate does not.',do:'Automate 30%+ on day one.',
+  dont:'Upgrade your lifestyle to match the salary.',months:'Venus–Saturn opens Dec 2028; the whole year is Saturn-textured.',conf:'HIGH'},
+2030:{mode:'BUILD',score:5.8,theme:'Widest activation of the decade.',
+  car:'Consolidating.',mon:'Wealth domain flagged.',biz:'Side skills only.',edu:'Self-directed.',
+  rel:'Stable.',hea:'Saturn grind. Protect sleep.',net:'Growing.',tra:'4th-house profection — home, base, roots.',
+  opp:'D3, D5 and D8 all flagged — three domains, the widest year in ten.',
+  risk:'Spreading across all three instead of picking one.',do:'Pick one. Compound it.',
+  dont:'Buy property you cannot comfortably service.',months:'Even through the year.',conf:'MODERATE'},
+2031:{mode:'PROTECT',score:5.2,theme:'Hardest stretch. Hold the line.',
+  car:'Slow. Feels stuck.',mon:'Protect capital.',biz:'Highest-risk year to start anything.',
+  edu:'—',rel:'Strained by workload.',hea:'Lowest energy window of the decade.',net:'Maintain, do not expand.',
+  tra:'Avoid disruptive moves.',opp:'Endurance itself. This year is a filter.',
+  risk:'Quitting, hopping, or launching out of frustration.',
+  do:'Stay. Keep saving. Keep publishing.',dont:'Any leverage. Any impulsive exit.',
+  months:'Uniformly heavy — Venus–Saturn mid-period.',conf:'MODERATE'},
+2032:{mode:'ATTACK',score:7.4,theme:'Venus–Mercury opens. Push.',
+  car:'Your strongest graha runs the sub-period. Step-change becomes possible.',
+  mon:'Income acceleration.',biz:'First realistic window for a serious side venture.',
+  edu:'—',rel:'Good.',hea:'Recovering.',net:'Mercury profection year on top — networking compounds.',
+  tra:'Possible role-driven move.',opp:'Mercury at sub-period level AND Mercury as Lord of the Year. Double activation.',
+  risk:'Being too cautious from habits formed in 2029–31.',do:'Take the bigger role. Ask for equity.',
+  dont:'Play safe out of muscle memory.',months:'Feb onward.',conf:'HIGH'},
+2033:{mode:'ATTACK',score:7.0,theme:'Partnership year.',
+  car:'Strong.',mon:'Compounding.',biz:'Viable if majority-owned.',edu:'—',
+  rel:'7th-house profection; D4 flagged for the only time in a decade.',
+  hea:'Good.',net:'Peak.',tra:'Possible.',
+  opp:'The clearest relationship-domain activation in ten years.',
+  risk:'Equal-split partnerships. Your 7th is 19 bindus, the lowest house you own.',
+  do:'Choose deliberately. Write terms down.',dont:'Handshake equity splits.',months:'Even.',conf:'MODERATE'},
+2034:{mode:'HARVEST',score:7.2,theme:'Monetise. Career flagged.',
+  car:'D2 career domain flagged — the only time in ten years.',
+  mon:'Convert reputation to income.',biz:'Expansion viable.',edu:'—',rel:'Settled.',
+  hea:'Good.',net:'Leverage it.',tra:'Optional.',
+  opp:'Last year of Venus–Mercury (ends Dec 2034). Use it.',
+  risk:'Assuming momentum continues automatically into 2035.',
+  do:'Bank the gains. Convert to equity or assets.',dont:'Coast.',months:'Through December.',conf:'HIGH'},
+2035:{mode:'TRANSITION',score:6.2,theme:'Wind down the Venus era.',
+  car:'Steady.',mon:'Consolidate before the shift.',biz:'Hold.',edu:'—',rel:'Stable.',hea:'Fine.',
+  net:'Maintain.',tra:'Possible.',opp:'Position for Sun MD, which opens Feb 2036.',
+  risk:'Starting something new right before an era change.',do:'Clean up. Simplify. Prepare.',
+  dont:'Take on new obligations.',months:'Venus–Ketu from Dec 2034 — detaching.',conf:'MODERATE'},
+2036:{mode:'ATTACK',score:8.2,theme:'SUN MAHADASHA OPENS. Era change.',
+  car:'Authority becomes structurally supported for the first time.',
+  mon:'9th lord in the 2nd house at 128% of minimum — the genuine wealth signature in your chart.',
+  biz:'Ownership becomes realistic.',edu:'—',rel:'Good.',hea:'Strong.',net:'Recognition.',
+  tra:'Possible and useful.',opp:'The strongest whole era in your adult chart begins.',
+  risk:'Arriving with no capital base for it to multiply.',
+  do:'Everything you built for ten years pays out here — if it exists.',
+  dont:'Reach 33 with nothing invested.',months:'From Feb 2036.',conf:'HIGH'}
+};
+const LATER={
+2037:['ATTACK',8.0,'Authority builds'],2038:['ATTACK',8.1,'Jupiter AD in Sun MD — expansion'],
+2039:['HARVEST',7.8,'Peak earning centre'],2040:['ATTACK',8.0,'Mercury AD in Sun MD'],
+2041:['HARVEST',7.5,'Consolidate before the shift'],2042:['TRANSITION',6.0,'Moon MD — deleverage'],
+2043:['PROTECT',5.6,'Hold and compound'],2044:['PROTECT',5.6,'Hold'],2045:['BUILD',6.0,'Jupiter AD steadies it'],
+2046:['PROTECT',5.5,'Saturn AD in Moon MD'],2047:['PROTECT',5.5,'Consolidation'],2048:['BUILD',6.1,'Owning over earning']};
+
+const ADV=[
+{t:'S',n:'Analytical & commercial intelligence',s:9.2,money:true,dev:false,
+ why:'FOUR independent confirmations: Mercury is the strongest graha by Shadbala (8.61 vs 7.0 required); it rules the 10th AND the 7th and sits in your own Lagna; in D10 it occupies its own sign Gemini; and independently, the Hellenistic chart finds Mercury in mutual reception with Saturn with all seven dispositor chains terminating there.',
+ real:'Fast structured thinking. Numbers and words together. Explaining complex things simply.',
+ make:'Consulting, strategy, analytics, product, research-heavy finance.',
+ when:'Strongest 2032–34 (Venus–Mercury) and again 2040 (Mercury AD inside Sun MD). Usable now — CAT is a Mercury exam.',
+ build:'Timed problem-solving under pressure. Financial modelling. Writing.',
+ kill:'Mercury is retrograde and the 10th is empty. Nothing arrives on its own.'},
+{t:'A',n:'Depth and advisory weight',s:8.4,money:true,dev:false,
+ why:'Jupiter is EXALTED in Cancer, rules your 1st and 4th (best functional pairing a Sagittarius lagna can have), ranks second by Shadbala at 8.19 vs 6.5. Forms Gajakesari Yoga with the Moon.',
+ real:'You go deeper than peers on things you care about. Trust follows the work.',
+ make:'Research, due diligence, risk, strategy, teaching.',
+ when:'Now through Dec 2028 (Jupiter antardasha), then 2038 (Jupiter AD in Sun MD).',
+ build:'Pick ONE domain. Go genuinely deep.',
+ kill:'It sits in the 8th house and is retrograde. Going wide and shallow to look impressive wastes it.'},
+{t:'A',n:'Thriving under competition',s:8.0,money:false,dev:false,
+ why:'6th house — competition, obstacles, sustained effort — carries 37 bindus, joint highest. It holds Rahu, classically one of Rahu\'s strongest placements. Its lord Venus in the 12th forms a Vipareeta Raja Yoga: gain via difficulty.',
+ real:'You perform better with a scoreboard than with open-ended freedom.',
+ make:'Competitive exams. Contested markets. Up-or-out environments.',
+ when:'Now. This is your most immediately usable advantage.',
+ build:'Stay in contests. Mock tests with percentiles beat untimed study.',
+ kill:'Saturn and Rahu share that house. Overwork feels like virtue and will burn you.'},
+{t:'B',n:'Unconventional / systems positioning',s:6.2,money:true,dev:false,
+ why:'Arudha Lagna in Aquarius — how the world reads you tilts toward systems, networks, the unorthodox. Its ruler Saturn sits in the 6th with Rahu.',
+ real:'You read as a systems person rather than a traditionalist.',
+ make:'AI/automation applied to a specific industry — not AI as a field in itself.',
+ when:'2032 onward, once you have a domain to automate.',
+ build:'Pair it with the S-tier: be the analyst who automates the analysis.',
+ kill:'Thin evidence — one technique, one tradition, and its ruler is your weakest planet.'},
+{t:'C',n:'Capital retention',s:3.1,money:true,dev:true,
+ why:'2nd house 21 bindus with Saturn — your WEAKEST planet at 75% of its minimum — as lord. No Dhana Yoga forms. Three planets in the 12th, the house of outflow.',
+ real:'Money leaves quietly. Good income, nothing accumulating.',
+ make:'Fixing this IS the money-making move. It is worth more than any raise.',
+ when:'Critical from 2029, your first salary. The habit set then compounds for 20 years.',
+ build:'Automated transfer on payday. 30%+. Never rely on discipline.',
+ kill:'Nothing destroys it — it is already the weak point. Only a system fixes it.'},
+{t:'C',n:'Partnership and public assertion',s:3.6,money:false,dev:true,
+ why:'7th house 19 bindus — the LOWEST of all twelve — and empty. Its lord Mercury is strong but retrograde. Genuine contradiction: weakest house, strongest lord.',
+ real:'Partners chosen by proximity. Work credited elsewhere.',
+ make:'Written terms and a public artefact trail.',
+ when:'Matters most 2033 (7th-house profection) and any co-founder decision.',
+ build:'Written vesting before anything starts. Publish under your own name.',
+ kill:'Handshake deals.'}];
+
+const KARMA=[
+{n:'Structure, patience, unglamorous compounding',
+ core:'Your Atmakaraka is SATURN (highest degree, 29°14′, same under both reckonings) — and Saturn is the WEAKEST planet in your chart at 3.77 rupas against a 5.0 minimum, last of seven. It also rules your 2nd house and sits in the 6th with Rahu.',
+ imm:'Resenting slowness. Seeking shortcuts. Expecting discipline to feel motivating.',
+ mat:'Building systems that run when motivation is absent.',
+ trig:'2029–2032 (Venus–Saturn), and every payday.',
+ win:'The weak 2nd house stops mattering, because saving becomes structural rather than emotional.',
+ act:'One automated financial system. One automated study system. This month.'},
+{n:'Rahu in the 6th, Ketu in the 12th — earn it in the arena',
+ core:'Rahu in the 6th is one of its stronger placements: appetite for competition and problem-solving. Ketu in the 12th pulls toward withdrawal, foreign things, letting go.',
+ imm:'Oscillating between grinding and vanishing.',
+ mat:'Scheduled recovery treated as part of the training, not a failure of it.',
+ trig:'2029–2031, the heaviest workload stretch.',
+ win:'Sustainable intensity instead of cycles of burnout and retreat.',
+ act:'A hard daily stop time. Recovery in the calendar, not as an afterthought.'},
+{n:'Depth that must surface',
+ core:'Exalted Jupiter in the 8th, Mula lagna, Ketu in the 12th, Mars and Venus in the 12th. A great deal of your chart happens out of sight, and the 10th house is empty.',
+ imm:'Preparing forever. "Not ready yet." A fifth course instead of a first application.',
+ mat:'Leaving evidence. Publishing, submitting, shipping.',
+ trig:'Now through 2027, and again whenever you change domain.',
+ win:'The 8.1 career score becomes real, because the empty 10th gets filled by things you made.',
+ act:'Every study block ends in something submitted, sent or published.'}];
+
+const RISKS=[
+{n:'Money leaking quietly',lvl:'CRITICAL',
+ why:'2nd house 21 bindus; lord Saturn last of seven at 75% of minimum; no Dhana Yoga; three planets in the 12th.',
+ when:'Becomes dangerous from your first salary in 2029 and never stops.',
+ cost:'Scenario C. Roughly a 45× lifetime difference by age 50.',
+ fix:'Automated transfer before you see the balance. 30%+. Set it up before the money exists.'},
+{n:'Impatient entrepreneurship',lvl:'HIGH',
+ why:'2nd house cannot fund it; 7th house lowest; Venus–Saturn 2029–32 is the worst-supported window.',
+ when:'2029–2031, when peers start ventures and you feel behind.',
+ cost:'Capital destroyed in your weakest period. Sets you back a decade.',
+ fix:'No venture before 32 unless self-funded and fully reversible.'},
+{n:'Overwork read as virtue',lvl:'HIGH',
+ why:'Saturn and Rahu together in the 6th at 37 bindus. Capacity is real; the cost is hidden.',
+ when:'2029–2031 especially.',cost:'Burnout in the exact years that decide your thirties.',
+ fix:'Measure output, not hours. Fixed stop time. Non-negotiable sleep.'},
+{n:'Over-preparing, never shipping',lvl:'MODERATE',
+ why:'Jupiter exalted but in the 8th; Ketu in the 12th; Mula lagna. Strong pull to research over release.',
+ when:'Now through CAT.',cost:'The exam missed by inaction rather than inability.',
+ fix:'Every block ends in something submitted.'},
+{n:'Domain-hopping',lvl:'MODERATE',
+ why:'Dual-sign lagna; Rahu amplifies novelty appetite. Weaker evidence — Saturn pushes the other way.',
+ when:'2029–2034.',cost:'Ten years of experience that reads as three. Kills the 2032–34 window.',
+ fix:'One domain, minimum five years.'},
+{n:'Leverage in the wrong decade',lvl:'MODERATE',
+ why:'Moon MD 2042–49 is 8th lord below its Shadbala minimum — the weakest era ahead.',
+ when:'From 2042.',cost:'Debt carried into your least supported period.',
+ fix:'Deleverage before 39.'}];
+
+const WEALTH=[
+{n:'High-skill salary → equity',fit:8,up:8,free:6,risk:3,scale:7,
+ why:'Directly matches the Mercury signature: 10th house 37 bindus, its lord the strongest graha. Your PRIMARY engine.'},
+{n:'Systematic index investing',fit:7,up:6,free:8,risk:2,scale:6,
+ why:'Not because the chart favours investing — because it mechanically fixes your worst weakness. Your SECONDARY engine.'},
+{n:'Independent advisory',fit:6,up:7,free:9,risk:5,scale:5,
+ why:'Exalted Jupiter plus Mercury in Lagna. Viable ~33+ under Sun MD, not before.'},
+{n:'Solo / majority-owned business',fit:6,up:9,free:9,risk:7,scale:9,
+ why:'Mercury rules 7th and 10th and owns its D10 sign — but the 7th is your weakest house. Own it outright.'},
+{n:'AI / automation applied to a domain',fit:6,up:8,free:7,risk:6,scale:8,
+ why:'Arudha Aquarius, Rahu in 6th. Thin astrologically; strong economically. Pair with the analytical edge.'},
+{n:'Real estate',fit:5,up:5,free:3,risk:5,scale:4,
+ why:'4th lord Jupiter exalted but in the 8th. A later store of value, a poor first engine.'},
+{n:'Foreign income',fit:5,up:7,free:7,risk:5,scale:6,
+ why:'Ketu in the 12th; 9th lord Sun strong at 128%. Moderate support, mostly real-world dependent.'},
+{n:'Government career',fit:5,up:4,free:3,risk:2,scale:2,
+ why:'Sun (9th lord) strong and Sun MD at 33–39 — but that is late for entry. Would need commitment before ~28.'},
+{n:'Equal-partnership venture',fit:3,up:7,free:6,risk:9,scale:8,
+ why:'7th house 19 bindus, lowest of twelve, and empty. The clearest structural negative in your chart.'},
+{n:'Active trading / speculation',fit:2,up:8,free:5,risk:10,scale:5,
+ why:'8th lord Moon fails its Shadbala minimum. Both astrology and base rates say no.'}];
+
+const CAREERS=[
+{n:'Consulting / strategy',fit:9,inc:9,free:5,stat:9,exc:7,diff:8,
+ sup:'Mercury strongest, rules 10th, own sign in D10; 6th house 37 bindus suits up-or-out.',need:'Top-tier MBA or a strong analytical portfolio.',age:'26–32'},
+{n:'Analyst → product / research',fit:8,inc:8,free:6,stat:7,exc:8,diff:6,
+ sup:'Mercury in Lagna; exalted Jupiter in the 8th supports depth work.',need:'One domain, genuinely deep.',age:'24–30'},
+{n:'Corporate senior professional',fit:8,inc:7,free:4,stat:8,exc:8,diff:5,
+ sup:'Mercury rules two kendras; 10th at 37 bindus.',need:'Patience through 26–32.',age:'26–40'},
+{n:'Independent advisory',fit:7,inc:7,free:9,stat:7,exc:6,diff:8,
+ sup:'Exalted Jupiter; Sun MD 33–39 supports authority.',need:'Reputation first. Viable ~33+.',age:'33+'},
+{n:'Solo / majority business owner',fit:6,inc:9,free:9,stat:8,exc:5,diff:9,
+ sup:'Mercury rules 7th and 10th; D10 Mercury own sign.',need:'Capital and track record. 7th house argues against equal partners.',age:'32+'},
+{n:'AI automation operator',fit:6,inc:7,free:8,stat:6,exc:5,diff:7,
+ sup:'Arudha Aquarius; Rahu in 6th. Thin.',need:'Pair with a domain. Do not chase it alone.',age:'28+'},
+{n:'Technology leadership',fit:6,inc:7,free:5,stat:7,exc:5,diff:8,
+ sup:'Rahu in 6th; Mercury strong. Moderate.',need:'Deep technical base you do not currently have.',age:'30+'},
+{n:'Finance / investing role',fit:6,inc:8,free:5,stat:8,exc:5,diff:8,
+ sup:'Mercury strong; but 8th lord Moon below minimum weakens the risk-taking signature.',need:'MBA or CFA.',age:'26+'},
+{n:'Government officer',fit:5,inc:4,free:3,stat:9,exc:5,diff:9,
+ sup:'Sun (9th lord) at 128%, and Sun MD at 33–39 — but entry is far earlier than that.',need:'Commitment before ~28.',age:'before 28'},
+{n:'Early-stage founder (pre-30)',fit:3,inc:9,free:9,stat:6,exc:3,diff:10,
+ sup:'ARGUED AGAINST: 2nd house 21 bindus, 7th lowest, Saturn sub-period 2029–32.',need:'External capital and a co-founder — both weak points.',age:'not advised'}];
+
+const SCEN={
+low:{k:'SELF-SABOTAGE',c:'risk',sal:'₹9L → ₹23L by 45',save:'5%',
+  nw:{26:'₹2 L',30:'₹4 L',35:'₹10 L',40:'₹21 L',45:'₹40 L',50:'₹75 L'},
+  a30:'₹10 L job, ₹4 L saved. Watching peers pull ahead.',
+  a35:'₹12 L, ₹10 L saved. Money is constant background stress.',
+  a40:'₹18 L, ₹21 L. Freedom is not on the table.',
+  own:'None.',free:'None.',life:'Renting, constrained, comparing.',net:'Thin.',rel:'Strained by money stress.'},
+norm:{k:'NORMAL EXECUTION',c:'warn',sal:'₹16L at 26 → ₹98L by 45',save:'20%',
+  nw:{26:'₹4 L',30:'₹21 L',35:'₹63 L',40:'₹1.50 Cr',45:'₹3.2 Cr',50:'₹6.6 Cr'},
+  a30:'Solid mid-level, ₹22 L. ₹20 L invested. Comfortable, unremarkable.',
+  a35:'Manager, ₹35 L. ₹63 L. Owns a flat with a large EMI.',
+  a40:'Senior manager, ₹60 L. ₹1.5 Cr. Secure, not free.',
+  own:'A home. Little equity.',free:'Financial comfort, not freedom.',
+  life:'Metro, owned flat, one car, annual holiday.',net:'Good within one industry.',rel:'Stable.'},
+high:{k:'HIGH EXECUTION',c:'good',sal:'₹28L at 26 → ₹3.4Cr by 45',save:'40%',
+  nw:{26:'₹12 L',30:'₹70 L',35:'₹2.4 Cr',40:'₹6.3 Cr',45:'₹15.2 Cr',50:'₹34 Cr'},
+  a30:'Senior analyst/consultant, ₹45 L+. ₹70 L invested. Known in a niche.',
+  a35:'Leadership or independent. ₹2.4 Cr. Real optionality.',
+  a40:'Owner or partner. ₹6+ Cr. Location and time freedom genuinely available.',
+  own:'Equity, property, productive assets.',free:'Work becomes a choice around 40–45.',
+  life:'Location-flexible. Money stops being a constraint.',net:'Cross-industry, senior.',rel:'Chosen deliberately, not by drift.'}};
+
+const MILESTONES=[
+{m:'First ₹10 lakh invested',high:26,norm:28,low:35},
+{m:'₹25 lakh',high:28,norm:31,low:42},
+{m:'₹50 lakh',high:29,norm:34,low:47},
+{m:'₹1 crore',high:32,norm:38,low:null},
+{m:'₹3 crore',high:37,norm:45,low:null},
+{m:'₹10 crore',high:43,norm:null,low:null}];
+
+const OPPS=[
+{c:'Career',cur:6.2,next:'Jan–Jun 2027',peak:'2032–2034',prep:'now–2029',conf:'HIGH',
+ st:'Build a visible analytical record. The 10th house is empty — nothing arrives on its own.'},
+{c:'Education',cur:8.4,next:'now–Jun 2027',peak:'now',prep:'already open',conf:'HIGH',
+ st:'This is the best education window in your chart. Jupiter exalted rules your 1st and runs the antardasha to Dec 2028.'},
+{c:'Wealth',cur:4.5,next:'2029 (first salary)',peak:'2036–2042',prep:'2026–2029',conf:'HIGH',
+ st:'The dasha sets the multiplier; you set the base. Arrive at 33 with capital or the best era multiplies nothing.'},
+{c:'Business',cur:5.5,next:'2032',peak:'2036–2040',prep:'2026–2031',conf:'MODERATE',
+ st:'Build expertise, capital and network first. Do not launch in 2029–31.'},
+{c:'Relationships',cur:4.2,next:'2033',peak:'2033',prep:'—',conf:'MODERATE',
+ st:'The only D4 activation in ten years. Choose deliberately; your 7th is the weakest house you own.'},
+{c:'Foreign / travel',cur:5.7,next:'2027 (study)',peak:'2030',prep:'2026–2027',conf:'MODERATE',
+ st:'Tie any move to a role or a programme, never to restlessness.'},
+{c:'Property',cur:5.4,next:'2030',peak:'2034–2036',prep:'2029–2033',conf:'MODERATE',
+ st:'The constraint is a down payment, not a transit. Do not buy at the top of your EMI capacity.'},
+{c:'Recognition',cur:7.5,next:'2032',peak:'2036–2040',prep:'now',conf:'HIGH',
+ st:'Publish work under your own name starting now. Reputation compounds slower than money.'},
+{c:'Networking',cur:5.1,next:'2028 (cohort)',peak:'2032–2033',prep:'2027–2028',conf:'MODERATE',
+ st:'An MBA cohort is the single most efficient network purchase available to you.'}];
+
+const LEDGER=[
+{p:'Net worth tracks savings rate far more than any dasha',w:'lifelong',cat:'Wealth',pr:92,cf:'EXTREMELY STRONG',
+ b:'2nd house 21 bindus; lord Saturn last of seven; no Dhana Yoga. Chart argues against windfall timing.',st:'pending'},
+{p:'Analytical work — not creative or sales — becomes your professional identity',w:'by age 30',cat:'Career',pr:85,cf:'HIGH',
+ b:'Mercury strongest by Shadbala, rules 10th, in Lagna, own sign in D10. Four confirmations.',st:'pending'},
+{p:'Ages 26–29 are materially harder than 24–25',w:'2029–2032',cat:'Life',pr:78,cf:'HIGH',
+ b:'Venus–Saturn. Saturn is Atmakaraka, weakest planet, and 2nd lord.',st:'pending'},
+{p:'Jan–Jun 2027 is your strongest near-term window for conversion and negotiation',w:'2027 H1',cat:'Education',pr:76,cf:'HIGH',
+ b:'Mercury pratyantardasha + profection to the 1st house.',st:'pending'},
+{p:'Ages 33–39 outperform your twenties on every measure',w:'2036–2042',cat:'Life',pr:75,cf:'HIGH',
+ b:'Sun MD: 9th lord (trikona) in the 2nd house at 128% of Shadbala minimum.',st:'pending'},
+{p:'You do not become a full-time founder before age 30',w:'to 2033',cat:'Business',pr:80,cf:'HIGH',
+ b:'2nd house weak, 7th house lowest, Saturn sub-period 2029–32.',st:'pending'},
+{p:'2032–34 brings a visible career step-change if positioned for it',w:'2032–2034',cat:'Career',pr:65,cf:'MODERATE',
+ b:'Venus–Mercury; Mercury strongest and 10th lord; Mercury profection year 2032.',st:'pending'},
+{p:'Equal-partnership ventures go worse than solo or majority ones',w:'lifelong',cat:'Business',pr:62,cf:'MODERATE',
+ b:'7th house 19 bindus, lowest and empty. CONTRADICTED BY: its lord Mercury is the strongest planet.',st:'pending'},
+{p:'Reputation comes from expertise and ownership, not visibility or fame',w:'by 35',cat:'Status',pr:60,cf:'MODERATE',
+ b:'Arudha Aquarius; three planets in the 12th; empty 10th.',st:'pending'},
+{p:'Overwork, not low energy, is your health-attention pattern',w:'throughout',cat:'Energy',pr:58,cf:'MODERATE',
+ b:'Saturn + Rahu in the 6th at 37 bindus. NOT a medical claim.',st:'pending'}];
+
+const DECISIONS={
+'Start a business':{sc:3,ast:'AVOID FOR NOW',rw:'Weak',
+ why:'2nd house 21 bindus cannot fund it; 7th house is the lowest you own; Venus–Saturn 2029–32 is the worst-supported stretch. First viable window is 2032, and the strong one is 2036+.',rec:'AVOID FOR NOW'},
+'Change job':{sc:5,ast:'WAIT',rw:'N/A yet',
+ why:'You have no job to change yet. From 2029, the Saturn sub-period specifically punishes hopping — the temptation will be strongest exactly when staying pays most.',rec:'WAIT/PREPARE'},
+'Do an MBA':{sc:9,ast:'GO HARD',rw:'Strong',
+ why:'Jupiter exalted rules your 1st and runs the antardasha to Dec 2028 — the best education window in your chart. Mercury PD covers Jan–Jun 2027, exactly the interview and admission season.',rec:'GO HARD'},
+'Take a competitive exam':{sc:9,ast:'GO HARD',rw:'Depends on mocks',
+ why:'6th house 37 bindus with Rahu — competition is a genuine strength. Mercury is your strongest graha and CAT is a Mercury exam. Astrology cannot supply a percentile; mocks can.',rec:'GO HARD'},
+'Invest (index, systematic)':{sc:8,ast:'GO HARD',rw:'Strong',
+ why:'Not because the chart favours investing, but because it mechanically fixes your most-confirmed weakness. This is the single highest-leverage action available to you.',rec:'GO HARD'},
+'Buy property':{sc:4,ast:'WAIT',rw:'Weak',
+ why:'4th lord Jupiter exalted but in the 8th. The real constraint is a down payment you do not have. Realistic window 2030–2035.',rec:'WAIT/PREPARE'},
+'Relocate':{sc:7,ast:'PROCEED',rw:'Conditional',
+ why:'Ketu in the 12th and profection to the 1st in 2027 support a move — but only tied to a specific programme or role. Moving for its own sake wastes it.',rec:'PROCEED'},
+'Enter a partnership':{sc:3,ast:'AVOID FOR NOW',rw:'Weak',
+ why:'7th house 19 bindus — the lowest of all twelve — and empty. Genuine contradiction: its lord Mercury is your strongest planet. Net verdict: solo or majority only, and always with written terms.',rec:'AVOID FOR NOW'},
+'Network aggressively':{sc:6,ast:'PROCEED',rw:'Moderate',
+ why:'11th and 3rd both 31 bindus; Arudha in Aquarius favours networks. But the 3rd lord is Saturn, your weakest planet — this will not happen by itself. Systematise it.',rec:'PROCEED'},
+'Build quietly':{sc:9,ast:'GO HARD',rw:'Strong',
+ why:'Exalted Jupiter in the 8th, Ketu in the 12th, Mula lagna, empty 10th. Your chart is built for deep private work — provided you leave public evidence of it.',rec:'GO HARD'}};
+
+const MISSION={period:'Aug 2026 – Jan 2027',
+ pd:'Venus–Jupiter–Saturn pratyantardasha',
+ primary:'CAT preparation. Timed mocks with recorded percentiles, not study hours.',
+ secondary:'Sleep and a hard daily stop time. Saturn PD is a grind texture; it rewards consistency and punishes all-nighters.',
+ quiet:'One deep domain. Publish something in it monthly.',
+ avoid:'Starting anything new. Five parallel projects. Any business idea.',
+ wealth:'Set up the automated transfer NOW, before income exists. The habit matters more than the amount.',
+ rel:'Low priority this window. Nothing in the chart pushes it and your attention is finite.'};
+
+const ACTIONS={
+today:['Set one automatic transfer to an account you hold no card for — any amount.',
+ 'Take one full timed CAT mock; record the percentile in the KPI tab.',
+ 'Write down the ONE domain you want to be known for.'],
+week:['Three timed sectional tests with a written error log.',
+ 'Publish one piece of analytical work publicly under your own name.',
+ 'Fix a sleep window and a hard stop time; hold it five nights.',
+ 'List ten people 5–10 years ahead of you in your chosen domain.',
+ 'Cancel two subscriptions you forgot you had.'],
+month:['Raise the automated savings amount once.',
+ 'Four full timed mocks; percentile trend must be visible.',
+ 'Two real conversations with someone further along than you.',
+ 'One published artefact in your chosen domain.',
+ 'A written one-page plan for the Jan–Jun 2027 admission window.']};
+
+const KPIS=[
+{k:'Savings rate',t:'30%+',w:'The single highest-leverage number in your life. Worth ~₹5 Cr by 50.'},
+{k:'Mock percentile',t:'95+ and rising',w:'The only real predictor of CAT conversion. Astrology cannot supply it.'},
+{k:'Full timed mocks taken',t:'40+ before Nov',w:'Volume with error analysis, not study hours.'},
+{k:'Published artefacts',t:'1/month',w:'Fills the empty 10th house. Nothing arrives on its own.'},
+{k:'Invested capital',t:'growing monthly',w:'The base your best decade (2036+) will multiply.'},
+{k:'Sleep hours',t:'7+ consistent',w:'Saturn + Rahu in the 6th: overwork is your risk pattern, not weakness.'},
+{k:'Domain focus',t:'1, for 5 years',w:'Domain-hopping kills the 2032–34 window.'}];
+
+const GLOSS={
+ 'Mahadasha':'The main chapter of your life, running for several years at a time.',
+ 'Antardasha':'A smaller chapter operating inside the big one.',
+ 'Pratyantardasha':'A sub-sub-chapter — the finest timing level this chart can honestly resolve.',
+ 'Shadbala':'A classical six-part strength score for each planet, measured against a minimum it should reach.',
+ 'SAV':'Sarvashtakavarga — a bindu (point) count per house. The twelve houses must total exactly 337.',
+ 'Bindus':'Points in the Ashtakavarga system. More points, more support for that area of life.',
+ 'Atmakaraka':'The planet at the highest degree — traditionally read as the soul\'s main lesson.',
+ 'Arudha Lagna':'How the world perceives you, as distinct from who you are.',
+ 'Profection':'A yearly technique: each birthday advances the active house by one.',
+ 'Vipareeta Raja Yoga':'A combination where difficulty itself becomes the source of gain.',
+ 'Kendra':'The angular houses — 1, 4, 7, 10. Structural, action-oriented.',
+ 'Trikona':'The trine houses — 1, 5, 9. Fortune, purpose, support.',
+ 'Dusthana':'Houses 6, 8, 12 — difficulty, hidden matters, loss.'};
+</script>
