@@ -40,10 +40,11 @@ def show_date(eng, date):
             print(f"             note   : {r['note']}")
         print()
     lo, hi, wdays = effective_window(reads)
-    agg, bg = aggregate(reads, wdays)
+    agg, bg = aggregate(reads)
     print(f"  Effective window (intersection of all active periods): {lo} -> {hi}  ({wdays} days)")
-    print(f"  A cluster votes with its finest active period, and only if that period is within")
-    print(f"  {int(BACKGROUND_RATIO)}x the window. Coarser periods are background and are listed separately.\n")
+    print(f"  A cluster votes with its finest active period, counted only if within")
+    print(f"  {int(BACKGROUND_RATIO)}x the finest period any cluster offers. Coarser periods are")
+    print(f"  background: listed, never counted.\n")
     print("  domain               n    grade      basis")
     print("  " + "-" * 98)
     for dm in sorted(agg, key=lambda d: (-len(agg[d]), d)):
@@ -92,6 +93,10 @@ def detail(wins, n=3):
         for c, whys in sorted(w["basis"].items()):
             for x in whys:
                 print(f"      {c:9s} {x}")
+        nat = w.get("underlying_cluster_windows") or {}
+        for c, (a2, b2) in sorted(nat.items()):
+            if a2 > w["start"] or b2 < w["end"] or a2 < w["start"]:
+                print(f"      (the {c} period actually spans {a2} -> {b2})")
         print(f"      TESTABLE: reviewing this window afterwards, did anything notable fall in "
               f"{w['domain_name']}?")
         print(f"      A MISS   : nothing notable in {w['domain']}, while something notable fell "

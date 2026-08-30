@@ -20,6 +20,8 @@ import json
 import subprocess
 import os
 
+from . import core
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 DOMAINS = {
@@ -61,13 +63,23 @@ def _add(doms, dm, why, scale_days):
     doms.setdefault(dm, []).append({"why": why, "scale_days": scale_days})
 
 
-def aggregate(reads, window_days):
+def aggregate(reads, window_days=None):
     """Split cluster contributions into discriminating votes and background-only.
 
-    Each cluster votes with its finest period; that vote counts only if the period is
-    within BACKGROUND_RATIO of the window length.
+    Each cluster votes with its finest period. That vote counts only if the period is
+    within BACKGROUND_RATIO of the RESOLUTION IN PLAY -- the shortest active period any
+    cluster offers -- not of the scan segment.
+
+    Gating against the segment was wrong: the scan slices at every transition, so a
+    segment can be arbitrarily short (a 15-day gap between two boundaries, or a segment
+    truncated by the caller's start date). That shrank the gate and demoted real signals
+    to background, and in the extreme nullified every cluster at once. The resolution in
+    play does not depend on how the range happens to be sliced.
     """
-    limit = BACKGROUND_RATIO * max(window_days, 1)
+    finest_overall = min(
+        (e["scale_days"] for r in reads for entries in r["domains"].values() for e in entries),
+        default=365)
+    limit = BACKGROUND_RATIO * max(finest_overall, 1)
     counted, background = {}, {}
     for r in reads:
         for dm, entries in r["domains"].items():
@@ -77,8 +89,8 @@ def aggregate(reads, window_days):
                     e["why"] for e in entries if e["scale_days"] <= limit]
             else:
                 background.setdefault(dm, {})[r["cluster"]] = [
-                    f"{e['why']} [{e['scale_days']} d = {e['scale_days']/max(window_days,1):.1f}x "
-                    f"the window -- background, not counted]" for e in entries]
+                    f"{e['why']} [{e['scale_days']} d = {e['scale_days']/max(finest_overall,1):.1f}x "
+                    f"the finest active period -- background, not counted]" for e in entries]
     return counted, background
 
 
@@ -112,6 +124,7 @@ class Engine:
         self.j_sits = {g: self.J["planets"][g]["house_whole_sign"] for g in self.J["planets"]}
         self.w_sits = {p: self.W["planets"][p]["whole_sign_house"] for p in self.W["planets"]}
         self._zw_cache = {}
+        self._lichun_cache = {}
 
     @staticmethod
     def _rulerships(houses, key):
@@ -179,16 +192,33 @@ class Engine:
                 "window_start": start.isoformat(), "window_end": end.isoformat(),
                 "domains": doms, "summary": f"profection h{house}, LoY {lord}"}
 
+    def lichun(self, year):
+        """Exact Lichun (Sun at 315 deg) for a year -- the BaZi year boundary.
+
+        Not hardcoded to 4 February: the instant drifts, and the natal chart in this
+        repository turns on precisely this boundary.
+        """
+        if year not in self._lichun_cache:
+            guess = core.jd_ut(dt.datetime(year, 2, 4, tzinfo=dt.timezone.utc))
+            j = core.solar_longitude_crossing(315.0, guess)
+            self._lichun_cache[year] = core.jd_to_utc(j).date()
+        return self._lichun_cache[year]
+
+    def bazi_year(self, date):
+        """The BaZi year a date belongs to. Runs Lichun to Lichun, not January to January."""
+        return date.year - 1 if date < self.lichun(date.year) else date.year
+
     def sinic_at(self, date, zw):
         doms, basis = {}, []
-        ap = next((a for a in self.B["annual_pillars"] if a["year"] == date.year), None)
+        byear = self.bazi_year(date)
+        ap = next((a for a in self.B["annual_pillars"] if a["year"] == byear), None)
         if ap:
             for dm in TEN_GOD_DOMAIN.get(ap["ten_god_stem"], []):
                 _add(doms, dm,
                      f"BaZi annual pillar {ap['ganzhi']} is {ap['ten_god_stem']} to the Day Master", 365)
             basis.append(f"annual {ap['ganzhi']} {ap['ten_god_stem']}")
         dy = next((p for p in self.B["da_yun"]["periods"]
-                   if p["ganzhi"] and p["start_year"] <= date.year <= p["end_year"]), None)
+                   if p["ganzhi"] and p["start_year"] <= byear <= p["end_year"]), None)
         if dy:
             basis.append(f"Da Yun {dy['ganzhi']} (10 yr, background)")
         if zw:
@@ -202,7 +232,8 @@ class Engine:
         return {"cluster": "sinic", "technique": "BaZi luck pillars + Zi Wei periods",
                 "mechanism": "solar-term distance at birth; Five-Elements Bureau from the Ming palace",
                 "period": " | ".join(basis),
-                "window_start": f"{date.year}-02-04", "window_end": f"{date.year + 1}-02-04",
+                "window_start": self.lichun(byear).isoformat(),
+                "window_end": self.lichun(byear + 1).isoformat(),
                 "domains": doms, "summary": " | ".join(basis),
                 "note": "BaZi and Zi Wei corroborate internally but contribute ONE cross-cultural vote."}
 
@@ -235,13 +266,13 @@ class Engine:
                         pts.add(d)
         y = start.year - 1
         while y <= end.year + 1:
-            for cand in (self.birth.replace(year=y), dt.date(y, 2, 4)):
+            for cand in (self.birth.replace(year=y), self.lichun(y)):
                 if start <= cand <= end:
                     pts.add(cand)
             y += 1
         for p in self.B["da_yun"]["periods"]:
             if p["ganzhi"]:
-                cand = dt.date(p["start_year"], 2, 4)
+                cand = self.lichun(p["start_year"])
                 if start <= cand <= end:
                     pts.add(cand)
         return sorted(pts)
@@ -261,8 +292,7 @@ class Engine:
             zw = self._zw_cache.get(mid.isoformat())
             reads = [self.jyotisha_at(mid), self.western_at(mid), self.sinic_at(mid, zw)]
             reads = [r for r in reads if r]
-            wlen = max((b - a).days, 1)
-            agg, bg = aggregate(reads, wlen)
+            agg, bg = aggregate(reads)
             out.append({"start": a.isoformat(), "end": b.isoformat(),
                         "days": (b - a).days, "reads": reads,
                         "domains": agg, "background_only": bg})
@@ -275,8 +305,11 @@ class Engine:
             for dm, byc in seg["domains"].items():
                 if len(byc) >= min_clusters:
                     bgc = seg["background_only"].get(dm, {})
+                    natural = {r["cluster"]: [r["window_start"], r["window_end"]]
+                               for r in seg["reads"] if r["cluster"] in byc}
                     hits.append({"domain": dm, "domain_name": DOMAINS[dm],
                                  "start": seg["start"], "end": seg["end"],
+                                 "underlying_cluster_windows": natural,
                                  "clusters": sorted(byc), "cluster_count": len(byc),
                                  "grade": "STRONG" if len(byc) >= 3 else "MODERATE",
                                  "basis": {c: v for c, v in byc.items()},
